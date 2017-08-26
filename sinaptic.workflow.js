@@ -1,222 +1,648 @@
 "use strict";
+
 var sinaptic = sinaptic || {};
-sinaptic.vm = sinaptic.vm || {}, sinaptic.wf = function () {
-    function s(s, a, e) {
-        var i = $(a).html(),
-            t = Handlebars.compile(i)(e);
-        $(s).html(t)
-    }
 
-    function a(s) {
-        console.log("Error: " + s.responseJSON.error)
-    }
+sinaptic.vm = sinaptic.vm || {};
 
-    function e() {
-        $("#saldodeudor").on("input", function () {
-            var s = $(this).val(),
-                a = s.replace(/[^0-9,\.]/, "");
-            s !== a && $(this).val(a)
-        })
-    }
-    var i = {
+sinaptic.wf = function () {
+
+    var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
         sinistersListName: "Siniestros",
         statusListname: "Estados"
     };
-    ! function () {
-        var s = i.host + "/_vti_bin/listdata.svc/Estados";
-        $.ajax({
-            url: s,
-            type: "GET",
-            async: !0,
-            headers: {
-                accept: "application/json;odata=verbose"
-            },
-            success: function (s) {
-                sinaptic.vm.status = s.d.results, console.log("Cargando Estados: OK")
-            },
-            error: a
-        })
-    }(),
-        function () {
-            var s = i.host + "/_vti_bin/listdata.svc/Carriers";
-            $.ajax({
-                url: s,
-                type: "GET",
-                async: !0,
-                headers: {
-                    accept: "application/json;odata=verbose"
-                },
-                success: function (s) {
-                    sinaptic.vm.carriers = s.d.results, console.log("Cargando Carriers: OK")
-                },
-                error: a
-            })
-        }(),
-        function () {
-            var s = i.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq 1 or Grupo/Identificador eq 4)";
-            $.ajax({
-                url: s,
-                type: "GET",
-                async: !0,
-                headers: {
-                    accept: "application/json;odata=verbose"
-                },
-                success: function (s) {
-                    sinaptic.vm.willisusers = s.d.results
-                },
-                error: a
-            })
-        }();
-    var t = function (s) {
-        var a = "";
-        switch (s) {
-            case 21:
-                $.each(sinaptic.vm.status, function (s, e) {
-                    if (21 === e.Identificador) {
-                        var i = $("#newSinister_fechaSiniestro").val(),
-                            t = e.Alerta1,
-                            o = new Date(i),
-                            n = (o = new Date(o.setDate(o.getDate() + t))).getDate();
-                        n < 10 && (n = "0" + n);
-                        var r = parseInt(o.getMonth()) + 1;
-                        r < 10 && (r = "0" + r), a = o.getFullYear() + "-" + r + "-" + n + "T00:00:00"
-                    }
-                })
-        }
-        return a
-    },
-        o = function (s) {
-            var e = "",
-                t = i.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Siniestro eq '" + s + "'";
-            return $.ajax({
-                url: t,
-                type: "GET",
-                async: !0,
-                headers: {
-                    accept: "application/json;odata=verbose"
-                },
-                success: function (s) {
-                    e = s.d.results[0].Identificador, n(e)
-                },
-                error: a
-            }), e
-        },
-        n = function (s) {
-            var e = {
-                ResponsableId: $("#responsablewillis").val(),
-                TeamLeaderId: $("#teamleaderwillis").val(),
-                EstadoId: 22
-            };
-            $.ajax({
-                url: i.host + "/_vti_bin/listdata.svc/" + i.sinistersListName + "(" + s + ")",
-                type: "POST",
-                processData: !1,
-                contentType: "application/json;odata=verbose",
-                data: JSON.stringify(e),
-                headers: {
-                    Accept: "application/json;odata=verbose",
-                    "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                    "X-HTTP-Method": "MERGE",
-                    "If-Match": "*"
-                },
-                success: function (s) {
-                    alert("Siniestro actualizado.")
-                },
-                error: a
-            })
-        };
-    return {
-        createSinister: function () {
-            var s = t(21),
-                e = {
-                    Siniestro: $("#newSinister_siniestro").val(),
-                    Grupo: $("#newSinister_grupo").val(),
-                    Orden: $("#newSinister_orden").val(),
-                    CarrierId: $("#newSinister_carrier").val(),
-                    Tomador: $("#newSinister_tomador").val(),
-                    FechaSiniestro: $("#newSinister_fechaSiniestro").val() + "T00:00:00",
-                    TipoDeSiniestroValue: $("#newSinister_tipoSiniestro").val(),
-                    ModeloVehiculo: $("#newSinister_modeloVehiculo").val(),
-                    Dominio: $("#newSinister_dominio").val(),
-                    SumaAsegurada: $("#newSinister_suma").val(),
-                    MailCliente: $("#newSinister_mailCliente").val(),
-                    TelCliente: $("#newSinister_telCliente").val(),
-                    MailCia: $("#newSinister_mailCia").val(),
-                    TelCia: $("#newSinister_telCia").val(),
-                    VencimientoEstado: s,
-                    EstadoId: 21
-                };
-            sinaptic.wf.validateForm(e, 0, function () {
-                $.ajax({
-                    url: i.host + "/_vti_bin/listdata.svc/" + i.sinistersListName,
-                    type: "POST",
-                    processData: !1,
-                    contentType: "application/json;odata=verbose",
-                    data: JSON.stringify(e),
-                    headers: {
-                        Accept: "application/json;odata=verbose",
-                        "X-RequestDigest": $("#__REQUESTDIGEST").val()
-                    },
-                    success: function (s) {
-                        alert("Siniestro Creado: " + e.Siniestro)
-                    },
-                    error: a
-                })
-            }, a)
-        },
-        showTaskForm: function (a, i) {
-            sinaptic.context = {
-                siniestro: JSON.parse(a),
-                estado: {
-                    id: i
-                }
-            };
-            var t = [],
-                o = [],
-                n = [];
-            switch (i) {
-                case 21:
-                    $(sinaptic.vm.willisusers).each(function (s, a) {
-                        4 === a.Grupo.Identificador ? (t.push("<option value='"), t.push(a.Identificador), t.push("'>"), t.push(a.Usuario.Nombre), t.push("</option>")) : (o.push("<option value='"), o.push(a.Identificador), o.push("'>"), o.push(a.Usuario.Nombre), o.push("</option>"))
-                    }), n.push("<div class='form-group'>"), n.push("<div class='col-md-8'>"), n.push("<label class='control-label'>Responsable Willis</label>"), n.push("<select id='responsablewillis' class='form-control'>"), n.push(t.join("")), n.push("</select>"), n.push("</div>"), n.push("</div>"), n.push(" <div class='form-group'>"), n.push("<div class='col-md-8'>"), n.push("<label class='control-label'>Team Leader Willis</label>"), n.push("<select id='teamleaderwillis' class='form-control'>"), n.push(o.join("")), n.push("</select>"), n.push("</div>"), n.push("</div>");
-                    break;
-                case 23:
-                    n.push("<div class='form-group'>"), n.push("<div class='col-md-12'>"), n.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>"), n.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>"), n.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>"), n.push("</div>"), n.push("</div>");
-                    break;
-                case 24:
-                    n.push(" <div class='form-group'>"), n.push("<div class='col-md-8'>"), n.push("<label class='control-label'>Tipo de resolución</label>"), n.push("<select id='teamleaderwillis' class='form-control'>"), n.push("<option value='1'>Liquidación de saldo deudor</option>"), n.push("<option value='2'>Reposición de unidad</option>"), n.push("</select>"), n.push("</div>"), n.push("</div>"), n.push('<div class="table table-striped" class="files" id="previews">'), n.push(' <div id="template" class="file-row">'), n.push("<div>"), n.push(' <span class="preview"><img data-dz-thumbnail /></span>'), n.push("</div>"), n.push("<div>"), n.push('<p class="name" data-dz-name></p>'), n.push('<strong class="error text-danger" data-dz-errormessage></strong>'), n.push("</div>"), n.push("<div>"), n.push('<p class="size" data-dz-size></p>'), n.push('<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">'), n.push('<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>'), n.push("</div>"), n.push("</div>"), n.push("<div>"), n.push('<button type="button" class="btn btn-primary start">'), n.push('<i class="glyphicon glyphicon-upload"></i>'), n.push("<span>Start</span>"), n.push(" </button>"), n.push('<button type="button" data-dz-remove class="btn btn-warning cancel">'), n.push('<i class="glyphicon glyphicon-ban-circle"></i>'), n.push("<span>Cancel</span>"), n.push("</button>"), n.push('<button type="button" data-dz-remove class="btn btn-danger delete">'), n.push('<i class="glyphicon glyphicon-trash"></i>'), n.push("<span>Delete</span>"), n.push("</button>"), n.push("</div>"), n.push("</div>"), n.push("</div>");
-                    break;
-                case 25:
-                    n.push(" <div class='form-group'>"), n.push("<div class='col-md-8'>"), n.push("<label class='control-label'>Saldo deudor</label>"), n.push("<div class='input-group'>"), n.push("<span class='input-group-addon'>$</span>"), n.push("<input id='saldodeudor' type='number' step='0.01' class='form-control'/>"), n.push("</div>"), n.push("</div>"), n.push("</div>"), n.push(" <div class='form-group'>"), n.push("<div class='col-md-8'>"), n.push("<label class='control-label'>Vencimiento de deuda</label>"), n.push("<input id='vencimientodeuda' type='date' class='form-control'/>"), n.push("</div>"), n.push("</div>")
-            }
-            n = n.join(""), s("#modalsContainer", "#modalTask-template", sinaptic.context), $("#taskcontent").append(n), e(), $("#modaltask").modal()
-        },
-        showCreateSinister: function () {
-            var a = [];
-            $(sinaptic.vm.carriers).each(function (s, e) {
-                a.push({
-                    id: e.Identificador,
-                    name: e["Título"]
-                })
-            }), s("#modalsContainer", "#newSinister-template", {
-                carriers: a
-            }), $("#newSinister").modal()
-        },
-        addComment: function (s) {
-            $("#estado" + s + "comentarios").css("display", "none"), $("#estado" + s + "acciones").css("display", "inline")
-        },
-        completeTask: function (s) {
-            switch (s) {
-                case 21:
-                    var a = $("#siniestronombre").text().trim();
-                    o(a);
-                    break;
-                case 25:
-                    $("#saldodeudor").val(), $("#vencimientodeuda").val()
-            }
-            
-        }
+
+    getStatus();
+    getCarriers();
+    getWillisUsers();
+
+    // PRIVATE METHODS
+    function renderTemplate(target, tpl, data) {
+        var source = $(tpl).html();
+        var template = Handlebars.compile(source);
+        var structure = template(data);
+        $(target).html(structure);
     }
+
+    function getWillisUsers() {
+        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq 1 or Grupo/Identificador eq 4)";
+        $.ajax({
+            url: usersUrl,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                sinaptic.vm.willisusers = data.d.results;
+            },
+            error: errorHandler
+        });
+    }
+
+    function getStatus() {
+        var url = settings.host + "/_vti_bin/listdata.svc/Estados";
+        $.ajax({
+            url: url,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                sinaptic.vm.status = data.d.results;
+                console.log("Cargando Estados: OK");
+            },
+            error: errorHandler
+        });
+    }
+
+    function getCarriers() {
+        var url = settings.host + "/_vti_bin/listdata.svc/Carriers";
+        $.ajax({
+            url: url,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                sinaptic.vm.carriers = data.d.results;
+                console.log("Cargando Carriers: OK");
+            },
+            error: errorHandler
+        });
+    }
+
+    function errorHandler(data) {
+        console.log("Error: " + data.responseJSON.error);
+    }
+
+    //PUBLIC METHODS
+    var showCreateSinister = function () {
+        var _carriers = [];
+        $(sinaptic.vm.carriers).each(function (i, carrier) {
+            _carriers.push({ "id": carrier.Identificador, "name": carrier["T\u00EDtulo"] });
+        });
+        var payload = { carriers: _carriers };
+        renderTemplate("#modalsContainer", "#newSinister-template", payload);
+        $("#newSinister").modal();
+    };
+
+    var showTaskForm = function (siniestro, estadoId) {
+
+        sinaptic.context = { "siniestro": JSON.parse(siniestro), "estado": { "id": estadoId } };
+        var responsables = [];
+        var teamleaders = [];
+
+        var taskContent = [];
+        switch (estadoId) {
+            case 21:
+                $(sinaptic.vm.willisusers).each(function (i, user) {
+                    if (user.Grupo.Identificador === 4) {
+                        responsables.push("<option value='");
+                        responsables.push(user.Identificador);
+                        responsables.push("'>");
+                        responsables.push(user.Usuario.Nombre);
+                        responsables.push("</option>");
+                    }
+                    else {
+                        teamleaders.push("<option value='");
+                        teamleaders.push(user.Identificador);
+                        teamleaders.push("'>");
+                        teamleaders.push(user.Usuario.Nombre);
+                        teamleaders.push("</option>");
+                    }
+                });
+                // RESPONSABLE WILLIS
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Responsable Willis</label>");
+                taskContent.push("<select id='responsablewillis' class='form-control'>");
+                taskContent.push(responsables.join(""));
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                // TEAM LEADER WILLIS
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Team Leader Willis</label>");
+                taskContent.push("<select id='teamleaderwillis' class='form-control'>");
+                taskContent.push(teamleaders.join(""));
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+            case 22:
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+           
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Formulario 04</label>");
+                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                taskContent.push("</div>");            
+               
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("</div>");
+            
+
+                break;
+            case 23:
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
+                taskContent.push("</div>");
+
+
+
+                taskContent.push("</div>");
+                break;
+            case 24:
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Tipo de resolución</label>");
+                taskContent.push("<select id='teamleaderwillis' class='form-control'>");
+                taskContent.push("<option value='1'>Liquidación de saldo deudor</option>");
+                taskContent.push("<option value='2'>Reposición de unidad</option>");
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                
+                taskContent.push('<div class="table table-striped" class="files" id="previews">');
+                taskContent.push(' <div id="template" class="file-row">');
+                taskContent.push('<div>');
+                taskContent.push(' <span class="preview"><img data-dz-thumbnail /></span>');
+                taskContent.push('</div>');
+                taskContent.push('<div>');
+                taskContent.push('<p class="name" data-dz-name></p>');
+                taskContent.push('<strong class="error text-danger" data-dz-errormessage></strong>');
+                taskContent.push('</div>');
+                taskContent.push('<div>');
+                taskContent.push('<p class="size" data-dz-size></p>');
+                taskContent.push('<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">');
+                taskContent.push('<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>');
+                taskContent.push('</div>');
+                taskContent.push('</div>');
+                taskContent.push('<div>');
+                taskContent.push('<button type="button" class="btn btn-primary start">');
+                taskContent.push('<i class="glyphicon glyphicon-upload"></i>');
+                taskContent.push('<span>Start</span>');
+                taskContent.push(' </button>');
+                taskContent.push('<button type="button" data-dz-remove class="btn btn-warning cancel">');
+                taskContent.push('<i class="glyphicon glyphicon-ban-circle"></i>');
+                taskContent.push('<span>Cancel</span>');
+                taskContent.push('</button>');
+                taskContent.push('<button type="button" data-dz-remove class="btn btn-danger delete">');
+                taskContent.push('<i class="glyphicon glyphicon-trash"></i>');
+                taskContent.push('<span>Delete</span>');
+                taskContent.push('</button>');
+                taskContent.push('</div>');
+                taskContent.push('</div>');
+                taskContent.push('</div>');
+                break;
+            case 25:
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Saldo deudor</label>");
+                taskContent.push("<div class='input-group'>");
+                taskContent.push("<span class='input-group-addon'>$</span>");
+                taskContent.push("<input id='saldodeudor' type='number' step='0.01' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Vencimiento de deuda</label>");
+                taskContent.push("<input id='vencimientodeuda' type='date' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+
+            case 26:
+
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Formulario 04</label>");
+                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+
+            case 27: // informar rendicion plan ovalo
+
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Importe a cancelar</label>");
+                taskContent.push("<input id='cancelImport' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Modo de Cancelación</label>");
+                taskContent.push("<select id='cancelationMode' class='form-control'>");
+                teamleaders.push("<option>");
+                teamleaders.push("TRANSFERENCIA");
+                teamleaders.push("</option>");
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Fecha de Cacelación</label>");
+                taskContent.push("<input id='cancelDate' type='date' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Numero de Cheque</label>");
+                taskContent.push("<input id='checkNumber' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Comprobante Nº</label>");
+                taskContent.push("<input id='comprobanteNumber' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Rendición del pago</label>");
+                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+
+                break;
+
+            case 28: // acreditar fondos a cuenta plan ovalo
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                break;
+
+            case 33: //autorizar reposicion
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Autorizar Reposicion</label>");
+                taskContent.push("<input type='checkbox'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                break;
+
+
+            case 35: // Remitir Factura a Plan Ovalo
+
+                taskContent.push("<div class='form-group'>");
+
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Factura</label>");
+                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+
+            case 39: // verificar nueva Prenda
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Título</label>");
+                taskContent.push("<input id='title' type='text' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Grupo</label>");
+                taskContent.push("<input id='group' type='text' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Orden</label>");
+                taskContent.push("<input id='orden' type='text' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>ID siniestro</label>");
+                taskContent.push("<input id='idSinister' type='text' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Verificar Prenda</label>");
+                taskContent.push("<input type='checkbox' id='verifyPrenda'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+
+                break;
+        }
+        taskContent = taskContent.join("");
+        renderTemplate("#modalsContainer", "#modalTask-template", sinaptic.context);
+
+        $("#taskcontent").append(taskContent);
+        applyContentFormatters();
+        $("#modaltask").modal();
+    };
+
+    function applyContentFormatters() {
+        $("#saldodeudor").on("input", function () {
+            var v = $(this).val(), vc = v.replace(/[^0-9,\.]/, '');
+            if (v !== vc)
+                $(this).val(vc);
+        });
+    }
+
+    var createSinister = function () {
+
+        var vencimiento = getEndStateDate(21);
+
+
+        var nuevoSiniestro = {
+            Siniestro: $("#newSinister_siniestro").val(),
+            Grupo: $("#newSinister_grupo").val(),
+            Orden: $("#newSinister_orden").val(),
+            CarrierId: $("#newSinister_carrier").val(),
+            Tomador: $("#newSinister_tomador").val(),
+            FechaSiniestro: $("#newSinister_fechaSiniestro").val() +"T00:00:00",
+            TipoDeSiniestroValue: $("#newSinister_tipoSiniestro").val(),
+            ModeloVehiculo: $("#newSinister_modeloVehiculo").val(),
+            Dominio: $("#newSinister_dominio").val(),
+            SumaAsegurada : $("#newSinister_suma").val(),
+            MailCliente: $("#newSinister_mailCliente").val(),
+            TelCliente: $("#newSinister_telCliente").val(),
+            MailCia: $("#newSinister_mailCia").val(),
+            TelCia: $("#newSinister_telCia").val(),
+            VencimientoEstado: vencimiento,
+            EstadoId: 21 //ASIGNACIÓN DE RESPONSABLE
+        };
+        sinaptic.wf.validateForm(nuevoSiniestro, 0, function () {
+            $.ajax({
+                url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName,
+                type: "POST",
+                processData: false,
+                contentType: "application/json;odata=verbose",
+                data: JSON.stringify(nuevoSiniestro),
+                headers: {
+                    "Accept": "application/json;odata=verbose",
+                    "X-RequestDigest": $("#__REQUESTDIGEST").val()
+                },
+                success: function (data) {
+                    //console.log("Siniestro Creado: " + data.d);
+                    alert("Siniestro Creado: " + nuevoSiniestro.Siniestro);
+                  
+                    //window.location.reload();
+                },
+                error: errorHandler
+            })
+        }, errorHandler);
+    };
+
+    var addComment = function (estadoId) {
+        $("#estado" + estadoId + "comentarios").css("display", "none");
+        $("#estado" + estadoId + "acciones").css("display", "inline");
+    };
+
+    var showAddComment = function (estadoId) {
+        $("#estado" + estadoId + "comentarios").css("display", "inline");
+        $("#estado" + estadoId + "acciones").css("display", "none");
+    };
+
+
+    var getEndStateDate = function (estadoId) {
+
+        var vencimiento = "";
+        switch (estadoId) {
+            case 21:
+                $.each(sinaptic.vm.status, function (key, object) {
+                    if (object.Identificador === 21) {
+                        var fechaInicial = $("#newSinister_fechaSiniestro").val();
+                        var a = object.Alerta1;
+                        var fecha = new Date(fechaInicial);
+                        fecha = new Date(fecha.setDate(fecha.getDate() + a));
+
+                        var dia = fecha.getDate();
+                        if (dia < 10) {
+                            dia = "0" + dia;
+                        }
+
+                        var mes = (parseInt(fecha.getMonth()) + 1);
+                        if (mes < 10) {
+                            mes = "0" + mes;
+                        }
+
+                        vencimiento = fecha.getFullYear() + "-" + mes + "-" + dia + "T00:00:00";
+                    }
+                });
+
+                break;
+        }
+
+        return vencimiento;
+    }
+
+    var getSiniestro = function (currentSinisterName) {
+
+        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Siniestro eq '"+ currentSinisterName +"'";
+        $.ajax({
+            url: url,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                var sinisterId = data.d.results[0].Identificador;
+                updateSinister(sinisterId);
+            },
+            error: errorHandler
+        });
+    }
+
+
+    var updateSinister = function (sinisterId) {
+
+        var asignacionIds = {
+            ResponsableId: $("#responsablewillis").val(),
+            TeamLeaderId: $("#teamleaderwillis").val(),
+            EstadoId: 22
+        };
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(asignacionIds),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-HTTP-Method": "MERGE",
+                "If-Match": "*"
+            },
+            success: function (data) {
+
+                alert("Siniestro actualizado.");
+
+            },
+            error: errorHandler
+        });
+
+    }
+
+    var completeTask = function (estadoId) {
+
+        switch (estadoId) {
+            case 21:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
+            
+                break;
+            case 25:
+                var saldoDeudor = $("#saldodeudor").val();
+                var fechaVenc = $("#vencimientodeuda").val();
+                break;
+        };
+    }
+
+    return {
+        createSinister: createSinister,
+        showTaskForm: showTaskForm,
+        showCreateSinister: showCreateSinister,
+        addComment: addComment,
+        completeTask: completeTask
+    };
 }();
