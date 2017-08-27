@@ -344,10 +344,17 @@ sinaptic.wf = function () {
 				taskContent.push("</div>");
 				  
 			
-                taskContent.push("<div id='comentariosContainer' class='collapse'>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
+				taskContent.push("</div>");
+				
 				taskContent.push("</div>");
 		
                 taskContent.push("</div>");
