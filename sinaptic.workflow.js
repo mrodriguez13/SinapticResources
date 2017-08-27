@@ -489,9 +489,7 @@ sinaptic.wf = function () {
     }
 
     var createSinister = function () {
-
-	alert("test");
-	
+		
         var vencimiento = getEndStateDate(21);
 
 
@@ -597,6 +595,8 @@ sinaptic.wf = function () {
 
     var updateSinister = function (sinisterId) {
 
+	alert("test");
+	
         var asignacionIds = {
             ResponsableId: $("#responsablewillis").val(),
             TeamLeaderId: $("#teamleaderwillis").val(),
