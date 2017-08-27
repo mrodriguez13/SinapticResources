@@ -323,7 +323,7 @@ sinaptic.wf = function () {
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios		
 				
-                taskContent.push("<div class='form-group'>");
+                
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Rendicion del pago</label>");
                 taskContent.push("</div>");
@@ -332,7 +332,7 @@ sinaptic.wf = function () {
 				taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
                 taskContent.push("</div>");
 
-                taskContent.push("</div>");
+               
 				
                
                 taskContent.push("<div class='col-md-8'>");
