@@ -656,9 +656,6 @@ sinaptic.wf = function () {
 
 
     var updateSinister = function (sinisterId, sinisterState) {
-
-		
-	
         var asignacionIds = {
             EstadoId: sinisterState + 1
         };
@@ -677,16 +674,172 @@ sinaptic.wf = function () {
             },
             success: function (data) {
 
-				
-                alert("Siniestro actualizado.");
-				
-				window.location.reload();
+                switch (sinisterState) {
+                    case 21:
+                        var properties = {
+                            siniestroID: sinisterId,
+                            ResponsableId: $("#responsablewillis").val(),
+                            TeamLeaderId: $("#teamleaderwillis").val()
+                        }
 
+                        updateState21_(properties);
+
+                        break;
+                    case 22:
+                         //si posee comentarios, llamo al metodo para crear uno nuevo en la lista
+         
+                        break;
+
+                    case 23:
+                        var properties = {
+                           
+                        }
+
+                        updateState23_(properties);
+
+                        break;
+
+                    case 24:
+                        var properties = {
+                        
+                        }
+
+                        updateState24_(properties);
+
+                        break;
+
+                    case 25:
+                        
+                        break;
+
+                    case 26:
+                       
+                        break;
+
+                    case 27:
+                      
+                        break;
+
+                    case 28:
+                    
+                        break;
+
+                    case 29:
+                      
+                        break;
+
+                    case 30:
+                        
+                        break;
+
+                    case 31:
+                  
+                        break;
+
+                    case 32:
+                      
+                        break;
+
+                    case 33:
+                        
+                        break;
+
+                    case 34:
+                     
+                        break;
+
+                    case 35:
+                      
+                        break;
+
+                    case 36:
+                       
+                        break;
+
+                    case 37:
+                        
+                        break;
+
+                    case 38:
+                        
+                        break;
+
+                    case 39:
+                     
+                        break;
+
+                    case 40:
+             
+                        break;
+
+                    case 41:
+                       
+                        break;
+
+                    case 42:
+                     
+                        break;
+
+                }
             },
             error: errorHandler
         });
 
     }
+
+    var updateState21_ = function (properties) {
+
+        var newProperties = {
+            ResponsableId: properties.ResponsableId,
+            TeamLeaderId: properties.TeamLeaderId
+        };
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + properties.siniestroID + ")",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(newProperties),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-HTTP-Method": "MERGE",
+                "If-Match": "*"
+            },
+            success: function (data) {
+                alert("Siniestro actualizado correctamente.");
+            },
+                error: errorHandler
+        });
+    }
+
+
+
+    var updateState22_ = function (properties) {
+
+        var newProperties = {
+            
+        };
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + properties.siniestroID + ")",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(newProperties),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-HTTP-Method": "MERGE",
+                "If-Match": "*"
+            },
+            success: function (data) {
+                alert("Siniestro actualizado correctamente.");
+            },
+            error: errorHandler
+        });
+    }
+
 
     var completeTask = function (estadoId) {
 
@@ -697,12 +850,11 @@ sinaptic.wf = function () {
                 break;
 
             case 22:
-			// ResponsableId: $("#responsablewillis").val();
-            // TeamLeaderId: $("#teamleaderwillis").val();
-                
-				//si posee comentarios, llamo al metodo para crear uno nuevo en la lista
+    
+               
                 var currentSinisterName = $("#siniestronombre").text().trim();
                 getSiniestro(currentSinisterName);
+
 
                 break;
 
@@ -718,10 +870,8 @@ sinaptic.wf = function () {
                 break;
 
             case 25:
-                // var saldoDeudor = $("#saldodeudor").val();
-                // var fechaVenc = $("#vencimientodeuda").val();
-				var currentSinisterName = $("#siniestronombre").text().trim();
-                getSiniestro(currentSinisterName);
+                var saldoDeudor = $("#saldodeudor").val();
+                var fechaVenc = $("#vencimientodeuda").val();
                 break;
 
             case 26:
