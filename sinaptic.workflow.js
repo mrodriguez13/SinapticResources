@@ -145,11 +145,16 @@ sinaptic.wf = function () {
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios
            
+                taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
-                taskContent.push("</div>");            
-               
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
+				taskContent.push("</div>");
+                taskContent.push("</div>");  				  
+              
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
@@ -160,7 +165,7 @@ sinaptic.wf = function () {
             case 23:
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-12'>");
-                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentacion completa?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
                 taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
                 taskContent.push("</div>");
@@ -246,7 +251,7 @@ sinaptic.wf = function () {
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios
 				
-                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
 				taskContent.push("</div>");
@@ -281,7 +286,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<label class='control-label'>Modo de Cancelación</label>");
+                taskContent.push("<label class='control-label'>Modo de Cancelacion</label>");
                 taskContent.push("<select id='cancelationMode' class='form-control'>");
                 teamleaders.push("<option>");
                 teamleaders.push("TRANSFERENCIA");
@@ -292,7 +297,7 @@ sinaptic.wf = function () {
 
                 taskContent.push(" <div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<label class='control-label'>Fecha de Cacelación</label>");
+                taskContent.push("<label class='control-label'>Fecha de Cacelacion</label>");
                 taskContent.push("<input id='cancelDate' type='date' class='form-control'/>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -306,7 +311,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<label class='control-label'>Comprobante Nº</label>");
+                taskContent.push("<label class='control-label'>Comprobante N</label>");
                 taskContent.push("<input id='comprobanteNumber' type='number' class='form-control'/>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -469,7 +474,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<label class='control-label'>Título</label>");
+                taskContent.push("<label class='control-label'>Titulo</label>");
                 taskContent.push("<input id='title' type='text' class='form-control'/>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
