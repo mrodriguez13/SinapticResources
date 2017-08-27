@@ -343,14 +343,13 @@ sinaptic.wf = function () {
                 taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
 				taskContent.push("</div>");
 				  
-				taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<div id='comentariosContainer' class='collapse' style='display:none;'>");
+			
+                taskContent.push("<div id='comentariosContainer' class='collapse'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
 				taskContent.push("</div>");
-				taskContent.push("</div>");
-
+		
                 taskContent.push("</div>");
 
                 taskContent.push(" <div class='form-group'>");
