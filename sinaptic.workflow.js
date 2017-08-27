@@ -657,9 +657,9 @@ sinaptic.wf = function () {
 
     var updateSinister = function (sinisterId, sinisterState) {
 
+		
+	
         var asignacionIds = {
-            ResponsableId: $("#responsablewillis").val(),
-            TeamLeaderId: $("#teamleaderwillis").val(),
             EstadoId: sinisterState + 1
         };
 
@@ -694,7 +694,10 @@ sinaptic.wf = function () {
                 break;
 
             case 22:
-                //si posee comentarios, llamo al metodo para crear uno nuevo en la lista
+			// ResponsableId: $("#responsablewillis").val();
+            // TeamLeaderId: $("#teamleaderwillis").val();
+                
+				//si posee comentarios, llamo al metodo para crear uno nuevo en la lista
                 var currentSinisterName = $("#siniestronombre").text().trim();
                 getSiniestro(currentSinisterName);
 
