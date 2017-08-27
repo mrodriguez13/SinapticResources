@@ -701,7 +701,6 @@ sinaptic.wf = function () {
                 var currentSinisterName = $("#siniestronombre").text().trim();
                 getSiniestro(currentSinisterName);
 
-
                 break;
 
             case 23:
@@ -716,8 +715,10 @@ sinaptic.wf = function () {
                 break;
 
             case 25:
-                var saldoDeudor = $("#saldodeudor").val();
-                var fechaVenc = $("#vencimientodeuda").val();
+                // var saldoDeudor = $("#saldodeudor").val();
+                // var fechaVenc = $("#vencimientodeuda").val();
+				var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 26:
