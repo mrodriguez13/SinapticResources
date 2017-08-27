@@ -692,9 +692,14 @@ sinaptic.wf = function () {
 
                     case 23:
                         // posee 2 radio button,comentario y adjunto, no tiene campos de llenado
-                    
+                        var isCompleted = false;
+
+                        if ($("input#docCompletaSi")[0].checked === true) {
+                            isCompleted = true;
+                        }
+
                         var properties = {
-                         
+                            DocCertCompleta: isCompleted
                         }
 
                         lastUpdate_(properties, sinisterId);
