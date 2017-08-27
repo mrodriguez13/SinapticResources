@@ -732,14 +732,18 @@ sinaptic.wf = function () {
                     case 27:
 
                         //var properties = {
-                        //    //TipoDeResulociónValue: resolucion
+                        //   ImporteACancelar: $("#cancelImport").val(),
+                        //   ModoDeCancelaciónValue: $("#cancelationMode option:selected").text(),
+                        //   FechaDeCancelación: $("#cancelDate").val(),
+                        //   NumeroDeCheque:$("#checkNumber").val(),
+                        //   ComprobanteN:$("#comprobanteNumber").val(),
                         //}
 
                         //lastUpdate_(properties, sinisterId);
 
                         alert("Estado actualizado.")
                         window.location.reload();
-                      
+
                         break;
 
                     case 28:
