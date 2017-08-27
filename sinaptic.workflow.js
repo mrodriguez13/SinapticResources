@@ -334,7 +334,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("</div>");
 				
-                taskContent.push(" <div class='form-group'>");
+               
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -342,7 +342,7 @@ sinaptic.wf = function () {
 				taskContent.push("<div class='col-md-8'>");
 				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
 				taskContent.push("</div>");
-                taskContent.push("</div>");
+             
             
 
 
@@ -678,6 +678,7 @@ sinaptic.wf = function () {
                          //estado que posee comentario y adjunto, no tiene campos de llenado
                     
                         alert("Estado actualizado.")
+                        window.location.reload();
                         break;
 
                     case 23:
@@ -697,7 +698,7 @@ sinaptic.wf = function () {
                         break;
 
                     case 24:
-                        var resolucion = $("#teamleaderwillis option:selected").text();
+                        //var resolucion = $("#teamleaderwillis option:selected").text();
 
                         //var properties = {
                         //    //TipoDeResulociónValue: resolucion
@@ -706,7 +707,7 @@ sinaptic.wf = function () {
                         //lastUpdate_(properties, sinisterId);
 
                         alert("Estado actualizado.")
-
+                        window.location.reload();
                         //falta comentario
 
                         break;
@@ -722,17 +723,22 @@ sinaptic.wf = function () {
                         break;
 
                     case 26:
-                        //var properties = {
-                        //    //TipoDeResulociónValue: resolucion
-                        //}
+                     
                         alert("Estado actualizado.")
-
-                        //lastUpdate_(properties, sinisterId);
+                        window.location.reload();
+                           //falta comentario y adjunto
                         break;
 
                     case 27:
 
+                        //var properties = {
+                        //    //TipoDeResulociónValue: resolucion
+                        //}
+
+                        //lastUpdate_(properties, sinisterId);
+
                         alert("Estado actualizado.")
+                        window.location.reload();
                       
                         break;
 
