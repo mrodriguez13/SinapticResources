@@ -169,7 +169,8 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>Documentacion completa?</label></div>");
-                taskContent.push("<div class='col-md-6'><input name='optradio' type='checkbox' id='docCompleta'>");
+                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
                 taskContent.push("</div>");
 				
                 taskContent.push("</div>");
@@ -690,8 +691,10 @@ sinaptic.wf = function () {
                         break;
 
                     case 23:
+                        // posee 2 radio button,comentario y adjunto, no tiene campos de llenado
+                    
                         var properties = {
-                            DocCertCompleta: 1;
+                            DocCertCompleta:1;
                         }
 
                         lastUpdate_(properties, sinisterId);
