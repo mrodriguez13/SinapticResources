@@ -144,7 +144,7 @@ sinaptic.wf = function () {
                 taskContent.push("</textarea>");
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios
-           
+
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
@@ -186,37 +186,27 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 
-                taskContent.push('<div class="table table-striped" class="files" id="previews">');
-                taskContent.push(' <div id="template" class="file-row">');
-                taskContent.push('<div>');
-                taskContent.push(' <span class="preview"><img data-dz-thumbnail /></span>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<p class="name" data-dz-name></p>');
-                taskContent.push('<strong class="error text-danger" data-dz-errormessage></strong>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<p class="size" data-dz-size></p>');
-                taskContent.push('<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">');
-                taskContent.push('<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<button type="button" class="btn btn-primary start">');
-                taskContent.push('<i class="glyphicon glyphicon-upload"></i>');
-                taskContent.push('<span>Start</span>');
-                taskContent.push(' </button>');
-                taskContent.push('<button type="button" data-dz-remove class="btn btn-warning cancel">');
-                taskContent.push('<i class="glyphicon glyphicon-ban-circle"></i>');
-                taskContent.push('<span>Cancel</span>');
-                taskContent.push('</button>');
-                taskContent.push('<button type="button" data-dz-remove class="btn btn-danger delete">');
-                taskContent.push('<i class="glyphicon glyphicon-trash"></i>');
-                taskContent.push('<span>Delete</span>');
-                taskContent.push('</button>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+                taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Comentario</label>");
+                taskContent.push("</div>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<textarea id='comentario' class='form-control'>");
+                taskContent.push("</textarea>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");//form group de los comentarios
+
+                taskContent.push("<div class='col-md-8' style='padding-left:4px;'>");
+                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+                taskContent.push("</div>");
+                taskContent.push("<div class='col-md-8' style='padding-left:4px;'>");
+                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("</div>");
+
                 break;
             case 25:
                 taskContent.push(" <div class='form-group'>");
