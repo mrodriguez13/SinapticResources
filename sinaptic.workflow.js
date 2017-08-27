@@ -254,7 +254,7 @@ sinaptic.wf = function () {
 				taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push(" <div class='form-group'>");
+          
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -262,8 +262,7 @@ sinaptic.wf = function () {
 				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
 				taskContent.push("</div>");  
-                
-                taskContent.push("</div>");
+           
         
                 break;
 
@@ -331,10 +330,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-8'>");
 				taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
                 taskContent.push("</div>");
-
-               
-				
-               
+              
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -363,9 +359,8 @@ sinaptic.wf = function () {
                 taskContent.push("</textarea>");
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios
-				
 
-                taskContent.push(" <div class='form-group'>");
+
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -374,9 +369,8 @@ sinaptic.wf = function () {
 				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
 				taskContent.push("</div>");
                
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+           
+            
 
                 break;
 
@@ -402,9 +396,7 @@ sinaptic.wf = function () {
                 taskContent.push("</textarea>");
 				taskContent.push("</div>");
 				taskContent.push("</div>");//form group de los comentarios
-				
-
-                taskContent.push(" <div class='form-group'>");
+    
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -413,10 +405,6 @@ sinaptic.wf = function () {
 				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
 				taskContent.push("</div>");
                
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
                 break;
 
 
@@ -445,15 +433,9 @@ sinaptic.wf = function () {
                 //taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
 
                 taskContent.push("<input id= 'my-attachments' value='Cargar documento' type= 'file' fileread='run.AttachmentData' fileinfo= 'run.AttachmentInfo' />");
-
                 taskContent.push("</div>");
-                taskContent.push("</div>");
-
-				
-				
-	
-				
-				taskContent.push(" <div class='form-group'>");
+                taskContent.push("</div>");	
+			
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
 				taskContent.push("</div>");
@@ -461,9 +443,7 @@ sinaptic.wf = function () {
 				taskContent.push("<div class='col-md-8'>");
 				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
 				taskContent.push("</div>");
-               
-                taskContent.push("</div>");
-				
+                   
                 taskContent.push("</div>");
                 break;
 
@@ -671,14 +651,19 @@ sinaptic.wf = function () {
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
+                        var hasComment = false;
+
                         lastUpdate_(properties, sinisterId);
 
                         break;
                     case 22:
                          //estado que posee comentario y adjunto, no tiene campos de llenado
-                    
+                        var hasComment = true;
+
                         alert("Estado actualizado.")
                         window.location.reload();
+
+
                         break;
 
                     case 23:
@@ -688,6 +673,10 @@ sinaptic.wf = function () {
                         if ($("input#docCompletaSi")[0].checked === true) {
                             isCompleted = true;
                         }
+
+
+                        var hasComment = false;
+
 
                         var properties = {
                             DocCertCompleta: isCompleted
@@ -705,6 +694,7 @@ sinaptic.wf = function () {
                         //}
 
                         //lastUpdate_(properties, sinisterId);
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
                         window.location.reload();
@@ -713,6 +703,7 @@ sinaptic.wf = function () {
                         break;
 
                     case 25:
+                        var hasComment = false;
 
                         var properties = {
                             SaldoPendiente: $("#saldodeudor").val(),
@@ -723,14 +714,15 @@ sinaptic.wf = function () {
                         break;
 
                     case 26:
-                     
+                        var hasComment = false;
+
                         alert("Estado actualizado.")
                         window.location.reload();
                            //falta comentario y adjunto
                         break;
 
                     case 27:
-
+                        var hasComment = false;
                         //var properties = {
                         //   ImporteACancelar: $("#cancelImport").val(),
                         //   ModoDeCancelaciónValue: $("#cancelationMode option:selected").text(),
@@ -747,25 +739,28 @@ sinaptic.wf = function () {
                         break;
 
                     case 28:
-
+                        var hasComment = false;
+                           //falta comentario
                         alert("Estado actualizado.")
 
                         break;
 
                     case 29:
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
                         break;
 
                     case 30:
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
                         break;
 
                     case 31:
-
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
@@ -774,70 +769,71 @@ sinaptic.wf = function () {
 
                     case 32:
 
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
 
 
                         break;
 
                     case 33:
-
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
                         break;
 
                     case 34:
-
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
                         break;
 
                     case 35:
-
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
 
                         break;
 
                     case 36:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
                        
                         break;
 
                     case 37:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
                         
                         break;
 
                     case 38:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
                         
                         break;
 
                     case 39:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
 
                         break;
 
                     case 40:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
              
                         break;
 
                     case 41:
-
+                        var hasComment = false;
                         alert("Estado actualizado.")
 
                         break;
 
                     case 42:
+                        var hasComment = false;
 
                         alert("Estado actualizado.")
                      
@@ -850,7 +846,7 @@ sinaptic.wf = function () {
 
     }
 
-    var lastUpdate_ = function (properties, sinisterId) {
+    var lastUpdate_ = function (properties, sinisterId, hasComment) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
@@ -867,6 +863,13 @@ sinaptic.wf = function () {
             success: function (data) {
                 alert("Siniestro actualizado correctamente.");
                 window.location.reload();
+
+                //if (hasComment) {
+                // var comentario = $("#comentario").val();
+                // ejecutar llamada para crear comentarios
+
+                //}
+
             },
                 error: errorHandler
         });
