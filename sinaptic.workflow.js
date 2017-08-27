@@ -677,7 +677,10 @@ sinaptic.wf = function () {
             },
             success: function (data) {
 
+				
                 alert("Siniestro actualizado.");
+				
+				window.location.reload();
 
             },
             error: errorHandler
