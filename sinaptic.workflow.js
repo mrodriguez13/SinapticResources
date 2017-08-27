@@ -130,31 +130,31 @@ sinaptic.wf = function () {
                 break;
             case 22:
 
+      
                 taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-12'>");
-
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios
            
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
                 taskContent.push("</div>");            
                
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
                 taskContent.push("</div>");
-                taskContent.push("</div>");
-
-                taskContent.push("</div>");
-            
+			
 
                 break;
             case 23:
@@ -164,9 +164,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
                 taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
                 taskContent.push("</div>");
-
-
-
+				
                 taskContent.push("</div>");
                 break;
             case 24:
@@ -235,32 +233,40 @@ sinaptic.wf = function () {
 
 
                 taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-12'>");
-
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
+				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios
+				
                 taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
+				taskContent.push("</div>");
                 taskContent.push("</div>");
 
                 taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");  
+                
                 taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+        
                 break;
 
             case 27: // informar rendicion plan ovalo
@@ -305,59 +311,57 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push("<div class='form-group'>");
+				taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
+				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios		
+				
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Rendición del pago</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+				taskContent.push("<button type='button' onclick='uploadDocument();' class='btn btn-info' class='form-control'>Cargar documento");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
-
+				
                 taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");
                 taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+            
 
 
                 break;
 
             case 28: // acreditar fondos a cuenta plan ovalo
 
-                taskContent.push("<div class='form-group'>");
-				
+				taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
 				taskContent.push("</div>");
-				  
-			
                 taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
-				
 				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
 				taskContent.push("</div>");
-				
 				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
 				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios
 				
-				taskContent.push("</div>");
-		
-                taskContent.push("</div>");
 
                 taskContent.push(" <div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
@@ -383,22 +387,30 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push("<div class='form-group'>");
+				taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios
+				
 
                 taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");
+               
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -408,17 +420,23 @@ sinaptic.wf = function () {
 
             case 35: // Remitir Factura a Plan Ovalo
 
-                taskContent.push("<div class='form-group'>");
-
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+           
+		   
+				taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
+				taskContent.push("</div>");
+				taskContent.push("</div>");//form group de los comentarios
+				
+		   
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-4'>");
                 taskContent.push("<label class='control-label'>Factura</label>");
@@ -429,13 +447,21 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+				
+				
+	
+				
+				taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");
+               
                 taskContent.push("</div>");
-                taskContent.push("</div>");
+				
                 taskContent.push("</div>");
                 break;
 
@@ -477,16 +503,21 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push("<div class='form-group'>");
+				
+            	taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                taskContent.push("<button type='button' data-toggle='collapse' data-target='#comentariosContainer' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+                taskContent.push("<div id='comentariosContainer' class='collapse' style='width:70%'>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
+				taskContent.push("</div>");
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				
+				taskContent.push("</div>");//form group de los comentarios
 
                 break;
         }
