@@ -613,9 +613,9 @@ sinaptic.wf = function () {
                 $.each(sinaptic.vm.status, function (key, object) {
                     if (object.Identificador === 21) {
                         var fechaInicial = $("#newSinister_fechaSiniestro").val();
-                        var a = object.Alerta1;
+                        var diasHastaVencer = parseInt(object.Alerta1);
                         var fecha = new Date(fechaInicial);
-                        fecha = new Date(fecha.setDate(fecha.getDate() + a));
+                        fecha = new Date(fecha.setDate(fecha.getDate() + diasHastaVencer));
 
                         var dia = fecha.getDate();
                         if (dia < 10) {
@@ -676,13 +676,12 @@ sinaptic.wf = function () {
 
                 switch (sinisterState) {
                     case 21:
-                        var properties = {
-                            siniestroID: sinisterId,
+                        var properties = {   
                             ResponsableId: $("#responsablewillis").val(),
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
-                        updateState21_(properties);
+                        updateState21_(properties, sinisterId);
 
                         break;
                     case 22:
@@ -787,19 +786,19 @@ sinaptic.wf = function () {
 
     }
 
-    var updateState21_ = function (properties) {
+    var updateState21_ = function (properties, sinisterId) {
 
-        var newProperties = {
-            ResponsableId: properties.ResponsableId,
-            TeamLeaderId: properties.TeamLeaderId
-        };
+        //var newProperties = {
+        //    ResponsableId: properties.ResponsableId,
+        //    TeamLeaderId: properties.TeamLeaderId
+        //};
 
         $.ajax({
-            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + properties.siniestroID + ")",
+            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
             type: "POST",
             processData: false,
             contentType: "application/json;odata=verbose",
-            data: JSON.stringify(newProperties),
+            data: JSON.stringify(properties),
             headers: {
                 "Accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
@@ -808,6 +807,7 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 alert("Siniestro actualizado correctamente.");
+                window.location.reload();
             },
                 error: errorHandler
         });
@@ -826,7 +826,7 @@ sinaptic.wf = function () {
             type: "POST",
             processData: false,
             contentType: "application/json;odata=verbose",
-            data: JSON.stringify(newProperties),
+            data: JSON.stringify(properties),
             headers: {
                 "Accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
@@ -835,6 +835,7 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 alert("Siniestro actualizado correctamente.");
+                window.location.reload();
             },
             error: errorHandler
         });
