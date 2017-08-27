@@ -694,7 +694,7 @@ sinaptic.wf = function () {
                         // posee 2 radio button,comentario y adjunto, no tiene campos de llenado
                     
                         var properties = {
-                            DocCertCompleta:1;
+                         
                         }
 
                         lastUpdate_(properties, sinisterId);
