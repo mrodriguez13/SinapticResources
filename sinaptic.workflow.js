@@ -647,21 +647,20 @@ sinaptic.wf = function () {
             headers: { "accept": "application/json;odata=verbose" },
             success: function (data) {
                 var sinisterId = data.d.results[0].Identificador;
-                updateSinister(sinisterId);
+                var sinisterState = data.d.results[0].EstadoId;
+                updateSinister(sinisterId, sinisterState);
             },
             error: errorHandler
         });
     }
 
 
-    var updateSinister = function (sinisterId) {
+    var updateSinister = function (sinisterId, sinisterState) {
 
-	alert("test");
-	
         var asignacionIds = {
             ResponsableId: $("#responsablewillis").val(),
             TeamLeaderId: $("#teamleaderwillis").val(),
-            EstadoId: 22
+            EstadoId: sinisterState + 1
         };
 
         $.ajax({
@@ -695,12 +694,22 @@ sinaptic.wf = function () {
                 break;
 
             case 22:
+                //si posee comentarios, llamo al metodo para crear uno nuevo en la lista
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
+
+
                 break;
 
             case 23:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
+
                 break;
 
             case 24:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 25:
@@ -709,54 +718,88 @@ sinaptic.wf = function () {
                 break;
 
             case 26:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 27:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 28:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 29:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 30:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 31:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 32:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 33:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 34:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 35:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 36:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 37:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 38:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 39:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 40:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 41:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
             case 42:
+                var currentSinisterName = $("#siniestronombre").text().trim();
+                getSiniestro(currentSinisterName);
                 break;
 
 
