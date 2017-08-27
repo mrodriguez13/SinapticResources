@@ -134,7 +134,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
 
                 taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -238,7 +238,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
 
                 taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -307,7 +307,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -339,7 +339,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -370,7 +370,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -396,7 +396,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='form-group'>");
 
                 taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
@@ -407,7 +407,10 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-4'>");
                 taskContent.push("<label class='control-label'>Factura</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+                //taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+
+                taskContent.push("<input id= 'my-attachments' value='Cargar documento' type= 'file' fileread='run.AttachmentData' fileinfo= 'run.AttachmentInfo' />");
+
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
@@ -461,7 +464,7 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
