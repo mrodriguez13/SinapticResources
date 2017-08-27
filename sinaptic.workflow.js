@@ -697,11 +697,15 @@ sinaptic.wf = function () {
                         break;
 
                     case 24:
+                        var resolucion = $("#teamleaderwillis option:selected").text();
+
                         var properties = {
-                           
+                            TipoDeResulociónValue: resolucion
                         }
 
                         lastUpdate_(properties, sinisterId);
+
+                        //falta comentario
 
                         break;
 
