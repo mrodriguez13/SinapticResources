@@ -168,9 +168,8 @@ sinaptic.wf = function () {
             case 23:
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-12'>");
-                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentacion completa?</label></div>");
-                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>Documentacion completa?</label></div>");
+                taskContent.push("<div class='col-md-6'><input name='optradio' type='checkbox' id='docCompleta'>");
                 taskContent.push("</div>");
 				
                 taskContent.push("</div>");
@@ -673,7 +672,7 @@ sinaptic.wf = function () {
                 "If-Match": "*"
             },
             success: function (data) {
-
+                
                 switch (sinisterState) {
                     case 21:
                         var properties = {   
@@ -681,29 +680,30 @@ sinaptic.wf = function () {
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
-                        updateState21_(properties, sinisterId);
+                        lastUpdate_(properties, sinisterId);
 
                         break;
                     case 22:
-                         //si posee comentarios, llamo al metodo para crear uno nuevo en la lista
-         
+                         //estado que posee comentario y adjunto, no tiene campos de llenado
+                    
+                        alert("Estado actualizado.")
                         break;
 
                     case 23:
                         var properties = {
-                           
+                            DocCertCompleta: 1;
                         }
 
-                        updateState23_(properties);
+                        lastUpdate_(properties, sinisterId);
 
                         break;
 
                     case 24:
                         var properties = {
-                        
+                           
                         }
 
-                        updateState24_(properties);
+                        lastUpdate_(properties, sinisterId);
 
                         break;
 
@@ -786,12 +786,7 @@ sinaptic.wf = function () {
 
     }
 
-    var updateState21_ = function (properties, sinisterId) {
-
-        //var newProperties = {
-        //    ResponsableId: properties.ResponsableId,
-        //    TeamLeaderId: properties.TeamLeaderId
-        //};
+    var lastUpdate_ = function (properties, sinisterId) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
@@ -814,34 +809,6 @@ sinaptic.wf = function () {
     }
 
 
-
-    var updateState22_ = function (properties) {
-
-        var newProperties = {
-            
-        };
-
-        $.ajax({
-            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + properties.siniestroID + ")",
-            type: "POST",
-            processData: false,
-            contentType: "application/json;odata=verbose",
-            data: JSON.stringify(properties),
-            headers: {
-                "Accept": "application/json;odata=verbose",
-                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                "X-HTTP-Method": "MERGE",
-                "If-Match": "*"
-            },
-            success: function (data) {
-                alert("Siniestro actualizado correctamente.");
-                window.location.reload();
-            },
-            error: errorHandler
-        });
-    }
-
-
     var completeTask = function (estadoId) {
 
         switch (estadoId) {
@@ -851,12 +818,8 @@ sinaptic.wf = function () {
                 break;
 
             case 22:
-    
-               
                 var currentSinisterName = $("#siniestronombre").text().trim();
                 getSiniestro(currentSinisterName);
-
-
                 break;
 
             case 23:
