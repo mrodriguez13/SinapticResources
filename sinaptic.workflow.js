@@ -713,15 +713,21 @@ sinaptic.wf = function () {
 
                     case 25:
 
+                        var properties = {
+                            SaldoPendiente: $("#saldodeudor").val(),
+                            VencimientoDeuda: $("#vencimientodeuda").val()
+                        }
 
-                        alert("Estado actualizado.")
-
+                        lastUpdate_(properties, sinisterId);
                         break;
 
                     case 26:
-
+                        //var properties = {
+                        //    //TipoDeResulociónValue: resolucion
+                        //}
                         alert("Estado actualizado.")
-                       
+
+                        //lastUpdate_(properties, sinisterId);
                         break;
 
                     case 27:
