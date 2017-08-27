@@ -338,21 +338,30 @@ sinaptic.wf = function () {
             case 28: // acreditar fondos a cuenta plan ovalo
 
                 taskContent.push("<div class='form-group'>");
+				
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<button type='button' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>Crear comentario");
+				taskContent.push("</div>");
+				  
+				taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<div id='comentariosContainer' style='display:none;'>");
                 taskContent.push("<label class='control-label'>Comentario</label>");
                 taskContent.push("<textarea id='comentario' class='form-control'>");
                 taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				taskContent.push("</div>");
+
                 taskContent.push("</div>");
 
                 taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                taskContent.push("</div>");
+				taskContent.push("</div>");
+				
+				taskContent.push("<div class='col-md-8'>");
+				taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+				taskContent.push("</div>");
+               
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
