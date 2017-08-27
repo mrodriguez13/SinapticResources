@@ -699,85 +699,131 @@ sinaptic.wf = function () {
                     case 24:
                         var resolucion = $("#teamleaderwillis option:selected").text();
 
-                        var properties = {
-                            TipoDeResulociónValue: resolucion
-                        }
+                        //var properties = {
+                        //    //TipoDeResulociónValue: resolucion
+                        //}
 
-                        lastUpdate_(properties, sinisterId);
+                        //lastUpdate_(properties, sinisterId);
+
+                        alert("Estado actualizado.")
 
                         //falta comentario
 
                         break;
 
                     case 25:
-                        
+
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 26:
+
+                        alert("Estado actualizado.")
                        
                         break;
 
                     case 27:
+
+                        alert("Estado actualizado.")
                       
                         break;
 
                     case 28:
-                    
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 29:
-                      
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 30:
-                        
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 31:
-                  
+
+
+                        alert("Estado actualizado.")
+
+
                         break;
 
                     case 32:
-                      
+
+
+                        alert("Estado actualizado.")
+
+
                         break;
 
                     case 33:
-                        
+
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 34:
-                     
+
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 35:
-                      
+
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 36:
+
+                        alert("Estado actualizado.")
                        
                         break;
 
                     case 37:
+
+                        alert("Estado actualizado.")
                         
                         break;
 
                     case 38:
+
+                        alert("Estado actualizado.")
                         
                         break;
 
                     case 39:
-                     
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 40:
+
+                        alert("Estado actualizado.")
              
                         break;
 
                     case 41:
-                       
+
+                        alert("Estado actualizado.")
+
                         break;
 
                     case 42:
+
+                        alert("Estado actualizado.")
                      
                         break;
 
