@@ -490,6 +490,8 @@ sinaptic.wf = function () {
 
     var createSinister = function () {
 
+	alert("test");
+	
         var vencimiento = getEndStateDate(21);
 
 
