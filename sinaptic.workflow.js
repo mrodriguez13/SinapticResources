@@ -904,9 +904,9 @@ sinaptic.wf = function () {
     var addComentario = function (sinisterId) {
 
         var properties = {
-            Título: $("#siniestronombre").text().trim(),
+            //Título: $("#siniestronombre").text().trim(),
             Comentario: $("#comentario").val(),
-            IDSiniestro: sinisterId,
+            IDSiniestro: sinisterId
         }
 
         $.ajax({
