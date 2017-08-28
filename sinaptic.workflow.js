@@ -96,14 +96,14 @@ sinaptic.wf = function () {
                 $(sinaptic.vm.willisusers).each(function (i, user) {
                     if (user.Grupo.Identificador === 4) {
                         responsables.push("<option value='");
-                        responsables.push(user.Usuario.Cuenta);
+                        responsables.push(user.Usuario.Nombre);
                         responsables.push("'>");
                         responsables.push(user.Usuario.Nombre);
                         responsables.push("</option>");
                     }
                     else {
                         teamleaders.push("<option value='");
-                        teamleaders.push(user.Usuario.Cuenta);
+                        teamleaders.push(user.Usuario.Nombre);
                         teamleaders.push("'>");
                         teamleaders.push(user.Usuario.Nombre);
                         teamleaders.push("</option>");
@@ -660,6 +660,8 @@ sinaptic.wf = function () {
                          //estado que posee comentario y adjunto, no tiene campos de llenado
                         var hasComment = true;
 
+                        addComentario(sinisterId);
+
                         alert("Estado actualizado.");
                         window.location.reload();
                         // lastUpdate_(properties, sinisterId, hasComment);
@@ -883,6 +885,42 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 alert("Siniestro actualizado correctamente.");
+                
+
+                if (hasComment) {
+                    addComentario(sinisterId);
+                 //ejecutar llamada para crear comentarios
+
+                } else {
+                    window.location.reload();
+                }
+
+            },
+                error: errorHandler
+        });
+    }
+
+
+    var addComentario = function (sinisterId) {
+
+        var properties = {
+            Título: $("#siniestronombre").text().trim(),
+            Comentario: $("#comentario").val(),
+            IDSiniestro: sinisterId,
+        }
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/Comentarios",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(properties),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                alert("Comentario añadido correctamente.");
                 window.location.reload();
 
                 //if (hasComment) {
@@ -892,9 +930,11 @@ sinaptic.wf = function () {
                 //}
 
             },
-                error: errorHandler
+            error: errorHandler
         });
+
     }
+
 
 
     var completeTask = function (estadoId) {
