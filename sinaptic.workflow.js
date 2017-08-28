@@ -546,12 +546,12 @@ sinaptic.wf = function () {
             if (status.Identificador === estadoId) {
                 var alert1 = status.Alerta1;
                 var alertDate1 = new Date();
-                alertDate1 = new Date(alertDate1.setDate(fecha.getDate() + alert1));
+                alertDate1 = new Date(alertDate1.setDate(alertDate1.getDate() + alert1));
                 alertDates.alertDate1 = alertDate1;
 
                 var alert2 = status.Alerta2;
                 var alertDate2 = new Date();
-                alertDate2 = new Date(fecha.setDate(alertDate2.getDate() + alert2));
+                alertDate2 = new Date(alertDate2.setDate(alertDate2.getDate() + alert2));
                 alertDates.alertDate2 = alertDate2;
 
                 return alertDates;
