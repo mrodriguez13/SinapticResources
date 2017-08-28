@@ -208,13 +208,12 @@ sinaptic.posa = function (options) {
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
                 var date = moment(sinister.VencimientoEstado);
                 date.add(date.utcOffset() * -1, 'm');
-                //vencimientoTarea = sinister.VencimientoEstado.replace("/Date(", "");
-                //vencimientoTarea = new Date(Number(vencimientoTarea.replace(")/", "")));
                 vencimientoTarea = dateToString(date._d);
             }
             var currSinister = {
                 siniestro: sinister.Siniestro,
                 identificador: sinister.Identificador,
+                idhistorial: siinster.IdHistorial,
                 estado: descStatus,
                 grupo: sinister.Grupo,
                 orden: sinister.Orden,
