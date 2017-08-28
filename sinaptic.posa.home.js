@@ -179,7 +179,7 @@ sinaptic.posa = function (options) {
         var date = moment(date);
         date.add(date.utcOffset() * -1, 'm');
         date = date.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-        var idx = date.getDate();
+        var idx = date._d.getDate();
         vm.sinistersByClosedDate = vm.sinistersByClosedDate || [];
         var exists = false;
         for (var i = 0; i < vm.sinistersByClosedDate.length; ++i) {
