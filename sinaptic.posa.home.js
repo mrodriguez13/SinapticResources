@@ -210,7 +210,7 @@ sinaptic.posa = function (options) {
                 date.add(date.utcOffset() * -1, 'm');
                 //vencimientoTarea = sinister.VencimientoEstado.replace("/Date(", "");
                 //vencimientoTarea = new Date(Number(vencimientoTarea.replace(")/", "")));
-                vencimientoTarea = dateToString(date);
+                vencimientoTarea = dateToString(date._d);
             }
             var currSinister = {
                 siniestro: sinister.Siniestro,
