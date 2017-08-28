@@ -96,14 +96,14 @@ sinaptic.wf = function () {
                 $(sinaptic.vm.willisusers).each(function (i, user) {
                     if (user.Grupo.Identificador === 4) {
                         responsables.push("<option value='");
-                        responsables.push(user.Usuario.CorreoElectrónico);
+                        responsables.push(user.Identificador);
                         responsables.push("'>");
                         responsables.push(user.Usuario.Nombre);
                         responsables.push("</option>");
                     }
                     else {
                         teamleaders.push("<option value='");
-                        teamleaders.push(user.Usuario.CorreoElectrónico);
+                        teamleaders.push(user.Identificador);
                         teamleaders.push("'>");
                         teamleaders.push(user.Usuario.Nombre);
                         teamleaders.push("</option>");
