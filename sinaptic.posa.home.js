@@ -176,10 +176,15 @@ sinaptic.posa = function (options) {
     }
 
     function sumSinisterByClosedDate(date) {
-        date = date.replace("/Date(", "");
-        date = new Date(Number(date.replace(")/", "")));
-        var idx = date.getDate();
+        var date = moment(date);
+        date.add(date.utcOffset() * -1, 'm');
         date = date.setHours(0, 0, 0, 0);
+        var idx = date.getDate();
+
+        //date = date.replace("/Date(", "");
+        //date = new Date(Number(date.replace(")/", "")));
+        //var idx = date.getDate();
+        //date = date.setHours(0, 0, 0, 0);
         vm.sinistersByClosedDate = vm.sinistersByClosedDate || [];
         var exists = false;
         for (var i = 0; i < vm.sinistersByClosedDate.length; ++i) {
@@ -206,9 +211,12 @@ sinaptic.posa = function (options) {
                 vencimientoDeuda = new Date(Number(vencimientoDeuda.replace(")/", "")));
             }
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
-                vencimientoTarea = sinister.VencimientoEstado.replace("/Date(", "");
-                vencimientoTarea = new Date(Number(vencimientoTarea.replace(")/", "")));
-                vencimientoTarea = dateToString(vencimientoTarea);
+                var date = moment(sinister.VencimientoEstado);
+                date.add(date.utcOffset() * -1, 'm');
+                date = date.setHours(0, 0, 0, 0);
+                //vencimientoTarea = sinister.VencimientoEstado.replace("/Date(", "");
+                //vencimientoTarea = new Date(Number(vencimientoTarea.replace(")/", "")));
+                vencimientoTarea = dateToString(date);
             }
             var currSinister = {
                 siniestro: sinister.Siniestro,
