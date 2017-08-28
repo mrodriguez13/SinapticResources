@@ -16,6 +16,9 @@ sinaptic.wf = function () {
     getStatus();
     getCarriers();
     getWillisUsers();
+    getCurrentUserName();
+
+    var currentDisplayName = "";
 
     // PRIVATE METHODS
     function renderTemplate(target, tpl, data) {
@@ -67,6 +70,22 @@ sinaptic.wf = function () {
             },
             error: errorHandler
         });
+    }
+
+    function getCurrentUserName()
+    {
+        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=Usuario/Identificador eq " + _spPageContextInfo.userId;
+        $.ajax({
+            url: usersUrl,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                currentDisplayName = data.d.results[0].Nombre;
+            },
+            error: errorHandler
+        });
+
     }
 
     function errorHandler(data) {
@@ -624,7 +643,6 @@ sinaptic.wf = function () {
         });
     }
 
-
     var updateSinister = function (sinisterId, sinisterState) {
         var asignacionIds = {
             EstadoId: sinisterState + 1
@@ -934,7 +952,8 @@ sinaptic.wf = function () {
             T\u00edtulo: $("#siniestronombre").text().trim(),
             Comentario: $("#comentario").val(),
             IDSiniestro: sinisterId,
-            EstadoComentario: estado
+            EstadoComentario: estado,
+            Comentarista: currentDisplayName
         }
 
         $.ajax({
