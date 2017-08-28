@@ -213,7 +213,7 @@ sinaptic.posa = function (options) {
             var currSinister = {
                 siniestro: sinister.Siniestro,
                 identificador: sinister.Identificador,
-                idhistorial: siinster.IdHistorial,
+                idhistorial: sinister.IdHistorial,
                 estado: descStatus,
                 grupo: sinister.Grupo,
                 orden: sinister.Orden,
