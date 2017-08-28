@@ -299,9 +299,15 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Modo de Cancelacion</label>");
                 taskContent.push("<select id='cancelationMode' class='form-control'>");
-                teamleaders.push("<option>");
-                teamleaders.push("TRANSFERENCIA");
+
+                teamleaders.push("<option value='Transferencia'>");
+                teamleaders.push("Transferencia");
                 teamleaders.push("</option>");
+
+                teamleaders.push("<option value='Dep\u00f3sito'>");
+                teamleaders.push("Dep\u00f3sito");
+                teamleaders.push("</option>");
+
                 taskContent.push("</select>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
