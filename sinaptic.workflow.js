@@ -744,43 +744,46 @@ sinaptic.wf = function () {
                         break;
 
                     case 28:
-                       
-                           //falta comentario
-                        alert("Estado actualizado.");
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
-                        window.location.reload();
+                        var properties = {
+                        }
+                     
+                        lastUpdate_(properties, sinisterId,estadoId);
+                    
                         break;
 
                     case 29:
                        
+                        var properties = {
+                        }
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                            // lastUpdate_(properties, sinisterId, ,estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 30:
                        
+                        var properties = {
+                        }
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 31:
                        
+                        var properties = {
+                        }
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 32:
+                        var properties = {
+                        }
 
-                       
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
+
 
                         break;
 
@@ -792,7 +795,7 @@ sinaptic.wf = function () {
                         //    propiedad : autorizarReposicion
                         //}
 
-                        //lastUpdate_(properties, sinisterId, ,estadoId);
+                        //lastUpdate_(properties, sinisterId, estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -800,69 +803,83 @@ sinaptic.wf = function () {
 
                     case 34:
                        
+                        var properties = {
+                        }
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 35:
                        
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+                    
                         break;
 
                     case 36:
-                       
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                       // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 37:
-                       
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 38:
                        
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 39:
                        
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 40:
                        
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                    // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
                     case 41:
                        
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        var properties = {
+                        }
+
+                        lastUpdate_(properties, sinisterId, estadoId);
+
                         break;
 
-                    case 42:
+                    //case 42:
                        
+                    //    var properties = {
+                    //    }
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                     // lastUpdate_(properties, sinisterId, ,estadoId);
-                        break;
+                    //    lastUpdate_(properties, sinisterId, estadoId);
+
+                    //    break;
 
                 }
             },
@@ -871,7 +888,7 @@ sinaptic.wf = function () {
 
     }
 
-    var lastUpdate_ = function (properties, sinisterId, , estadoId) {
+    var lastUpdate_ = function (properties, sinisterId,estadoId) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
