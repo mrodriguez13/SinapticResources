@@ -583,7 +583,7 @@ sinaptic.wf = function () {
                 $.each(sinaptic.vm.status, function (key, object) {
                     if (object.Identificador === 21) {
                         var fechaInicial = $("#newSinister_fechaSiniestro").val();
-                        var diasHastaVencer = parseInt(object.Alerta1);
+                        var diasHastaVencer = parseInt(object.Alerta1) + 1;
                         var fecha = new Date(fechaInicial);
                         fecha = new Date(fecha.setDate(fecha.getDate() + diasHastaVencer));
 
