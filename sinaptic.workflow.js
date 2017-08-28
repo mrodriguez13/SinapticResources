@@ -379,7 +379,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Autorizar Reposicion</label>");
-                taskContent.push("<input type='checkbox'>");
+                taskContent.push("<input type='checkbox' id ='autRep'>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
@@ -653,16 +653,16 @@ sinaptic.wf = function () {
 
                         var hasComment = false;
 
-                        lastUpdate_(properties, sinisterId);
+                        lastUpdate_(properties, sinisterId, hasComment);
 
                         break;
                     case 22:
                          //estado que posee comentario y adjunto, no tiene campos de llenado
                         var hasComment = true;
 
-                        alert("Estado actualizado.")
+                        alert("Estado actualizado.");
                         window.location.reload();
-
+                        // lastUpdate_(properties, sinisterId, hasComment);
 
                         break;
 
@@ -682,7 +682,7 @@ sinaptic.wf = function () {
                             DocCertCompleta: isCompleted
                         }
 
-                        lastUpdate_(properties, sinisterId);
+                        lastUpdate_(properties, sinisterId, hasComment);
 
                         break;
 
@@ -693,13 +693,13 @@ sinaptic.wf = function () {
                         //    //TipoDeResulociónValue: resolucion
                         //}
 
-                        //lastUpdate_(properties, sinisterId);
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
+                        alert("Estado actualizado.");
                         window.location.reload();
                         //falta comentario
-
+                     
                         break;
 
                     case 25:
@@ -710,15 +710,16 @@ sinaptic.wf = function () {
                             VencimientoDeuda: $("#vencimientodeuda").val()
                         }
 
-                        lastUpdate_(properties, sinisterId);
+                        lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 26:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
+                        alert("Estado actualizado.");
                         window.location.reload();
                            //falta comentario y adjunto
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 27:
@@ -731,9 +732,9 @@ sinaptic.wf = function () {
                         //   ComprobanteN:$("#comprobanteNumber").val(),
                         //}
 
-                        //lastUpdate_(properties, sinisterId);
+                        // lastUpdate_(properties, sinisterId, hasComment);
 
-                        alert("Estado actualizado.")
+                        alert("Estado actualizado.");
                         window.location.reload();
 
                         break;
@@ -741,102 +742,122 @@ sinaptic.wf = function () {
                     case 28:
                         var hasComment = false;
                            //falta comentario
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        // lastUpdate_(properties, sinisterId, hasComment);
+                        window.location.reload();
                         break;
 
                     case 29:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                            // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 30:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 31:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 32:
 
                         var hasComment = false;
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
 
                         break;
 
                     case 33:
                         var hasComment = false;
+                        var autorizarReposicion = $("#autRep").is(":checked");
 
-                        alert("Estado actualizado.")
+                        //var properties = {
+                        //    propiedad : autorizarReposicion
+                        //}
 
+                        //lastUpdate_(properties, sinisterId, hasComment);
+
+                        alert("Estado actualizado.");
+                        window.location.reload();
                         break;
 
                     case 34:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 35:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 36:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-                       
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                       // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 37:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-                        
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 38:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-                        
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 39:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 40:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-             
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                    // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 41:
                         var hasComment = false;
-                        alert("Estado actualizado.")
-
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                        // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                     case 42:
                         var hasComment = false;
 
-                        alert("Estado actualizado.")
-                     
+                        alert("Estado actualizado.");
+                        window.location.reload();
+                     // lastUpdate_(properties, sinisterId, hasComment);
                         break;
 
                 }
