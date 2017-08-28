@@ -81,7 +81,7 @@ sinaptic.wf = function () {
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
             success: function (data) {
-                currentDisplayName = data.d.results[0].Nombre;
+                currentDisplayName = data.d.results[0].Usuario.Nombre;
             },
             error: errorHandler
         });
