@@ -557,7 +557,7 @@ sinaptic.wf = function () {
                     //console.log("Siniestro Creado: " + data.d);
                     alert("Siniestro Creado: " + nuevoSiniestro.Siniestro);
                   
-                    //window.location.reload();
+                    window.location.reload();
                 },
                 error: errorHandler
             })
