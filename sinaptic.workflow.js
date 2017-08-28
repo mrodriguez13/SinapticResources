@@ -553,10 +553,11 @@ sinaptic.wf = function () {
                 var alertDate2 = new Date();
                 alertDate2 = new Date(alertDate2.setDate(alertDate2.getDate() + alert2));
                 alertDates.alertDate2 = alertDate2;
-
-                return alertDates;
+                return false;
             }
         });
+
+        return alertDates;
     }
 
     function createHistorial(payload, callback) {
