@@ -4,6 +4,8 @@ var sinaptic = sinaptic || {};
 
 sinaptic.vm = sinaptic.vm || {};
 
+var currentDisplayName = "";
+
 sinaptic.wf = function () {
 
     var settings = {
@@ -17,8 +19,6 @@ sinaptic.wf = function () {
     getCarriers();
     getWillisUsers();
     getCurrentUserName();
-
-    var currentDisplayName = "";
 
     // PRIVATE METHODS
     function renderTemplate(target, tpl, data) {
