@@ -178,10 +178,10 @@ sinaptic.wf = function () {
             case 24:
                 taskContent.push(" <div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<label class='control-label'>Tipo de resolución</label>");
+                taskContent.push("<label class='control-label'>Tipo de resoluci\u00f3n</label>");
                 taskContent.push("<select id='teamleaderwillis' class='form-control'>");
-                taskContent.push("<option value='1'>Liquidación de saldo deudor</option>");
-                taskContent.push("<option value='2'>Reposición de unidad</option>");
+                taskContent.push("<option value='1'>Liquidaci\u00f3n de saldo deudor</option>");
+                taskContent.push("<option value='2'>Reposici\u00f3n de unidad</option>");
                 taskContent.push("</select>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -692,7 +692,7 @@ sinaptic.wf = function () {
                         //var resolucion = $("#teamleaderwillis option:selected").text();
 
                         //var properties = {
-                        //    //TipoDeResulociónValue: resolucion
+                        //    //TipoDeResuloci\u00f3nValue: resolucion
                         //}
 
                         // lastUpdate_(properties, sinisterId, hasComment,estadoId);
@@ -728,8 +728,8 @@ sinaptic.wf = function () {
                         var hasComment = false;
                         //var properties = {
                         //   ImporteACancelar: $("#cancelImport").val(),
-                        //   ModoDeCancelaciónValue: $("#cancelationMode option:selected").text(),
-                        //   FechaDeCancelación: $("#cancelDate").val(),
+                        //   ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
+                        //   FechaDeCancelaci\u00f3n: $("#cancelDate").val(),
                         //   NumeroDeCheque:$("#checkNumber").val(),
                         //   ComprobanteN:$("#comprobanteNumber").val(),
                         //}
@@ -913,7 +913,7 @@ sinaptic.wf = function () {
         
 
         var properties = {
-            //Título: $("#siniestronombre").text().trim(),
+            T\u00edtulo: $("#siniestronombre").text().trim(),
             Comentario: $("#comentario").val(),
             IDSiniestro: sinisterId,
             EstadoComentario: estado
