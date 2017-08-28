@@ -643,7 +643,8 @@ sinaptic.wf = function () {
                 "If-Match": "*"
             },
             success: function (data) {
-                
+
+
                 switch (sinisterState) {
                     case 21:
                         var properties = {   
@@ -651,7 +652,7 @@ sinaptic.wf = function () {
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
                     case 22:
@@ -685,7 +686,7 @@ sinaptic.wf = function () {
                             DocCertCompleta: isCompleted
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -696,7 +697,7 @@ sinaptic.wf = function () {
                         //    //TipoDeResuloci\u00f3nValue: resolucion
                         //}
 
-                        // lastUpdate_(properties, sinisterId,estadoId);
+                        // lastUpdate_(properties, sinisterId,sinisterState);
                        
 
                         alert("Estado actualizado.");
@@ -713,7 +714,7 @@ sinaptic.wf = function () {
                             VencimientoDeuda: $("#vencimientodeuda").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
                         break;
 
                     case 26:
@@ -723,7 +724,7 @@ sinaptic.wf = function () {
                         alert("Estado actualizado.");
                         window.location.reload();
                            //falta comentario y adjunto
-                         lastUpdate_(properties, sinisterId,estadoId);
+                         lastUpdate_(properties, sinisterId,sinisterState);
                         break;
 
                     case 27:
@@ -736,7 +737,7 @@ sinaptic.wf = function () {
                            ComprobanteN:$("#comprobanteNumber").val(),
                         }
 
-                         lastUpdate_(properties, sinisterId,estadoId);
+                         lastUpdate_(properties, sinisterId,sinisterState);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -747,7 +748,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
                      
-                        lastUpdate_(properties, sinisterId,estadoId);
+                        lastUpdate_(properties, sinisterId,sinisterState);
                     
                         break;
 
@@ -756,7 +757,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -765,7 +766,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -774,7 +775,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -782,7 +783,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
 
                         break;
@@ -795,7 +796,7 @@ sinaptic.wf = function () {
                         //    propiedad : autorizarReposicion
                         //}
 
-                        //lastUpdate_(properties, sinisterId, estadoId);
+                        //lastUpdate_(properties, sinisterId, sinisterState);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -806,7 +807,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -816,7 +817,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
                     
                         break;
 
@@ -824,7 +825,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -832,7 +833,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -841,7 +842,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -850,7 +851,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -859,7 +860,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -868,7 +869,7 @@ sinaptic.wf = function () {
                         var properties = {
                         }
 
-                        lastUpdate_(properties, sinisterId, estadoId);
+                        lastUpdate_(properties, sinisterId, sinisterState);
 
                         break;
 
@@ -877,7 +878,7 @@ sinaptic.wf = function () {
                     //    var properties = {
                     //    }
 
-                    //    lastUpdate_(properties, sinisterId, estadoId);
+                    //    lastUpdate_(properties, sinisterId, sinisterState);
 
                     //    break;
 
@@ -888,7 +889,7 @@ sinaptic.wf = function () {
 
     }
 
-    var lastUpdate_ = function (properties, sinisterId,estadoId) {
+    var lastUpdate_ = function (properties, sinisterId,sinisterState) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
@@ -909,7 +910,7 @@ sinaptic.wf = function () {
 
                     var estado = "";
                     for (var i = 0; i < sinaptic.vm.status.length; i++) {
-                        if (sinaptic.vm.status[i].Identificador === estadoId) {
+                        if (sinaptic.vm.status[i].Identificador === sinisterState) {
                             estado = sinaptic.vm.status[i].Descripci\u00f3n;
                         }
                     }
