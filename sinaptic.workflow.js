@@ -653,18 +653,20 @@ sinaptic.wf = function () {
 
                         var hasComment = false;
 
-                        lastUpdate_(properties, sinisterId, hasComment);
+                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
 
                         break;
                     case 22:
                          //estado que posee comentario y adjunto, no tiene campos de llenado
                         var hasComment = true;
 
-                        addComentario(sinisterId);
+                       
+
+                        //addComentario(sinisterId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
 
                         break;
 
@@ -676,15 +678,13 @@ sinaptic.wf = function () {
                             isCompleted = true;
                         }
 
-
                         var hasComment = false;
-
 
                         var properties = {
                             DocCertCompleta: isCompleted
                         }
 
-                        lastUpdate_(properties, sinisterId, hasComment);
+                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
 
                         break;
 
@@ -695,7 +695,7 @@ sinaptic.wf = function () {
                         //    //TipoDeResulociónValue: resolucion
                         //}
 
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         var hasComment = false;
 
                         alert("Estado actualizado.");
@@ -712,7 +712,7 @@ sinaptic.wf = function () {
                             VencimientoDeuda: $("#vencimientodeuda").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, hasComment);
+                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
                         break;
 
                     case 26:
@@ -721,7 +721,7 @@ sinaptic.wf = function () {
                         alert("Estado actualizado.");
                         window.location.reload();
                            //falta comentario y adjunto
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 27:
@@ -734,7 +734,7 @@ sinaptic.wf = function () {
                         //   ComprobanteN:$("#comprobanteNumber").val(),
                         //}
 
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -745,7 +745,7 @@ sinaptic.wf = function () {
                         var hasComment = false;
                            //falta comentario
                         alert("Estado actualizado.");
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         window.location.reload();
                         break;
 
@@ -754,7 +754,7 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                            // lastUpdate_(properties, sinisterId, hasComment);
+                            // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 30:
@@ -762,7 +762,7 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 31:
@@ -770,7 +770,7 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 32:
@@ -778,7 +778,7 @@ sinaptic.wf = function () {
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
 
                         break;
 
@@ -790,7 +790,7 @@ sinaptic.wf = function () {
                         //    propiedad : autorizarReposicion
                         //}
 
-                        //lastUpdate_(properties, sinisterId, hasComment);
+                        //lastUpdate_(properties, sinisterId, hasComment,estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -801,7 +801,7 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 35:
@@ -809,49 +809,49 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 36:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                       // lastUpdate_(properties, sinisterId, hasComment);
+                       // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 37:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 38:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 39:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 40:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                    // lastUpdate_(properties, sinisterId, hasComment);
+                    // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 41:
                         var hasComment = false;
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment);
+                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                     case 42:
@@ -859,7 +859,7 @@ sinaptic.wf = function () {
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                     // lastUpdate_(properties, sinisterId, hasComment);
+                     // lastUpdate_(properties, sinisterId, hasComment,estadoId);
                         break;
 
                 }
@@ -869,7 +869,7 @@ sinaptic.wf = function () {
 
     }
 
-    var lastUpdate_ = function (properties, sinisterId, hasComment) {
+    var lastUpdate_ = function (properties, sinisterId, hasComment, estadoId) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
@@ -888,7 +888,7 @@ sinaptic.wf = function () {
                 
 
                 if (hasComment) {
-                    addComentario(sinisterId);
+                    addComentario(sinisterId, estadoId);
                  //ejecutar llamada para crear comentarios
 
                 } else {
@@ -901,12 +901,22 @@ sinaptic.wf = function () {
     }
 
 
-    var addComentario = function (sinisterId) {
+
+    var addComentario = function (sinisterId, estadoId) {
+        var estado = "";
+
+        for (var i = 0; i < sinaptic.vm.status.length; i++) {
+            if (sinaptic.vm.status[i].Identificador === estadoId) {
+                estado = sinaptic.vm.status[i].Descripci\u00f3n;
+            }
+         }
+        
 
         var properties = {
             //Título: $("#siniestronombre").text().trim(),
             Comentario: $("#comentario").val(),
-            IDSiniestro: sinisterId
+            IDSiniestro: sinisterId,
+            EstadoComentario: estado
         }
 
         $.ajax({
