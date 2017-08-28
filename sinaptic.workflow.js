@@ -630,7 +630,7 @@ sinaptic.wf = function () {
         if (idHistorial != undefined && idHistorial != null) {
             closeStatusById(idHistorial);
             createHistorial(historyPayload, function (data) {
-                payload.IdHistorial = data.d.results[0].Identificador;
+                payload.IdHistorial = data.d.Identificador;
                 payload.VencimientoEstado = getAlertDates(payload.EstadoId).alert1.toJSON();
                 updateSinister(sinisterId, payload);
             });
