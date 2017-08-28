@@ -70,7 +70,15 @@ sinaptic.wf = function () {
     }
 
     function errorHandler(data) {
-        console.log("Error: " + data.responseJSON.error);
+        console.log("Error: " + data.responseText);
+    }
+
+    function applyContentFormatters() {
+        $("#saldodeudor").on("input", function () {
+            var v = $(this).val(), vc = v.replace(/[^0-9,\.]/, '');
+            if (v !== vc)
+                $(this).val(vc);
+        });
     }
 
     //PUBLIC METHODS
@@ -481,19 +489,8 @@ sinaptic.wf = function () {
         $("#modaltask").modal();
     };
 
-    function applyContentFormatters() {
-        $("#saldodeudor").on("input", function () {
-            var v = $(this).val(), vc = v.replace(/[^0-9,\.]/, '');
-            if (v !== vc)
-                $(this).val(vc);
-        });
-    }
-
     var createSinister = function () {
-
         var vencimiento = getEndStateDate(21);
-
-
         var nuevoSiniestro = {
             Siniestro: $("#newSinister_siniestro").val(),
             Grupo: $("#newSinister_grupo").val(),
@@ -543,34 +540,23 @@ sinaptic.wf = function () {
     };
 
 
-    var getEndStateDate = function (estadoId) {
-        var vencimiento = "";
-        switch (estadoId) {
-            case 21:
-                $.each(sinaptic.vm.status, function (key, object) {
-                    if (object.Identificador === 21) {
-                        var fechaInicial = $("#newSinister_fechaSiniestro").val();
-                        var a = object.Alerta1;
-                        var fecha = new Date(fechaInicial);
-                        fecha = new Date(fecha.setDate(fecha.getDate() + a));
+    var getAlertDates = function (estadoId) {
+        var alertDates = {};
+        $.each(sinaptic.vm.status, function (key, status) {
+            if (status.Identificador === estadoId) {
+                var alert1 = status.Alerta1;
+                var alertDate1 = new Date();
+                alertDate1 = new Date(alertDate1.setDate(fecha.getDate() + alert1));
+                alertDates.alertDate1 = alertDate1;
 
-                        var dia = fecha.getDate();
-                        if (dia < 10) {
-                            dia = "0" + dia;
-                        }
+                var alert2 = status.Alerta2;
+                var alertDate2 = new Date();
+                alertDate2 = new Date(fecha.setDate(alertDate2.getDate() + alert2));
+                alertDates.alertDate2 = alertDate2;
 
-                        var mes = (parseInt(fecha.getMonth()) + 1);
-                        if (mes < 10) {
-                            mes = "0" + mes;
-                        }
-
-                        vencimiento = fecha.getFullYear() + "-" + mes + "-" + dia + "T00:00:00";
-                    }
-                });
-
-                break;
-        }
-        return vencimiento;
+                return alertDates;
+            }
+        });
     }
 
     function createHistorial(payload, callback) {
@@ -640,12 +626,12 @@ sinaptic.wf = function () {
         var sinisterId = sinaptic.vm.currentSinister.identificador;
         var idHistorial = sinaptic.vm.currentSinister.idhistorial;
         var nextStatus = payload.EstadoId;
-        var historyPayload = { "Siniestro": sinisterId, "Estado": nextStatus, "FechaDesde": new Date().toJSON() };
+        var historyPayload = { "SiniestroId": sinisterId, "EstadoId": nextStatus, "FechaDesde": new Date().toJSON() };
         if (idHistorial != undefined && idHistorial != null) {
             closeStatusById(idHistorial);
             createHistorial(historyPayload, function (data) {
                 payload.IdHistorial = data.d.results[0].Identificador;
-                payload.VencimientoEstado = getEndStateDate(payload.EstadoId);
+                payload.VencimientoEstado = getAlertDates(payload.EstadoId).alert1.toJSON();
                 updateSinister(sinisterId, payload);
             });
         }
