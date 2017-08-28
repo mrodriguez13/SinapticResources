@@ -657,7 +657,7 @@ sinaptic.wf = function () {
                         break;
                     case 22:
 
-                        if ($("#comentario").val() != "") {
+                        if ($("#comentario").val() != "" && $("#comentario").val() != undefined) {
 
                             var estado = "";
                             for (var i = 0; i < sinaptic.vm.status.length; i++) {
@@ -906,7 +906,7 @@ sinaptic.wf = function () {
             success: function (data) {
               
                 
-                if ($("#comentario").val() != "") {
+                if ($("#comentario").val() != "" && $("#comentario").val() != undefined) {
 
                     var estado = "";
                     for (var i = 0; i < sinaptic.vm.status.length; i++) {
