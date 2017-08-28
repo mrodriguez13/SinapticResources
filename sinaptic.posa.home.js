@@ -178,13 +178,8 @@ sinaptic.posa = function (options) {
     function sumSinisterByClosedDate(date) {
         var date = moment(date);
         date.add(date.utcOffset() * -1, 'm');
-        date = date.setHours(0, 0, 0, 0);
+        date = date.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
         var idx = date.getDate();
-
-        //date = date.replace("/Date(", "");
-        //date = new Date(Number(date.replace(")/", "")));
-        //var idx = date.getDate();
-        //date = date.setHours(0, 0, 0, 0);
         vm.sinistersByClosedDate = vm.sinistersByClosedDate || [];
         var exists = false;
         for (var i = 0; i < vm.sinistersByClosedDate.length; ++i) {
@@ -213,7 +208,6 @@ sinaptic.posa = function (options) {
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
                 var date = moment(sinister.VencimientoEstado);
                 date.add(date.utcOffset() * -1, 'm');
-                date = date.setHours(0, 0, 0, 0);
                 //vencimientoTarea = sinister.VencimientoEstado.replace("/Date(", "");
                 //vencimientoTarea = new Date(Number(vencimientoTarea.replace(")/", "")));
                 vencimientoTarea = dateToString(date);
