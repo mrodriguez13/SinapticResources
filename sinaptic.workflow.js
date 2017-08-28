@@ -637,8 +637,8 @@ sinaptic.wf = function () {
     }
 
     var updateStatusChange = function (payload) {
-        var sinisterId = sinaptic.vm.currentSinister.Identificador;
-        var idHistorial = sinaptic.vm.currentSinister.IdHistorial;
+        var sinisterId = sinaptic.vm.currentSinister.identificador;
+        var idHistorial = sinaptic.vm.currentSinister.idhistorial;
         var nextStatus = payload.EstadoId;
         var historyPayload = { "Siniestro": sinisterId, "Estado": nextStatus, "FechaDesde": new Date().toJSON() };
         if (idHistorial != undefined && idHistorial != null) {
