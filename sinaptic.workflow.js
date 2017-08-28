@@ -930,7 +930,7 @@ sinaptic.wf = function () {
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             success: function (data) {
-                alert("Comentario añadido correctamente.");
+                alert("Comentario a\u00f1adido correctamente.");
                 window.location.reload();
 
                 //if (hasComment) {
