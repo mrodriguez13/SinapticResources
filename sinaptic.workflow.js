@@ -651,22 +651,25 @@ sinaptic.wf = function () {
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
-                        var hasComment = false;
-
                         lastUpdate_(properties, sinisterId, hasComment, estadoId);
 
                         break;
                     case 22:
-                         //estado que posee comentario y adjunto, no tiene campos de llenado
-                        var hasComment = true;
 
-                       
+                        if ($("#comentario").val() != "") {
 
-                        //addComentario(sinisterId);
+                            var estado = "";
+                            for (var i = 0; i < sinaptic.vm.status.length; i++) {
+                                if (sinaptic.vm.status[i].Identificador === estadoId) {
+                                    estado = sinaptic.vm.status[i].Descripci\u00f3n;
+                                }
+                            }
+                            addComentario(sinisterId, estado);
 
-                        alert("Estado actualizado.");
-                        window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        } else {
+                            alert("Siniestro actualizado correctamente.");
+                            window.location.reload();
+                        }
 
                         break;
 
@@ -678,13 +681,11 @@ sinaptic.wf = function () {
                             isCompleted = true;
                         }
 
-                        var hasComment = false;
-
                         var properties = {
                             DocCertCompleta: isCompleted
                         }
 
-                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
+                        lastUpdate_(properties, sinisterId, , estadoId);
 
                         break;
 
@@ -695,8 +696,8 @@ sinaptic.wf = function () {
                         //    //TipoDeResuloci\u00f3nValue: resolucion
                         //}
 
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
-                        var hasComment = false;
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -705,36 +706,37 @@ sinaptic.wf = function () {
                         break;
 
                     case 25:
-                        var hasComment = false;
+                       
 
                         var properties = {
                             SaldoPendiente: $("#saldodeudor").val(),
                             VencimientoDeuda: $("#vencimientodeuda").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
+                        lastUpdate_(properties, sinisterId, , estadoId);
                         break;
 
                     case 26:
-                        var hasComment = false;
+                        var properties = {
+                        }
 
                         alert("Estado actualizado.");
                         window.location.reload();
                            //falta comentario y adjunto
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                         lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 27:
-                        var hasComment = false;
-                        //var properties = {
-                        //   ImporteACancelar: $("#cancelImport").val(),
-                        //   ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
-                        //   FechaDeCancelaci\u00f3n: $("#cancelDate").val(),
-                        //   NumeroDeCheque:$("#checkNumber").val(),
-                        //   ComprobanteN:$("#comprobanteNumber").val(),
-                        //}
+                       
+                        var properties = {
+                           ImporteACancelar: $("#cancelImport").val(),
+                           ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
+                           FechaDeCancelaci\u00f3n: $("#cancelDate").val(),
+                           NumeroDeCheque:$("#checkNumber").val(),
+                           ComprobanteN:$("#comprobanteNumber").val(),
+                        }
 
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                         lastUpdate_(properties, sinisterId, ,estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
@@ -742,124 +744,124 @@ sinaptic.wf = function () {
                         break;
 
                     case 28:
-                        var hasComment = false;
+                       
                            //falta comentario
                         alert("Estado actualizado.");
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         window.location.reload();
                         break;
 
                     case 29:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                            // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                            // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 30:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 31:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 32:
 
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
 
                         break;
 
                     case 33:
-                        var hasComment = false;
+                       
                         var autorizarReposicion = $("#autRep").is(":checked");
 
                         //var properties = {
                         //    propiedad : autorizarReposicion
                         //}
 
-                        //lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        //lastUpdate_(properties, sinisterId, ,estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
                         break;
 
                     case 34:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 35:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 36:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                       // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                       // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 37:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 38:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 39:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 40:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                    // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                    // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 41:
-                        var hasComment = false;
+                       
                         alert("Estado actualizado.");
                         window.location.reload();
-                        // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                        // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                     case 42:
-                        var hasComment = false;
+                       
 
                         alert("Estado actualizado.");
                         window.location.reload();
-                     // lastUpdate_(properties, sinisterId, hasComment,estadoId);
+                     // lastUpdate_(properties, sinisterId, ,estadoId);
                         break;
 
                 }
@@ -869,7 +871,7 @@ sinaptic.wf = function () {
 
     }
 
-    var lastUpdate_ = function (properties, sinisterId, hasComment, estadoId) {
+    var lastUpdate_ = function (properties, sinisterId, , estadoId) {
 
         $.ajax({
             url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName + "(" + sinisterId + ")",
@@ -884,14 +886,20 @@ sinaptic.wf = function () {
                 "If-Match": "*"
             },
             success: function (data) {
-                alert("Siniestro actualizado correctamente.");
+              
                 
+                if ($("#comentario").val() != "") {
 
-                if (hasComment) {
-                    addComentario(sinisterId, estadoId);
-                 //ejecutar llamada para crear comentarios
-
+                    var estado = "";
+                    for (var i = 0; i < sinaptic.vm.status.length; i++) {
+                        if (sinaptic.vm.status[i].Identificador === estadoId) {
+                            estado = sinaptic.vm.status[i].Descripci\u00f3n;
+                        }
+                    }
+                    addComentario(sinisterId, estado);
+               
                 } else {
+                    alert("Siniestro actualizado correctamente.");
                     window.location.reload();
                 }
 
@@ -902,15 +910,7 @@ sinaptic.wf = function () {
 
 
 
-    var addComentario = function (sinisterId, estadoId) {
-        var estado = "";
-
-        for (var i = 0; i < sinaptic.vm.status.length; i++) {
-            if (sinaptic.vm.status[i].Identificador === estadoId) {
-                estado = sinaptic.vm.status[i].Descripci\u00f3n;
-            }
-         }
-        
+    var addComentario = function (sinisterId, estado) {
 
         var properties = {
             T\u00edtulo: $("#siniestronombre").text().trim(),
@@ -930,14 +930,8 @@ sinaptic.wf = function () {
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             success: function (data) {
-                alert("Comentario a\u00f1adido correctamente.");
+                alert("Siniestro y comentario a\u00f1adidos correctamente.");
                 window.location.reload();
-
-                //if (hasComment) {
-                // var comentario = $("#comentario").val();
-                // ejecutar llamada para crear comentarios
-
-                //}
 
             },
             error: errorHandler
