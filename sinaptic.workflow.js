@@ -661,7 +661,7 @@ sinaptic.wf = function () {
 
                             var estado = "";
                             for (var i = 0; i < sinaptic.vm.status.length; i++) {
-                                if (sinaptic.vm.status[i].Identificador === estadoId) {
+                                if (sinaptic.vm.status[i].Identificador === sinisterState) {
                                     estado = sinaptic.vm.status[i].Descripci\u00f3n;
                                 }
                             }
