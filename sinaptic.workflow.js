@@ -651,7 +651,7 @@ sinaptic.wf = function () {
                             TeamLeaderId: $("#teamleaderwillis").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, hasComment, estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
 
                         break;
                     case 22:
@@ -685,7 +685,7 @@ sinaptic.wf = function () {
                             DocCertCompleta: isCompleted
                         }
 
-                        lastUpdate_(properties, sinisterId, , estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
 
                         break;
 
@@ -696,7 +696,7 @@ sinaptic.wf = function () {
                         //    //TipoDeResuloci\u00f3nValue: resolucion
                         //}
 
-                        // lastUpdate_(properties, sinisterId, ,estadoId);
+                        // lastUpdate_(properties, sinisterId,estadoId);
                        
 
                         alert("Estado actualizado.");
@@ -713,7 +713,7 @@ sinaptic.wf = function () {
                             VencimientoDeuda: $("#vencimientodeuda").val()
                         }
 
-                        lastUpdate_(properties, sinisterId, , estadoId);
+                        lastUpdate_(properties, sinisterId, estadoId);
                         break;
 
                     case 26:
@@ -723,7 +723,7 @@ sinaptic.wf = function () {
                         alert("Estado actualizado.");
                         window.location.reload();
                            //falta comentario y adjunto
-                         lastUpdate_(properties, sinisterId, ,estadoId);
+                         lastUpdate_(properties, sinisterId,estadoId);
                         break;
 
                     case 27:
@@ -736,7 +736,7 @@ sinaptic.wf = function () {
                            ComprobanteN:$("#comprobanteNumber").val(),
                         }
 
-                         lastUpdate_(properties, sinisterId, ,estadoId);
+                         lastUpdate_(properties, sinisterId,estadoId);
 
                         alert("Estado actualizado.");
                         window.location.reload();
