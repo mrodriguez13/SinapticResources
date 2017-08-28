@@ -615,9 +615,8 @@ sinaptic.wf = function () {
                 "If-Match": "*"
             },
             success: function (data) {
-
-                alert("Siniestro actualizado.");
-
+                console.log("Siniestro actualizado: " + data.d.Identificador);
+                sinaptic.posa.refresh();
             },
             error: errorHandler
         });
