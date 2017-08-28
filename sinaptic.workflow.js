@@ -105,14 +105,14 @@ sinaptic.wf = function () {
                 $(sinaptic.vm.willisusers).each(function (i, user) {
                     if (user.Grupo.Identificador === 4) {
                         responsables.push("<option value='");
-                        responsables.push(user.Identificador);
+                        responsables.push(user.Usuario.Identificador);
                         responsables.push("'>");
                         responsables.push(user.Usuario.Nombre);
                         responsables.push("</option>");
                     }
                     else {
                         teamleaders.push("<option value='");
-                        teamleaders.push(user.Identificador);
+                        teamleaders.push(user.Usuario.Identificador);
                         teamleaders.push("'>");
                         teamleaders.push(user.Usuario.Nombre);
                         teamleaders.push("</option>");
@@ -642,7 +642,6 @@ sinaptic.wf = function () {
 
         switch (estadoId) {
             case 21:
-                var currentSinisterName = $("#siniestronombre").text().trim();
                 var payload = {
                     ResponsableId: $("#responsablewillis").val(),
                     TeamLeaderId: $("#teamleaderwillis").val(),
@@ -653,6 +652,12 @@ sinaptic.wf = function () {
             case 25:
                 var saldoDeudor = $("#saldodeudor").val();
                 var fechaVenc = $("#vencimientodeuda").val();
+                var payload = {
+                    ResponsableId: $("#responsablewillis").val(),
+                    TeamLeaderId: $("#teamleaderwillis").val(),
+                    EstadoId: 22
+                };
+                updateStatusChange(payload);
                 break;
         };
     }
