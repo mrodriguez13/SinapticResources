@@ -488,7 +488,7 @@ sinaptic.wf = function () {
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas documentos"
+                dictMaxFilesExceeded: "No puede subir mas documentos",
                 init: function () {
                     var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
                     var myDropzone = this;
