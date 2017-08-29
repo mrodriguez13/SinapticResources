@@ -154,7 +154,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<div id='dropzone'>");
+                taskContent.push("<div id='dropzone' class='dropzone'>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -488,7 +488,7 @@ sinaptic.wf = function () {
     };
 
     var createSinister = function () {
-        var vencimiento = getAlertDates(21).alertDate1.toJSON();
+        var vencimiento = getDueDates(21).alertDate1.toJSON();
         var nuevoSiniestro = {
             Siniestro: $("#newSinister_siniestro").val(),
             Grupo: $("#newSinister_grupo").val(),
@@ -538,7 +538,7 @@ sinaptic.wf = function () {
     };
 
 
-    var getAlertDates = function (estadoId) {
+    var getDueDates = function (estadoId) {
         var alertDates = {};
         $.each(sinaptic.vm.status, function (key, status) {
             if (status.Identificador === estadoId) {
@@ -620,6 +620,10 @@ sinaptic.wf = function () {
         });
     }
 
+    function loadDocuemtnFile(statusId) {
+
+    }
+
     var updateStatusChange = function (payload) {
         var sinisterId = sinaptic.vm.currentSinister.identificador;
         var idHistorial = sinaptic.vm.currentSinister.idhistorial;
@@ -629,7 +633,7 @@ sinaptic.wf = function () {
             closeStatusById(idHistorial);
             createHistorial(historyPayload, function (data) {
                 payload.IdHistorial = data.d.Identificador;
-                var dueDate = getAlertDates(payload.EstadoId);
+                var dueDate = getDueDates(payload.EstadoId);
                 payload.VencimientoEstado = dueDate.alertDate1.toJSON();
                 updateSinister(sinisterId, payload);
             });
@@ -637,7 +641,6 @@ sinaptic.wf = function () {
     }
 
     var completeTask = function (estadoId) {
-
         switch (estadoId) {
             case 21:
                 var payload = {
@@ -647,13 +650,18 @@ sinaptic.wf = function () {
                 };
                 updateStatusChange(payload);         
                 break;
-            case 25:
-                var saldoDeudor = $("#saldodeudor").val();
-                var fechaVenc = $("#vencimientodeuda").val();
+            case 22:
+                loadDocumentFile(22);
                 var payload = {
-                    ResponsableId: $("#responsablewillis").val(),
-                    TeamLeaderId: $("#teamleaderwillis").val(),
-                    EstadoId: 22
+                    EstadoId: 23
+                };
+                updateStatusChange(payload);
+                break;
+            case 25:
+                var payload = {
+                    SaldoPendiente: $("#saldodeudor").val(),
+                    VencimientoDeuda: $("#vencimientodeuda").val(),
+                    EstadoId: 26
                 };
                 updateStatusChange(payload);
                 break;
