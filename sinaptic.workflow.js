@@ -649,56 +649,71 @@ sinaptic.wf = function () {
         var file = "";
         if (array_Files.length > 0) {
           
-            for (var i = 0; i < array_Files.length; i++) {
-                file = array_Files[i];
+            //for (var i = 0; i < array_Files.length; i++) {
+            //file = array_Files[i];
+                file = array_Files[0];
                 fileName = file.name;
+                var fr = new FileReader();
+                fr.onload = receivedBinary;
+                fr.readAsDataURL(file);
 
-                createFile(file)
-
-            }
+            //}
         }
 
     }
 
-
-    function createFile(file) {
-        var clientContext;
-        var oWebsite;
-        var oList;
-        var fileCreateInfo;
-        var fileContent;
-
+    // Callback function for onload event of FileReader
+    function receivedBinary() {
+        // Get the ClientContext for the app web
         clientContext = new SP.ClientContext.get_current();
-        oWebsite = clientContext.get_web();
-        oList = oWebsite.get_lists().getByTitle("Documentos");
+        // Use the host web URL to get a parent context - this allows us to get data from the parent
+        parentCtx = new SP.AppContextSite(clientContext, settings.host);
+        parentWeb = parentCtx.get_web();
+        parentList = parentWeb.get_lists().getByTitle("Documentos");
 
         fileCreateInfo = new SP.FileCreationInformation();
         fileCreateInfo.set_url(file.name);
+        fileCreateInfo.set_overwrite(true);
         fileCreateInfo.set_content(new SP.Base64EncodedByteArray());
-        fileContent = "The content of my new file";
 
-        for (var i = 0; i < fileContent.length; i++) {
-
-            fileCreateInfo.get_content().append(fileContent.charCodeAt(i));
+        // Read the binary contents of the base 64 data URL into a Uint8Array
+        // Append the contents of this array to the SP.FileCreationInformation
+        var arr = convertDataURIToBinary(this.result);
+        for (var i = 0; i < arr.length; ++i) {
+            fileCreateInfo.get_content().append(arr[i]);
         }
 
-        this.newFile = oList.get_rootFolder().get_files().add(fileCreateInfo);
+        // Upload the file to the root folder of the document library
+        this.newFile = parentList.get_rootFolder().get_files().add(fileCreateInfo);
 
         clientContext.load(this.newFile);
-        clientContext.executeQueryAsync(
-            Function.createDelegate(this, successHandler),
-            Function.createDelegate(this, errorHandler)
-        );
-
-        function successHandler() {
-            alert("success.");
-        }
-
-        function errorHandler() {
-            alert("Request failed: " + arguments[1].get_message());
-        }
+        clientContext.executeQueryAsync(onSuccess, onFailure);
     }
 
+    function onSuccess() {
+        // File successfully uploaded
+        alert("Success!");
+    }
+
+    function onFailure() {
+        // Error occurred
+        alert("Request failed: " + arguments[1].get_message());
+    }
+
+
+    function convertDataURIToBinary(dataURI) {
+        var BASE64_MARKER = ';base64,';
+        var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+        var base64 = dataURI.substring(base64Index);
+        var raw = window.atob(base64);
+        var rawLength = raw.length;
+        var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+        for (i = 0; i < rawLength; i++) {
+            array[i] = raw.charCodeAt(i);
+        }
+        return array;
+    }
 
     //end dropzone
 
