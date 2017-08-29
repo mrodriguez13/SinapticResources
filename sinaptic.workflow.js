@@ -694,8 +694,7 @@ sinaptic.wf = function () {
             processData: false,
             headers: {
                 Accept: "application/json;odata=verbose",
-                "X-RequestDigest": jQuery("#__REQUESTDIGEST").val(),
-                "Content-Length": buffer.byteLength
+                "X-RequestDigest": jQuery("#__REQUESTDIGEST").val()
             },
             success: function () {
                 alert("Item added");
