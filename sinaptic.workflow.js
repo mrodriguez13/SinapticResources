@@ -653,14 +653,7 @@ sinaptic.wf = function () {
                 file = array_Files[i];
                 fileName = file.name;
 
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    uploadFileDropz(e.target.result, fileName);
-                }
-                reader.onerror = function (e) {
-                    alert(e.target.error);
-                }
-                reader.readAsArrayBuffer(file);
+                createFile(file)
 
             }
         }
@@ -668,34 +661,43 @@ sinaptic.wf = function () {
     }
 
 
-    function uploadFileDropz(buffer, fileName) {
-        var url = String.format("{0}/_api/Web/Lists/getByTitle('Documentos')/RootFolder/Files/Add(url='{1}', overwrite=true)", settings.host, fileName);
-        //url = settings.host + "/_vti_bin/listdata.svc/Documentos" + settings.sinistersListName + "(" + sinisterId + ")",
+    function createFile(file) {
+        var clientContext;
+        var oWebsite;
+        var oList;
+        var fileCreateInfo;
+        var fileContent;
 
-        var call = jQuery.ajax({
-            url: url,
-            type: "POST",
-            data: buffer,
-            processData: false,
-            headers: {
-                Accept: "application/json;odata=verbose",
-                "X-RequestDigest": jQuery("#__REQUESTDIGEST").val()
-            },
-            success: function () {
-                alert("Item added");
-            }
-        });
+        clientContext = new SP.ClientContext.get_current();
+        oWebsite = clientContext.get_web();
+        oList = oWebsite.get_lists().getByTitle("Documentos");
 
-        return call;
+        fileCreateInfo = new SP.FileCreationInformation();
+        fileCreateInfo.set_url(file.name);
+        fileCreateInfo.set_content(new SP.Base64EncodedByteArray());
+        fileContent = "The content of my new file";
+
+        for (var i = 0; i < fileContent.length; i++) {
+
+            fileCreateInfo.get_content().append(fileContent.charCodeAt(i));
+        }
+
+        this.newFile = oList.get_rootFolder().get_files().add(fileCreateInfo);
+
+        clientContext.load(this.newFile);
+        clientContext.executeQueryAsync(
+            Function.createDelegate(this, successHandler),
+            Function.createDelegate(this, errorHandler)
+        );
+
+        function successHandler() {
+            alert("success.");
+        }
+
+        function errorHandler() {
+            alert("Request failed: " + arguments[1].get_message());
+        }
     }
-
-
-    function failHandler(jqXHR, textStatus, errorThrown) {
-        var response = JSON.parse(jqXHR.responseText);
-        var message = response ? response.error.message.value : textStatus;
-        alert("Call failed. Error: " + message);
-    }
-
 
 
     //end dropzone
