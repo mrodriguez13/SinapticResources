@@ -111,6 +111,7 @@ sinaptic.wf = function () {
         var responsables = [];
         var teamleaders = [];
         var startDropZone = false;
+        var dropZoneMessage = "";
         var taskContent = [];
         switch (estadoId) {
             case 21:
@@ -159,6 +160,7 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 startDropZone = true;
+                dropZoneMessage = "Arrastre o haga click para seleccionar el Formulario 04";
                 break;
             case 23:
                 taskContent.push("<div class='form-group'>");
@@ -481,7 +483,11 @@ sinaptic.wf = function () {
         if (startDropZone) {
             $("#dropzone").dropzone({
                 url: "#",
-                autoProcessQueue: false
+                autoProcessQueue: false,
+                maxFiles: 1,
+                addRemoveLinks: true,
+                dictDefaultMessage: dropZoneMessage,
+                dictRemoveFile: "Quitar documento"
             });
         }
         $("#modaltask").modal();
