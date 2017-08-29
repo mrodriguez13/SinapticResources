@@ -665,13 +665,13 @@ sinaptic.wf = function () {
     // Callback function for onload event of FileReader
     function receivedBinary() {
         // Get the ClientContext for the app web
-        clientContext = new SP.ClientContext.get_current();
+        var clientContext = new SP.ClientContext.get_current();
         // Use the host web URL to get a parent context - this allows us to get data from the parent
-        parentCtx = new SP.AppContextSite(clientContext, settings.host);
-        parentWeb = parentCtx.get_web();
-        parentList = parentWeb.get_lists().getByTitle("Documentos");
+        var parentCtx = new SP.AppContextSite(clientContext, settings.host);
+        var parentWeb = parentCtx.get_web();
+        var parentList = parentWeb.get_lists().getByTitle("Documentos");
 
-        fileCreateInfo = new SP.FileCreationInformation();
+        var fileCreateInfo = new SP.FileCreationInformation();
         fileCreateInfo.set_url(file.name);
         fileCreateInfo.set_overwrite(true);
         fileCreateInfo.set_content(new SP.Base64EncodedByteArray());
