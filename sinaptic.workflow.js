@@ -492,12 +492,12 @@ sinaptic.wf = function () {
                 init: function () {
                     var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
                     var myDropzone = this;
-                    submitButton.addEventListener("click", function () {
-                        myDropzone.processQueue(true);
-                   
+                    //submitButton.addEventListener("click", function () {
+                    //    myDropzone.processQueue(true);
+                        }
                     });
                 }
-            });
+            //});
         }
         $("#modaltask").modal();
     };
