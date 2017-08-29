@@ -494,6 +494,7 @@ sinaptic.wf = function () {
                     var myDropzone = this;
                     submitButton.addEventListener("click", function () {
                         myDropzone.processQueue(true);
+                        uploadDocument();
                     });
                 }
             });
@@ -775,7 +776,7 @@ sinaptic.wf = function () {
                     EstadoId: 23
                 };
                 updateStatusChange(payload);
-                uploadDocument();
+           
                 break;
             case 25:
                 var payload = {
