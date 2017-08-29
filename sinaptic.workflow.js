@@ -651,11 +651,11 @@ sinaptic.wf = function () {
           
             for (var i = 0; i < array_Files.length; i++) {
                 file = array_Files[i];
-                fileName = array_Files[i].name;
+                fileName = file.name;
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    addItem(e.target.result, fileName);
+                    uploadFileDropz(e.target.result, fileName);
                 }
                 reader.onerror = function (e) {
                     alert(e.target.error);
@@ -667,29 +667,9 @@ sinaptic.wf = function () {
 
     }
 
-    function addItem(buffer, fileName) {
-        var call = uploadFileDropz(buffer, fileName);
-        call.done(function (data, textStatus, jqXHR) {
-            var call2 = getItem(data.d);
-
-            call2.done(function (data, textStatus, jqXHR) {
-                var item = data.d;
-                updateItemFields(item);
-
-            });
-            call2.fail(function (jqXHR, textStatus, errorThrown) {
-                //failHandler(jqXHR, textStatus, errorThrown);
-            });
-        });
-        call.fail(function (jqXHR, textStatus, errorThrown) {
-            //failHandler(jqXHR, textStatus, errorThrown);
-        });
-    }
 
     function uploadFileDropz(buffer, fileName) {
-        var url = String.format("{0}/_api/Web/Lists/getByTitle('Documentos')/RootFolder/Files/Add(url='{1}', overwrite=true)",
-            settings.host, fileName);
-
+        var url = String.format("{0}/_api/Web/Lists/getByTitle('Documentos')/RootFolder/Files/Add(url='{1}', overwrite=true)", settings.host, fileName);
         //url = settings.host + "/_vti_bin/listdata.svc/Documentos" + settings.sinistersListName + "(" + sinisterId + ")",
 
         var call = jQuery.ajax({
@@ -709,18 +689,6 @@ sinaptic.wf = function () {
         return call;
     }
 
-    function getItem(file) {
-        var call = jQuery.ajax({
-            url: file.ListItemAllFields.__deferred.uri,
-            type: "GET",
-            dataType: "json",
-            headers: {
-                Accept: "application/json;odata=verbose"
-            }
-        });
-
-        return call;
-    }
 
     function failHandler(jqXHR, textStatus, errorThrown) {
         var response = JSON.parse(jqXHR.responseText);
