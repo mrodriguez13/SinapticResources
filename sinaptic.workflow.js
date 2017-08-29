@@ -480,6 +480,9 @@ sinaptic.wf = function () {
 
         $("#taskcontent").append(taskContent);
         applyContentFormatters();
+
+        $("#modaltask").modal();
+
         if (startDropZone) {
             $("#dropzone").dropzone({
                 url: "#",
@@ -488,18 +491,19 @@ sinaptic.wf = function () {
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas documentos"
-                //init: function () {
-                //    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
-                //    var myDropzone = this;
-                //    submitButton.addEventListener("click", function () {
-                //        myDropzone.processQueue(true);
+                dictMaxFilesExceeded: "No puede subir mas documentos",
+                init: function () {
+                    //var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
+                    var submitButton = $(".modal-footer>.btn .btn-success");
+                    var myDropzone = this;
+                    submitButton.addEventListener("click", function () {
+                        myDropzone.processQueue(true);
                         
-                //    });
-                //}
+                    });
+                }
             });
         }
-        $("#modaltask").modal();
+     
     };
 
     var createSinister = function () {
