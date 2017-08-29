@@ -490,7 +490,7 @@ sinaptic.wf = function () {
                 dictRemoveFile: "Quitar",
                 dictMaxFilesExceeded: "No puede subir mas documentos",
                 init: function () {
-                    var submitButton = document.querySelector("#modaltask button.btn.btn-success");
+                    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
                     var myDropzone = this;
                     submitButton.addEventListener("click", function () {
                         myDropzone.processQueue(true);
@@ -634,6 +634,101 @@ sinaptic.wf = function () {
         });
     }
 
+
+
+
+    function uploadDocument() {
+
+        var element = document.getElementById("dropzone");
+        var array_Files = element.dropzone.files;
+        var fileName = "";
+        if (array_Files.length > 0)
+        {
+
+            for (var i = 0; i < array_Files.length; i++) {
+
+                fileName = array_Files[i].name;
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    addItem(e.target.result, fileName);
+                }
+                reader.onerror = function (e) {
+                    alert(e.target.error);
+                }
+                reader.readAsArrayBuffer(file);
+
+            }
+      
+
+            function addItem(buffer, fileName) {
+                var call = uploadDocument(buffer, fileName);
+                call.done(function (data, textStatus, jqXHR) {
+                    var call2 = getItem(data.d);
+
+                    call2.done(function (data, textStatus, jqXHR) {
+                        var item = data.d;
+                        updateItemFields(item);
+  
+                    });
+                    call2.fail(function (jqXHR, textStatus, errorThrown) {
+                        //failHandler(jqXHR, textStatus, errorThrown);
+                    });
+                });
+                call.fail(function (jqXHR, textStatus, errorThrown) {
+                    //failHandler(jqXHR, textStatus, errorThrown);
+                });
+            }
+
+            function uploadDocument(buffer, fileName) {
+                var url = String.format( "{0}/_api/Web/Lists/getByTitle('Documentos')/RootFolder/Files/Add(url='{1}', overwrite=true)",
+                    settings.host, fileName);
+
+                //url = settings.host + "/_vti_bin/listdata.svc/Documentos" + settings.sinistersListName + "(" + sinisterId + ")",
+
+                var call = jQuery.ajax({
+                    url: url,
+                    type: "POST",
+                    data: buffer,
+                    processData: false,
+                    headers: {
+                        Accept: "application/json;odata=verbose",
+                        "X-RequestDigest": jQuery("#__REQUESTDIGEST").val(),
+                        "Content-Length": buffer.byteLength
+                    },
+                    success: function () {
+                        alert("Item added");
+                    }
+                });
+
+                return call;
+            }
+
+            function getItem(file) {
+                var call = jQuery.ajax({
+                    url: file.ListItemAllFields.__deferred.uri,
+                    type: "GET",
+                    dataType: "json",
+                    headers: {
+                        Accept: "application/json;odata=verbose"
+                    }
+                });
+
+                return call;
+            }
+
+            function failHandler(jqXHR, textStatus, errorThrown) {
+                var response = JSON.parse(jqXHR.responseText);
+                var message = response ? response.error.message.value : textStatus;
+                alert("Call failed. Error: " + message);
+            }
+
+        }
+    }
+
+
+
+
     function loadDocumentFile(statusId) {
         var idfolder = sinaptic.vm.currentSinister.identificador
         var libraryName = "Legajos";
@@ -661,6 +756,9 @@ sinaptic.wf = function () {
                 updateSinister(sinisterId, payload);
             });
         }
+
+        uploadDocument();
+
     }
 
     var completeTask = function (estadoId) {
