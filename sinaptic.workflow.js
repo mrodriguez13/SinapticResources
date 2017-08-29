@@ -646,10 +646,11 @@ sinaptic.wf = function () {
         var element = document.getElementById("dropzone");
         var array_Files = element.dropzone.files;
         var fileName = "";
+        var file = "";
         if (array_Files.length > 0) {
-
+          
             for (var i = 0; i < array_Files.length; i++) {
-
+                file = array_Files[i];
                 fileName = array_Files[i].name;
 
                 var reader = new FileReader();
