@@ -757,8 +757,6 @@ sinaptic.wf = function () {
             });
         }
 
-        uploadDocument();
-
     }
 
     var completeTask = function (estadoId) {
@@ -777,6 +775,7 @@ sinaptic.wf = function () {
                     EstadoId: 23
                 };
                 updateStatusChange(payload);
+                uploadDocument();
                 break;
             case 25:
                 var payload = {
