@@ -487,7 +487,15 @@ sinaptic.wf = function () {
                 maxFiles: 1,
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
-                dictRemoveFile: "Quitar documento"
+                dictRemoveFile: "Quitar",
+                dictMaxFilesExceeded: "No puede subir mas documentos",
+                init: function () {
+                    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
+                    var myDropzone = this;
+                    submitButton.addEventListener("click", function () {
+                        myDropzone.processQueue(true);
+                    });
+                }
             });
         }
         $("#modaltask").modal();
@@ -627,7 +635,16 @@ sinaptic.wf = function () {
     }
 
     function loadDocuemtnFile(statusId) {
+        var idfolder = sinaptic.vm.currentSinister.identificador
+        var libraryName = "Legajos";
+        var contentType = "";
+        switch (statusId) {
+            case 22:
+                contentType = ""; // Acá va el content type correspondiente a Formulario 04
+            default:
 
+        }
+        // TODO: Hacer que obtenga los archivos del dropzone (#dropzone) y subirlos a la biblioteca correspondiente
     }
 
     var updateStatusChange = function (payload) {
