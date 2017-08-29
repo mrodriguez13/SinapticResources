@@ -494,7 +494,7 @@ sinaptic.wf = function () {
                     var myDropzone = this;
                     submitButton.addEventListener("click", function () {
                         myDropzone.processQueue(true);
-                        uploadDocument();
+                        //uploadDocument();
                     });
                 }
             });
