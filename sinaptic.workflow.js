@@ -488,15 +488,15 @@ sinaptic.wf = function () {
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas documentos",
-                init: function () {
-                    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
-                    var myDropzone = this;
-                    submitButton.addEventListener("click", function () {
-                        myDropzone.processQueue(true);
+                dictMaxFilesExceeded: "No puede subir mas documentos"
+                //init: function () {
+                //    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
+                //    var myDropzone = this;
+                //    submitButton.addEventListener("click", function () {
+                //        myDropzone.processQueue(true);
                         
-                    });
-                }
+                //    });
+                //}
             });
         }
         $("#modaltask").modal();
