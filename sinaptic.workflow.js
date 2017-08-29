@@ -637,7 +637,7 @@ sinaptic.wf = function () {
 
     //dropzone upload files
 
-    function uploadDocument() {
+    function uploadFile() {
   
         var element = document.getElementById("dropzone");
         var array_Files = element.dropzone.files;
@@ -665,7 +665,7 @@ sinaptic.wf = function () {
     }
 
     function addItem(buffer, fileName) {
-        var call = uploadDocument(buffer, fileName);
+        var call = uploadFileDropz(buffer, fileName);
         call.done(function (data, textStatus, jqXHR) {
             var call2 = getItem(data.d);
 
@@ -683,7 +683,7 @@ sinaptic.wf = function () {
         });
     }
 
-    function uploadDocument(buffer, fileName) {
+    function uploadFileDropz(buffer, fileName) {
         var url = String.format("{0}/_api/Web/Lists/getByTitle('Documentos')/RootFolder/Files/Add(url='{1}', overwrite=true)",
             settings.host, fileName);
 
@@ -776,7 +776,7 @@ sinaptic.wf = function () {
                     EstadoId: 23
                 };
                 updateStatusChange(payload);
-                uploadDocument();
+                uploadFile();
                 break;
             case 25:
                 var payload = {
