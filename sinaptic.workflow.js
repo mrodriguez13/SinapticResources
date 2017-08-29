@@ -25,7 +25,7 @@ sinaptic.wf = function () {
             url: "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js",
             dataType: "script",
             success: function (data) {
-                console.log("DropZone.js Loaded");
+                console.log("DropZone.js loaded - OK");
             }
         });
     }
@@ -110,7 +110,7 @@ sinaptic.wf = function () {
         sinaptic.vm.currentSinister = JSON.parse(siniestro);
         var responsables = [];
         var teamleaders = [];
-
+        var startDropZone = false;
         var taskContent = [];
         switch (estadoId) {
             case 21:
@@ -149,34 +149,16 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
-            case 22:
+            case 22: // Procesar Formularios y Certificado
 
                 taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-12'>");
-
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
-                taskContent.push("<label class='control-label'>Comentario</label>");
-                taskContent.push("<textarea id='comentario' class='form-control'>");
-                taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-           
-                taskContent.push("<div class='col-md-4'>");
+                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
-                taskContent.push("</div>");            
-               
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
+                taskContent.push("<div id='dropzone'>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
-
                 taskContent.push("</div>");
-            
-
+                startDropZone = true;
                 break;
             case 23:
                 taskContent.push("<div class='form-group'>");
@@ -253,8 +235,6 @@ sinaptic.wf = function () {
                 break;
 
             case 26:
-
-
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-12'>");
 
@@ -274,7 +254,7 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-4'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
@@ -498,6 +478,12 @@ sinaptic.wf = function () {
 
         $("#taskcontent").append(taskContent);
         applyContentFormatters();
+        if (startDropZone) {
+            $("#dropzone").dropzone({
+                url: "#",
+                autoProcessQueue: false
+            });
+        }
         $("#modaltask").modal();
     };
 
