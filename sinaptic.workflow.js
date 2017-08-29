@@ -644,7 +644,7 @@ sinaptic.wf = function () {
         var fileName = "";
         if (array_Files.length > 0) {
 
-            myDropzone.processQueue(true);
+            element.processQueue(true);
 
             for (var i = 0; i < array_Files.length; i++) {
 
