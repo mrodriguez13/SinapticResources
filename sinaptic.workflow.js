@@ -490,11 +490,11 @@ sinaptic.wf = function () {
                 dictRemoveFile: "Quitar",
                 dictMaxFilesExceeded: "No puede subir mas documentos",
                 init: function () {
-                    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
-                    var myDropzone = this;
-                    submitButton.addEventListener("click", function () {
-                        myDropzone.processQueue(true);
-                    });
+                    //var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
+                    //var myDropzone = this;
+                    //submitButton.addEventListener("click", function () {
+                    //    myDropzone.processQueue(true);
+                    //});
                 }
             });
         }
@@ -634,7 +634,7 @@ sinaptic.wf = function () {
         });
     }
 
-    function loadDocuemtnFile(statusId) {
+    function loadDocumentFile(statusId) {
         var idfolder = sinaptic.vm.currentSinister.identificador
         var libraryName = "Legajos";
         var contentType = "";
