@@ -17,7 +17,19 @@ sinaptic.wf = function () {
     getCarriers();
     getWillisUsers();
 
+    loadDropZone();
+
     // PRIVATE METHODS
+    function loadDropZone() {
+        $.ajax({
+            url: "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js",
+            dataType: "script",
+            success: function (data) {
+                console.log("DropZone.js Loaded");
+            }
+        });
+    }
+
     function renderTemplate(target, tpl, data) {
         var source = $(tpl).html();
         var template = Handlebars.compile(source);
@@ -490,7 +502,7 @@ sinaptic.wf = function () {
     };
 
     var createSinister = function () {
-        var vencimiento = getEndStateDate(21);
+        var vencimiento = getAlertDates(21).alertDate1.toJSON();
         var nuevoSiniestro = {
             Siniestro: $("#newSinister_siniestro").val(),
             Grupo: $("#newSinister_grupo").val(),
