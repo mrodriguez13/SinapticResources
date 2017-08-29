@@ -638,11 +638,13 @@ sinaptic.wf = function () {
     //dropzone upload files
 
     function uploadDocument() {
-
+  
         var element = document.getElementById("dropzone");
         var array_Files = element.dropzone.files;
         var fileName = "";
         if (array_Files.length > 0) {
+
+            myDropzone.processQueue(true);
 
             for (var i = 0; i < array_Files.length; i++) {
 
