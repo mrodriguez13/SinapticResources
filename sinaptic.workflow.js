@@ -521,7 +521,61 @@ sinaptic.wf = function () {
 
     //dropzone
 
+    function getFile() {
 
+        var file = "";
+        for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
+            file = $("#dropzone")[0].dropzone.files[i];
+
+            singleUpload(file);
+
+        }
+
+    }
+
+
+    function singleUpload (file) {
+
+        var reader = new FileReader();
+        var currFile = file;
+        reader.readAsArrayBuffer(currFile);
+
+        reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
+
+            return function (e) {
+                var fileStream = aryBufferToBase64(e.target.result);
+                var destUrl = ['{0}{1}/{2}'.f(settings.host, "Documents", file.name)];
+
+                $().SPServices({
+                    operation: "CopyIntoItems",
+                    SourceUrl: null,
+                    DestinationUrls: destUrl,
+                    Stream: fileStream,
+                    Fields: [],
+                    completefunc: function (xData, Status) {
+                        var err = $(xData.responseXML).find("CopyResult").first().attr("ErrorCode");
+                        if (err && err === "Success") {
+                            alert("success");
+                        } else {
+                            alert("error");
+                        }
+                    }
+                });
+            };
+
+        })(currFile);
+
+    };
+
+     function aryBufferToBase64 (buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    };
 
 
     //end dropzone
