@@ -18,6 +18,7 @@ sinaptic.wf = function () {
     getWillisUsers();
 
     loadDropZone();
+    loadSpSrvcs();
 
     // PRIVATE METHODS
     function loadDropZone() {
@@ -26,6 +27,17 @@ sinaptic.wf = function () {
             dataType: "script",
             success: function (data) {
                 console.log("DropZone.js loaded - OK");
+            }
+        });
+    }
+
+    // PRIVATE METHODS
+    function loadSpSrvcs() {
+        $.ajax({
+            url: "https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices.min.js",
+            dataType: "script",
+            success: function (data) {
+                console.log("SpServices.js loaded - OK");
             }
         });
     }
@@ -506,6 +518,20 @@ sinaptic.wf = function () {
      
     };
 
+
+    //dropzone
+
+
+
+
+    //end dropzone
+
+
+
+
+
+
+
     var createSinister = function () {
         var vencimiento = getDueDates(21).alertDate1.toJSON();
         var nuevoSiniestro = {
@@ -641,80 +667,9 @@ sinaptic.wf = function () {
 
     //dropzone upload files
 
-    function uploadFile() {
+
+
   
-        var element = document.getElementById("dropzone");
-        var array_Files = element.dropzone.files;
-        var fileName = "";
-        var file = "";
-        if (array_Files.length > 0) {
-          
-            //for (var i = 0; i < array_Files.length; i++) {
-            //file = array_Files[i];
-                file = array_Files[0];
-                fileName = file.name;
-                var fr = new FileReader();
-                fr.onload = receivedBinary;
-                fr.readAsDataURL(file);
-
-            //}
-        }
-
-    }
-
-    // Callback function for onload event of FileReader
-    function receivedBinary() {
-        // Get the ClientContext for the app web
-        var clientContext = new SP.ClientContext.get_current();
-        // Use the host web URL to get a parent context - this allows us to get data from the parent
-        var parentCtx = new SP.AppContextSite(clientContext, settings.host);
-        var parentWeb = parentCtx.get_web();
-        var parentList = parentWeb.get_lists().getByTitle("Documentos");
-
-        var fileCreateInfo = new SP.FileCreationInformation();
-        fileCreateInfo.set_url(file.name);
-        fileCreateInfo.set_overwrite(true);
-        fileCreateInfo.set_content(new SP.Base64EncodedByteArray());
-
-        // Read the binary contents of the base 64 data URL into a Uint8Array
-        // Append the contents of this array to the SP.FileCreationInformation
-        var arr = convertDataURIToBinary(this.result);
-        for (var i = 0; i < arr.length; ++i) {
-            fileCreateInfo.get_content().append(arr[i]);
-        }
-
-        // Upload the file to the root folder of the document library
-        this.newFile = parentList.get_rootFolder().get_files().add(fileCreateInfo);
-
-        clientContext.load(this.newFile);
-        clientContext.executeQueryAsync(onSuccess, onFailure);
-    }
-
-    function onSuccess() {
-        // File successfully uploaded
-        alert("Success!");
-    }
-
-    function onFailure() {
-        // Error occurred
-        alert("Request failed: " + arguments[1].get_message());
-    }
-
-
-    function convertDataURIToBinary(dataURI) {
-        var BASE64_MARKER = ';base64,';
-        var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-        var base64 = dataURI.substring(base64Index);
-        var raw = window.atob(base64);
-        var rawLength = raw.length;
-        var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-        for (i = 0; i < rawLength; i++) {
-            array[i] = raw.charCodeAt(i);
-        }
-        return array;
-    }
-
     //end dropzone
 
 
