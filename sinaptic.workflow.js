@@ -544,7 +544,7 @@ sinaptic.wf = function () {
 
             return function (e) {
                 var fileStream = aryBufferToBase64(e.target.result);
-                var destUrl = settings.host + "Documents/" + file.name;
+                var destUrl = settings.host + "/Documents/" + file.name;
 
                 $().SPServices({
                     operation: "CopyIntoItems",
@@ -719,12 +719,6 @@ sinaptic.wf = function () {
         });
     }
 
-    //dropzone upload files
-
-
-
-  
-    //end dropzone
 
 
     function loadDocumentFile(statusId) {
