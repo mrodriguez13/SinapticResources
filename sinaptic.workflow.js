@@ -544,7 +544,7 @@ sinaptic.wf = function () {
 
             return function (e) {
                 var fileStream = aryBufferToBase64(e.target.result);
-                var destUrl = ['{0}{1}/{2}'.f(settings.host, "Documents", file.name)];
+                var destUrl = ['{0}{1}/{2}', settings.host, "Documents", file.name];
 
                 $().SPServices({
                     operation: "CopyIntoItems",
