@@ -773,7 +773,7 @@ sinaptic.wf = function () {
                     EstadoId: 23
                 };
                 updateStatusChange(payload);
-                uploadFile();
+                getFile();
                 break;
             case 25:
                 var payload = {
