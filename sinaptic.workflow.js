@@ -196,7 +196,7 @@ sinaptic.wf = function () {
                 taskContent.push("</select>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
-                
+
                 taskContent.push('<div class="table table-striped" class="files" id="previews">');
                 taskContent.push(' <div id="template" class="file-row">');
                 taskContent.push('<div>');
@@ -430,7 +430,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-4'>");
                 taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
                 taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                
+
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -506,7 +506,7 @@ sinaptic.wf = function () {
                 dictMaxFilesExceeded: "No puede subir mas de un documento"
             });
         }
-     
+
     };
 
 
@@ -519,38 +519,17 @@ sinaptic.wf = function () {
         }
     }
 
-    function singleUpload (file) {
+    function singleUpload(file) {
         var reader = new FileReader();
         var currFile = file;
         reader.readAsArrayBuffer(currFile);
 
         reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
             return function (e) {
-<<<<<<< HEAD
-                var fileStream = aryBufferToBase64(e.target.result);
-                var destUrl = settings.host + "/SiteAssets/" + file.name;
-
-                $().SPServices({
-                    operation: "CopyIntoItems",
-                    SourceUrl: null,
-                    DestinationUrls: destUrl,
-                    Stream: fileStream,
-                    Fields: [],
-                    completefunc: function (xData, Status) {
-                        var err = $(xData.responseXML).find("CopyResult").first().attr("ErrorCode");
-                        if (err === "Success") {
-                            alert("success");
-                        } else {
-                            alert("error");
-                        }
-                    }
-                });
-=======
                 var fileData = aryBufferToBase64(e.target.result);
- //               PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
+                //               PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
 
                 uploadFileCrossSite(fileData, settings.host);
->>>>>>> 4fa2750bcfe10f3ccb36a59a5c79c14bb2af9bf4
             };
 
         })(currFile);
@@ -562,7 +541,7 @@ sinaptic.wf = function () {
         var appWebUrl = settings.host;
         var targetSiteUrl = appWebUrl;
         folderName = "";
-         // if there is no folder name then just upload to the root folder
+        // if there is no folder name then just upload to the root folder
         if (folderName == "") {
             url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
                 "@TargetSite='" + targetSiteUrl + "'" +
@@ -572,10 +551,10 @@ sinaptic.wf = function () {
         else {
             // if there is a folder name then upload into this folder
             url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/folders(@TargetFolderName)/files/add(url=@TargetFileName,overwrite='true')?" +
-               "@TargetSite='" + targetSiteUrl + "'" +
-               "&@TargetLibrary='" + libraryName + "'" +
-               "&@TargetFolderName='" + folderName + "'" +
-               "&@TargetFileName='" + fileName + "'";
+                "@TargetSite='" + targetSiteUrl + "'" +
+                "&@TargetLibrary='" + libraryName + "'" +
+                "&@TargetFolderName='" + folderName + "'" +
+                "&@TargetFileName='" + fileName + "'";
         }
 
         console.log(url);
@@ -638,8 +617,8 @@ sinaptic.wf = function () {
                     arrayBuffer = reader.result;
 
                     url = webUrl + "/_api/web/lists/getByTitle(@TargetLibrary)/RootFolder/files/add(url=@TargetFileName,overwrite='true')?" +
-                       "@TargetLibrary='" + libraryName + "'" +
-                       "&@TargetFileName='" + file.name + "'";
+                        "@TargetLibrary='" + libraryName + "'" +
+                        "&@TargetFileName='" + file.name + "'";
 
                     jQuery.ajax({
                         url: url,
@@ -670,7 +649,7 @@ sinaptic.wf = function () {
         });
     };
 
-     function aryBufferToBase64 (buffer) {
+    function aryBufferToBase64(buffer) {
         var binary = '';
         var bytes = new Uint8Array(buffer);
         var len = bytes.byteLength;
@@ -688,11 +667,11 @@ sinaptic.wf = function () {
             Orden: $("#newSinister_orden").val(),
             CarrierId: $("#newSinister_carrier").val(),
             Tomador: $("#newSinister_tomador").val(),
-            FechaSiniestro: $("#newSinister_fechaSiniestro").val() +"T00:00:00",
+            FechaSiniestro: $("#newSinister_fechaSiniestro").val() + "T00:00:00",
             TipoDeSiniestroValue: $("#newSinister_tipoSiniestro").val(),
             ModeloVehiculo: $("#newSinister_modeloVehiculo").val(),
             Dominio: $("#newSinister_dominio").val(),
-            SumaAsegurada : $("#newSinister_suma").val(),
+            SumaAsegurada: $("#newSinister_suma").val(),
             MailCliente: $("#newSinister_mailCliente").val(),
             TelCliente: $("#newSinister_telCliente").val(),
             MailCia: $("#newSinister_mailCia").val(),
@@ -712,7 +691,7 @@ sinaptic.wf = function () {
                     "X-RequestDigest": $("#__REQUESTDIGEST").val()
                 },
                 success: function (data) {
-                    console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);                 
+                    console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
                     //sinaptic.posa.refresh();
                     window.location.reload();
                 },
@@ -852,7 +831,7 @@ sinaptic.wf = function () {
                     TeamLeaderId: $("#teamleaderwillis").val(),
                     EstadoId: 22
                 };
-                updateStatusChange(payload);         
+                updateStatusChange(payload);
                 break;
             case 22:
                 loadDocumentFile(22);
@@ -862,14 +841,206 @@ sinaptic.wf = function () {
                 updateStatusChange(payload);
                 getFile();
                 break;
+
+            case 23:
+                // posee 2 radio button,comentario y adjunto, no tiene campos de llenado
+                var isCompleted = false;
+
+                if ($("input#docCompletaSi")[0].checked === true) {
+                    isCompleted = true;
+                }
+
+                var payload = {
+                    DocCertCompleta: isCompleted,
+                    EstadoId: 24
+
+                }
+
+                updateStatusChange(payload);
+
+                break;
+
+            case 24:
+                var resolucion = $("#teamleaderwillis option:selected").text();
+
+                var payload = {
+                    TipoDeResuloci\u00f3nValue: resolucion,
+                    EstadoId: 25
+                }
+
+                updateStatusChange(payload);
+
+                break;
+
             case 25:
                 var payload = {
                     SaldoPendiente: $("#saldodeudor").val(),
                     VencimientoDeuda: $("#vencimientodeuda").val(),
                     EstadoId: 26
                 };
+
                 updateStatusChange(payload);
                 break;
+
+            case 26:
+                var payload = {
+                    EstadoId: 27
+                }
+             
+                 updateStatusChange(payload);
+                break;
+
+            case 27:
+
+                var payload = {
+                    ImporteACancelar: $("#cancelImport").val(),
+                    ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
+                    FechaDeCancelaci\u00f3n: $("#cancelDate").val(),
+                    NumeroDeCheque: $("#checkNumber").val(),
+                    ComprobanteN: $("#comprobanteNumber").val(),
+                    EstadoId: 28
+                }
+                 updateStatusChange(payload);
+
+                break;
+
+            case 28:
+                var payload = {
+                    EstadoId: 29
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 29:
+
+                var payload = {
+                    EstadoId: 30
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 30:
+
+                var payload = {
+                    EstadoId: 31
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 31:
+
+                var payload = {
+                    EstadoId: 32
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 32:
+                var payload = {
+                    EstadoId: 33
+                }
+
+                 updateStatusChange(payload);
+                break;
+
+            case 33:
+
+                //var autorizarReposicion = $("#autRep").is(":checked");
+
+                var payload = {
+                    //propiedad: autorizarReposicion, 
+                     EstadoId: 34
+                }
+
+                 updateStatusChange(payload);
+                break;
+
+            case 34:
+
+                var payload = {
+                    EstadoId: 35
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 35:
+
+                var payload = {
+                    EstadoId: 36
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 36:
+                var payload = {
+                    EstadoId: 37
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 37:
+                var payload = {
+                    EstadoId: 38
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 38:
+
+                var payload = {
+                    EstadoId: 39
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 39:
+
+                var payload = {
+                    EstadoId: 40
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 40:
+
+                var payload = {
+                    EstadoId: 41
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
+            case 41:
+
+                var payload = {
+                    EstadoId: 42
+                }
+
+                 updateStatusChange(payload);
+
+                break;
+
         };
     }
 
