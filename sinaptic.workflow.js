@@ -18,6 +18,7 @@ sinaptic.wf = function () {
     getWillisUsers();
 
     loadDropZone();
+    loadSpSrvcs();
 
     // PRIVATE METHODS
     function loadDropZone() {
@@ -26,6 +27,17 @@ sinaptic.wf = function () {
             dataType: "script",
             success: function (data) {
                 console.log("DropZone.js loaded - OK");
+            }
+        });
+    }
+
+    // PRIVATE METHODS
+    function loadSpSrvcs() {
+        $.ajax({
+            url: "https://cdnjs.cloudflare.com/ajax/libs/jquery.SPServices/2014.02/jquery.SPServices.min.js",
+            dataType: "script",
+            success: function (data) {
+                console.log("SpServices.js loaded - OK");
             }
         });
     }
@@ -480,6 +492,9 @@ sinaptic.wf = function () {
 
         $("#taskcontent").append(taskContent);
         applyContentFormatters();
+
+        $("#modaltask").modal();
+
         if (startDropZone) {
             $("#dropzone").dropzone({
                 url: "#",
@@ -488,17 +503,95 @@ sinaptic.wf = function () {
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas documentos",
-                init: function () {
-                    var submitButton = document.querySelector("#modaltask button.btn.btn-success");
-                    var myDropzone = this;
-                    submitButton.addEventListener("click", function () {
-                        myDropzone.processQueue(true);
-                    });
-                }
+                dictMaxFilesExceeded: "No puede subir mas de un documento"
             });
         }
-        $("#modaltask").modal();
+     
+    };
+
+
+    //dropzone
+    function getFile() {
+        var file = "";
+        for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
+            file = $("#dropzone")[0].dropzone.files[i];
+            singleUpload(file);
+        }
+    }
+
+    function singleUpload (file) {
+        var reader = new FileReader();
+        var currFile = file;
+        reader.readAsArrayBuffer(currFile);
+
+        var reqExecutor = new SP.RequestExecutor(appWebUrl);
+
+        reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
+            return function (e) {
+                var fileData = aryBufferToBase64(e.target.result);
+                PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.Identificador, fileData);
+            };
+
+        })(currFile);
+
+    };
+
+    function PerformUpload(libraryName, fileName, folderName, fileData) {
+        var url;
+        var appWebUrl = settings.host;
+        //var ServerRelativeURL = "/sites/DevSite/Shared%20Documents";
+        //url = appWebUrl + "/_api/web/GetFolderByServerRelativeUrl('" + ServerRelativeURL + "')/Files/add(url='" + fileName + "',overwrite='true')";
+
+        // if there is no folder name then just upload to the root folder
+        if (folderName == "") {
+            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
+                "@TargetSite='" + targetSiteUrl + "'" +
+                "&@TargetLibrary='" + libraryName + "'" +
+                "&@TargetFileName='" + fileName + "'";
+        }
+        else {
+            // if there is a folder name then upload into this folder
+            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/folders(@TargetFolderName)/files/add(url=@TargetFileName,overwrite='true')?" +
+               "@TargetSite='" + targetSiteUrl + "'" +
+               "&@TargetLibrary='" + libraryName + "'" +
+               "&@TargetFolderName='" + folderName + "'" +
+               "&@TargetFileName='" + fileName + "'";
+        }
+
+        //DBGIN
+        console.log(url);
+
+        // use the request executor (cross domain library) to perform the upload
+        var reqExecutor = new SP.RequestExecutor(appWebUrl);
+        reqExecutor.executeAsync({
+            url: url,
+            method: "POST",
+            headers: {
+                "Accept": "application/json; odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            contentType: "application/json;odata=verbose",
+            binaryStringRequestBody: true,
+            body: fileData,
+            success: function (err) {
+                alert("Success! Your file was uploaded to SharePoint.");
+            },
+            error: function (err) {
+                //alert("Oooooops... it looks like something went wrong uploading your file.");
+                console.log(x.message);
+                console.log(y); console.log(z);
+            }
+        });
+    }
+
+     function aryBufferToBase64 (buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
     };
 
     var createSinister = function () {
@@ -550,7 +643,6 @@ sinaptic.wf = function () {
         $("#estado" + estadoId + "comentarios").css("display", "inline");
         $("#estado" + estadoId + "acciones").css("display", "none");
     };
-
 
     var getDueDates = function (estadoId) {
         var alertDates = {};
@@ -661,6 +753,7 @@ sinaptic.wf = function () {
                 updateSinister(sinisterId, payload);
             });
         }
+
     }
 
     var completeTask = function (estadoId) {
@@ -679,6 +772,7 @@ sinaptic.wf = function () {
                     EstadoId: 23
                 };
                 updateStatusChange(payload);
+                getFile();
                 break;
             case 25:
                 var payload = {
