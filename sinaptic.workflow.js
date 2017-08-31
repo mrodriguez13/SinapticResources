@@ -527,7 +527,7 @@ sinaptic.wf = function () {
         reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
             return function (e) {
                 var fileData = aryBufferToBase64(e.target.result);
-                PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.Identificador, fileData);
+                PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
             };
 
         })(currFile);
@@ -538,10 +538,7 @@ sinaptic.wf = function () {
         var url;
         var appWebUrl = settings.host;
         var targetSiteUrl = appWebUrl;
-        //var ServerRelativeURL = "/sites/DevSite/Shared%20Documents";
-        //url = appWebUrl + "/_api/web/GetFolderByServerRelativeUrl('" + ServerRelativeURL + "')/Files/add(url='" + fileName + "',overwrite='true')";
-
-        // if there is no folder name then just upload to the root folder
+         // if there is no folder name then just upload to the root folder
         if (folderName == "") {
             url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
                 "@TargetSite='" + targetSiteUrl + "'" +
@@ -557,21 +554,18 @@ sinaptic.wf = function () {
                "&@TargetFileName='" + fileName + "'";
         }
 
-        //DBGIN
         console.log(url);
 
-        // use the request executor (cross domain library) to perform the upload
-        var reqExecutor = new SP.RequestExecutor(appWebUrl);
-        reqExecutor.executeAsync({
+        jQuery.ajax({
             url: url,
-            method: "POST",
+            type: "POST",
+            data: fileData,
             headers: {
                 "Accept": "application/json; odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             contentType: "application/json;odata=verbose",
-            binaryStringRequestBody: true,
-            body: fileData,
+            processData: false,
             success: function (err) {
                 alert("Success! Your file was uploaded to SharePoint.");
             },
@@ -579,6 +573,25 @@ sinaptic.wf = function () {
                 console.log(err.message);
             }
         });
+
+
+        //reqExecutor.executeAsync({
+        //    url: url,
+        //    method: "POST",
+        //    headers: {
+        //        "Accept": "application/json; odata=verbose",
+        //        "X-RequestDigest": $("#__REQUESTDIGEST").val()
+        //    },
+        //    contentType: "application/json;odata=verbose",
+        //    binaryStringRequestBody: true,
+        //    body: fileData,
+        //    success: function (err) {
+        //        alert("Success! Your file was uploaded to SharePoint.");
+        //    },
+        //    error: function (err) {
+        //        console.log(err.message);
+        //    }
+        //});
     }
 
      function aryBufferToBase64 (buffer) {
