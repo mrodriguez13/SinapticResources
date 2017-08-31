@@ -524,8 +524,6 @@ sinaptic.wf = function () {
         var currFile = file;
         reader.readAsArrayBuffer(currFile);
 
-        var reqExecutor = new SP.RequestExecutor(appWebUrl);
-
         reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
             return function (e) {
                 var fileData = aryBufferToBase64(e.target.result);
