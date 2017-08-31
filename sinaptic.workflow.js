@@ -527,7 +527,9 @@ sinaptic.wf = function () {
         reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
             return function (e) {
                 var fileData = aryBufferToBase64(e.target.result);
-                PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
+ //               PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
+
+                uploadFileCrossSite(fileData, settings.host);
             };
 
         })(currFile);
@@ -538,6 +540,7 @@ sinaptic.wf = function () {
         var url;
         var appWebUrl = settings.host;
         var targetSiteUrl = appWebUrl;
+        folderName = "";
          // if there is no folder name then just upload to the root folder
         if (folderName == "") {
             url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
@@ -593,6 +596,60 @@ sinaptic.wf = function () {
         //    }
         //});
     }
+
+    var uploadFileCrossSite = function (file, webUrl) {
+        url = webUrl + "/_api/contextinfo";
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            headers: {
+                "Accept": "application/json; odata=verbose"
+            },
+            contentType: "application/json;odata=verbose",
+            success: function (data) {
+                var digest = data.d.GetContextWebInformation.FormDigestValue;
+                var libraryName = "Legajos";
+
+                var reader = new FileReader();
+                var arrayBuffer;
+
+                reader.onload = function (e) {
+                    arrayBuffer = reader.result;
+
+                    url = webUrl + "/_api/web/lists/getByTitle(@TargetLibrary)/RootFolder/files/add(url=@TargetFileName,overwrite='true')?" +
+                       "@TargetLibrary='" + libraryName + "'" +
+                       "&@TargetFileName='" + file.name + "'";
+
+                    jQuery.ajax({
+                        url: url,
+                        type: "POST",
+                        data: arrayBuffer,
+                        headers: {
+                            "Accept": "application/json; odata=verbose",
+                            "X-RequestDigest": digest
+                        },
+                        contentType: "application/json;odata=verbose",
+                        processData: false,
+                        success: function (data) {
+                            console.log("Archivo subido correctamente!");
+                        },
+                        error: function (error) {
+                            console.log("Error al subir el archivo");
+                        }
+                    });
+                };
+
+                reader.readAsArrayBuffer(file);
+
+            },
+            error: function () {
+                jQuery('#lblResult').text("Error accessing other site.");
+                if (currentDlg != null) {
+                    currentDlg.close();
+                }
+            }
+        });
+    };
 
      function aryBufferToBase64 (buffer) {
         var binary = '';
