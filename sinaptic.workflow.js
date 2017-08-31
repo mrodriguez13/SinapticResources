@@ -642,11 +642,9 @@ sinaptic.wf = function () {
                 reader.readAsArrayBuffer(file);
 
             },
-            error: function () {
+            error: function (error) {
                 jQuery('#lblResult').text("Error accessing other site.");
-                if (currentDlg != null) {
-                    currentDlg.close();
-                }
+                console.log("Error al subir el archivo");
             }
         });
     };
