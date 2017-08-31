@@ -598,7 +598,7 @@ sinaptic.wf = function () {
     }
 
     var uploadFileCrossSite = function (file, webUrl) {
-        url = webUrl + "/_api/contextinfo";
+        var url = webUrl + "/_api/contextinfo";
         jQuery.ajax({
             url: url,
             type: "POST",
