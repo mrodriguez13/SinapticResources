@@ -537,6 +537,7 @@ sinaptic.wf = function () {
     function PerformUpload(libraryName, fileName, folderName, fileData) {
         var url;
         var appWebUrl = settings.host;
+        var targetSiteUrl = appWebUrl;
         //var ServerRelativeURL = "/sites/DevSite/Shared%20Documents";
         //url = appWebUrl + "/_api/web/GetFolderByServerRelativeUrl('" + ServerRelativeURL + "')/Files/add(url='" + fileName + "',overwrite='true')";
 
@@ -575,9 +576,7 @@ sinaptic.wf = function () {
                 alert("Success! Your file was uploaded to SharePoint.");
             },
             error: function (err) {
-                //alert("Oooooops... it looks like something went wrong uploading your file.");
-                console.log(x.message);
-                console.log(y); console.log(z);
+                console.log(err.message);
             }
         });
     }
