@@ -498,21 +498,12 @@ sinaptic.wf = function () {
         if (startDropZone) {
             $("#dropzone").dropzone({
                 url: "#",
-                autoProcessQueue: true,
+                autoProcessQueue: false,
                 maxFiles: 1,
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas documentos"
-                //init: function () {
-                //    var submitButton = document.querySelector(".modal-footer>.btn .btn-success");
-                //    var submitButton = $(".modal-footer>.btn .btn-success");
-                //    var myDropzone = this;
-                //    submitButton.addEventListener("click", function () {
-                //        myDropzone.processQueue(true);
-                        
-                //    });
-                //}
+                dictMaxFilesExceeded: "No puede subir mas de un documento"
             });
         }
      
@@ -521,26 +512,21 @@ sinaptic.wf = function () {
 
     //dropzone
     function getFile() {
-
         var file = "";
         for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
             file = $("#dropzone")[0].dropzone.files[i];
-
             singleUpload(file);
-
         }
-
     }
 
     function singleUpload (file) {
-
         var reader = new FileReader();
         var currFile = file;
         reader.readAsArrayBuffer(currFile);
 
         reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
-
             return function (e) {
+<<<<<<< HEAD
                 var fileStream = aryBufferToBase64(e.target.result);
                 var destUrl = settings.host + "/SiteAssets/" + file.name;
 
@@ -559,10 +545,129 @@ sinaptic.wf = function () {
                         }
                     }
                 });
+=======
+                var fileData = aryBufferToBase64(e.target.result);
+ //               PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
+
+                uploadFileCrossSite(fileData, settings.host);
+>>>>>>> 4fa2750bcfe10f3ccb36a59a5c79c14bb2af9bf4
             };
 
         })(currFile);
 
+    };
+
+    function PerformUpload(libraryName, fileName, folderName, fileData) {
+        var url;
+        var appWebUrl = settings.host;
+        var targetSiteUrl = appWebUrl;
+        folderName = "";
+         // if there is no folder name then just upload to the root folder
+        if (folderName == "") {
+            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
+                "@TargetSite='" + targetSiteUrl + "'" +
+                "&@TargetLibrary='" + libraryName + "'" +
+                "&@TargetFileName='" + fileName + "'";
+        }
+        else {
+            // if there is a folder name then upload into this folder
+            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/folders(@TargetFolderName)/files/add(url=@TargetFileName,overwrite='true')?" +
+               "@TargetSite='" + targetSiteUrl + "'" +
+               "&@TargetLibrary='" + libraryName + "'" +
+               "&@TargetFolderName='" + folderName + "'" +
+               "&@TargetFileName='" + fileName + "'";
+        }
+
+        console.log(url);
+
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: fileData,
+            headers: {
+                "Accept": "application/json; odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            contentType: "application/json;odata=verbose",
+            processData: false,
+            success: function (err) {
+                alert("Success! Your file was uploaded to SharePoint.");
+            },
+            error: function (err) {
+                console.log(err.message);
+            }
+        });
+
+
+        //reqExecutor.executeAsync({
+        //    url: url,
+        //    method: "POST",
+        //    headers: {
+        //        "Accept": "application/json; odata=verbose",
+        //        "X-RequestDigest": $("#__REQUESTDIGEST").val()
+        //    },
+        //    contentType: "application/json;odata=verbose",
+        //    binaryStringRequestBody: true,
+        //    body: fileData,
+        //    success: function (err) {
+        //        alert("Success! Your file was uploaded to SharePoint.");
+        //    },
+        //    error: function (err) {
+        //        console.log(err.message);
+        //    }
+        //});
+    }
+
+    var uploadFileCrossSite = function (file, webUrl) {
+        var url = webUrl + "/_api/contextinfo";
+        jQuery.ajax({
+            url: url,
+            type: "POST",
+            headers: {
+                "Accept": "application/json; odata=verbose"
+            },
+            contentType: "application/json;odata=verbose",
+            success: function (data) {
+                var digest = data.d.GetContextWebInformation.FormDigestValue;
+                var libraryName = "Legajos";
+
+                var reader = new FileReader();
+                var arrayBuffer;
+
+                reader.onload = function (e) {
+                    arrayBuffer = reader.result;
+
+                    url = webUrl + "/_api/web/lists/getByTitle(@TargetLibrary)/RootFolder/files/add(url=@TargetFileName,overwrite='true')?" +
+                       "@TargetLibrary='" + libraryName + "'" +
+                       "&@TargetFileName='" + file.name + "'";
+
+                    jQuery.ajax({
+                        url: url,
+                        type: "POST",
+                        data: arrayBuffer,
+                        headers: {
+                            "Accept": "application/json; odata=verbose",
+                            "X-RequestDigest": digest
+                        },
+                        contentType: "application/json;odata=verbose",
+                        processData: false,
+                        success: function (data) {
+                            console.log("Archivo subido correctamente!");
+                        },
+                        error: function (error) {
+                            console.log("Error al subir el archivo");
+                        }
+                    });
+                };
+
+                reader.readAsArrayBuffer(file);
+
+            },
+            error: function (error) {
+                jQuery('#lblResult').text("Error accessing other site.");
+                console.log("Error al subir el archivo");
+            }
+        });
     };
 
      function aryBufferToBase64 (buffer) {
@@ -574,15 +679,6 @@ sinaptic.wf = function () {
         }
         return window.btoa(binary);
     };
-
-
-    //end dropzone
-
-
-
-
-
-
 
     var createSinister = function () {
         var vencimiento = getDueDates(21).alertDate1.toJSON();
@@ -634,7 +730,6 @@ sinaptic.wf = function () {
         $("#estado" + estadoId + "comentarios").css("display", "inline");
         $("#estado" + estadoId + "acciones").css("display", "none");
     };
-
 
     var getDueDates = function (estadoId) {
         var alertDates = {};
@@ -718,7 +813,6 @@ sinaptic.wf = function () {
             error: errorHandler
         });
     }
-
 
     function loadDocumentFile(statusId) {
         var idfolder = sinaptic.vm.currentSinister.identificador
