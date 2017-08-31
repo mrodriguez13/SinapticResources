@@ -520,7 +520,6 @@ sinaptic.wf = function () {
 
 
     //dropzone
-
     function getFile() {
 
         var file = "";
@@ -532,7 +531,6 @@ sinaptic.wf = function () {
         }
 
     }
-
 
     function singleUpload (file) {
 
@@ -554,7 +552,7 @@ sinaptic.wf = function () {
                     Fields: [],
                     completefunc: function (xData, Status) {
                         var err = $(xData.responseXML).find("CopyResult").first().attr("ErrorCode");
-                        if (err && err === "Success") {
+                        if (err === "Success") {
                             alert("success");
                         } else {
                             alert("error");
@@ -619,7 +617,8 @@ sinaptic.wf = function () {
                 },
                 success: function (data) {
                     console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);                 
-                    sinaptic.posa.refresh();
+                    //sinaptic.posa.refresh();
+                    window.location.reload();
                 },
                 error: errorHandler
             })
@@ -713,7 +712,8 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 console.log("Siniestro actualizado");
-                sinaptic.posa.refresh();
+                //sinaptic.posa.refresh();
+                window.location.reload();
             },
             error: errorHandler
         });
