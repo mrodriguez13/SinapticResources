@@ -16,20 +16,7 @@ sinaptic.wf = function () {
     getStatus();
     getCarriers();
     getWillisUsers();
-
-    loadDropZone();
     loadSpSrvcs();
-
-    // PRIVATE METHODS
-    function loadDropZone() {
-        $.ajax({
-            url: "https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js",
-            dataType: "script",
-            success: function (data) {
-                console.log("DropZone.js loaded - OK");
-            }
-        });
-    }
 
     // PRIVATE METHODS
     function loadSpSrvcs() {
@@ -125,6 +112,8 @@ sinaptic.wf = function () {
         var startDropZone = false;
         var dropZoneMessage = "";
         var taskContent = [];
+        var siniesterInfo = [];
+        var infoHeight = 0;
         switch (estadoId) {
             case 21:
                 $(sinaptic.vm.willisusers).each(function (i, user) {
@@ -181,9 +170,6 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
                 taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
                 taskContent.push("</div>");
-
-
-
                 taskContent.push("</div>");
                 break;
             case 24:
@@ -197,37 +183,7 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
 
-                taskContent.push('<div class="table table-striped" class="files" id="previews">');
-                taskContent.push(' <div id="template" class="file-row">');
-                taskContent.push('<div>');
-                taskContent.push(' <span class="preview"><img data-dz-thumbnail /></span>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<p class="name" data-dz-name></p>');
-                taskContent.push('<strong class="error text-danger" data-dz-errormessage></strong>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<p class="size" data-dz-size></p>');
-                taskContent.push('<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">');
-                taskContent.push('<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
-                taskContent.push('<div>');
-                taskContent.push('<button type="button" class="btn btn-primary start">');
-                taskContent.push('<i class="glyphicon glyphicon-upload"></i>');
-                taskContent.push('<span>Start</span>');
-                taskContent.push(' </button>');
-                taskContent.push('<button type="button" data-dz-remove class="btn btn-warning cancel">');
-                taskContent.push('<i class="glyphicon glyphicon-ban-circle"></i>');
-                taskContent.push('<span>Cancel</span>');
-                taskContent.push('</button>');
-                taskContent.push('<button type="button" data-dz-remove class="btn btn-danger delete">');
-                taskContent.push('<i class="glyphicon glyphicon-trash"></i>');
-                taskContent.push('<span>Delete</span>');
-                taskContent.push('</button>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
-                taskContent.push('</div>');
+    
                 break;
             case 25:
                 taskContent.push(" <div class='form-group'>");
@@ -249,38 +205,33 @@ sinaptic.wf = function () {
                 break;
 
             case 26:
-                taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-12'>");
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Saldo Deudor</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldo'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
-                taskContent.push("<label class='control-label'>Comentario</label>");
-                taskContent.push("<textarea id='comentario' class='form-control'>");
-                taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
-                taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<label class='control-label'>Formulario 04</label>");
-                taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
-                taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+                siniesterInfo.push("<div class='col-md-8'>");
+                siniesterInfo.push("<label>Vencimiento de deuda</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldovenc'>");
+                siniesterInfo.push(isoDateToString(sinaptic.vm.currentSinister.vencimientodeuda));
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+                infoHeight = 110;
+                //taskContent.push("<div class='form-group'>");
+                //taskContent.push("<div class='col-md-12'>");
+                //taskContent.push("<div class='col-md-4'>");
+                //taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
+                //taskContent.push("<div id='comentariosContainer' style='display:none;'>");
+                //taskContent.push("<label class='control-label'>Comentario</label>");
+                //taskContent.push("<textarea id='comentario' class='form-control'>");
+                //taskContent.push("</textarea>");
+                //taskContent.push("</div>");
+                //taskContent.push("</div>");
                 break;
-
             case 27: // informar rendicion plan ovalo
-
-
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Importe a cancelar</label>");
@@ -292,9 +243,12 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Modo de Cancelación</label>");
                 taskContent.push("<select id='cancelationMode' class='form-control'>");
-                teamleaders.push("<option>");
-                teamleaders.push("TRANSFERENCIA");
-                teamleaders.push("</option>");
+                taskContent.push("<option value='Transferencia'>");
+                taskContent.push("Transferencia");
+                taskContent.push("</option>");
+                taskContent.push("<option value='Cheque'>");
+                taskContent.push("Cheque");
+                taskContent.push("</option>");
                 taskContent.push("</select>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
@@ -322,55 +276,58 @@ sinaptic.wf = function () {
 
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
-                taskContent.push("<label class='control-label'>Comentario</label>");
-                taskContent.push("<textarea id='comentario' class='form-control'>");
-                taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
-                taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-8'>");
                 taskContent.push("<label class='control-label'>Rendición del pago</label>");
                 taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
-
-                taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-
-
+                infoHeight = 150;
                 break;
 
             case 28: // acreditar fondos a cuenta plan ovalo
 
-                taskContent.push("<div class='form-group'>");
-                taskContent.push("<div class='col-md-8'>");
-                taskContent.push("<button type='button' value='Crear comentario' onclick='$(#comentariosContainer).css('display','')' class='btn btn-warning'>");
-                taskContent.push("<div id='comentariosContainer' style='display:none;'>");
-                taskContent.push("<label class='control-label'>Comentario</label>");
-                taskContent.push("<textarea id='comentario' class='form-control'>");
-                taskContent.push("</textarea>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Carrier</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='iniestrocarrier'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.carrier);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-                taskContent.push(" <div class='form-group'>");
-                taskContent.push("<div class='col-md-4'>");
-                taskContent.push("<label class='control-label'>Link de Control de Siniestro</label>");
-                taskContent.push("<a href=''>Ver siniestro de tarea en el Panel de Control de Siniestros</a>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
-                taskContent.push("</div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Importe a cancelar</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestroimporteacaancelar'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Modo de cancelación</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestromodocancelacion'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.modocancelacion);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Fecha de cancelación</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrofechacancelacion'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.fechadecancelacion);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Número de cheque</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestronumerocheque'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.numerodecheque ? sinaptic.vm.currentSinister.numerodecheque: 0);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Comprobante número</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrocomprobantenro'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.comprobantenumero);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
                 break;
 
@@ -487,11 +444,20 @@ sinaptic.wf = function () {
 
                 break;
         }
-        taskContent = taskContent.join("");
+
         renderTemplate("#modalsContainer", "#modalTask-template", sinaptic.context);
 
+        if (siniesterInfo.length > 0) {
+            siniesterInfo = siniesterInfo.join("");
+            $("#taskcontent > div.sinisterInfo").append(siniesterInfo);
+            $(".sinisterInfo").css("height", infoHeight);
+        }
+
+        taskContent = taskContent.join("");
         $("#taskcontent").append(taskContent);
         applyContentFormatters();
+
+
 
         $("#modaltask").modal();
 
@@ -503,153 +469,100 @@ sinaptic.wf = function () {
                 addRemoveLinks: true,
                 dictDefaultMessage: dropZoneMessage,
                 dictRemoveFile: "Quitar",
-                dictMaxFilesExceeded: "No puede subir mas de un documento"
+                dictMaxFilesExceeded: "No puede subir mas de un documento",
+                init: function () {
+                    this.on("sending", function (file, xhr, data) {
+                        if (file.fullPath) {
+                            data.append("fullPath", file.fullPath);
+                        }
+                    });
+                }
             });
         }
 
+        $("#showComment").on("click", function () {
+            
+            $('#comentariosContainer').toggle();
+        });
+
+        $("#saveComment").on("click", function () {
+            $("#comentario").prop("disabled", true);
+            $("#saveComment").prop("disabled", true);
+            saveComment();
+        });
+
+
     };
 
+
+    function isoDateToString(isoDate) {
+        var auxDate = isoDate.split("T")[0];
+        auxDate = auxDate.split("-");
+        return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
+    }
 
     //dropzone
     function getFile() {
         var file = "";
         for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
             file = $("#dropzone")[0].dropzone.files[i];
-            singleUpload(file);
+            UploadMe(file);
         }
     }
 
-    function singleUpload(file) {
+    function UploadMe(readFile) {
         var reader = new FileReader();
-        var currFile = file;
-        reader.readAsArrayBuffer(currFile);
-
-        reader.onload = (function (theFile) { // (IIFE) Immediately-Invoked Function Expression
-            return function (e) {
-                var fileData = aryBufferToBase64(e.target.result);
-                //               PerformUpload("Legajos", file.name, sinaptic.vm.currentSinister.identificador, fileData);
-
-                uploadFileCrossSite(fileData, settings.host);
-            };
-
-        })(currFile);
-
-    };
-
-    function PerformUpload(libraryName, fileName, folderName, fileData) {
-        var url;
-        var appWebUrl = settings.host;
-        var targetSiteUrl = appWebUrl;
-        folderName = "";
-        // if there is no folder name then just upload to the root folder
-        if (folderName == "") {
-            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/Files/add(url=@TargetFileName,overwrite='true')?" +
-                "@TargetSite='" + targetSiteUrl + "'" +
-                "&@TargetLibrary='" + libraryName + "'" +
-                "&@TargetFileName='" + fileName + "'";
-        }
-        else {
-            // if there is a folder name then upload into this folder
-            url = appWebUrl + "/_api/SP.AppContextSite(@TargetSite)/web/lists/getByTitle(@TargetLibrary)/RootFolder/folders(@TargetFolderName)/files/add(url=@TargetFileName,overwrite='true')?" +
-                "@TargetSite='" + targetSiteUrl + "'" +
-                "&@TargetLibrary='" + libraryName + "'" +
-                "&@TargetFolderName='" + folderName + "'" +
-                "&@TargetFileName='" + fileName + "'";
-        }
-
-        console.log(url);
-
-        jQuery.ajax({
-            url: url,
-            type: "POST",
-            data: fileData,
-            headers: {
-                "Accept": "application/json; odata=verbose",
-                "X-RequestDigest": $("#__REQUESTDIGEST").val()
-            },
-            contentType: "application/json;odata=verbose",
-            processData: false,
-            success: function (err) {
-                alert("Success! Your file was uploaded to SharePoint.");
-            },
-            error: function (err) {
-                console.log(err.message);
-            }
-        });
-
-
-        //reqExecutor.executeAsync({
-        //    url: url,
-        //    method: "POST",
-        //    headers: {
-        //        "Accept": "application/json; odata=verbose",
-        //        "X-RequestDigest": $("#__REQUESTDIGEST").val()
-        //    },
-        //    contentType: "application/json;odata=verbose",
-        //    binaryStringRequestBody: true,
-        //    body: fileData,
-        //    success: function (err) {
-        //        alert("Success! Your file was uploaded to SharePoint.");
-        //    },
-        //    error: function (err) {
-        //        console.log(err.message);
-        //    }
-        //});
+        reader.readAsArrayBuffer(readFile); //array buffer
+        reader.onprogress = updateProgress;
+        reader.onload = loaded;
+        reader.onerror = errorHandler;
     }
 
-    var uploadFileCrossSite = function (file, webUrl) {
-        var url = webUrl + "/_api/contextinfo";
-        jQuery.ajax({
-            url: url,
+    function loaded(evt) {
+        var fileString = evt.target.result;
+        var fileRawData = arrayBufferToBase64(fileString); // this is the mothod to convert Buffer array to Binary
+        var filePath = fileString.fullPath;
+        var file = filePath.match(/\\([^\\]+)$/)[1];
+
+        var soapEnv =
+            "<soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'> \
+                <soap:Body>\
+                    <CopyIntoItems xmlns='http://schemas.microsoft.com/sharepoint/soap/'>\
+                        <SourceUrl>" + filePath + "</SourceUrl>\
+                            <DestinationUrls>\
+                                <string>https://access.willis.com/site/ExpertiseBrokersArgentina/Legajos/" + file + "</string>\
+                            </DestinationUrls>\
+                            <Fields>\
+                                <FieldInformation Type='Text' DisplayName='Title' InternalName='Title' Value='Test'  />\
+                                  <FieldInformation Type='Text' DisplayName='BudgetId' InternalName='BudgetId' Value='8'  />\
+                            </Fields>\
+                        <Stream>" + fileRawData + "</Stream>\
+                    </CopyIntoItems>\
+                </soap:Body>\
+            </soap:Envelope>";
+
+        $.ajax({
+            url: "https://access.willis.com/site/ExpertiseBrokersArgentina/_vti_bin/copy.asmx",
+            beforeSend: function (xhr) { xhr.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems"); },
             type: "POST",
-            headers: {
-                "Accept": "application/json; odata=verbose"
-            },
-            contentType: "application/json;odata=verbose",
-            success: function (data) {
-                var digest = data.d.GetContextWebInformation.FormDigestValue;
-                var libraryName = "Legajos";
-
-                var reader = new FileReader();
-                var arrayBuffer;
-
-                reader.onload = function (e) {
-                    arrayBuffer = reader.result;
-
-                    url = webUrl + "/_api/web/lists/getByTitle(@TargetLibrary)/RootFolder/files/add(url=@TargetFileName,overwrite='true')?" +
-                        "@TargetLibrary='" + libraryName + "'" +
-                        "&@TargetFileName='" + file.name + "'";
-
-                    jQuery.ajax({
-                        url: url,
-                        type: "POST",
-                        data: arrayBuffer,
-                        headers: {
-                            "Accept": "application/json; odata=verbose",
-                            "X-RequestDigest": digest
-                        },
-                        contentType: "application/json;odata=verbose",
-                        processData: false,
-                        success: function (data) {
-                            console.log("Archivo subido correctamente!");
-                        },
-                        error: function (error) {
-                            console.log("Error al subir el archivo");
-                        }
-                    });
-                };
-
-                reader.readAsArrayBuffer(file);
-
-            },
-            error: function (error) {
-                jQuery('#lblResult').text("Error accessing other site.");
-                console.log("Error al subir el archivo");
-            }
+            dataType: "xml",
+            data: soapEnv,
+            complete: processResult,
+            contentType: "text/xml; charset=\"utf-8\""
         });
-    };
 
-    function aryBufferToBase64(buffer) {
+    }
+
+    //function errorHandler(evt) {
+    //    if (evt.target.error.name == "NotReadableError") {
+    //        // The file could not be read.
+    //    }
+    //}
+
+    function updateProgress(evt) {
+    }
+
+    function arrayBufferToBase64(buffer) {
         var binary = '';
         var bytes = new Uint8Array(buffer);
         var len = bytes.byteLength;
@@ -786,8 +699,8 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 console.log("Siniestro actualizado");
-                //sinaptic.posa.refresh();
-                window.location.reload();
+                sinaptic.posa();
+ //               window.location.reload();
             },
             error: errorHandler
         });
@@ -813,15 +726,49 @@ sinaptic.wf = function () {
         var historyPayload = { "SiniestroId": sinisterId, "EstadoId": nextStatus, "FechaDesde": new Date().toJSON() };
         if (idHistorial != undefined && idHistorial != null) {
             closeStatusById(idHistorial);
-            createHistorial(historyPayload, function (data) {
-                payload.IdHistorial = data.d.Identificador;
-                var dueDate = getDueDates(payload.EstadoId);
-                payload.VencimientoEstado = dueDate.alertDate1.toJSON();
-                updateSinister(sinisterId, payload);
-            });
         }
+        createHistorial(historyPayload, function (data) {
+            payload.IdHistorial = data.d.Identificador;
+            var dueDate = getDueDates(payload.EstadoId);
+            payload.VencimientoEstado = dueDate.alertDate1.toJSON();
+            updateSinister(sinisterId, payload);
+        });
 
     }
+
+    var saveComment = function () {
+
+        var properties = {
+            T\u00edtulo: sinaptic.vm.currentSinister.siniestro,
+            Comentario: $("#comentario").val(),
+            IDSiniestro: sinaptic.vm.currentSinister.identificador,
+            EstadoComentario: sinaptic.vm.currentSinister.estado,
+            ComentaristaId: _spPageContextInfo.userId
+        }
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/Comentarios",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(properties),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+
+                alert("Comentario guardado correctamente.");
+                $("#comentario").val("");
+                $("#comentario").prop("disabled", false);
+                $("#saveComment").prop("disabled", false);
+
+            },
+            error: errorHandler
+        });
+
+    }
+
 
     var completeTask = function (estadoId) {
         switch (estadoId) {
@@ -852,7 +799,7 @@ sinaptic.wf = function () {
 
                 var payload = {
                     DocCertCompleta: isCompleted,
-                    EstadoId: 24
+                    EstadoId: isCompleted ? 24:42
 
                 }
 
@@ -862,20 +809,18 @@ sinaptic.wf = function () {
 
             case 24:
                 var resolucion = $("#teamleaderwillis option:selected").text();
-
+                var reslvalue = $("#teamleaderwillis option:selected").val();
                 var payload = {
                     TipoDeResuloci\u00f3nValue: resolucion,
-                    EstadoId: 25
+                    EstadoId: reslvalue == "1"? 25: 33
                 }
-
                 updateStatusChange(payload);
-
                 break;
 
             case 25:
                 var payload = {
                     SaldoPendiente: $("#saldodeudor").val(),
-                    VencimientoDeuda: $("#vencimientodeuda").val(),
+                    VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                     EstadoId: 26
                 };
 
@@ -895,7 +840,7 @@ sinaptic.wf = function () {
                 var payload = {
                     ImporteACancelar: $("#cancelImport").val(),
                     ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
-                    FechaDeCancelaci\u00f3n: $("#cancelDate").val(),
+                    FechaDeCancelaci\u00f3n: $("#cancelDate").val() + "T00:00:00",
                     NumeroDeCheque: $("#checkNumber").val(),
                     ComprobanteN: $("#comprobanteNumber").val(),
                     EstadoId: 28
@@ -908,34 +853,26 @@ sinaptic.wf = function () {
                 var payload = {
                     EstadoId: 29
                 }
-
                  updateStatusChange(payload);
-
                 break;
 
             case 29:
-
                 var payload = {
                     EstadoId: 30
                 }
-
                  updateStatusChange(payload);
-
                 break;
 
             case 30:
-
                 var payload = {
                     EstadoId: 31
                 }
-
                  updateStatusChange(payload);
-
                 break;
 
             case 31:
-
                 var payload = {
+                    FechaDeCancelacion: new Date().toISOString(),
                     EstadoId: 32
                 }
 
@@ -1038,6 +975,14 @@ sinaptic.wf = function () {
                 }
 
                  updateStatusChange(payload);
+
+                 break;
+            case 42:
+                var payload = {
+                    EstadoId: 23
+                }
+
+                updateStatusChange(payload);
 
                 break;
 
