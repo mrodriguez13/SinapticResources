@@ -1,6 +1,6 @@
 ﻿var pagina = window.location.href;
 pagina = pagina.substring(0, pagina.indexOf("/Paginas"));
-//var idSinister = window.location.hash.slice(4); 
+var idSinister = window.location.hash.slice(4); 
 
 $(document).ready(function () {
     getSpecificSinister();
@@ -34,7 +34,7 @@ var SiniestroProperties = {
 function getSpecificSinister() {
     //var url = pagina + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + idSinister;
    
-    var url = pagina + "/_vti_bin/listdata.svc/Siniestros?$expand=Estado,Carrier,Responsable,TeamLeader,TipoDeResuloción&$filter=Identificador eq 695";
+    var url = pagina + "/_vti_bin/listdata.svc/Siniestros?$expand=Estado,Carrier,Responsable,TeamLeader,TipoDeResuloción&$filter=Identificador eq "+ idSinister;
 
     //var url = pagina + "/_vti_bin/listdata.svc/Siniestros?$expand=Estado";
     $.ajax({
@@ -71,7 +71,7 @@ function fillProps(objectSinister) {
     SiniestroProperties.Suma_Asegurada = objectSinister.SumaAsegurada;
     SiniestroProperties.Tipo_Resolucion = objectSinister.TipoDeResulociónValue;
     SiniestroProperties.Creacion_del_Siniestro = objectSinister.Creado;
-    SiniestroProperties.Días_Transcurridos = -
+    SiniestroProperties.Días_Transcurridos = "-";
 
     SiniestroProperties.Estado = objectSinister.Estado.Descripción;
 
