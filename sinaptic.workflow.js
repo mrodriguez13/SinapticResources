@@ -452,7 +452,13 @@ sinaptic.wf = function () {
             dataType: "xml",
             data: soapEnv,
             beforeSend: function (xhr) { xhr.setRequestHeader('SOAPAction', 'http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems'); },
-            contentType: "text/xml; charset=\"utf-8\""
+            contentType: "text/xml; charset=\"utf-8\"",
+            sucess: function () {
+                console.log("Documento creado correctamente");
+            },
+            error: function (err) {
+                console.log("No se pudo creae el documento");
+            },
         });
     }
 
