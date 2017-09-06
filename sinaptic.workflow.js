@@ -734,6 +734,10 @@ sinaptic.wf = function () {
 			
 			hoy = dd + '/' + mm + '/' + yyyy;
 			
+			if($("#saldodeudor").val().substring(0,1) == "-"){
+			alert("El saldo deudor no puede ser negativo.");
+			break;
+			}
 			
 			if($("#saldodeudor").val() == ""){
 				alert("El saldo deudor es invalido.");
