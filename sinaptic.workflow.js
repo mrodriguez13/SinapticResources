@@ -442,7 +442,7 @@ sinaptic.wf = function () {
                       + "</soap:Body>"
                       + "</soap:Envelope>";
         jQuery.ajax({
-            url: "http://your_sharepoint/_vti_bin/copy.asmx",
+            url: "https://access.willis.com/site/ExpertiseBrokersArgentina/_vti_bin/copy.asmx",
             type: "POST",
             dataType: "xml",
             data: soapEnv,
