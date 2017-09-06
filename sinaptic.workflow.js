@@ -879,6 +879,12 @@ sinaptic.wf = function () {
             var payload = {
                 EstadoId: 36
             }
+			
+			if($("#dropzone")[0].dropzone.files.length < 1){
+			alert("Debe adjuntar un documento");
+			break;
+			}
+			
             updateStatusChange(payload);
             break;
 
