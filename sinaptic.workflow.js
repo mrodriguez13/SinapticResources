@@ -415,6 +415,7 @@ sinaptic.wf = function () {
         var file = "";
         for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
             file = $("#dropzone")[0].dropzone.files[i];
+            sinaptic.vm.uploadingFileName = file.Name;
             UploadMe(file);
         }
     }
@@ -427,9 +428,7 @@ sinaptic.wf = function () {
         reader.onerror = errorHandler;
     }
 
-    // The file content must be encoded into Base64. To do it I use the function available on my blog (http://blog.kodono.info/wordpress/2011/07/27/midi-code-encoder-decoder-en-base64-pour-javascript-programmation/)
-    function encode_b64(a, b, c, d, e, f) { b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; c = '='; for (d = f = ''; e &= 3, a.charAt(d++) || (b = ';=', e) ; f += b.charAt(63 & c >> ++e * 2)) c = c << 8 | a.charCodeAt(d -= !e); return f }
-
+    
     // "Upload" is the name of our function to do the job
     // txtContent is a plain text, the content of our file
     // destinationUrl is the full path URL to the document library (with the filename included)
@@ -464,7 +463,7 @@ sinaptic.wf = function () {
 
     function loaded(evt) {
         var fileString = evt.target.result;
-        Upload(fileString, settings.host + "/Legajos/395/FORM04.docx")
+        Upload(fileString, settings.host + "/Legajos/" + sinaptic.vm.currentSinister.identificador + "/" + sinaptic.vm.uploadingFileName)
     }
 
     function updateProgress(evt) {}
