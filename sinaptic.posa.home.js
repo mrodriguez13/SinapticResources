@@ -394,7 +394,7 @@ sinaptic.posa = function (options) {
             ykeys: ["cantidad"],
             // Labels for the ykeys -- will be displayed when you hover over the
             // chart.
-            labels: ["Cantidad de d\u00edas"]
+            labels: ["Cantidad de Tareas"]
         });
     }
 
