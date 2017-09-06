@@ -820,7 +820,7 @@ sinaptic.wf = function () {
 			}
 			
 			if(inputDate < hoy) {
-				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+				alert("La fecha de cancelación no puede ser menor o igual al día de hoy.");
 				break;
 			}else{
             updateStatusChange(payload);
