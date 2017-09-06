@@ -763,13 +763,11 @@ sinaptic.wf = function () {
             break;
 
         case 33:
-            var autorizarReposicion = $("#autoRep").is(":checked");
             var isAuthorized = false;
             if ($("input#autRepoSi")[0].checked === true) {
                 isAuthorized = true;
             }
             var payload = {
-                //propiedad: autorizarReposicion, 
                 EstadoId: isAuthorized? 34: 25
             }
             updateStatusChange(payload);
