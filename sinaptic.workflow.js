@@ -739,6 +739,10 @@ sinaptic.wf = function () {
 				break;
 			}					
 			
+			if(inputDate == "") {
+				alert("Ingrese una fecha valida.")
+				break;
+			}
 			
 			if(inputDate < hoy) {
 				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
