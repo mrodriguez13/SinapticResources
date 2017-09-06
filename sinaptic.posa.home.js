@@ -382,8 +382,7 @@ sinaptic.posa = function (options) {
             dataOverdue.push({ estado: status.Estado, cantidad: status.Qty })
         })
         $("#overdueTasksContainer").empty();
-        $("#overdueTasksContainer").css("width", 500);
-        $("#overdueTasksContainer").css("height", 250);
+        $("#overdueTasksContainer").width(500).height(250);
         new Morris.Bar({
             // ID of the element in which to draw the chart.
             element: "overdueTasksContainer",
