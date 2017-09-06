@@ -415,7 +415,7 @@ sinaptic.wf = function () {
         var file = "";
         for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
             file = $("#dropzone")[0].dropzone.files[i];
-            sinaptic.vm.uploadingFileName = file.Name;
+            sinaptic.vm.uploadingFileName = file.name;
             UploadMe(file);
         }
     }
