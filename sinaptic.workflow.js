@@ -268,10 +268,14 @@ sinaptic.wf = function () {
 
             taskContent.push("<div class='form-group'>");
             taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Rendición del pago</label>");
-            taskContent.push("<button type='button' onclick='uploadDocument();' value='Cargar documento' class='btn btn-info' class='form-control'>");
+            taskContent.push("<label class='control-label'>Rebdición del pago</label>");
+            taskContent.push("<div id='dropzone' class='dropzone'>");
             taskContent.push("</div>");
             taskContent.push("</div>");
+            taskContent.push("</div>");
+            startDropZone = true;
+            dropZoneMessage = "Arrastre o haga click para seleccionar la rendición del pago";
+            break;
             infoHeight = 150;
             break;
 
@@ -333,7 +337,19 @@ sinaptic.wf = function () {
             taskContent.push("</div>");
             break;
 
-        case 35: // Remitir Factura a Plan Ovalo
+        case 35: //Remitir factura a plan Ovalo
+            taskContent.push("<div class='form-group'>");
+            taskContent.push("<div class='col-md-8'>");
+            taskContent.push("<label class='control-label'>Factura de nueva unidad</label>");
+            taskContent.push("<div id='dropzone' class='dropzone'>");
+            taskContent.push("</div>");
+            taskContent.push("</div>");
+            taskContent.push("</div>");
+            startDropZone = true;
+            dropZoneMessage = "Arrastre aquí o haga click para seleccionar la Factura de la nueva unidad";
+            break;
+
+        case 39: // Verificar nueva prenda
             taskContent.push("<div class='form-group'>");
             taskContent.push("<div class='col-md-12'>");
             taskContent.push("<div class='col-md-6'><label class='control-label'>¿Verificar nueva prenda?</label></div>");
@@ -750,7 +766,7 @@ sinaptic.wf = function () {
             break;
 
         case 33:
-            var autorizarReposicion = $("#autRep").is(":checked");
+            var autorizarReposicion = $("#autoRep").is(":checked");
             var isAuthorized = false;
             if ($("input#autRepoSi")[0].checked === true) {
                 isAuthorized = true;
@@ -770,6 +786,7 @@ sinaptic.wf = function () {
             break;
 
         case 35:
+            // FALTA ADJUNTAR FACTURA
             var payload = {
                 EstadoId: 36
             }
