@@ -731,16 +731,24 @@ sinaptic.wf = function () {
 			
 			if($("#saldodeudor").val() == ""){
 				alert("El saldo deudor es invalido.");
-			}else{					
+				break;
+			}					
 			
-				if(inputDate < hoy) {
-					alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
-				}else{
-				
-				sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
-				}
+			if($("#saldodeudor").val() == "0"){
+				alert("El saldo deudor no puede ser 0");
+				break;
+			}					
 			
+			
+			if(inputDate < hoy) {
+				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+				break;
+			}else{
+			
+			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 			}
+			
+			
             break;
 
         case 26:
