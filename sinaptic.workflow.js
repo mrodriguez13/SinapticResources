@@ -817,7 +817,7 @@ sinaptic.wf = function () {
         case 39:
             verifPrenda
             var verifPrenda = false;
-            if ($("input# verifPrendaSi")[0].checked === true) {
+            if ($("input#verifPrendaSi")[0].checked === true) {
                 verifPrenda = true;
             }
             var payload = {
