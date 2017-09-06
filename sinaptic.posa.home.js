@@ -415,13 +415,13 @@ sinaptic.posa = function (options) {
 
         $(vm.sinistersByCreatedDate).each(function (i, sinister) {
             if (sinister.Date >= firstDay && sinister.Date <= lastDay) {
-                newSinistersValues[sinister.Idx] = sinister.Qty;
+                newSinistersValues[sinister.Idx - 1] = sinister.Qty;
             }
         })
 
         $(vm.sinistersByClosedDate).each(function (i, sinister) {
             if (sinister.Date >= firstDay && sinister.Date <= lastDay) {
-                closedSinistersValues[sinister.Idx] = sinister.Qty;
+                closedSinistersValues[sinister.Idx - 1] = sinister.Qty;
             }
         })
 

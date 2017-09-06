@@ -69,14 +69,22 @@ sinaptic.wf.validateForm = function (objeto, estadoId, success, error) {
 
             }
             break;
+        case 25:
+            if (objeto.VencimientoDeuda < new Date().toISOString()) {
+                errores.push("La fecha de vencimiento del saldo deusor no puede ser menor que la fecha en curso");
+            }
+            break;
     }
 
-    if (errores.length > 0) {
-        for (var i = 0; i < errores.length; i++) {
-            alert(errores[i]);
+    if (errores.length > 0) {    
+        if(error === null || error === undefined){
+            for (var i = 0; i < errores.length; i++) {
+                console.log(errores[i]);
+            }
         }
-     
-        error();
+        else{
+            error(errores);
+        }
     }
     else {
         success();
