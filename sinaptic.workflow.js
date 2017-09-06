@@ -429,7 +429,7 @@ sinaptic.wf = function () {
     // txtContent is a plain text, the content of our file
     // destinationUrl is the full path URL to the document library (with the filename included)
     function Upload(txtContent, destinationUrl) {
-        var jsStream = encode_b64(txtContent);
+        var jsStream = arrayBufferToBase64(txtContent);
         var soapEnv = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                       + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
                       + "<soap:Body>"
