@@ -714,9 +714,9 @@ sinaptic.wf = function () {
 			
 			var inputDate = $("#vencimientodeuda").val();	
 			var hoy = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1;
-			var yyyy = today.getFullYear();
+			var dd = hoy.getDate();
+			var mm = hoy.getMonth()+1;
+			var yyyy = hoy.getFullYear();
 			
 			if(dd<10) {
 				dd = '0'+dd
