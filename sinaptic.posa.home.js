@@ -381,10 +381,10 @@ sinaptic.posa = function (options) {
         $(vm.overdueByStatus).each(function (i, status) {
             dataOverdue.push({ estado: status.Estado, cantidad: status.Qty })
         })
-        $("#overdueTasksContainer").empty();
+        $("#agingByStatus").empty();
         new Morris.Bar({
             // ID of the element in which to draw the chart.
-            element: "overdueTasksContainer",
+            element: "agingByStatus",
             // Chart data records -- each entry in this array corresponds to a point on
             // the chart.
             data: dataOverdue,
