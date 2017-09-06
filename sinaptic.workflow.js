@@ -398,12 +398,12 @@ sinaptic.wf = function () {
             saveComment();
         });
     };
-
-    function isoDateToString(isoDate) {
-        var auxDate = isoDate.split("T")[0];
-        auxDate = auxDate.split("-");
-        return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
-    }
+	
+ // function isoDateToString(isoDate) {
+        // var auxDate = isoDate.split("T")[0];
+        // auxDate = auxDate.split("-");
+        // return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
+    // }
 
     //dropzone
     function getFile() {
@@ -711,7 +711,29 @@ sinaptic.wf = function () {
                 VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                 EstadoId: 26
             };
+			
+			var inputDate = $("#vencimientodeuda").val();	
+			var hoy = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			
+			if(dd<10) {
+				dd = '0'+dd
+			} 
+			
+			if(mm<10) {
+				mm = '0'+mm
+			} 
+			
+			hoy = dd + '/' + mm + '/' + yyyy;
+			
+			if(inputDate < hoy) {
+				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+			}else{
+			
             sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
+			}
             break;
 
         case 26:
