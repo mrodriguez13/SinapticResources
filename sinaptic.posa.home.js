@@ -143,6 +143,20 @@ sinaptic.posa = function (options) {
         }
     }
 
+    function sumOverdueTaskByStatus(status) {
+        vm.overdueByStatus = vm.overdueByStatus || [];
+        var exists = false;
+        $(vm.overdueByStatus).each(function (i, task) {
+            if (task.Estado == status) {
+                task.Qty++;
+                exists = true;
+            }
+        })
+        if (!exists) {
+            vm.overdueByStatus.push({ Estado: status, Qty: 1 });
+        }
+    }
+
     function sumSinisterByStatus(status) {
         vm.sinisterByStatus = vm.sinisterByStatus || [];
         var exists = false;
@@ -201,14 +215,23 @@ sinaptic.posa = function (options) {
             var descStatus = sinister.Estado["Descripci\u00F3n"] || "";
             var vencimientoDeuda = "";
             var vencimientoTarea = "";
+            var fechaCancelacion = "";
+            var dueDate = new Date();
             if (sinister.VencimientoDeuda != undefined && sinister.VencimientoDeuda != null) {
                 vencimientoDeuda = sinister.VencimientoDeuda.replace("/Date(", "");
                 vencimientoDeuda = new Date(Number(vencimientoDeuda.replace(")/", "")));
+                vencimientoDeuda = dateToString(vencimientoDeuda);
             }
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
                 var date = moment(sinister.VencimientoEstado);
                 date.add(date.utcOffset() * -1, 'm');
                 vencimientoTarea = dateToString(date._d);
+                dueDate = date._d;
+            }
+            if (sinister["FechaDeCancelaci\u00f3n"] != undefined && sinister["FechaDeCancelaci\u00f3n"] != null) {
+                fechaCancelacion = sinister["FechaDeCancelaci\u00f3n"].replace("/Date(", "");
+                fechaCancelacion = new Date(Number(fechaCancelacion.replace(")/", "")));
+                fechaCancelacion = dateToString(fechaCancelacion);
             }
             var currSinister = {
                 siniestro: sinister.Siniestro,
@@ -218,19 +241,22 @@ sinaptic.posa = function (options) {
                 grupo: sinister.Grupo,
                 orden: sinister.Orden,
                 tomador: sinister.Tomador,
-                carrier: sinister.Carrier["Título"],
+                carrier: sinister.Carrier["T\u00edtulo"],
                 dominio: sinister.Dominio,
                 fechaSiniestro: sinister.FechaSiniestro,
                 mailcliente: sinister.MailCliente,
                 mailcompania: sinister.MailCia,
                 modelovehiculo: sinister.ModeloVehiculo,
                 numerodecheque: sinister.NumeroDeCheque,
+                modocancelacion: sinister["ModoDeCancelaci\u00f3nValue"],
+                fechadecancelacion: fechaCancelacion,
+                comprobantenumero: sinister.ComprobanteN,
                 saldopendiente: sinister.SaldoPendiente,
                 sumaasegurada: sinister.SumaAsegurada,
                 telefonocliente: sinister.TelCliente,
                 telefonocompania: sinister.TelCia,
                 tipovehiculo: sinister.TipoVehiculo,
-                tiporesolucion: sinister["TipoDeResulociónValue"],
+                tiporesolucion: sinister["TipoDeResuloci\u00f3nValue"],
                 tiposiniestro: sinister.TipoDeSiniestroValue,
                 vencimientodeuda: vencimientoDeuda
             };
@@ -245,6 +271,8 @@ sinaptic.posa = function (options) {
             };
             if (descStatus !== "")
                 sumTaskByStatus(descStatus);
+            if (descStatus !== "" && dueDate <= new Date())
+                sumOverdueTaskByStatus(descStatus);
             tasks.push(task);
         })
         var context = {
@@ -286,6 +314,8 @@ sinaptic.posa = function (options) {
             ]
         });
         renderTasksByStatusChart();
+        renderOverdueByStatuschart();
+
     }
 
     function renderTasksByStatusChart() {
@@ -293,7 +323,7 @@ sinaptic.posa = function (options) {
         $(vm.tasksByStatus).each(function (i, status) {
             dataTasks.push({ estado: status.Estado, cantidad: status.Qty })
         })
-
+        $("#tasksByStatus").empty();
         new Morris.Bar({
             // ID of the element in which to draw the chart.
             element: "tasksByStatus",
@@ -329,7 +359,7 @@ sinaptic.posa = function (options) {
         $(vm.agingByStatus).each(function (i, status) {
             dataAging.push({ estado: status.Estado, cantidad: status.Aging })
         })
-
+        $("#agingByStatus").empty();
         new Morris.Bar({
             // ID of the element in which to draw the chart.
             element: "agingByStatus",
@@ -343,6 +373,29 @@ sinaptic.posa = function (options) {
             // Labels for the ykeys -- will be displayed when you hover over the
             // chart.
             labels: ["Cantidad de d\u00edas"]
+        });
+    }
+
+    function renderOverdueByStatuschart() {
+        var dataOverdue = [];
+        $(vm.overdueByStatus).each(function (i, status) {
+            dataOverdue.push({ estado: status.Estado, cantidad: status.Qty })
+        })
+        $("#overdueTasksContainer").empty();
+        $("#overdueTasksContainer").width(500).height(250);
+        new Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: "overdueTasksContainer",
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: dataOverdue,
+            // The name of the data record attribute that contains x-values.
+            xkey: "estado",
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ["cantidad"],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ["Cantidad de Tareas"]
         });
     }
 
@@ -362,13 +415,13 @@ sinaptic.posa = function (options) {
 
         $(vm.sinistersByCreatedDate).each(function (i, sinister) {
             if (sinister.Date >= firstDay && sinister.Date <= lastDay) {
-                newSinistersValues[sinister.Idx] = sinister.Qty;
+                newSinistersValues[sinister.Idx - 1] = sinister.Qty;
             }
         })
 
         $(vm.sinistersByClosedDate).each(function (i, sinister) {
             if (sinister.Date >= firstDay && sinister.Date <= lastDay) {
-                closedSinistersValues[sinister.Idx] = sinister.Qty;
+                closedSinistersValues[sinister.Idx - 1] = sinister.Qty;
             }
         })
 
