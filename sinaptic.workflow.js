@@ -218,7 +218,7 @@ sinaptic.wf = function () {
             siniesterInfo.push("<div class='col-md-8'>");
             siniesterInfo.push("<label>Vencimiento de deuda</label>");
             siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldovenc'>");
-            siniesterInfo.push(isoDateToString(sinaptic.vm.currentSinister.vencimientodeuda));
+            // siniesterInfo.push(isoDateToString(sinaptic.vm.currentSinister.vencimientodeuda));
             siniesterInfo.push("</div>");
             siniesterInfo.push("</div>");
             infoHeight = 110;
