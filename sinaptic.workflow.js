@@ -759,7 +759,7 @@ sinaptic.wf = function () {
 
         case 31:
             var payload = {
-                FechaDeCancelacion: new Date().toISOString(),
+                FechaDeCierreDeSiniestro: new Date().toISOString(),
                 EstadoId: 32
             }
             updateStatusChange(payload);
