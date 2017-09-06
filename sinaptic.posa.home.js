@@ -379,7 +379,7 @@ sinaptic.posa = function (options) {
     function renderOverdueByStatuschart() {
         var dataOverdue = [];
         $(vm.overdueByStatus).each(function (i, status) {
-            dataOverdue.push({ estado: status.Estado, cantidad: status.Aging })
+            dataOverdue.push({ estado: status.Estado, cantidad: status.Qty })
         })
         $("#overdueTasksContainer").empty();
         new Morris.Bar({
