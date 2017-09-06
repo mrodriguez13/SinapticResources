@@ -679,7 +679,7 @@ sinaptic.wf = function () {
             };
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
-			alert("Debe adjuntar un documento".);
+			alert("Debe adjuntar un documento");
 			break;
 			}
 
@@ -779,7 +779,7 @@ sinaptic.wf = function () {
             }
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
-				alert("Debe adjuntar un documento".);
+				alert("Debe adjuntar un documento");
 				break;
 			}
 			
