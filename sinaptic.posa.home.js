@@ -314,6 +314,8 @@ sinaptic.posa = function (options) {
             ]
         });
         renderTasksByStatusChart();
+        renderOverdueByStatuschart();
+
     }
 
     function renderTasksByStatusChart() {
