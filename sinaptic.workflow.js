@@ -777,7 +777,54 @@ sinaptic.wf = function () {
                 ComprobanteN: $("#comprobanteNumber").val(),
                 EstadoId: 28
             }
+			
+			if($("#dropzone")[0].dropzone.files.length < 1){
+				alert("Debe adjuntar un documento".);
+				break;
+			}
+			
+			var inputDate = $("#cancelDate").val();
+			var hoy = new Date();
+			var dd = hoy.getDate();
+			var mm = hoy.getMonth()+1;
+			var yyyy = hoy.getFullYear();
+			
+			if(dd<10) {
+				dd = '0'+dd
+			} 
+			if(mm<10) {
+				mm = '0'+mm
+			} 		
+			hoy = dd + '/' + mm + '/' + yyyy;
+			
+			var importe = $("#cancelImport").val();
+			
+			if(importe.substring(0,1) == "-"){
+				alert("El importe no puede ser negativo.");
+				break;
+			}
+			
+			if(importe == ""){
+				alert("El importe es invalido.");
+				break;
+			}					
+			
+			if(importe == "0"){
+				alert("El importe no puede ser 0");
+				break;
+			}					
+			
+			if(inputDate == "") {
+				alert("Ingrese una fecha valida.")
+				break;
+			}
+			
+			if(inputDate < hoy) {
+				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+				break;
+			}else{
             updateStatusChange(payload);
+			}
             break;
 
         case 28:
