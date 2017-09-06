@@ -206,7 +206,7 @@ sinaptic.wf = function () {
             taskContent.push("</div>");
             break;
 
-        case 26:
+        case 26:  // Informar saldo deudor a compañía
             siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
             siniesterInfo.push("<div class='col-md-4'>");
             siniesterInfo.push("<label>Saldo Deudor</label>");
@@ -218,7 +218,7 @@ sinaptic.wf = function () {
             siniesterInfo.push("<div class='col-md-8'>");
             siniesterInfo.push("<label>Vencimiento de deuda</label>");
             siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldovenc'>");
-            siniesterInfo.push(isoDateToString(sinaptic.vm.currentSinister.vencimientodeuda));
+            siniesterInfo.push(sinaptic.vm.currentSinister.vencimientodeuda);
             siniesterInfo.push("</div>");
             siniesterInfo.push("</div>");
             infoHeight = 110;
@@ -268,7 +268,7 @@ sinaptic.wf = function () {
 
             taskContent.push("<div class='form-group'>");
             taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Rebdición del pago</label>");
+            taskContent.push("<label class='control-label'>Rendición del pago</label>");
             taskContent.push("<div id='dropzone' class='dropzone'>");
             taskContent.push("</div>");
             taskContent.push("</div>");
@@ -392,18 +392,23 @@ sinaptic.wf = function () {
             $('#comentariosContainer').toggle();
         });
 
+		$("#showAttach").on("click", function () {
+
+            $('#attachContainer').toggle();
+        });
+		
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
             $("#saveComment").prop("disabled", true);
             saveComment();
         });
     };
-
-    function isoDateToString(isoDate) {
-        var auxDate = isoDate.split("T")[0];
-        auxDate = auxDate.split("-");
-        return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
-    }
+	
+ // function isoDateToString(isoDate) {
+        // var auxDate = isoDate.split("T")[0];
+        // auxDate = auxDate.split("-");
+        // return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
+    // }
 
     //dropzone
     function getFile() {
@@ -442,7 +447,7 @@ sinaptic.wf = function () {
                       + "</soap:Body>"
                       + "</soap:Envelope>";
         jQuery.ajax({
-            url: "https://access.willis.com/site/ExpertiseBrokersArgentina/_vti_bin/copy.asmx",
+            url: settings.host + "/_vti_bin/copy.asmx",
             type: "POST",
             dataType: "xml",
             data: soapEnv,
@@ -453,7 +458,7 @@ sinaptic.wf = function () {
 
     function loaded(evt) {
         var fileString = evt.target.result;
-        Upload(fileString, "https://access.willis.com/site/ExpertiseBrokersArgentina/Legajos/395/FORM04.docx")
+        Upload(fileString, settings.host + "/Legajos/395/FORM04.docx")
     }
 
     function updateProgress(evt) {}
@@ -677,6 +682,12 @@ sinaptic.wf = function () {
             var payload = {
                 EstadoId: 23
             };
+			
+			if($("#dropzone")[0].dropzone.files.length < 1){
+			alert("Debe adjuntar un documento");
+			break;
+			}
+
             updateStatusChange(payload);
             getFile();
             break;
@@ -711,7 +722,52 @@ sinaptic.wf = function () {
                 VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                 EstadoId: 26
             };
-            sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
+			
+			var inputDate = $("#vencimientodeuda").val();	
+			var hoy = new Date();
+			var dd = hoy.getDate();
+			var mm = hoy.getMonth()+1;
+			var yyyy = hoy.getFullYear();
+			
+			if(dd<10) {
+				dd = '0'+dd
+			} 
+			
+			if(mm<10) {
+				mm = '0'+mm
+			} 
+			
+			hoy = dd + '/' + mm + '/' + yyyy;
+			
+			if($("#saldodeudor").val().substring(0,1) == "-"){
+			alert("El saldo deudor no puede ser negativo.");
+			break;
+			}
+			
+			if($("#saldodeudor").val() == ""){
+				alert("El saldo deudor es invalido.");
+				break;
+			}					
+			
+			if($("#saldodeudor").val() == "0"){
+				alert("El saldo deudor no puede ser 0");
+				break;
+			}					
+			
+			if(inputDate == "") {
+				alert("Ingrese una fecha valida.")
+				break;
+			}
+			
+			if(inputDate < hoy) {
+				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+				break;
+			}else{
+			
+			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
+			}
+			
+			
             break;
 
         case 26:
@@ -730,7 +786,54 @@ sinaptic.wf = function () {
                 ComprobanteN: $("#comprobanteNumber").val(),
                 EstadoId: 28
             }
+			
+			if($("#dropzone")[0].dropzone.files.length < 1){
+				alert("Debe adjuntar un documento");
+				break;
+			}
+			
+			var inputDate = $("#cancelDate").val();
+			var hoy = new Date();
+			var dd = hoy.getDate();
+			var mm = hoy.getMonth()+1;
+			var yyyy = hoy.getFullYear();
+			
+			if(dd<10) {
+				dd = '0'+dd
+			} 
+			if(mm<10) {
+				mm = '0'+mm
+			} 		
+			hoy = dd + '/' + mm + '/' + yyyy;
+			
+			var importe = $("#cancelImport").val();
+			
+			if(importe.substring(0,1) == "-"){
+				alert("El importe no puede ser negativo.");
+				break;
+			}
+			
+			if(importe == ""){
+				alert("El importe es invalido.");
+				break;
+			}					
+			
+			if(importe == "0"){
+				alert("El importe no puede ser 0");
+				break;
+			}					
+			
+			if(inputDate == "") {
+				alert("Ingrese una fecha valida.")
+				break;
+			}
+			
+			if(inputDate < hoy) {
+				alert("La fecha de cancelación no puede ser menor o igual al día de hoy.");
+				break;
+			}else{
             updateStatusChange(payload);
+			}
             break;
 
         case 28:
@@ -785,6 +888,12 @@ sinaptic.wf = function () {
             var payload = {
                 EstadoId: 36
             }
+			
+			if($("#dropzone")[0].dropzone.files.length < 1){
+			alert("Debe adjuntar un documento");
+			break;
+			}
+			
             updateStatusChange(payload);
             break;
 
