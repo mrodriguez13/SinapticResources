@@ -392,6 +392,11 @@ sinaptic.wf = function () {
             $('#comentariosContainer').toggle();
         });
 
+		$("#showAttach").on("click", function () {
+
+            $('#attachContainer').toggle();
+        });
+		
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
             $("#saveComment").prop("disabled", true);
