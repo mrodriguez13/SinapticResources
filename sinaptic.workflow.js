@@ -387,10 +387,25 @@ sinaptic.wf = function () {
                 }
             });
         }
+        $("#dropzoneCommon").dropzone({
+            url: "#",
+            autoProcessQueue: false,
+            maxFiles: 5,
+            addRemoveLinks: true,
+            dictDefaultMessage: dropZoneMessage,
+            dictRemoveFile: "Quitar",
+            dictMaxFilesExceeded: "No puede subir mas de 5 documentos en simultaneo",
+            init: function () {
+                this.on("sending", function (file, xhr, data) {
+                    if (file.fullPath) {
+                        data.append("fullPath", file.fullPath);
+                    }
+                });
+            }
+        });
+
         $("#showComment").on("click", function () {
- //           var est = $(".modal-footer").children().prop('disabled');
             $('#comentariosContainer').toggle();
-//            $(".modal-footer").children().prop('disabled', !est);
         });
 
 		$("#showAttach").on("click", function () {
@@ -401,22 +416,15 @@ sinaptic.wf = function () {
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
             $("#saveComment").prop("disabled", true);
-//            est = $(".modal-footer").children().prop('disabled', false);
             saveComment();
         });
     };
 	
- // function isoDateToString(isoDate) {
-        // var auxDate = isoDate.split("T")[0];
-        // auxDate = auxDate.split("-");
-        // return auxDate[2] + "/" + auxDate[1] + "/" + auxDate[0];
-    // }
-
     //dropzone
-    function getFile() {
+    function getFile(selector) {
         var file = "";
-        for (var i = 0; i < $("#dropzone")[0].dropzone.files.length; i++) {
-            file = $("#dropzone")[0].dropzone.files[i];
+        for (var i = 0; i < $(selector)[0].dropzone.files.length; i++) {
+            file = $(selector)[0].dropzone.files[i];
             sinaptic.vm.uploadingFileName = file.name;
             UploadMe(file);
         }
@@ -695,7 +703,7 @@ sinaptic.wf = function () {
 			    break;
 			}
             updateStatusChange(payload);
-            getFile();
+            getFile("#dropzone");
             break;
 
         case 23:
@@ -844,7 +852,7 @@ sinaptic.wf = function () {
 				break;
 			}
             updateStatusChange(payload);
-			getFile();
+            getFile("#dropzone");
             break;
 
         case 28:
