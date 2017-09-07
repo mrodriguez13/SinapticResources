@@ -388,9 +388,9 @@ sinaptic.wf = function () {
             });
         }
         $("#showComment").on("click", function () {
-            var est = $(".modal-footer").children().prop('disabled');
+ //           var est = $(".modal-footer").children().prop('disabled');
             $('#comentariosContainer').toggle();
-            $(".modal-footer").children().prop('disabled', !est);
+//            $(".modal-footer").children().prop('disabled', !est);
         });
 
 		$("#showAttach").on("click", function () {
@@ -401,7 +401,7 @@ sinaptic.wf = function () {
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
             $("#saveComment").prop("disabled", true);
-            est = $(".modal-footer").children().prop('disabled', false);
+//            est = $(".modal-footer").children().prop('disabled', false);
             saveComment();
         });
     };
