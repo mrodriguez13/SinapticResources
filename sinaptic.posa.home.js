@@ -449,7 +449,7 @@ sinaptic.posa = function (options) {
         console.log("Error: " + data);
     }
 
-    function hasPressedEnter(e) {
+    var hasPressedEnter = function(e) {
         var keynum;
 
         if (window.event) { // IE                    
@@ -538,6 +538,7 @@ sinaptic.posa = function (options) {
 
     return {
         refresh: refresh,
+        hasPressedEnter:hasPressedEnter,
         vm: vm
     }
 
