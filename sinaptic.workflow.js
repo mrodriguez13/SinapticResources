@@ -413,6 +413,10 @@ sinaptic.wf = function () {
             $('#attachContainer').toggle();
         });
 		
+		$("#uploadFile").on("click", function () {
+		    getFile("#dropzoneCommon");
+		});
+
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
             $("#saveComment").prop("disabled", true);
