@@ -518,11 +518,13 @@ sinaptic.wf = function () {
     var addComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "none");
         $("#estado" + estadoId + "acciones").css("display", "inline");
+        $(".modal-footer").children().prop('disabled', false);
     };
 
     var showAddComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "inline");
         $("#estado" + estadoId + "acciones").css("display", "none");
+        $(".modal-footer").children().prop('disabled', true);
     };
 
     var getDueDates = function (estadoId) {
@@ -607,18 +609,6 @@ sinaptic.wf = function () {
         });
     }
 
-    function loadDocumentFile(statusId) {
-        var idfolder = sinaptic.vm.currentSinister.identificador
-        var libraryName = "Legajos";
-        var contentType = "";
-        switch (statusId) {
-        case 22:
-            contentType = ""; // Acá va el content type correspondiente a Formulario 04
-        default:
-        }
-        // TODO: Hacer que obtenga los archivos del dropzone (#dropzone) y subirlos a la biblioteca correspondiente
-    }
-
     var updateStatusChange = function (payload) {
         var sinisterId = sinaptic.vm.currentSinister.identificador;
         var idHistorial = sinaptic.vm.currentSinister.idhistorial;
@@ -659,7 +649,6 @@ sinaptic.wf = function () {
                 "X-RequestDigest": $("#__REQUESTDIGEST").val()
             },
             success: function (data) {
-                alert("Comentario guardado correctamente.");
                 $("#comentario").val("");
                 $("#comentario").prop("disabled", false);
                 $("#saveComment").prop("disabled", false);
@@ -685,6 +674,7 @@ sinaptic.wf = function () {
             };		
 			if($("#dropzone")[0].dropzone.files.length < 1){
 			    alert("Debe adjuntar el Formulario 04");
+			    $("#dropzone").focus();
 			    closeTaskOk = false;
 			    break;
 			}
@@ -735,26 +725,31 @@ sinaptic.wf = function () {
 			hoy = dd + '/' + mm + '/' + yyyy;
 			if($("#saldodeudor").val().substring(0,1) == "-"){
 			    alert("El saldo deudor no puede ser negativo");
+			    $("#saldodeudor").focus();
 			    closeTaskOk = false;
 			    break;
 			}
 			if($("#saldodeudor").val() == ""){
 			    alert("Debe ingresar el saldo deudor");
+			    $("#saldodeudor").focus();
 			    closeTaskOk = false;
 				break;
 			}					
 			if($("#saldodeudor").val() == "0"){
 			    alert("El saldo deudor no puede ser 0");
+			    $("#saldodeudor").focus();
 			    closeTaskOk = false;
 				break;
 			}					
 			if(inputDate == "") {
 			    alert("Debe ingresar la fecha de vencimiento de la deuda");
+			    $("#vencimientodeuda").focus();
 			    closeTaskOk = false;
 				break;
 			}
-			if(inputDate < hoy) {
-			    alert("La fecha de vencimiento debe ser mayor o igual a la fecha en curso");
+			if(inputDate <= hoy) {
+			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+			    $("#vencimientodeuda").focus();
 			    closeTaskOk = false;
 				break;
 			}
@@ -781,6 +776,7 @@ sinaptic.wf = function () {
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
 			    alert("Debe adjuntar la Rendición del pago");
+			    $("#dropzone").focus();
 			    closeTaskOk = false;
 				break;
 			}
@@ -803,6 +799,7 @@ sinaptic.wf = function () {
 			
 			if(importe.substring(0,1) == "-"){
 			    alert("El importe no puede ser negativo");
+			    $("#cancelImport").focus();
 			    closeTaskOk = false;
 				break;
 			}
@@ -889,6 +886,7 @@ sinaptic.wf = function () {
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
 			    alert("Debe adjuntar un documento");
+			    $("#dropzone").focus();
 			    closeTaskOk = false;
 			    break;
 			}
