@@ -392,7 +392,7 @@ sinaptic.wf = function () {
             autoProcessQueue: false,
             maxFiles: 5,
             addRemoveLinks: true,
-            dictDefaultMessage: dropZoneMessage,
+            dictDefaultMessage: "Arrastre aqui o haga click para seleccionar archivos",
             dictRemoveFile: "Quitar",
             dictMaxFilesExceeded: "No puede subir mas de 5 documentos en simultaneo",
             init: function () {
