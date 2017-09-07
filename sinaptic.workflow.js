@@ -415,6 +415,7 @@ sinaptic.wf = function () {
 		
 		$("#uploadFile").on("click", function () {
 		    getFile("#dropzoneCommon");
+		    $('#attachContainer').toggle();
 		});
 
         $("#saveComment").on("click", function () {
@@ -432,6 +433,7 @@ sinaptic.wf = function () {
             sinaptic.vm.uploadingFileName = file.name;
             UploadMe(file);
         }
+        $(selector)[0].dropzone.removeAllFiles();
     }
 
     function UploadMe(readFile) {
