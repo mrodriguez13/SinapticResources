@@ -2,7 +2,7 @@
     background-color: #e8e8e8 !important;
 }
 
-tr.odd:hover {
+tr:hover {
     background-color: #bee0ed !important;
 }
 
