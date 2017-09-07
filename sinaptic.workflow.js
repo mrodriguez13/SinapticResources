@@ -669,6 +669,7 @@ sinaptic.wf = function () {
     }
 
     var completeTask = function (estadoId) {
+        var closeTaskOk = true;
         switch (estadoId) {
         case 21:
             var payload = {
@@ -684,6 +685,7 @@ sinaptic.wf = function () {
             };		
 			if($("#dropzone")[0].dropzone.files.length < 1){
 			    alert("Debe adjuntar el Formulario 04");
+			    closeTaskOk = false;
 			    break;
 			}
             updateStatusChange(payload);
@@ -733,22 +735,27 @@ sinaptic.wf = function () {
 			hoy = dd + '/' + mm + '/' + yyyy;
 			if($("#saldodeudor").val().substring(0,1) == "-"){
 			    alert("El saldo deudor no puede ser negativo");
+			    closeTaskOk = false;
 			    break;
 			}
 			if($("#saldodeudor").val() == ""){
-				alert("Debe ingresar el saldo deudor");
+			    alert("Debe ingresar el saldo deudor");
+			    closeTaskOk = false;
 				break;
 			}					
 			if($("#saldodeudor").val() == "0"){
-				alert("El saldo deudor no puede ser 0");
+			    alert("El saldo deudor no puede ser 0");
+			    closeTaskOk = false;
 				break;
 			}					
 			if(inputDate == "") {
-				alert("Debe ingresar la fecha de vencimiento de la deuda")
+			    alert("Debe ingresar la fecha de vencimiento de la deuda");
+			    closeTaskOk = false;
 				break;
 			}
 			if(inputDate < hoy) {
-				alert("La fecha de vencimiento debe ser mayor o igual a la fecha en curso");
+			    alert("La fecha de vencimiento debe ser mayor o igual a la fecha en curso");
+			    closeTaskOk = false;
 				break;
 			}
 			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
@@ -774,6 +781,7 @@ sinaptic.wf = function () {
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
 			    alert("Debe adjuntar la Rendición del pago");
+			    closeTaskOk = false;
 				break;
 			}
 			
@@ -794,27 +802,32 @@ sinaptic.wf = function () {
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
-				alert("El importe no puede ser negativo");
+			    alert("El importe no puede ser negativo");
+			    closeTaskOk = false;
 				break;
 			}
 			if(importe == ""){
 			    alert("Debe ingresar el importe a cancelar");
 			    $("#cancelImport").focus();
+			    closeTaskOk = false;
 				break;
 			}					
 			if(importe == "0"){
 			    alert("El importe no puede ser 0");
 			    $("#cancelImport").focus();
+			    closeTaskOk = false;
 				break;
 			}					
 			if(inputDate == "") {
 			    alert("Ingrese una fecha válida")
 			    $("#cancelDate").focus();
+			    closeTaskOk = false;
 				break;
 			}
-			if(inputDate < hoy) {
-			    alert("La fecha de cancelación debe ser mayor o igual a la fecha actual");
+			if(inputDate <= hoy) {
+			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
 			    $("#cancelDate").focus();
+			    closeTaskOk = false;
 				break;
 			}
             updateStatusChange(payload);
@@ -875,8 +888,9 @@ sinaptic.wf = function () {
             }
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
-			alert("Debe adjuntar un documento");
-			break;
+			    alert("Debe adjuntar un documento");
+			    closeTaskOk = false;
+			    break;
 			}
 			
             updateStatusChange(payload);
@@ -943,6 +957,10 @@ sinaptic.wf = function () {
             break;
 
         };
+
+        if (closeTaskOk) {
+            $("#modaltask").modal('hide');
+        }
     }
 
     return {
