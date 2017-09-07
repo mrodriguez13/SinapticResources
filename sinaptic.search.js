@@ -67,10 +67,6 @@ var loadData = function (data, settings) {
 
     structure += '</tbody></table>';
     $(settings.element).html(structure);
-    $('#listaSiniestros tbody tr').click(function () {
-        window.location.href = $(this).attr('href');
-        return false;
-    });
     loadFiltersAndSearch(settings.element);
     setSearch();
 };
