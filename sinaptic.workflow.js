@@ -180,7 +180,7 @@ sinaptic.wf = function () {
             taskContent.push(" <div class='form-group'>");
             taskContent.push("<div class='col-md-8'>");
             taskContent.push("<label class='control-label'>Tipo de resolución</label>");
-            taskContent.push("<select id='teamleaderwillis' class='form-control'>");
+            taskContent.push("<select id='tipoResolucion' class='form-control'>");
             taskContent.push("<option value='1'>Liquidación de saldo deudor</option>");
             taskContent.push("<option value='2'>Reposición de unidad</option>");
             taskContent.push("</select>");
@@ -422,16 +422,12 @@ sinaptic.wf = function () {
 
     function UploadMe(readFile) {
         var reader = new FileReader();
-        reader.readAsArrayBuffer(readFile); //array buffer
+        reader.readAsArrayBuffer(readFile);
         reader.onprogress = updateProgress;
         reader.onload = loaded;
         reader.onerror = errorHandler;
     }
-
-    
-    // "Upload" is the name of our function to do the job
-    // txtContent is a plain text, the content of our file
-    // destinationUrl is the full path URL to the document library (with the filename included)
+ 
     function Upload(txtContent, destinationUrl) {
         var jsStream = arrayBufferToBase64(txtContent);
         var soapEnv = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -683,22 +679,18 @@ sinaptic.wf = function () {
             updateStatusChange(payload);
             break;
         case 22:
-            loadDocumentFile(22);
             var payload = {
                 EstadoId: 23
-            };
-			
+            };		
 			if($("#dropzone")[0].dropzone.files.length < 1){
-			alert("Debe adjuntar un documento");
-			break;
+			    alert("Debe adjuntar el Formulario 04");
+			    break;
 			}
-
             updateStatusChange(payload);
             getFile();
             break;
 
         case 23:
-            // posee 2 radio button,comentario y adjunto, no tiene campos de llenado
             var isCompleted = false;
             if ($("input#docCompletaSi")[0].checked === true) {
                 isCompleted = true;
@@ -712,8 +704,8 @@ sinaptic.wf = function () {
             break;
 
         case 24:
-            var resolucion = $("#teamleaderwillis option:selected").text();
-            var reslvalue = $("#teamleaderwillis option:selected").val();
+            var resolucion = $("#tipoResolucion option:selected").text();
+            var reslvalue = $("#tipoResolucion option:selected").val();
             var payload = {
                 TipoDeResuloci\u00f3nValue: resolucion,
                 EstadoId: reslvalue == "1" ? 25 : 33
@@ -727,51 +719,39 @@ sinaptic.wf = function () {
                 VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                 EstadoId: 26
             };
-			
 			var inputDate = $("#vencimientodeuda").val();	
 			var hoy = new Date();
 			var dd = hoy.getDate();
 			var mm = hoy.getMonth()+1;
 			var yyyy = hoy.getFullYear();
-			
 			if(dd<10) {
 				dd = '0'+dd
 			} 
-			
 			if(mm<10) {
 				mm = '0'+mm
 			} 
-			
 			hoy = dd + '/' + mm + '/' + yyyy;
-			
 			if($("#saldodeudor").val().substring(0,1) == "-"){
-			alert("El saldo deudor no puede ser negativo.");
-			break;
+			    alert("El saldo deudor no puede ser negativo");
+			    break;
 			}
-			
 			if($("#saldodeudor").val() == ""){
-				alert("El saldo deudor es invalido.");
+				alert("Debe ingresar el saldo deudor");
 				break;
 			}					
-			
 			if($("#saldodeudor").val() == "0"){
 				alert("El saldo deudor no puede ser 0");
 				break;
 			}					
-			
 			if(inputDate == "") {
-				alert("Ingrese una fecha valida.")
+				alert("Debe ingresar la fecha de vencimiento de la deuda")
 				break;
 			}
-			
 			if(inputDate < hoy) {
-				alert("La fecha de vencimiento no puede ser menor o igual al dia de hoy.");
+				alert("La fecha de vencimiento debe ser mayor o igual a la fecha en curso");
 				break;
-			}else{
-			
-			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 			}
-			
+			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 			
             break;
 
@@ -793,7 +773,7 @@ sinaptic.wf = function () {
             }
 			
 			if($("#dropzone")[0].dropzone.files.length < 1){
-				alert("Debe adjuntar un documento");
+			    alert("Debe adjuntar la Rendición del pago");
 				break;
 			}
 			
@@ -814,31 +794,31 @@ sinaptic.wf = function () {
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
-				alert("El importe no puede ser negativo.");
+				alert("El importe no puede ser negativo");
 				break;
 			}
-			
 			if(importe == ""){
-				alert("El importe es invalido.");
+			    alert("Debe ingresar el importe a cancelar");
+			    $("#cancelImport").focus();
 				break;
 			}					
-			
 			if(importe == "0"){
-				alert("El importe no puede ser 0");
+			    alert("El importe no puede ser 0");
+			    $("#cancelImport").focus();
 				break;
 			}					
-			
 			if(inputDate == "") {
-				alert("Ingrese una fecha valida.")
+			    alert("Ingrese una fecha válida")
+			    $("#cancelDate").focus();
 				break;
 			}
-			
 			if(inputDate < hoy) {
-				alert("La fecha de cancelación no puede ser menor o igual al día de hoy.");
+			    alert("La fecha de cancelación debe ser mayor o igual a la fecha actual");
+			    $("#cancelDate").focus();
 				break;
-			}else{
-            updateStatusChange(payload);
 			}
+            updateStatusChange(payload);
+			getFile();
             break;
 
         case 28:
