@@ -4,7 +4,7 @@
         var settings = $.extend({
             element: "#buscadorContainer",
             listName: "Siniestros",
-            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dni", "Dominio", "Estado"]
+            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado"]
         }, options);
         settings.element = "#" + $(this).attr("id");
         queryList(settings);
