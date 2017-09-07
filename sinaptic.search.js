@@ -67,8 +67,12 @@ var loadData = function (data, settings) {
 
     structure += '</tbody></table>';
     $(settings.element).html(structure);
-
+    $('#listaSiniestros tbody tr').click(function () {
+        window.location.href = $(this).attr('href');
+        return false;
+    });
     loadFiltersAndSearch(settings.element);
+    setSearch();
 };
 
 var loadFiltersAndSearch = function (container) {
@@ -86,11 +90,6 @@ var openUrl = function (url) {
 
 $(document).ready(function () {
     $('#buscadorContainer').crearBuscadorSiniestros();
-    $('#listaSiniestros tbody tr').click(function () {
-        window.location.href = $(this).attr('href');
-        return false;
-    });
-    setSearch();
 });
 
 var getURLParameter = function (name) {
@@ -98,7 +97,6 @@ var getURLParameter = function (name) {
 }
 
 var setSearch = function () {
-    debugger;
     var criteria = getURLParameter("Search");
     if (criteria != null) {
         $("#listaSiniestros_filter input").val(criteria);
