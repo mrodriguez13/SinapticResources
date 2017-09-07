@@ -2,7 +2,7 @@
     background-color: #e8e8e8 !important;
 }
 
-tr:hover {
+tbody>tr:hover {
     background-color: #bee0ed !important;
 }
 
