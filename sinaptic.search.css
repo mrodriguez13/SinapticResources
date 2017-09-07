@@ -1,0 +1,11 @@
+﻿tr.odd {
+    background-color: #e8e8e8 !important;
+}
+
+tr.odd:hover {
+    background-color: #bee0ed !important;
+}
+
+.table{
+    cursor: pointer;
+}
