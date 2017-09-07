@@ -65,7 +65,7 @@ sinaptic.posa = function (options) {
                     break;
             }
         });
-        struActions.push("<div id=\"Buscador\" class=\"pull-right\"><input type=\"text\" class=\"searchBox\" placeholder=\"Buscador de siniestros\" onkeyup=\"return sinaptic.posa.hasPressedEnter(event)\"><img class=\"searchImg\" src=\"/site/ExpertiseBrokersArgentina/SiteAssets/home/img/search-icon-marine-hi.png\" height=\"15px\" alt=\"\"></div>");
+        struActions.push("<div id=\"Buscador\" class=\"pull-right\"><input type=\"text\" class=\"searchBox\" placeholder=\"Buscador de siniestros\" onkeyup=\"return sinaptic.wf.hasPressedEnter(event)\"><img class=\"searchImg\" src=\"/site/ExpertiseBrokersArgentina/SiteAssets/home/img/search-icon-marine-hi.png\" height=\"15px\" alt=\"\"></div>");
         struActions = "<div class=\"row\">" + struActions.join("") + "</div>";
         $("#actionsBar").html(struActions);
     }
@@ -538,7 +538,6 @@ sinaptic.posa = function (options) {
 
     return {
         refresh: refresh,
-        hasPressedEnter:hasPressedEnter,
         vm: vm
     }
 

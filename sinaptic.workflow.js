@@ -509,8 +509,7 @@ sinaptic.wf = function () {
                 },
                 success: function (data) {
                     console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
-                    //sinaptic.posa.refresh();
-                    window.location.reload();
+                    sinaptic.posa();
                 },
                 error: errorHandler
             })
@@ -657,6 +656,21 @@ sinaptic.wf = function () {
             },
             error: errorHandler
         });
+    }
+
+    var hasPressedEnter = function (e) {
+        var keynum;
+
+        if (window.event) { // IE                    
+            keynum = e.keyCode;
+        } else if (e.which) { // Netscape/Firefox/Opera                   
+            keynum = e.which;
+        }
+
+        if (keynum == 13) {
+            var serchString = $(".searchBox").val();
+            window.location.href = "/site/expertisebrokersargentina/paginas/buscador.aspx?Search=" + serchString;
+        }
     }
 
     var completeTask = function (estadoId) {
@@ -968,6 +982,7 @@ sinaptic.wf = function () {
         showTaskForm: showTaskForm,
         showCreateSinister: showCreateSinister,
         addComment: addComment,
-        completeTask: completeTask
+        completeTask: completeTask,
+        hasPressedEnter: hasPressedEnter
     };
 }();
