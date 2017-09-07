@@ -520,13 +520,13 @@ sinaptic.wf = function () {
     var addComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "none");
         $("#estado" + estadoId + "acciones").css("display", "inline");
-        $(".modal-footer").children().prop('disabled', false);
+       // $(".modal-footer").children().prop('disabled', false);
     };
 
     var showAddComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "inline");
         $("#estado" + estadoId + "acciones").css("display", "none");
-        $(".modal-footer").children().prop('disabled', true);
+     //   $(".modal-footer").children().prop('disabled', true);
     };
 
     var getDueDates = function (estadoId) {
