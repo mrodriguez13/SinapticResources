@@ -490,7 +490,18 @@ sinaptic.wf = function () {
         return window.btoa(binary);
     };
 
+    function validateCreateSinister() {
+        var sinsterDate = $("#newSinister_fechaSiniestro").val() + "T00:00:00";
+        if (new Date(sinisterDate) > new Date()) {
+            return false;
+        }
+        return true;
+    }
+
     var createSinister = function () {
+        if (!validateCreateSinister()) {
+            return;
+        }
         var vencimiento = getDueDates(21).alertDate1.toJSON();
         var nuevoSiniestro = {
             Siniestro: $("#newSinister_siniestro").val(),
