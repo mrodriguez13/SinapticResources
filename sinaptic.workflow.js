@@ -491,8 +491,35 @@ sinaptic.wf = function () {
     };
 
     function validateCreateSinister() {
-        var sinsterDate = $("#newSinister_fechaSiniestro").val() + "T00:00:00";
+        var errors = [];
+        var sinisterName = $("#newSinister_siniestro").val();
+        var sinisterDate = $("#newSinister_fechaSiniestro").val() + "T00:00:00";
+        var group = $("#newSinister_grupo").val();
+        var order = $("#newSinister_orden").val();
+        var domain = $("#newSinister_dominio").val();
+
+        if (sinisterName === null || sinisterName === "") {
+            errors.push("Debe ingresar un título para el siniestro");
+            $("#newSinister_siniestro").focus();
+        }
         if (new Date(sinisterDate) > new Date()) {
+            errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
+            $("#newSinister_orden").focus();
+        }
+        if (group === null || group === "") {
+            errors.push("Debe ingresar el grupo");
+            $("#newSinister_grupo").focus();
+        }
+        if (order === null || order === "") {
+            errors.push("Debe ingresar el orden");
+            $("#newSinister_orden").focus();
+        }
+        if (domain === null || domain === "") {
+            errors.push("Debe ingresar el dominio el vehículo");
+            $("#newSinister_dominio").focus();
+        }
+        if (errors.length > 0) {
+            alert(errors.join(""));
             return false;
         }
         return true;
@@ -651,6 +678,7 @@ sinaptic.wf = function () {
             payload.IdHistorial = data.d.Identificador;
             var dueDate = getDueDates(payload.EstadoId);
             payload.VencimientoEstado = dueDate.alertDate1.toJSON();
+            payload.VencimientoEstado2 = dueDate.alertDate2.toJSON();
             updateSinister(sinisterId, payload);
         });
     }
