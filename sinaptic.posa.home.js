@@ -294,7 +294,7 @@ sinaptic.posa = function (options) {
                 "sInfoEmpty": "Mostrando tareas del 0 al 0 de un total de 0 tareas",
                 "sInfoFiltered": "(filtrado de un total de _MAX_ tareas)",
                 "sInfoPostFix": "",
-                "sSearch": "Buscar:",
+                "sSearch": "Buscar Tarea:",
                 "sUrl": "",
                 "sInfoThousands": ",",
                 "sLoadingRecords": "Cargando...",
