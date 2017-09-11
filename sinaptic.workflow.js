@@ -583,7 +583,7 @@ sinaptic.wf = function () {
     var getDueDates = function (estadoId) {
         var alertDates = {};
         $.each(sinaptic.vm.status, function (key, status) {
-            if (status.Identificador === estadoId) {
+            if (status.Id === estadoId) {
                 var alert1 = status.Alerta1;
                 var alertDate1 = new Date();
                 alertDate1 = new Date(alertDate1.setDate(alertDate1.getDate() + alert1));
