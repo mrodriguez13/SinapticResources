@@ -809,7 +809,15 @@ sinaptic.wf = function () {
 			    $("#saldodeudor").focus();
 			    closeTaskOk = false;
 				break;
-			}					
+			}
+			
+			if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
+			{
+				alert("El saldo deudor no puede ser mayor a la suma asegurada.");
+				$("#saldodeudor").focus();
+				closeTaskOk = false;
+				break;
+			}			
 			if(inputDate == "") {
 			    alert("Debe ingresar la fecha de vencimiento de la deuda");
 			    $("#vencimientodeuda").focus();
