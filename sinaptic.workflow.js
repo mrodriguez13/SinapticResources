@@ -792,6 +792,19 @@ sinaptic.wf = function () {
 				mm = '0'+mm
 			} 
 			hoy = dd + '/' + mm + '/' + yyyy;
+			if(inputDate == "") {
+			    alert("Debe ingresar la fecha de vencimiento de la deuda");
+			    $("#vencimientodeuda").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			if(inputDate < hoy) {
+			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+			    $("#vencimientodeuda").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			
 			if($("#saldodeudor").val().substring(0,1) == "-"){
 			    alert("El saldo deudor no puede ser negativo");
 			    $("#saldodeudor").focus();
@@ -818,18 +831,7 @@ sinaptic.wf = function () {
 				closeTaskOk = false;
 				break;
 			}			
-			if(inputDate == "") {
-			    alert("Debe ingresar la fecha de vencimiento de la deuda");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(inputDate <= hoy) {
-			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
-				break;
-			}
+		
 			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 			
             break;
@@ -872,6 +874,19 @@ sinaptic.wf = function () {
 			} 		
 			hoy = dd + '/' + mm + '/' + yyyy;
 			
+			if(inputDate == "") {
+			    alert("Ingrese una fecha válida")
+			    $("#cancelDate").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			if(inputDate < hoy) {
+			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
+			    $("#cancelDate").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
@@ -892,18 +907,7 @@ sinaptic.wf = function () {
 			    closeTaskOk = false;
 				break;
 			}					
-			if(inputDate == "") {
-			    alert("Ingrese una fecha válida")
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(inputDate <= hoy) {
-			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
+		
             updateStatusChange(payload);
             getFile("#dropzone");
             break;
