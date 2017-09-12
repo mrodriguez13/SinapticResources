@@ -813,7 +813,7 @@ sinaptic.wf = function () {
 			
 			if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
 			{
-				alert("El saldo deudor no puede ser mayor a la suma asegurada: $" + sinaptic.vm.currentSinister.sumaasegurada);
+				alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada +"]");
 				$("#saldodeudor").focus();
 				closeTaskOk = false;
 				break;
