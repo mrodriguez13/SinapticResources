@@ -37,7 +37,7 @@ var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
     var strufooter = '';
     $.each(settings.listColumns, function (key, value) {
-        if(key < settings.listColumns.length - 1){
+        if(key < (settings.listColumns.length - 1)){
             structure += '<th>' + value + '</th>';
             strufooter += '<th>' + value + '</th>';
         } else {
