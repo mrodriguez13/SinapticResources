@@ -82,6 +82,7 @@ var loadData = function (data, settings) {
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
     setSearch();
+    loadFooterSearchInputs(settings.element);
 };
 
 var loadFooterSearchInputs = function (element) {
@@ -139,7 +140,6 @@ var loadFiltersAndSearch = function (container) {
             "copy", "csv", "excel", "pdf", "print"
         ]
     });
-    loadFooterSearchInputs(container);
 };
 
 var openUrl = function (url) {
