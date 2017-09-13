@@ -82,7 +82,6 @@ var loadData = function (data, settings) {
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
     setSearch();
-    loadFooterSearchInputs(settings.element);
 };
 
 var loadFooterSearchInputs = function (element) {
