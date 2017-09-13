@@ -93,7 +93,7 @@ var loadFooterSearchInputs = function (element) {
     });
 
     // DataTable
-    var table = $(element).DataTable();
+    var table = $('.table').DataTable();;
 
     // Apply the search
     table.columns().every(function () {
@@ -140,7 +140,7 @@ var loadFiltersAndSearch = function (container) {
             "copy", "csv", "excel", "pdf", "print"
         ]
     });
-
+    loadFooterSearchInputs(container);
 };
 
 var openUrl = function (url) {
