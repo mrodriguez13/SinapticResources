@@ -79,13 +79,13 @@ var loadData = function (data, settings) {
 
 var loadFooterSearchInputs = function () {
     // Setup - add a text input to each footer cell
-    $('#example tfoot th').each(function () {
+    $(settings.element +' tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
     });
 
     // DataTable
-    var table = $('#example').DataTable();
+    var table = $(settings.element).DataTable();
 
     // Apply the search
     table.columns().every(function () {
