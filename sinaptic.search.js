@@ -159,10 +159,15 @@ var queryList = function (settings) {
 
 var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
+    var strufooter = '';
     $.each(settings.listColumns, function (key, value) {
         structure += '<th>' + value + '</th>';
+        strufooter += '<th>' + value + '</th>';
     });
-    structure += '</tr></thead><tbody>';
+    structure += '</tr></thead>';
+    structure += '<tfoot><tr>' + strufooter;
+    structure += '</tr></tfoot>';
+    structure += '<tbody>';
 
     var results = data.d.results;
     var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
@@ -196,8 +201,33 @@ var loadData = function (data, settings) {
     structure += '</tbody></table>';
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
+    loadFooterSearchInputs();
     setSearch();
 };
+
+var loadFooterSearchInputs = function () {
+    // Setup - add a text input to each footer cell
+    $('#example tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
+    // DataTable
+    var table = $('#example').DataTable();
+
+    // Apply the search
+    table.columns().every(function () {
+        var that = this;
+
+        $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+                that
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+}
 
 var loadFiltersAndSearch = function (container) {
     $('.table').DataTable({
