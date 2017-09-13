@@ -3,7 +3,7 @@ var sinaptic = sinaptic || {};
 
 sinaptic.sinisterSearch = function (options) {
     var settings = $.extend({
-        element: "#searchContainer",
+        element: "#buscadorContainer",
         listName: "Siniestros",
         listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dni", "Dominio", "Estado"]
     }, options);
