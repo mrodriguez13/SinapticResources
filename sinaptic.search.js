@@ -4,7 +4,7 @@
         var settings = $.extend({
             element: "#buscadorContainer",
             listName: "Siniestros",
-            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado"]
+            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "VencimientoTarea"]
         }, options);
         settings.element = "#" + $(this).attr("id");
         queryList(settings);
@@ -29,12 +29,20 @@ var queryList = function (settings) {
     });
 };
 
+var getSemaphore = function (dueDate) {
+    return dueDate;
+};
+
 var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
     var strufooter = '';
     $.each(settings.listColumns, function (key, value) {
-        structure += '<th>' + value + '</th>';
-        strufooter += '<th>' + value + '</th>';
+        if(key < settings.listColumns.lenght ){
+            structure += '<th>' + value + '</th>';
+            strufooter += '<th>' + value + '</th>';
+        } else {
+            structure += '<th>' + getSemaphore(value) + '</th>';
+        }
     });
     structure += '</tr></thead>';
     structure += '<tfoot><tr>' + strufooter;
@@ -73,8 +81,8 @@ var loadData = function (data, settings) {
     structure += '</tbody></table>';
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
-    loadFooterSearchInputs(settings.element);
     setSearch();
+    loadFooterSearchInputs(settings.element);
 };
 
 var loadFooterSearchInputs = function (element) {
