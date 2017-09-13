@@ -73,19 +73,19 @@ var loadData = function (data, settings) {
     structure += '</tbody></table>';
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
-    loadFooterSearchInputs();
+    loadFooterSearchInputs(settings.element);
     setSearch();
 };
 
-var loadFooterSearchInputs = function () {
+var loadFooterSearchInputs = function (element) {
     // Setup - add a text input to each footer cell
-    $(settings.element +' tfoot th').each(function () {
+    $(element +' tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
     });
 
     // DataTable
-    var table = $(settings.element).DataTable();
+    var table = $(element).DataTable();
 
     // Apply the search
     table.columns().every(function () {
