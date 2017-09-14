@@ -53,11 +53,11 @@ var getStatusCode = function (dueDate) {
     dueDate = dueDate.setHours(0, 0, 0, 0);
     var currDate = new Date();
     currDate = currDate.setHours(0, 0, 0, 0);
-    var tomorrow = currDate.addDay(1);
+    var tomorrow = currDate.setDate(currDate.getDate() + 1);
     if (tomorrow === dueDate) {
         return 2;
     }
-    if (currDate > dueDate) {
+    if (currDate >= dueDate) {
         return 3;
     }
 
