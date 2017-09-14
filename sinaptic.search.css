@@ -19,3 +19,7 @@ tfoot input {
 #listaSiniestros > tfoot > tr > th:nth-child(7) > input[type="text"]{
     display:none;
 }
+
+#listaSiniestros > tbody > tr > td:nth-child(7){
+    text-align: center;
+}

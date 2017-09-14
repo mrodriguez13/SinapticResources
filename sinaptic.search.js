@@ -35,13 +35,13 @@ var getSemaphore = function (dueDate) {
     var ret = "";
     switch (status) {
         case 1:
-            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/green_circle.gif" alt="Vigente" height="16" width="24">';
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/green_circle.gif" alt="Vigente" height="16" width="16">';
             break;
         case 2:
-            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/yellow_circle.png" alt="Próxima a vencer" height="16" width="24">';
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/yellow_circle.png" alt="Próxima a vencer" height="16" width="16">';
             break;
         case 3:
-            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/red_circle.gif" alt="Vencida" height="16" width="24">';
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/red_circle.gif" alt="Vencida" height="16" width="16">';
             break;
 
     }
