@@ -15,3 +15,7 @@ tfoot input {
         padding: 3px;
         box-sizing: border-box;
     }
+
+#listaSiniestros > tfoot > tr > th:nth-child(7) > input[type="text"]{
+    display:none;
+}
