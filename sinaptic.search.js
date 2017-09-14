@@ -4,7 +4,8 @@
         var settings = $.extend({
             element: "#buscadorContainer",
             listName: "Siniestros",
-            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "VencimientoEstado"]
+            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "VencimientoEstado"],
+            listColumnsNames: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "Estado"]
         }, options);
         settings.element = "#" + $(this).attr("id");
         queryList(settings);
@@ -51,9 +52,14 @@ var getStatusCode = function (dueDate) {
     dueDate = dueDate.replace("/Date(", "");
     dueDate = new Date(Number(dueDate.replace(")/", "")));
     dueDate = dueDate.setHours(0, 0, 0, 0);
+
     var currDate = new Date();
     currDate = currDate.setHours(0, 0, 0, 0);
-    var tomorrow = currDate.setDate(currDate.getDate() + 1);
+
+    var tomorrow = new Date();
+    tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow = tomorrow.setHours(0, 0, 0, 0);
+
     if (tomorrow === dueDate) {
         return 2;
     }
@@ -67,8 +73,8 @@ var getStatusCode = function (dueDate) {
 var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
     var strufooter = '';
-    $.each(settings.listColumns, function (key, value) {
-        if(key < (settings.listColumns.length - 1)){
+    $.each(settings.listColumnsNames, function (key, value) {
+        if (key < (settings.listColumnsNames.length - 1)) {
             structure += '<th>' + value + '</th>';
             strufooter += '<th>' + value + '</th>';
         } else {
