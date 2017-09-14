@@ -74,13 +74,8 @@ var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
     var strufooter = '';
     $.each(settings.listColumnsNames, function (key, value) {
-        if (key < (settings.listColumnsNames.length - 1)) {
-            structure += '<th>' + value + '</th>';
-            strufooter += '<th>' + value + '</th>';
-        } else {
-            structure += '<th>' + getSemaphore(value) + '</th>';
-            strufooter += '<th>' + value + '</th>';
-        }
+        structure += '<th>' + value + '</th>';
+        strufooter += '<th>' + value + '</th>';
     });
     structure += '</tr></thead>';
     structure += '<tfoot><tr>' + strufooter;
@@ -104,6 +99,9 @@ var loadData = function (data, settings) {
                             cellValue += " (Cerrado - " + item["MotivoSiniestroCerrado"] + ")";
                         }
                     }
+                    break;
+                case "VencimientoEstado":
+                    cellValue = getSemaphore(item[value]);
                     break;
                 default:
                     if (item[value] !== null) {
