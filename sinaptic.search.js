@@ -5,7 +5,7 @@
             element: "#buscadorContainer",
             listName: "Siniestros",
             listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "VencimientoEstado"],
-            listColumnsNames: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "Estado"]
+            listColumnsNames: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "Vencimiento"]
         }, options);
         settings.element = "#" + $(this).attr("id");
         queryList(settings);
@@ -174,6 +174,7 @@ var loadFiltersAndSearch = function (container) {
             }
         },
         "dom": "Bfrtip",
+        "targets": [6], "searchable": false, "orderable": false, "visible": true,
         "buttons": [
             "copy", "csv", "excel", "pdf", "print"
         ]
