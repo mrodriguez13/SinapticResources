@@ -42,6 +42,7 @@ var loadData = function (data, settings) {
             strufooter += '<th>' + value + '</th>';
         } else {
             structure += '<th>' + getSemaphore(value) + '</th>';
+            strufooter += '<th>' + value + '</th>';
         }
     });
     structure += '</tr></thead>';
