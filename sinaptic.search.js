@@ -58,7 +58,7 @@ var getStatusCode = function (dueDate) {
 
     var tomorrow = new Date();
     tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow = tomorrow.setHours(0, 0, 0, 0);
+    tomorrow = new Date(tomorrow).setHours(0, 0, 0, 0);
 
     if (tomorrow === dueDate) {
         return 2;
