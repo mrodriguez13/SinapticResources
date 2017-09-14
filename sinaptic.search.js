@@ -30,8 +30,39 @@ var queryList = function (settings) {
 };
 
 var getSemaphore = function (dueDate) {
-    return dueDate;
+    var status = getStatusCode(dueDate);
+    var ret = "";
+    switch (status) {
+        case 1:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/green_circle.jpg" alt="Vigente" height="24" width="24">';
+            break;
+        case 2:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/yellow_circle.jpg" alt="Próxima a vencer" height="24" width="24">';
+            break;
+        case 3:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/red_circle.jpg" alt="Vencida" height="24" width="24">';
+            break;
+
+    }
+    return ret;
 };
+
+var getStatusCode = function (dueDate) {
+    dueDate = dueDate.replace("/Date(", "");
+    dueDate = new Date(Number(dueDate.replace(")/", "")));
+    dueDate = dueDate.setHours(0, 0, 0, 0);
+    var currDate = new Date();
+    currDate = currDate.setHours(0, 0, 0, 0);
+    var tomorrow = currDate.addDay(1);
+    if (tomorrow === dueDate) {
+        return 2;
+    }
+    if (currDate > dueDate) {
+        return 3;
+    }
+
+    return 1;
+}
 
 var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
