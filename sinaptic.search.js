@@ -101,7 +101,9 @@ var loadData = function (data, settings) {
                     }
                     break;
                 case "VencimientoEstado":
-                    cellValue = getSemaphore(item[value]);
+                    if (item[value] !== null) {
+                        cellValue = getSemaphore(item[value]);
+                    }
                     break;
                 default:
                     if (item[value] !== null) {
