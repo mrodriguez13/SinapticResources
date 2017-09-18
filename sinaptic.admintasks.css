@@ -1,0 +1,25 @@
+﻿tr.odd {
+    background-color: #e8e8e8 !important;
+}
+
+#listaSiniestros > tbody > tr:hover {
+    background-color: #bee0ed !important;
+}
+
+.table{
+    cursor: pointer;
+}
+
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+#listaSiniestros > tfoot > tr > th:nth-child(7) > input[type="text"]{
+    display:none;
+}
+
+#listaSiniestros > tbody > tr > td:nth-child(7){
+    text-align: center;
+}
