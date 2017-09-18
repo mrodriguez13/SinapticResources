@@ -2252,7 +2252,7 @@ sinaptic.adminTasks = (function () {
         modal += '<p>Se van a eliminar todos los registros relacionados con el siniestro ¿confirma la acción?</p>';
         modal += '</div>';
         modal += '<div class="modal-footer">';
-        modal += '<button type="button" class="btn btn-Error" data-dismiss="modal" onclick="deleteCurrentSinisterHistory();">Aceptar</button>';
+        modal += '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sinaptic.adminTasks.deleteCurrentSinisterHistory();">Aceptar</button>';
         modal += '<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>';
         modal += '</div>';
         modal += '</div >';
@@ -2389,6 +2389,7 @@ sinaptic.adminTasks = (function () {
         enterPressed: enterPressed,
         updateCurrentSinister: updateCurrentSinister,
         fullUpdate: fullUpdate,
-        modalAskDelete: modalAskDelete
+        modalAskDelete: modalAskDelete,
+        deleteCurrentSinisterHistory: deleteCurrentSinisterHistory
     }
 })(jQuery);
