@@ -197,7 +197,9 @@ sinaptic.adminTasks = (function () {
                 tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><button type='button' onclick='sinaptic.adminTasks.modalAskDelete();'>Eliminar Siniestro</button><div class='button' data-oldTask='" + estado + "'></div></div>";
+                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><button type='button' onclick='sinaptic.adminTasks.modalAskDelete();'>Eliminar Siniestro</button>< button id= '" + idSiniestro + "' class='update' type= 'button' data- newTask='" + $("div.status option:selected").text() + "' > Aplicar Cambios</button > <button id='" + idSiniestro + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
+                
+                
 
               
                      
@@ -2205,7 +2207,8 @@ sinaptic.adminTasks = (function () {
         });
         $(".order>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
-            var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
+            var applyButton =
+            
             var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
 
