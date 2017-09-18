@@ -2314,10 +2314,11 @@ sinaptic.adminTasks = (function () {
         $.ajax({
 
             url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
-            type: "DELETE",
+            type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-Http-Method": "DELETE",
                 "IF-MATCH": "*"
             },
             success: function (data) {
@@ -2341,10 +2342,11 @@ sinaptic.adminTasks = (function () {
         $.ajax({
 
             url: currentPage + "/_vti_bin/listdata.svc/Legajos?$filter=Nombre eq '" + sinisterId + "'",
-            type: "DELETE",
+            type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-Http-Method": "DELETE",
                 "IF-MATCH": "*"
             },
             success: function (data) {
@@ -2365,10 +2367,11 @@ sinaptic.adminTasks = (function () {
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + sinisterId,
-            type: "DELETE",
+            type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-Http-Method": "DELETE",
                 "IF-MATCH": "*"
             },
             success: function (data) {
