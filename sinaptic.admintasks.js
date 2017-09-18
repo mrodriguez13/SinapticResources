@@ -2318,8 +2318,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                "X-Http-Method": "DELETE",
-                "IF-MATCH": "*"
+                "X-Http-Method": "DELETE"
             },
             success: function (data) {
                 console.log("Historial del siniestro eliminado.");
@@ -2346,8 +2345,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                "X-Http-Method": "DELETE",
-                "IF-MATCH": "*"
+                "X-Http-Method": "DELETE"
             },
             success: function (data) {
                 console.log("Adjuntos del siniestro eliminados.");
@@ -2371,8 +2369,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                "X-Http-Method": "DELETE",
-                "IF-MATCH": "*"
+                "X-Http-Method": "DELETE"
             },
             success: function (data) {
                 console.log("Siniestro eliminado.");
