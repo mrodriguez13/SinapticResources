@@ -1,37 +1,39 @@
-ï»¿
+"use strict";
+var sinaptic = sinaptic || {};
 
-var adminTasks = (function () {
+
+sinaptic.adminTasks = (function () {
     var context;
     var web;
 
-        var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
+    var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
     var listSiniestros = "Siniestros";
     var listEstados = "Estados";
     var templateListTasks = "";
-    var listFields = "ID,Siniestro,Estado,Tomador,Carrier,Tipo,TÃ­tulo";
+    var listFields = "ID,Siniestro,Estado,Tomador,Carrier,Tipo,Título";
     var allStatus = [{ statusId: 21, status: "A - Asignacion de responsable", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId : 22,status: "B - Procesar formularios y certificado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :23, status: "C - Certificar formulario de baja", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :24, status: "D - Obtener Conformidad Documentacion CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :25, status: "F - Informar Saldo Deudor a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId :26, status: "G - Informar Saldo Deudor a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId :27, status: "H - Informar Rendicion a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId :28, status: "I - Acreditar Fondos a Cuenta Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId :29, status: "J - Aplicar Fondos al Plan de Ahorros", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId :30, status: "K - Liberar Prenda Cancelada", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :31, status: "L - Enviar Prenda a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :32, status: "M - Siniestro Cerrado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId :33, status: "N - Autorizar Reposicion", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :34, status: "O - Solicitar Factura a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :35, status: "P - Remitir Factura a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :36, status: "Q - Enviar Formularios por Reposicion a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :37, status: "R - Remitir Formularios por Reposicion a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :38, status: "S - Remitir Nueva Prenda a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :39, status: "T - Verificar Nueva Prenda", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :40, status: "U - Enviar Prenda Rechazada a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId :41, status: "V - Remitir Prenda Corregida a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 22, status: "B - Procesar formularios y certificado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 23, status: "C - Certificar formulario de baja", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 24, status: "D - Obtener Conformidad Documentacion Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 25, status: "F - Informar Saldo Deudor a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 26, status: "G - Informar Saldo Deudor a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 27, status: "H - Informar Rendicion a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 28, status: "I - Acreditar Fondos a Cuenta Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 29, status: "J - Aplicar Fondos al Plan de Ahorros", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 30, status: "K - Liberar Prenda Cancelada", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 31, status: "L - Enviar Prenda a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 32, status: "M - Siniestro Cerrado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 33, status: "N - Autorizar Reposicion", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 34, status: "O - Solicitar Factura a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 35, status: "P - Remitir Factura a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 36, status: "Q - Enviar Formularios por Reposicion a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 37, status: "R - Remitir Formularios por Reposicion a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 38, status: "S - Remitir Nueva Prenda a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 39, status: "T - Verificar Nueva Prenda", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 40, status: "U - Enviar Prenda Rechazada a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 41, status: "V - Remitir Prenda Corregida a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 42, tatus: "E - Solicitar Documentacion al Cliente", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' }];
-    var allClosedCategories = ["Cerrado - No Configura DestrucciÃ³n Total", "Cerrado - Plan de Ahorro Cancelado", "Cerrado - Prescripto", "Cerrado - Rechazado", "Cerrado - Titular Fallecido", "Cerrado - VehÃ­culo Aparecido"];
+    var allClosedCategories = ["Cerrado - No Configura Destrucción Total", "Cerrado - Plan de Ahorro Cancelado", "Cerrado - Prescripto", "Cerrado - Rechazado", "Cerrado - Titular Fallecido", "Cerrado - Vehículo Aparecido"];
     var listSiniestrosURL = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/T%C3%ADtulo ne 'M - Siniestro Cerrado')";// and (SiniestroCancelado ne true)"//$select='" + listFields + "'";
     var Task = "";
     var getAllStatus = function () {
@@ -40,7 +42,7 @@ var adminTasks = (function () {
     var usrAssigned;
     var idVencRelated;
     var oldTaskIDRelated = 0;
-    var newTaskID="";
+    var newTaskID = "";
     var newTaskListName = "";
     var idCurrentSinisterInProccess = 0;
     var newCurrentStatusNameInProccess = "";
@@ -48,8 +50,8 @@ var adminTasks = (function () {
     var openTasks = [];
     var sinistersObjs = [];
 
-    var groupNew="";
-    var orderNew="";
+    var groupNew = "";
+    var orderNew = "";
     var historyID = "";
 
     var SinisterObject = {
@@ -58,7 +60,7 @@ var adminTasks = (function () {
         idSin: "",
         group: "",
         order: "",
-        responsable:""
+        responsable: ""
 
     }
     var destinatariosAlerta1Restore = "";
@@ -69,21 +71,21 @@ var adminTasks = (function () {
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
             success: retrieveAllStatus,
-            complete:getAllClosedStatusFromList,
+            complete: getAllClosedStatusFromList,
         });
     };
     var retrieveAllStatus = function (data) {
         var resData = data.d.results;
-        $(resData).each(function (i,item) {
-            allStatus[i].status = item.TÃ­tulo;
-            allStatus[i].gen = item["TareaGenÃ©rica"];
+        $(resData).each(function (i, item) {
+            allStatus[i].status = item.Título;
+            allStatus[i].gen = item["TareaGenérica"];
             allStatus[i].venc1 = calculateVencDate(item["Alerta1"]);
             allStatus[i].venc2 = calculateVencDate(item["Alerta2"]);
             allStatus[i].days1 = Number(item["Alerta1"]);
             allStatus[i].days2 = Number(item["Alerta2"]);
             var groupName = item["Grupo"];
             if (groupName != null) {
-                groupName = groupName.TÃ­tulo;
+                groupName = groupName.Título;
             } else {
                 groupName = "";
             }
@@ -111,7 +113,7 @@ var adminTasks = (function () {
     var retrieveAllClosedStatus = function (data) {
         var resData = data.d.results;
         $(resData).each(function (i, item) {
-            allClosedCategories[i] = item.TÃ­tulo;
+            allClosedCategories[i] = item.Título;
         });
     };
     var init = function () {
@@ -123,27 +125,25 @@ var adminTasks = (function () {
         //    getExactlySiniestro();
         //}
     }
-    var GetURLParameter = function(sParam){
+    var GetURLParameter = function (sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
-        for (var i = 0; i < sURLVariables.length; i++)
-        {
+        for (var i = 0; i < sURLVariables.length; i++) {
             var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam)
-            {
+            if (sParameterName[0] == sParam) {
                 return sParameterName[1];
             }
         }
     }
     var getExactlySiniestro = function () {
-        var groupURL=GetURLParameter('gp');
-        var orderURL=GetURLParameter('or');
+        var groupURL = GetURLParameter('gp');
+        var orderURL = GetURLParameter('or');
         var titleURL = decodeURI(GetURLParameter('title'));
-        titleURL = titleURL.replace("Ã¡", "a")
-        titleURL = titleURL.replace("Ã©", "e")
-        titleURL = titleURL.replace("Ã­", "i")
-        titleURL = titleURL.replace("Ã³", "o")
-        titleURL = titleURL.replace("Ãº", "u")
+        titleURL = titleURL.replace("á", "a")
+        titleURL = titleURL.replace("é", "e")
+        titleURL = titleURL.replace("í", "i")
+        titleURL = titleURL.replace("ó", "o")
+        titleURL = titleURL.replace("ú", "u")
         if (titleURL == "Asignacion de Responsable") {
             titleURL = "Asignacion de responsable";
         }
@@ -174,35 +174,35 @@ var adminTasks = (function () {
         var tasksStructure = "<div class='itemTask header'><div class='title'>Siniestro</div><div class='idSinister'>ID Siniestro</div><div class='status'>Estado</div><div class='group'>Grupo</div><div class='order'>Orden</div><div class='button'></div></div>";
         var headerContainer = "<div class='titleContainer'><h2>Panel de Control de Siniestros Abiertos</h2>" +
             "<div class='searchContainer'>" +
-  		"<input type='text' class='searchBox' placeholder='Escriba su BÃºsqueda...' onkeypress='return adminTasks.enterPressed(event)'><div class='searchButton'>" +
+  		"<input type='text' class='searchBox' placeholder='Escriba su Búsqueda...' onkeypress='return adminTasks.enterPressed(event)'><div class='searchButton'>" +
 	"<img src='https://access.willis.com/site/ExpertiseBrokersArgentina/PublishingImages/search-3-xxl.png'>" +
 "</div>" +
-  "</div>"+
+  "</div>" +
             "<div id='SinisterContainer'>" +
             "</div>";
         $("#Sinisters").html(headerContainer);
         $(resData).each(function (i, item) {
             sinistersObjs.push(item);
-            var asignado ="";
+            var asignado = "";
             if (item.AsignadoA != null) {
-                asignado = item.AsignadoA.TÃ­tulo;
+                asignado = item.AsignadoA.Título;
             }
-            var estado = item.Estado.TÃ­tulo;
+            var estado = item.Estado.Título;
             var siniestro = item.Siniestro;
             var grupo = item.Grupo;
             var orden = item.Orden;
             var idSiniestro = item.Identificador;
             if (item["SiniestroCancelado"]) {
-                tasksStructure += "<div class='itemTask canceled' data-idHistory='"+item.IdHistorial+"'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
+                tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
                 tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'></div></div>";
             }
-            
+
             //<div class='asigned'>"+asignado+"</div>
-            
+
         });
-        
+
         $("#SinisterContainer").html(tasksStructure);
         changeState();
         updateButton();
@@ -212,9 +212,9 @@ var adminTasks = (function () {
         restoreSinisterClick()
         $(".canceled select").prop("disabled", true);
         $(".canceled input").prop("disabled", true);
-        
+
     }
-    var enterPressed=function(e) {
+    var enterPressed = function (e) {
         if (e.keyCode == 13) {
             seachOpenSinister();
             return false;
@@ -222,14 +222,14 @@ var adminTasks = (function () {
     }
     var seachOpenSinister = function () {
         var filter = $("input.searchBox").val();
-        $(".itemTask:not('.header')").css("display","none");
+        $(".itemTask:not('.header')").css("display", "none");
         $(".itemTask:contains('" + filter.toUpperCase() + "'):not('.header')").css("display", "block");
-        $(".itemTask input").each(function (i,item) {
-            if ($(item).val().indexOf(filter)>=0) {
+        $(".itemTask input").each(function (i, item) {
+            if ($(item).val().indexOf(filter) >= 0) {
                 $(item).parent().parent().css("display", "block");
             }
         })
-        //var listSiniestrosURLSearch = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$select=*,Siniestro&$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/TÃ­tulo ne 'M - Siniestro Cerrado') and (Siniestro eq '" + filter + "')";
+        //var listSiniestrosURLSearch = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$select=*,Siniestro&$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/Título ne 'M - Siniestro Cerrado') and (Siniestro eq '" + filter + "')";
         //$.ajax({
         //    url: listSiniestrosURLSearch,
         //    async: true,
@@ -246,21 +246,21 @@ var adminTasks = (function () {
             //var newStatus = $(this).attr("data-newTask");
             var group = $(this).parent().parent().find(".group").attr("data-group");
             var order = $(this).parent().parent().find(".order").attr("data-order");
-            var venc1= getVencByStatus(oldStatus, "venc1");
+            var venc1 = getVencByStatus(oldStatus, "venc1");
             var venc2 = getVencByStatus(oldStatus, "venc2");
             if (confirm("Esta seguro que quiere restaurar un Siniestro Cancelado?") == true) {
                 historyID = $(this).parent().parent().attr("data-idHistory");
-                recoverOldTask(sin,idSin,oldStatus,"",oldStatus,"",group,order,venc1,venc2,"");
-            } 
+                recoverOldTask(sin, idSin, oldStatus, "", oldStatus, "", group, order, venc1, venc2, "");
+            }
             //updateSinisterRestore(sin, idSin, oldStatus, "", oldStatus, "", group, order, venc1, venc2);
 
 
         });
     }
-    var updateSinisterRestore = function (sin,idSin,oldStatus,listTareasURL,oldStatus,statusLetter,group,order,venc1,venc2) {
+    var updateSinisterRestore = function (sin, idSin, oldStatus, listTareasURL, oldStatus, statusLetter, group, order, venc1, venc2) {
         var siteURL = $(location).attr('href');
         context = new SP.ClientContext.get_current();
-        web = context.get_web(); 
+        web = context.get_web();
         SP.ClientContext.prototype.executeQuery = function () {
             var deferred = $.Deferred();
             this.executeQueryAsync(
@@ -336,7 +336,7 @@ var adminTasks = (function () {
             console.log(fArgs[1].get_message());
         })
     }
-    var getUserDetails = function (venc1, venc2, newStatus,userID) {
+    var getUserDetails = function (venc1, venc2, newStatus, userID) {
         var web = context.get_web();
         var userInfoList = web.get_siteUserInfoList();
         var camlQuery = new SP.CamlQuery();
@@ -375,7 +375,7 @@ var adminTasks = (function () {
         var camlQuery = new SP.CamlQuery();
         camlQuery.set_viewXml('<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>1</Value></Geq></Where></Query><RowLimit>100</RowLimit></View>');
         this.collListItem = mList.getItems(camlQuery);
-        
+
         context.load(collListItem);
         var promiseList = context.executeQuery();
         promiseList.done(function () {
@@ -421,7 +421,7 @@ var adminTasks = (function () {
                     });
                 }
             })();
-           
+
         }
     }
 
@@ -500,7 +500,7 @@ var adminTasks = (function () {
 
                 }
             })();
-            
+
         }
     }
     var restoreInGenericList = function (sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
@@ -534,11 +534,11 @@ var adminTasks = (function () {
 
                 }
             })();
-            
+
         }
     }
 
-    var createTaskInHistoryFromRestore = function (sin, idSin, newStatus, taskID, group,order,venc1,venc2) {
+    var createTaskInHistoryFromRestore = function (sin, idSin, newStatus, taskID, group, order, venc1, venc2) {
         var oList = context.get_web().get_lists().getByTitle("Historial");
 
         var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -669,31 +669,31 @@ var adminTasks = (function () {
 
     var buildData = function () {
     }
-    var getStatusItem = function (id,obj,idSin) {
+    var getStatusItem = function (id, obj, idSin) {
         var listEstadosURL = host + "/_vti_bin/listdata.svc/Estados(" + id + ")";
         $.ajax({
             url: listEstadosURL,
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
             success: function (data) {
-                finalStepUpdateSinister(data.d,obj,idSin);
+                finalStepUpdateSinister(data.d, obj, idSin);
             },
         });
     }
     var updateButton = function () {
         $('body').on('click', '.update', function () {
-        //$(".update").click(function () {
+            //$(".update").click(function () {
             var sin = $(this).parent().parent().find(".title").attr("data-sinister");
             var idSin = $(this).parent().parent().find(".idSinister").text();
             var oldStatus = $(this).parent().attr("data-oldTask");
             var newStatus = $(this).attr("data-newTask");
             var group = $(this).parent().parent().find(".group").attr("data-group");
-             groupNew = $(this).parent().parent().find(".group").find(".groupInbox").val();
+            groupNew = $(this).parent().parent().find(".group").find(".groupInbox").val();
             var order = $(this).parent().parent().find(".order").attr("data-order");
-             orderNew = $(this).parent().parent().find(".order").find(".orderInbox").val();
+            orderNew = $(this).parent().parent().find(".order").find(".orderInbox").val();
             var venc1 = "";
             var venc2 = "";
-            var statusLetter="";
+            var statusLetter = "";
             var statusList = "";
             historyID = $(this).parent().parent().attr("data-idHistory");
             listTareasURL = "";
@@ -735,7 +735,7 @@ var adminTasks = (function () {
 
                     });
             } else {
-                updateOrderAndGroupInTask(sin,oldStatus, idSin, groupNew, orderNew);
+                updateOrderAndGroupInTask(sin, oldStatus, idSin, groupNew, orderNew);
             }
         })
     };
@@ -807,7 +807,7 @@ var adminTasks = (function () {
                     });
 
                 }
-            })();            
+            })();
         }
     }
     var updateInList = function (sin, idSin, oldStatus, group, order) {
@@ -836,7 +836,7 @@ var adminTasks = (function () {
                     });
 
                 }
-            })();            
+            })();
         }
     }
     var updateSinisterOrderAndGroup = function (sin, idSin, oldStatus, group, order) {
@@ -874,26 +874,26 @@ var adminTasks = (function () {
         while (listItemEnumerator.moveNext()) {
             (function () {
                 var curritem = listItemEnumerator.get_current();
-            if (curritem.get_id() == id) {
-                curritem.set_item("Grupo", groupNew);
-                curritem.set_item("Orden", orderNew);
-                curritem.update();
-                //alert("updated!!!");
-                var promise = context.executeQuery();
-                promise.done(function () {
-                    console.log("done!!!");
-                });
-                promise.then(function (sArgs) {
-                    console.log("group and order updated!!");
-                    setDataReadyToStartOver()
-                }, function (fArgs) {
-                    console.log("error");
-                    console.log(fArgs[1].get_message());
-                });
+                if (curritem.get_id() == id) {
+                    curritem.set_item("Grupo", groupNew);
+                    curritem.set_item("Orden", orderNew);
+                    curritem.update();
+                    //alert("updated!!!");
+                    var promise = context.executeQuery();
+                    promise.done(function () {
+                        console.log("done!!!");
+                    });
+                    promise.then(function (sArgs) {
+                        console.log("group and order updated!!");
+                        setDataReadyToStartOver()
+                    }, function (fArgs) {
+                        console.log("error");
+                        console.log(fArgs[1].get_message());
+                    });
 
-            }
+                }
             })();
-            
+
         }
     }
     //var retrieveAllUsersAllGroups=function() {
@@ -913,7 +913,7 @@ var adminTasks = (function () {
 
     //    }, function (fArgs) {
     //       console.log("error");
-            
+
     //        var failmessage = fArgs[1].get_message();
     //    });
     //    return promiseGetGroups;
@@ -955,7 +955,7 @@ var adminTasks = (function () {
         };
 
 
-       
+
 
         var listName = getListNameFromStatusToUpdate(oldStatus, oldStatus[0]);
         var mList = context.get_web().get_lists().getByTitle(listName);
@@ -967,8 +967,8 @@ var adminTasks = (function () {
         context.load(collListItem);
         var promiseList = context.executeQuery();
         promiseList.done(function () {
-            
-           console.log("done!!!");
+
+            console.log("done!!!");
         });
         promiseList.then(function (sArgs) {
             //var vencID = oListItem.get_id();
@@ -979,11 +979,11 @@ var adminTasks = (function () {
                 checkInList(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
             }
             //retrieveAllUsersAllGroups();
-           console.log("ListAcceded!!")
+            console.log("ListAcceded!!")
             //sArgs[0] == success callback sender
             //sArgs[1] == success callback args
         }, function (fArgs) {
-           console.log("error");
+            console.log("error");
             //fArgs[0] == fail callback sender
             //fArgs[1] == fail callback args.
             //in JSOM the callback args aren't used much - 
@@ -992,13 +992,13 @@ var adminTasks = (function () {
             console.log(fArgs[1].get_message());
         });
         return promiseList;
-        
+
     }
     var checkInGenericList = function (sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
         var listItemEnumerator = collListItem.getEnumerator();
         var idTaskToClose = 0;
         while (listItemEnumerator.moveNext()) {
-            (function(){
+            (function () {
                 var curritem = listItemEnumerator.get_current();
                 if ((curritem.get_item("ID_x0020_Siniestro") == idSin) && (curritem.get_item("Estado_x0020_Siniestro").get_lookupValue() == oldStatus)) {
                     curritem.set_item("Status", "Completada");
@@ -1032,13 +1032,13 @@ var adminTasks = (function () {
                     });
 
                 }
-            })();            
+            })();
         }
     }
     var checkInList = function (sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
         var listItemEnumerator = collListItem.getEnumerator();
         var idTaskToClose = 0;
-        var continueWhile=true;
+        var continueWhile = true;
         while (listItemEnumerator.moveNext()) {
             if (continueWhile == true) {
                 (function () {
@@ -1067,7 +1067,7 @@ var adminTasks = (function () {
                             if (oldStatus != "A - Asignacion de responsable") {
                                 usrAssigned = curritem.get_item("AssignedTo");
                             }
-                            
+
                             curritem.update();
                             //alert("updated!!!");
                             var promise = context.executeQuery();
@@ -1109,11 +1109,11 @@ var adminTasks = (function () {
     }
     var getDestSecondAlert = function (venc1, venc2, estado) {
         var group = getGroupFromStatus(estado);
-        
+
         if (SinisterRecovering == true) {
             var isGen = isStatusGeneric(estado);
 
-            
+
             if (isGen == true) {
                 if (group == "Operadores Willis") {
                     destinatariosAlerta1Restore = SinisterObject.responsable;
@@ -1124,7 +1124,7 @@ var adminTasks = (function () {
                 destinatariosAlerta1Restore = SinisterObject.responsable;
                 group = "Team Leaders";
             }
-        }else if (group == "Operadores Willis") {
+        } else if (group == "Operadores Willis") {
             destinatariosAlerta1Restore = SinisterObject.responsable;
             group = "Team Leaders";
         }
@@ -1132,7 +1132,7 @@ var adminTasks = (function () {
         //this.lstObjectItem = lstObject.getItemById(group);
         //var destinatarios = lstObjectItem.get_item("Externos");
         //return destinatarios;
-        
+
         context.load(lstObject);
 
         var camlQuery = new SP.CamlQuery();
@@ -1142,23 +1142,23 @@ var adminTasks = (function () {
         var promiseList = context.executeQuery();
         promiseList.done(function () {
 
-           console.log("done!!!");
+            console.log("done!!!");
         });
         promiseList.then(function (sArgs) {
-            retrieveSecondDest(venc1, venc2,group, estado);
-           console.log("List Dest Second Acceded!!")
-            
+            retrieveSecondDest(venc1, venc2, group, estado);
+            console.log("List Dest Second Acceded!!")
+
         }, function (fArgs) {
-           console.log("error");
-            
+            console.log("error");
+
             console.log(fArgs[1].get_message());
         });
         return promiseList;
 
     }
-    var retrieveSecondDest = function (venc1, venc2,group, estado) {
+    var retrieveSecondDest = function (venc1, venc2, group, estado) {
         var listItemEnumerator = collListItem.getEnumerator();
-        var destinatarios=""
+        var destinatarios = ""
         while (listItemEnumerator.moveNext()) {
 
             var curritem = listItemEnumerator.get_current();
@@ -1166,11 +1166,11 @@ var adminTasks = (function () {
             //alert(curritem.get_id());
             if (curritem.get_item("Title") == group) {
                 destinatarios = curritem.get_item("Externos");
-               // break;
+                // break;
             }
             if (SinisterRecovering == true) {
                 var isGen = isStatusGeneric(estado);
-                if ((destinatariosAlerta1Restore == "")&&(isGen == true)) {
+                if ((destinatariosAlerta1Restore == "") && (isGen == true)) {
                     if (curritem.get_item("Title") == "Operadores POSA") {
                         destinatariosAlerta1Restore = curritem.get_item("Externos");
                     }
@@ -1191,18 +1191,18 @@ var adminTasks = (function () {
         });
         return itemToReturn;
     }
-    var createNewVenc = function (venc1, venc2, estado,destinatarios) {
+    var createNewVenc = function (venc1, venc2, estado, destinatarios) {
         var destAlert2 = destinatarios;//getDestSecondAlert(estado);
         var status = estado.split(" - ");
         status = status[1];
         var itemStatus = getItemFromObj(estado);
         var days1 = itemStatus.days1;
         var days2 = itemStatus.days2;
-        
-        return createVenc(days1, days2, status,destAlert2, itemStatus);
+
+        return createVenc(days1, days2, status, destAlert2, itemStatus);
     }
     var getTareasAListJSOM = function () {
-        
+
         var listName = "TareasA";
         var mList = context.get_web().get_lists().getByTitle(listName);
         context.load(mList);
@@ -1285,7 +1285,7 @@ var adminTasks = (function () {
             console.log(fArgs[1].get_message());
         })
     }
-    var createVenc = function (days1, days2, status, dest2,item) {
+    var createVenc = function (days1, days2, status, dest2, item) {
 
         var oList = context.get_web().get_lists().getByTitle("VencimientoTareas");
 
@@ -1310,23 +1310,23 @@ var adminTasks = (function () {
         oListItem.set_item('Title', newTaskID);
         oListItem.set_item('Destinatarios_x0020_Alerta_x00200', dest2);
         oListItem.set_item('Estado', status);
-       
+
 
         //oListItem.set_item('IdVencimiento', 'Hello World!'); /// HACE FALTA CREAR NUEVO REGISTRO DE VENC ANTES
 
         oListItem.update();
         var promiseVenc = context.executeQuery();
         promiseVenc.done(function () {
-           console.log("creating Venc!!!");
+            console.log("creating Venc!!!");
         });
         promiseVenc.then(function (sArgs) {
             var vencID = oListItem.get_id();
             updateNewTaskCreated(vencID);
-           console.log("venc Added!!")
+            console.log("venc Added!!")
             //sArgs[0] == success callback sender
             //sArgs[1] == success callback args
         }, function (fArgs) {
-           console.log("error");
+            console.log("error");
             //fArgs[0] == fail callback sender
             //fArgs[1] == fail callback args.
             //in JSOM the callback args aren't used much - 
@@ -1334,7 +1334,7 @@ var adminTasks = (function () {
             //on the fail callback
             console.log(fArgs[1].get_message());
         });
-        return promiseVenc;     
+        return promiseVenc;
 
     }
     var updateNewTaskCreated = function (vencID) {
@@ -1344,14 +1344,14 @@ var adminTasks = (function () {
         var itemCreateInfo = new SP.ListItemCreationInformation();
 
         this.lstObjectItem = oList.getItemById(newTaskID);
-        
+
         lstObjectItem.set_item("IdVencimiento", vencID);
         //var idSinister = lstObjectItem.get_item('ID_x0020_Siniestro');
         //var itemTitle = lstObjectItem.get_item('Title');
         lstObjectItem.update();
         var promiseVenc = context.executeQuery();
         promiseVenc.done(function () {
-           console.log("done!!!");
+            console.log("done!!!");
         });
         promiseVenc.then(function (sArgs) {
             //var vencID = oListItem.get_id();
@@ -1364,32 +1364,32 @@ var adminTasks = (function () {
                 updateIDHistorialSinester();
             }
         }, function (fArgs) {
-           console.log("error");
+            console.log("error");
             console.log(fArgs[1].get_message());
         });
     }
     var updateIDHistorialSinester = function (sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
-            var siteURL = $(location).attr('href');
-            var mListName = "Siniestros";
-            var mList = web.get_lists().getByTitle(String(mListName));
-            context.load(mList);
+        var siteURL = $(location).attr('href');
+        var mListName = "Siniestros";
+        var mList = web.get_lists().getByTitle(String(mListName));
+        context.load(mList);
 
-            var camlQuery = new SP.CamlQuery();
-            camlQuery.set_viewXml('<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>1</Value></Geq></Where></Query><RowLimit>100</RowLimit></View>');
-            this.collListItem = mList.getItems(camlQuery);
-            context.load(collListItem);
-            var promiseList = context.executeQuery();
-            promiseList.done(function () {
-                console.log("done!!!");
-            });
-            promiseList.then(function (sArgs) {
-                updateIDHistoryInSinister(sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
-                console.log("ListAcceded!!")
-            }, function (fArgs) {
-                console.log("error");
-                console.log(fArgs[1].get_message());
-            });
-            return promiseList;
+        var camlQuery = new SP.CamlQuery();
+        camlQuery.set_viewXml('<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>1</Value></Geq></Where></Query><RowLimit>100</RowLimit></View>');
+        this.collListItem = mList.getItems(camlQuery);
+        context.load(collListItem);
+        var promiseList = context.executeQuery();
+        promiseList.done(function () {
+            console.log("done!!!");
+        });
+        promiseList.then(function (sArgs) {
+            updateIDHistoryInSinister(sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
+            console.log("ListAcceded!!")
+        }, function (fArgs) {
+            console.log("error");
+            console.log(fArgs[1].get_message());
+        });
+        return promiseList;
     }
     var updateIDHistoryInSinister = function (sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
 
@@ -1423,44 +1423,44 @@ var adminTasks = (function () {
         this.lstObjectItem = lstObject.getItemById(idVencRelated);
         lstObjectItem.deleteObject();
         var promiseVenc = context.executeQuery();
-        
+
         promiseVenc.done(function () {
-           console.log("done!!!");
+            console.log("done!!!");
         });
         promiseVenc.then(function (sArgs) {
             console.log("venc deleted!!");
             //if (newStatus.indexOf("Cerrado - ") != 0) {
-                if (newStatus != "M - Siniestro Cerrado") {
-                    generateNewTaskInSpecificList(sin, id, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);
-                } else {
-                    console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
-                    location.reload();
-                }
+            if (newStatus != "M - Siniestro Cerrado") {
+                generateNewTaskInSpecificList(sin, id, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);
+            } else {
+                console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
+                location.reload();
+            }
             //}
-            
+
             //sArgs[0] == success callback sender
             //sArgs[1] == success callback args
         }, function (fArgs) {
-           console.log("error");
+            console.log("error");
             //fArgs[0] == fail callback sender
             //fArgs[1] == fail callback args.
             //in JSOM the callback args aren't used much - 
             //the only useful one is probably the get_message() 
             //on the fail callback
-           console.log(fArgs[1].get_message());
-           if (newStatus != "M - Siniestro Cerrado") {
-               generateNewTaskInSpecificList(sin, id, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);
-           } else {
-               console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
-               location.reload();
-           }
+            console.log(fArgs[1].get_message());
+            if (newStatus != "M - Siniestro Cerrado") {
+                generateNewTaskInSpecificList(sin, id, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);
+            } else {
+                console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
+                location.reload();
+            }
 
         });
         return promiseVenc;
     }
     //var getUserID = function (status,idSin) {
     //    var list = getListNameFromStatus(status, status[0]);
-    //    var listTaskURL= host + "/_vti_bin/listdata.svc/" + list + "?$select=Alerta1,Alerta2,TÃ­tulo,TareaGenÃ©rica"
+    //    var listTaskURL= host + "/_vti_bin/listdata.svc/" + list + "?$select=Alerta1,Alerta2,Título,TareaGenérica"
     //    $.ajax({
     //        url: listEstadosURL,
     //        async: true,
@@ -1472,7 +1472,7 @@ var adminTasks = (function () {
 
 
     //}
-    var generateNewTaskInSpecificList = function (sin, idSin,oldStatus, newStatus, statusLetter, group, order, venc1, venc2) {
+    var generateNewTaskInSpecificList = function (sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2) {
         //var statusIDIndex=getStatusValue(newStatus);
         var listTaskName = "";
         if (newStatus.indexOf("Cerrado - ") != 0) {
@@ -1491,96 +1491,96 @@ var adminTasks = (function () {
             titleTask = oldStatus.split(" - ");
             titleTask = titleTask[1];
         }
-          
-            var oList = context.get_web().get_lists().getByTitle(listTaskName);
-        
-            var itemCreateInfo = new SP.ListItemCreationInformation();
-            this.oListItem = oList.addItem(itemCreateInfo);
-            if (newStatus.indexOf("Cerrado - ") != 0) {
-                if (listTaskName.search("Generica") >= 0) {
-                    oListItem.set_item('Title', oldTaskIDRelated);
-                    oListItem.set_item('StartDate', new Date());
-                    oListItem.set_item('Status', 'No iniciada');
-                    //oListItem.set_item('Identificador', 'Hello World!');
-                    oListItem.set_item('ID_x0020_Siniestro', idSin);
-                    var sinLookupField = new SP.FieldLookupValue();
-                    sinLookupField.set_lookupId(getStatusValue(newStatus));
-                    oListItem.set_item('Estado_x0020_Siniestro', sinLookupField);
-                    oListItem.set_item('AssignedTo', assigned);
-                    oListItem.set_item('AssignedTo', assigned);
-                    //oListItem.set_item("Grupo", groupNew);
-                    //oListItem.set_item("Orden", orderNew);
 
-                    // oListItem.set_item('IdVencimiento', 'Hello World!'); /// HACE FALTA CREAR NUEVO REGISTRO DE VENC ANTES
+        var oList = context.get_web().get_lists().getByTitle(listTaskName);
+
+        var itemCreateInfo = new SP.ListItemCreationInformation();
+        this.oListItem = oList.addItem(itemCreateInfo);
+        if (newStatus.indexOf("Cerrado - ") != 0) {
+            if (listTaskName.search("Generica") >= 0) {
+                oListItem.set_item('Title', oldTaskIDRelated);
+                oListItem.set_item('StartDate', new Date());
+                oListItem.set_item('Status', 'No iniciada');
+                //oListItem.set_item('Identificador', 'Hello World!');
+                oListItem.set_item('ID_x0020_Siniestro', idSin);
+                var sinLookupField = new SP.FieldLookupValue();
+                sinLookupField.set_lookupId(getStatusValue(newStatus));
+                oListItem.set_item('Estado_x0020_Siniestro', sinLookupField);
+                oListItem.set_item('AssignedTo', assigned);
+                oListItem.set_item('AssignedTo', assigned);
+                //oListItem.set_item("Grupo", groupNew);
+                //oListItem.set_item("Orden", orderNew);
+
+                // oListItem.set_item('IdVencimiento', 'Hello World!'); /// HACE FALTA CREAR NUEVO REGISTRO DE VENC ANTES
 
 
-                } else {
-                    oListItem.set_item('Title', titleTask);
-                    oListItem.set_item('DueDate', getVencByStatus(newStatus, "venc1"));
-                    oListItem.set_item('Status', 'No iniciada');
-                    //oListItem.set_item('Identificador', 'Hello World!');
-                    oListItem.set_item('ID_x0020_Siniestro', idSin);
-                    var sinLookupField = new SP.FieldLookupValue();
-                    sinLookupField.set_lookupId(idSin);
-                    oListItem.set_item('Siniestro', sinLookupField);
-                    oListItem.set_item('AssignedTo', assigned);
-                    oListItem.set_item("Grupo", groupNew);
-                    oListItem.set_item("Orden", orderNew);
-                }
             } else {
-                var IdCategory = allClosedCategories.indexOf(newStatus)+1;
                 oListItem.set_item('Title', titleTask);
-               // oListItem.set_item('DueDate', getVencByStatus(newStatus, "venc1"));
-                oListItem.set_item('Status', 'Completado');
+                oListItem.set_item('DueDate', getVencByStatus(newStatus, "venc1"));
+                oListItem.set_item('Status', 'No iniciada');
                 //oListItem.set_item('Identificador', 'Hello World!');
                 oListItem.set_item('ID_x0020_Siniestro', idSin);
                 var sinLookupField = new SP.FieldLookupValue();
                 sinLookupField.set_lookupId(idSin);
                 oListItem.set_item('Siniestro', sinLookupField);
-                var catLookupField = new SP.FieldLookupValue();
-                catLookupField.set_lookupId(IdCategory);
-                oListItem.set_item('Categoria_x0020_Cerrado',catLookupField);
                 oListItem.set_item('AssignedTo', assigned);
+                oListItem.set_item("Grupo", groupNew);
+                oListItem.set_item("Orden", orderNew);
             }
-            oListItem.update();
+        } else {
+            var IdCategory = allClosedCategories.indexOf(newStatus) + 1;
+            oListItem.set_item('Title', titleTask);
+            // oListItem.set_item('DueDate', getVencByStatus(newStatus, "venc1"));
+            oListItem.set_item('Status', 'Completado');
+            //oListItem.set_item('Identificador', 'Hello World!');
+            oListItem.set_item('ID_x0020_Siniestro', idSin);
+            var sinLookupField = new SP.FieldLookupValue();
+            sinLookupField.set_lookupId(idSin);
+            oListItem.set_item('Siniestro', sinLookupField);
+            var catLookupField = new SP.FieldLookupValue();
+            catLookupField.set_lookupId(IdCategory);
+            oListItem.set_item('Categoria_x0020_Cerrado', catLookupField);
+            oListItem.set_item('AssignedTo', assigned);
+        }
+        oListItem.update();
 
-            var promiseAdd = context.executeQuery();
-            promiseAdd.done(function () {
-               console.log("done!!!");
-            });
-            promiseAdd.then(function (sArgs) {
-                idCurrentSinisterInProccess =idSin;
-                newCurrentStatusNameInProccess = newStatus;
-                if (newStatus.indexOf("Cerrado - ") != 0) {
-                    if (listTaskName.search("Generica") < 0) {
-                        newTaskID = oListItem.get_id();
-                        createTaskInHistory(sin, idSin, newStatus, newTaskID, venc1, venc2);
-                        console.log("data added!! new ID " + oListItem.get_id());
-                    } else {
-                        setDataReadyToStartOver();
-                    }
+        var promiseAdd = context.executeQuery();
+        promiseAdd.done(function () {
+            console.log("done!!!");
+        });
+        promiseAdd.then(function (sArgs) {
+            idCurrentSinisterInProccess = idSin;
+            newCurrentStatusNameInProccess = newStatus;
+            if (newStatus.indexOf("Cerrado - ") != 0) {
+                if (listTaskName.search("Generica") < 0) {
+                    newTaskID = oListItem.get_id();
+                    createTaskInHistory(sin, idSin, newStatus, newTaskID, venc1, venc2);
+                    console.log("data added!! new ID " + oListItem.get_id());
                 } else {
-                    console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
-                    location.reload();
-                    
+                    setDataReadyToStartOver();
                 }
-                //sArgs[0] == success callback sender
-                //sArgs[1] == success callback args
-            }, function (fArgs) {
-               console.log("error");
-                //fArgs[0] == fail callback sender
-                //fArgs[1] == fail callback args.
-                //in JSOM the callback args aren't used much - 
-                //the only useful one is probably the get_message() 
-                //on the fail callback
-                console.log(fArgs[1].get_message());
-            });
-            return promiseAdd;
+            } else {
+                console.log("Siniestro Cerrado.\nLa pagina se recargara para actualizar datos.")
+                location.reload();
+
+            }
+            //sArgs[0] == success callback sender
+            //sArgs[1] == success callback args
+        }, function (fArgs) {
+            console.log("error");
+            //fArgs[0] == fail callback sender
+            //fArgs[1] == fail callback args.
+            //in JSOM the callback args aren't used much - 
+            //the only useful one is probably the get_message() 
+            //on the fail callback
+            console.log(fArgs[1].get_message());
+        });
+        return promiseAdd;
     }
     var setDataReadyToStartOver = function () {
-       console.log("ITS DONE");
-       $("button#" + idCurrentSinisterInProccess).parent().parent().find(".group").attr("data-group", groupNew);
-       $("button#" + idCurrentSinisterInProccess).parent().parent().find(".order").attr("data-order", orderNew);
+        console.log("ITS DONE");
+        $("button#" + idCurrentSinisterInProccess).parent().parent().find(".group").attr("data-group", groupNew);
+        $("button#" + idCurrentSinisterInProccess).parent().parent().find(".order").attr("data-order", orderNew);
         $("button#" + idCurrentSinisterInProccess).parent().attr("data-oldtask", newCurrentStatusNameInProccess);
         $("button#" + idCurrentSinisterInProccess).css("display", "none");
         $("button#" + idCurrentSinisterInProccess).parent().parent().css("background-color", "#d3edd3");
@@ -1608,26 +1608,26 @@ var adminTasks = (function () {
         return list;
 
     }
-    var getListNameFromStatus = function (status,sLetter) {
+    var getListNameFromStatus = function (status, sLetter) {
         var isGeneric = isStatusGeneric(status);
         var list = "";
         if (isGeneric) {
             list = "Generador Tarea Generica"
         } else {
-            list ="Tareas "+sLetter;
+            list = "Tareas " + sLetter;
         }
         return list;
 
     }
-    var getOldTaskID = function (sin,id,oldStatus,url,newStatus) {
+    var getOldTaskID = function (sin, id, oldStatus, url, newStatus) {
         return $.ajax({
             url: url,
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
             success: function (data) {
                 var task = data.d.results[0];
-                completeOldTask(sin, id, oldStatus, task,newStatus);
-                
+                completeOldTask(sin, id, oldStatus, task, newStatus);
+
             },
         });
     }
@@ -1695,12 +1695,12 @@ var adminTasks = (function () {
             },
             success: getTaskToUpdate,
             error: function (xhr) {
-               console.log(xhr.status + ": " + xhr.statusText);
+                console.log(xhr.status + ": " + xhr.statusText);
             }
         });
     }
     var updateSinisterJSOM = function (sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
-        
+
         var siteURL = $(location).attr('href');
         //var titleName = document.title;
         var mListName = "Siniestros";
@@ -1714,17 +1714,17 @@ var adminTasks = (function () {
         var promiseList = context.executeQuery();
         promiseList.done(function () {
 
-           console.log("done!!!");
+            console.log("done!!!");
         });
         promiseList.then(function (sArgs) {
             //var vencID = oListItem.get_id();
             //updateNewTaskCreated(vencID);
             onQuerySucceeded1(sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
-           console.log("ListAcceded!!")
+            console.log("ListAcceded!!")
             //sArgs[0] == success callback sender
             //sArgs[1] == success callback args
         }, function (fArgs) {
-           console.log("error");
+            console.log("error");
             //fArgs[0] == fail callback sender
             //fArgs[1] == fail callback args.
             //in JSOM the callback args aren't used much - 
@@ -1734,7 +1734,7 @@ var adminTasks = (function () {
         });
         return promiseList;
 
-       // context.executeQueryAsync(Function.createDelegate(this, function () { onQuerySucceeded1(sin, id, newStatus); }), Function.createDelegate(this, this.onQueryFailed1));
+        // context.executeQueryAsync(Function.createDelegate(this, function () { onQuerySucceeded1(sin, id, newStatus); }), Function.createDelegate(this, this.onQueryFailed1));
 
 
     }
@@ -1742,14 +1742,14 @@ var adminTasks = (function () {
         var res = "";
         $(allStatus).each(function (i, item) {
             if (item.status == status) {
-                res=item.tipoResolucion;
+                res = item.tipoResolucion;
             }
         });
         return res;
     }
     var onQuerySucceeded1 = function (sin, id, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
 
-       console.log('Got the collection!');
+        console.log('Got the collection!');
 
         var listItemEnumerator = collListItem.getEnumerator();
         while (listItemEnumerator.moveNext()) {
@@ -1764,9 +1764,9 @@ var adminTasks = (function () {
                         curritem.set_item("Estado", lookupFld);
                         var resolution = getResTypeByStatus(newStatus);
                         if (resolution == "LSD") {
-                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "LIQUIDACIÃ“N DE SALDO DEUDOR");
+                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "LIQUIDACIÓN DE SALDO DEUDOR");
                         } else if (resolution == "RU") {
-                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "REPOSICIÃ“N DE UNIDAD");
+                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "REPOSICIÓN DE UNIDAD");
                         }
                         if (oldStatus == "A - Asignacion de responsable") {
                             curritem.set_item("Responsable", usrAssigned);
@@ -1811,44 +1811,44 @@ var adminTasks = (function () {
                     //    console.log("Item is updated!");
                     //});
                 }
-            })();        
+            })();
         }
     }
 
-    var onQueryFailed1=function(sender, args) {
+    var onQueryFailed1 = function (sender, args) {
 
         console.log('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
     }
 
 
-    var onQuerySucceeded=function() {
+    var onQuerySucceeded = function () {
 
         console.log('Item updated!');
     }
 
-    var onQueryFailed=function(sender, args) {
+    var onQueryFailed = function (sender, args) {
 
         console.log('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
     }
 
 
     var updateSinister = function (sin, id, newStatus) {
-         return updateSinisterJSOM(sin, id, newStatus);
+        return updateSinisterJSOM(sin, id, newStatus);
 
 
         //var objSin = getSinisterByID(id);
         ////objSin.EstadoId = getStatusValue(newStatus);
         //objSin.Creado = getFormattedDate(objSin.Creado);
         //objSin.FechaSiniestro = getFormattedDate(objSin.FechaSiniestro);
-        //objSin.FechaDeCancelaciÃ³n = getFormattedDate(objSin.FechaDeCancelaciÃ³n);
+        //objSin.FechaDeCancelación = getFormattedDate(objSin.FechaDeCancelación);
         //objSin.FechaDeCierreDeSiniestro = getFormattedDate(objSin.FechaDeCierreDeSiniestro);
         //objSin.Modificado = getFormattedDate(objSin.Modificado);
 
         //getStatusItem(objSin.EstadoId, objSin,id)
-        
+
 
     }
-    var createTaskInHistory = function (sin,idSin,newStatus,taskID,venc1,venc2) {
+    var createTaskInHistory = function (sin, idSin, newStatus, taskID, venc1, venc2) {
         var oList = context.get_web().get_lists().getByTitle("Historial");
 
         var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -1873,7 +1873,7 @@ var adminTasks = (function () {
             //updateNewTaskCreated(vencID);
             historyID = oListItemCreated.get_id();
             console.log("historyCreated!!")
-            
+
             getUserDetails(venc1, venc2, newStatus, SinisterObject.responsable);
             //getDestSecondAlert(venc1, venc2, newStatus);
             //createNewVenc(venc1, venc2, newStatus)
@@ -1913,10 +1913,10 @@ var adminTasks = (function () {
             closeTaskInHistory(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2, idTaskToClose);
             //retrieveAllUsersAllGroups();
             console.log("ListAcceded!!")
-            
+
         }, function (fArgs) {
             console.log("error");
-            
+
             console.log(fArgs[1].get_message());
         });
         return historyList;
@@ -1926,7 +1926,7 @@ var adminTasks = (function () {
 
 
         var listItemEnumerator = collListItem.getEnumerator();
-        
+
         while (listItemEnumerator.moveNext()) {
 
             (function () {
@@ -1989,19 +1989,19 @@ var adminTasks = (function () {
                     }
                 }
             })();
-            
+
         }
 
 
 
-        
+
 
 
     };
-    var completeOldTask = function (sin,id,oldStatus,task,newStatus) {
+    var completeOldTask = function (sin, id, oldStatus, task, newStatus) {
         var statusLetter = oldStatus.charAt(0);
         var statusList = "Tareas" + statusLetter;
-        var IDTask=task.Identificador
+        var IDTask = task.Identificador
         var etag = task.__metadata.etag;
         //var modifiedItem = {};
         //modifiedItem.EstadoValue = 2;
@@ -2012,14 +2012,14 @@ var adminTasks = (function () {
         task.Modificado = getFormattedDate(task.Modificado);
         task.EstadoValue = "Completada";
         //idVencRelated = task["IdVencimiento"];
-        //usrAssigned = task["AsignadoA"].TÃ­tulo;
+        //usrAssigned = task["AsignadoA"].Título;
         //idVencRelated = curritem.get_item("IdVencimiento");
         //usrAssigned = curritem.get_item("AsignadoA");
-        closeTaskInHistory(task.Identificador,sin,newStatus);
-        
+        closeTaskInHistory(task.Identificador, sin, newStatus);
+
         var jsonTask = JSON.stringify(task);
         var beforeSendFunction;
-        var listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList+"("+IDTask+")" ;
+        var listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList + "(" + IDTask + ")";
         //beforeSendFunction = function (xhr) {
         //    xhr.setRequestHeader("If-Match","*");
         //    xhr.setRequestHeader("X-HTTP-Method", 'MERGE');
@@ -2028,7 +2028,7 @@ var adminTasks = (function () {
             url: listTareasURL,
             type: "POST",
             contentType: "application/json;odata=verbose",
-            data:jsonTask,
+            data: jsonTask,
             headers: {
                 "Accept": "application/json;odata=verbose",
                 "X-HTTP-Method": "MERGE",
@@ -2037,7 +2037,7 @@ var adminTasks = (function () {
             },
             success: getTaskToUpdate,
             error: function (xhr) {
-               console.log(xhr.status + ": " + xhr.statusText);
+                console.log(xhr.status + ": " + xhr.statusText);
             }
         });
 
@@ -2057,17 +2057,17 @@ var adminTasks = (function () {
         //})
     };
 
-    
+
 
     var getTaskToUpdate = function (data) {
-       console.log("UPDATED!!!");
-            
+        console.log("UPDATED!!!");
+
 
     }
     var createNewTask = function () {
 
     }
-    var getVencByStatus = function (status,field) {
+    var getVencByStatus = function (status, field) {
         var venc = "";
         $(allStatus).each(function (i, item) {
             if (item.status == status) {
@@ -2082,16 +2082,16 @@ var adminTasks = (function () {
         $(resData).each(function (i, item) {
             var venc1 = item.Alerta1;
             var venc2 = Number(item.Alerta2);
-            var esGenerica = item["TareaGenÃ©rica"];
-            var title = item.TÃ­tulo;
+            var esGenerica = item["TareaGenérica"];
+            var title = item.Título;
             var groupName = item.Grupo;
             if (groupName != null) {
-                groupName = groupName.TÃ­tulo;
+                groupName = groupName.Título;
             } else {
                 groupName = "";
             }
 
-                
+
             completeStatusWithVenc(title, venc1, venc2, esGenerica, groupName);
 
         });
@@ -2099,7 +2099,7 @@ var adminTasks = (function () {
     var getVencimientos = function (sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2) {
         var listEstadosURL = host + "/_vti_bin/listdata.svc/" + listEstados + "?$expand=Grupo";
         return $.ajax({
-            type:"GET",
+            type: "GET",
             url: listEstadosURL,
             async: true,
             headers: { "ACCEPT": "application/json;odata=verbose" },
@@ -2107,7 +2107,7 @@ var adminTasks = (function () {
                 getVencimientosData(data);
             },
             error: function (error) {
-               console.log(error.responseText);
+                console.log(error.responseText);
             },
             complete: function () {
                 venc1 = getVencByStatus(newStatus, "venc1");
@@ -2125,13 +2125,13 @@ var adminTasks = (function () {
 
     }
 
-    var completeStatusWithVenc = function (title, venc1, venc2,esGen,group) {
+    var completeStatusWithVenc = function (title, venc1, venc2, esGen, group) {
         var vencDate1 = calculateVencDate(venc1);
         var vencDate2 = calculateVencDate(venc2);
-        $(allStatus).each(function (i,item) {
+        $(allStatus).each(function (i, item) {
             if (item.status == title) {
-                item.days1=venc1;
-                item.days2=venc2;
+                item.days1 = venc1;
+                item.days2 = venc2;
                 item.venc1 = vencDate1;
                 item.venc2 = vencDate2;
                 item.gen = esGen;
@@ -2154,7 +2154,7 @@ var adminTasks = (function () {
             }
             struct += ">" + item.status + "</option>";
         });
-        struct = struct + addClosedCategories(); 
+        struct = struct + addClosedCategories();
         struct += "</select>";
         return struct;
     }
@@ -2171,26 +2171,24 @@ var adminTasks = (function () {
         $(".statusBox").change(function () {
             //if (buttonCreated == false) {
             $(this).parent().parent().css("background-color", "#eaea1c");
-            var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text()+"' class='update' type='button' data-newTask='" + $(this).find("option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() +"' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
+            var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).find("option:selected").text() + "'>Aplicar</button>"
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
-
-           
             $(this).parent().parent().find(".button").html(applyButton);
             $(this).parent().parent().find(".button").html(fullEditButton);
-                // updateButton();
-                buttonCreated = true;
+            // updateButton();
+            buttonCreated = true;
             //} else {
             //    $(this).parent().parent().find(".button").find("button").css("display", "block");
             //}
-            
+
 
         });
         $(".group>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
-            
+
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' onclick ='updateCurrentSinister();' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
 
             $(this).parent().parent().find(".button").html(applyButton);
@@ -2202,7 +2200,7 @@ var adminTasks = (function () {
         $(".order>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
 
             $(this).parent().parent().find(".button").html(applyButton);
@@ -2221,7 +2219,7 @@ var adminTasks = (function () {
 
 
     var fullUpdate = function () {
-        
+
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
 
@@ -2235,8 +2233,8 @@ var adminTasks = (function () {
     var updateCurrentSinister = function () {
 
         var currentPage = window.location.href;
-        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas')); 
-       
+        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+
         var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         payload = {
@@ -2247,35 +2245,31 @@ var adminTasks = (function () {
 
 
 
-            $.ajax({
-                url: currentPage + "/_vti_bin/listdata.svc/Siniestros(" + sinisterId + ")",
-                type: "POST",
-                processData: false,
-                contentType: "application/json;odata=verbose",
-                data: JSON.stringify(payload),
-                headers: {
-                    "Accept": "application/json;odata=verbose",
-                    "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-                    "X-HTTP-Method": "MERGE",
-                    "If-Match": "*"
-                },
-                success: function (data) {
-                    alert("Siniestro actualizado");
-                    
-                },
-                error: console.log("Error en la ediciÃ³n rapida")
-            });
-        
+        $.ajax({
+            url: currentPage + "/_vti_bin/listdata.svc/Siniestros(" + sinisterId + ")",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(payload),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "X-HTTP-Method": "MERGE",
+                "If-Match": "*"
+            },
+            success: function (data) {
+                alert("Siniestro actualizado");
+
+            },
+            error: console.log("Error en la edición rapida")
+        });
+
 
     }
-
-
-
-
-
     return {
         init: init,
         getAllStatus: getAllStatus,
-        enterPressed: enterPressed
+        enterPressed: enterPressed,
+        fullUpdate: fullUpdate
     }
 })(jQuery);
