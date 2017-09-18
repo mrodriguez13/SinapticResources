@@ -2252,7 +2252,7 @@ sinaptic.adminTasks = (function () {
         modal += '<p>Se van a eliminar todos los registros relacionados con el siniestro ¿confirma la acción?</p>';
         modal += '</div>';
         modal += '<div class="modal-footer">';
-        modal += '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sinaptic.adminTasks.deleteCurrentSinisterHistory();">Aceptar</button>';
+        modal += '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sinaptic.adminTasks.getCurrentSinisterHistory();">Aceptar</button>';
         modal += '<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>';
         modal += '</div>';
         modal += '</div >';
@@ -2304,6 +2304,33 @@ sinaptic.adminTasks = (function () {
     }
 
 
+    var getCurrentSinisterHistory = function () {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
+
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
+            type: "GET",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+             
+            },
+            success: function (data) {
+                console.log(data.d.results);
+
+            },
+            error: function (err) {
+                console.log("Error al eliminar el historial del siniestro");
+            }
+        });
+
+    }
+
+
     var deleteCurrentSinisterHistory = function () {
 
         var currentPage = window.location.href;
@@ -2313,7 +2340,7 @@ sinaptic.adminTasks = (function () {
 
         $.ajax({
 
-            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq '" + sinisterId+"'",
+            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
             //url: currentPage + "/_vti_bin/listdata.svc/Historial(2802)",
             type: "POST",
             headers: {
@@ -2324,13 +2351,14 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
                 console.log("Historial del siniestro eliminado.");
-                deleteSinisterAttachments();
+                //deleteSinisterAttachments();
 
             },
             error: function (err) {
                 console.log("Error al eliminar el historial del siniestro");
             }
         });
+
     }
 
     var deleteSinisterAttachments = function () {
@@ -2394,6 +2422,7 @@ sinaptic.adminTasks = (function () {
         updateCurrentSinister: updateCurrentSinister,
         fullUpdate: fullUpdate,
         modalAskDelete: modalAskDelete,
+        getCurrentSinisterHistory: getCurrentSinisterHistory,
         deleteCurrentSinisterHistory: deleteCurrentSinisterHistory
     }
 })(jQuery);
