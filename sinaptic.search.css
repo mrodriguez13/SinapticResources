@@ -9,3 +9,17 @@
 .table{
     cursor: pointer;
 }
+
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+#listaSiniestros > tfoot > tr > th:nth-child(7) > input[type="text"]{
+    display:none;
+}
+
+#listaSiniestros > tbody > tr > td:nth-child(7){
+    text-align: center;
+}

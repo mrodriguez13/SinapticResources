@@ -4,7 +4,8 @@
         var settings = $.extend({
             element: "#buscadorContainer",
             listName: "Siniestros",
-            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado"]
+            listColumns: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "VencimientoEstado"],
+            listColumnsNames: ["Siniestro", "Grupo", "Orden", "Tomador", "Dominio", "Estado", "Vencimiento"]
         }, options);
         settings.element = "#" + $(this).attr("id");
         queryList(settings);
@@ -29,12 +30,57 @@ var queryList = function (settings) {
     });
 };
 
+var getSemaphore = function (dueDate) {
+    var status = getStatusCode(dueDate);
+    var ret = "";
+    switch (status) {
+        case 1:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/green_circle.gif" alt="Vigente" height="16" width="16">';
+            break;
+        case 2:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/yellow_circle.png" alt="Próxima a vencer" height="16" width="16">';
+            break;
+        case 3:
+            ret = '<img class="statusIcon" src="/site/ExpertiseBrokersArgentina/siteassets/img/red_circle.gif" alt="Vencida" height="16" width="16">';
+            break;
+
+    }
+    return ret;
+};
+
+var getStatusCode = function (dueDate) {
+    dueDate = dueDate.replace("/Date(", "");
+    dueDate = new Date(Number(dueDate.replace(")/", "")));
+    dueDate = dueDate.setHours(0, 0, 0, 0);
+
+    var currDate = new Date();
+    currDate = currDate.setHours(0, 0, 0, 0);
+
+    var tomorrow = new Date();
+    tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow = new Date(tomorrow).setHours(0, 0, 0, 0);
+
+    if (tomorrow === dueDate) {
+        return 2;
+    }
+    if (currDate >= dueDate) {
+        return 3;
+    }
+
+    return 1;
+}
+
 var loadData = function (data, settings) {
     var structure = '<table id="listaSiniestros" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>';
-    $.each(settings.listColumns, function (key, value) {
+    var strufooter = '';
+    $.each(settings.listColumnsNames, function (key, value) {
         structure += '<th>' + value + '</th>';
+        strufooter += '<th>' + value + '</th>';
     });
-    structure += '</tr></thead><tbody>';
+    structure += '</tr></thead>';
+    structure += '<tfoot><tr>' + strufooter;
+    structure += '</tr></tfoot>';
+    structure += '<tbody>';
 
     var results = data.d.results;
     var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
@@ -54,6 +100,11 @@ var loadData = function (data, settings) {
                         }
                     }
                     break;
+                case "VencimientoEstado":
+                    if (item[value] !== null) {
+                        cellValue = getSemaphore(item[value]);
+                    }
+                    break;
                 default:
                     if (item[value] !== null) {
                         cellValue = item[value];
@@ -69,7 +120,32 @@ var loadData = function (data, settings) {
     $(settings.element).html(structure);
     loadFiltersAndSearch(settings.element);
     setSearch();
+    loadFooterSearchInputs(settings.element);
 };
+
+var loadFooterSearchInputs = function (element) {
+    // Setup - add a text input to each footer cell
+    $(element +' tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+    });
+
+    // DataTable
+    var table = $('.table').DataTable();;
+
+    // Apply the search
+    table.columns().every(function () {
+        var that = this;
+
+        $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+                that
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+}
 
 var loadFiltersAndSearch = function (container) {
     $('.table').DataTable({
@@ -98,11 +174,11 @@ var loadFiltersAndSearch = function (container) {
             }
         },
         "dom": "Bfrtip",
+        "targets": [6], "searchable": false, "orderable": false, "visible": true,
         "buttons": [
             "copy", "csv", "excel", "pdf", "print"
         ]
     });
-
 };
 
 var openUrl = function (url) {
@@ -126,3 +202,7 @@ var setSearch = function () {
         table.search(criteria).draw();
     }
 }
+
+
+
+

@@ -490,7 +490,45 @@ sinaptic.wf = function () {
         return window.btoa(binary);
     };
 
+    function validateCreateSinister() {
+        var errors = [];
+        var sinisterName = $("#newSinister_siniestro").val();
+        var sinisterDate = $("#newSinister_fechaSiniestro").val() + "T00:00:00";
+        var group = $("#newSinister_grupo").val();
+        var order = $("#newSinister_orden").val();
+        var domain = $("#newSinister_dominio").val();
+
+        if (sinisterName === null || sinisterName === "") {
+            errors.push("Debe ingresar un título para el siniestro");
+            $("#newSinister_siniestro").focus();
+        }
+        if (new Date(sinisterDate) > new Date()) {
+            errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
+            $("#newSinister_orden").focus();
+        }
+        if (group === null || group === "") {
+            errors.push("Debe ingresar el grupo");
+            $("#newSinister_grupo").focus();
+        }
+        if (order === null || order === "") {
+            errors.push("Debe ingresar el orden");
+            $("#newSinister_orden").focus();
+        }
+        if (domain === null || domain === "") {
+            errors.push("Debe ingresar el dominio el vehículo");
+            $("#newSinister_dominio").focus();
+        }
+        if (errors.length > 0) {
+            alert(errors.join(""));
+            return false;
+        }
+        return true;
+    }
+
     var createSinister = function () {
+        if (!validateCreateSinister()) {
+            return;
+        }
         var vencimiento = getDueDates(21).alertDate1.toJSON();
         var nuevoSiniestro = {
             Siniestro: $("#newSinister_siniestro").val(),
@@ -640,6 +678,7 @@ sinaptic.wf = function () {
             payload.IdHistorial = data.d.Identificador;
             var dueDate = getDueDates(payload.EstadoId);
             payload.VencimientoEstado = dueDate.alertDate1.toJSON();
+            payload.VencimientoEstado2 = dueDate.alertDate2.toJSON();
             updateSinister(sinisterId, payload);
         });
     }
@@ -753,6 +792,19 @@ sinaptic.wf = function () {
 				mm = '0'+mm
 			} 
 			hoy = dd + '/' + mm + '/' + yyyy;
+			if(inputDate == "") {
+			    alert("Debe ingresar la fecha de vencimiento de la deuda");
+			    $("#vencimientodeuda").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			if(inputDate < hoy) {
+			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+			    $("#vencimientodeuda").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			
 			if($("#saldodeudor").val().substring(0,1) == "-"){
 			    alert("El saldo deudor no puede ser negativo");
 			    $("#saldodeudor").focus();
@@ -770,19 +822,16 @@ sinaptic.wf = function () {
 			    $("#saldodeudor").focus();
 			    closeTaskOk = false;
 				break;
-			}					
-			if(inputDate == "") {
-			    alert("Debe ingresar la fecha de vencimiento de la deuda");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
-				break;
 			}
-			if(inputDate <= hoy) {
-			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
+			
+			if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
+			{
+				alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada +"]");
+				$("#saldodeudor").focus();
+				closeTaskOk = false;
 				break;
-			}
+			}			
+		
 			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 			
             break;
@@ -825,6 +874,19 @@ sinaptic.wf = function () {
 			} 		
 			hoy = dd + '/' + mm + '/' + yyyy;
 			
+			if(inputDate == "") {
+			    alert("Ingrese una fecha válida")
+			    $("#cancelDate").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			if(inputDate < hoy) {
+			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
+			    $("#cancelDate").focus();
+			    closeTaskOk = false;
+				break;
+			}
+			
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
@@ -845,18 +907,7 @@ sinaptic.wf = function () {
 			    closeTaskOk = false;
 				break;
 			}					
-			if(inputDate == "") {
-			    alert("Ingrese una fecha válida")
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(inputDate <= hoy) {
-			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
+		
             updateStatusChange(payload);
             getFile("#dropzone");
             break;
