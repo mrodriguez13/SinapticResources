@@ -2322,6 +2322,13 @@ sinaptic.adminTasks = (function () {
             success: function (data) {
                 console.log(data.d.results);
 
+                var calls = data.d.results.length;
+                var arrayIds = [];
+                for (var i = 0; i < calls; i++) {
+                    arrayIds.push(data.d.results[i].Identificador);
+                }
+
+
             },
             error: function (err) {
                 console.log("Error al eliminar el historial del siniestro");
