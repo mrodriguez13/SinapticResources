@@ -1,25 +1,76 @@
-﻿tr.odd {
-    background-color: #e8e8e8 !important;
-}
-
-#listaSiniestros > tbody > tr:hover {
-    background-color: #bee0ed !important;
-}
-
-.table{
-    cursor: pointer;
-}
-
-tfoot input {
-        width: 100%;
-        padding: 3px;
-        box-sizing: border-box;
-    }
-
-#listaSiniestros > tfoot > tr > th:nth-child(7) > input[type="text"]{
-    display:none;
-}
-
-#listaSiniestros > tbody > tr > td:nth-child(7){
+﻿.itemTask>div {
+    display: inline-block;
+    width: 16%;
     text-align: center;
+    vertical-align: middle;
+}
+.titleContainer>h2 {
+    margin-bottom: 5px;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-top: 3px;
+}
+.titleContainer {
+    border-bottom: 1px solid #c6d5ef;
+    margin-bottom: 10px;
+}
+.itemTask.header {
+    background-color: #5c75a0;
+    color: white;
+    height: 19px;
+}
+.itemTask>.idSinister {
+    width: 10%!important;
+}
+.itemTask>.status {
+    width: 303px;
+}
+.itemTask>.group {
+    width: 12%!important;
+}
+.itemTask>.order {
+    width: 12%!important;
+}
+.itemTask:nth-child(even) {
+    background-color: #e1e9f7;
+}
+option.closedOptions {
+    background-color: #ebebeb;
+}
+.searchContainer {
+    display: inline-block;
+    float: right;
+    vertical-align: bottom;
+}
+input.searchBox {
+    display: inline-block;
+    vertical-align: middle;
+    width: 250px;
+}
+.searchButton {
+    display: inline-block;
+    background-color: #5c75a0;
+    color: white;
+    vertical-align: middle;
+    margin-left: 3px;
+    cursor: pointer;
+    padding: 0px 8px;
+}
+.searchButton>img {
+    width: 12px;
+    padding: 3px;
+}
+.searchButton:hover {
+    background-color: #869bbf;
+}
+.groupInbox, .orderInbox {
+    text-align: center;
+    height: 11px;
+    width: 87%;
+}
+.itemTask.canceled>div {
+    color: white;
+}
+.itemTask.canceled {
+    background-color: #fb9e9e!important;
 }
