@@ -2323,11 +2323,12 @@ sinaptic.adminTasks = (function () {
                 console.log(data.d.results);
 
                 var calls = data.d.results.length;
-                var arrayIds = [];
+     
                 for (var i = 0; i < calls; i++) {
-                    arrayIds.push(data.d.results[i].Identificador);
-                }
+                    sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador)
 
+                }
+                
 
             },
             error: function (err) {
@@ -2338,7 +2339,7 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var deleteCurrentSinisterHistory = function () {
+    var deleteCurrentSinisterHistory = function (trackingId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
@@ -2347,8 +2348,8 @@ sinaptic.adminTasks = (function () {
 
         $.ajax({
 
-            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
-            //url: currentPage + "/_vti_bin/listdata.svc/Historial(2802)",
+            //url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
+            url: currentPage + "/_vti_bin/listdata.svc/Historial(" + trackingId+")",
             type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
