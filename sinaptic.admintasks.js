@@ -1,8 +1,6 @@
 "use strict";
-var sinaptic = sinaptic || {};
 
-
-sinaptic.adminTasks = (function () {
+var adminTasks = (function () {
     var context;
     var web;
 
@@ -2172,7 +2170,7 @@ sinaptic.adminTasks = (function () {
             //if (buttonCreated == false) {
             $(this).parent().parent().css("background-color", "#eaea1c");
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).find("option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
             $(this).parent().parent().find(".button").html(applyButton);
             $(this).parent().parent().find(".button").html(fullEditButton);
@@ -2188,7 +2186,7 @@ sinaptic.adminTasks = (function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
 
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' onclick ='updateCurrentSinister();' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
 
             $(this).parent().parent().find(".button").html(applyButton);
@@ -2200,7 +2198,7 @@ sinaptic.adminTasks = (function () {
         $(".order>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
 
 
             $(this).parent().parent().find(".button").html(applyButton);
