@@ -2230,7 +2230,7 @@ sinaptic.adminTasks = (function () {
     var fullUpdate = function () {
 
         var currentPage = window.location.href;
-        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
         var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
