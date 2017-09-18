@@ -2313,8 +2313,8 @@ sinaptic.adminTasks = (function () {
 
         $.ajax({
 
-            //url: currentPage + "/_vti_bin/listdata.svc/Historial(2802)?$filter=SiniestroId eq " + sinisterId,
-            url: currentPage + "/_vti_bin/listdata.svc/Historial(2802)",
+            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq '" + sinisterId+"'",
+            //url: currentPage + "/_vti_bin/listdata.svc/Historial(2802)",
             type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
