@@ -1,6 +1,7 @@
-"use strict";
+ï»¿
+var sinaptic = sinaptic || {};
 
-var adminTasks = (function () {
+sinaptic.adminTasks = (function () {
     var context;
     var web;
 
@@ -8,30 +9,30 @@ var adminTasks = (function () {
     var listSiniestros = "Siniestros";
     var listEstados = "Estados";
     var templateListTasks = "";
-    var listFields = "ID,Siniestro,Estado,Tomador,Carrier,Tipo,Título";
+    var listFields = "ID,Siniestro,Estado,Tomador,Carrier,Tipo,TÃ­tulo";
     var allStatus = [{ statusId: 21, status: "A - Asignacion de responsable", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
     { statusId: 22, status: "B - Procesar formularios y certificado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
     { statusId: 23, status: "C - Certificar formulario de baja", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId: 24, status: "D - Obtener Conformidad Documentacion Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 24, status: "D - Obtener Conformidad Documentacion CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
     { statusId: 25, status: "F - Informar Saldo Deudor a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
-    { statusId: 26, status: "G - Informar Saldo Deudor a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
+    { statusId: 26, status: "G - Informar Saldo Deudor a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
     { statusId: 27, status: "H - Informar Rendicion a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
     { statusId: 28, status: "I - Acreditar Fondos a Cuenta Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
     { statusId: 29, status: "J - Aplicar Fondos al Plan de Ahorros", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'LSD' },
     { statusId: 30, status: "K - Liberar Prenda Cancelada", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
-    { statusId: 31, status: "L - Enviar Prenda a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+    { statusId: 31, status: "L - Enviar Prenda a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
     { statusId: 32, status: "M - Siniestro Cerrado", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
     { statusId: 33, status: "N - Autorizar Reposicion", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId: 34, status: "O - Solicitar Factura a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 34, status: "O - Solicitar Factura a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 35, status: "P - Remitir Factura a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 36, status: "Q - Enviar Formularios por Reposicion a Willis", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId: 37, status: "R - Remitir Formularios por Reposicion a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 37, status: "R - Remitir Formularios por Reposicion a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 38, status: "S - Remitir Nueva Prenda a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 39, status: "T - Verificar Nueva Prenda", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId: 40, status: "U - Enviar Prenda Rechazada a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
+    { statusId: 40, status: "U - Enviar Prenda Rechazada a CompaÃ±ia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 41, status: "V - Remitir Prenda Corregida a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 42, tatus: "E - Solicitar Documentacion al Cliente", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' }];
-    var allClosedCategories = ["Cerrado - No Configura Destrucción Total", "Cerrado - Plan de Ahorro Cancelado", "Cerrado - Prescripto", "Cerrado - Rechazado", "Cerrado - Titular Fallecido", "Cerrado - Vehículo Aparecido"];
+    var allClosedCategories = ["Cerrado - No Configura DestrucciÃ³n Total", "Cerrado - Plan de Ahorro Cancelado", "Cerrado - Prescripto", "Cerrado - Rechazado", "Cerrado - Titular Fallecido", "Cerrado - VehÃ­culo Aparecido"];
     var listSiniestrosURL = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/T%C3%ADtulo ne 'M - Siniestro Cerrado')";// and (SiniestroCancelado ne true)"//$select='" + listFields + "'";
     var Task = "";
     var getAllStatus = function () {
@@ -75,15 +76,15 @@ var adminTasks = (function () {
     var retrieveAllStatus = function (data) {
         var resData = data.d.results;
         $(resData).each(function (i, item) {
-            allStatus[i].status = item.Título;
-            allStatus[i].gen = item["TareaGenérica"];
+            allStatus[i].status = item.TÃ­tulo;
+            allStatus[i].gen = item["TareaGenÃ©rica"];
             allStatus[i].venc1 = calculateVencDate(item["Alerta1"]);
             allStatus[i].venc2 = calculateVencDate(item["Alerta2"]);
             allStatus[i].days1 = Number(item["Alerta1"]);
             allStatus[i].days2 = Number(item["Alerta2"]);
             var groupName = item["Grupo"];
             if (groupName != null) {
-                groupName = groupName.Título;
+                groupName = groupName.TÃ­tulo;
             } else {
                 groupName = "";
             }
@@ -111,7 +112,7 @@ var adminTasks = (function () {
     var retrieveAllClosedStatus = function (data) {
         var resData = data.d.results;
         $(resData).each(function (i, item) {
-            allClosedCategories[i] = item.Título;
+            allClosedCategories[i] = item.TÃ­tulo;
         });
     };
     var init = function () {
@@ -137,11 +138,11 @@ var adminTasks = (function () {
         var groupURL = GetURLParameter('gp');
         var orderURL = GetURLParameter('or');
         var titleURL = decodeURI(GetURLParameter('title'));
-        titleURL = titleURL.replace("á", "a")
-        titleURL = titleURL.replace("é", "e")
-        titleURL = titleURL.replace("í", "i")
-        titleURL = titleURL.replace("ó", "o")
-        titleURL = titleURL.replace("ú", "u")
+        titleURL = titleURL.replace("Ã¡", "a")
+        titleURL = titleURL.replace("Ã©", "e")
+        titleURL = titleURL.replace("Ã­", "i")
+        titleURL = titleURL.replace("Ã³", "o")
+        titleURL = titleURL.replace("Ãº", "u")
         if (titleURL == "Asignacion de Responsable") {
             titleURL = "Asignacion de responsable";
         }
@@ -172,20 +173,24 @@ var adminTasks = (function () {
         var tasksStructure = "<div class='itemTask header'><div class='title'>Siniestro</div><div class='idSinister'>ID Siniestro</div><div class='status'>Estado</div><div class='group'>Grupo</div><div class='order'>Orden</div><div class='button'></div></div>";
         var headerContainer = "<div class='titleContainer'><h2>Panel de Control de Siniestros Abiertos</h2>" +
             "<div class='searchContainer'>" +
-  		"<input type='text' class='searchBox' placeholder='Escriba su Búsqueda...' onkeypress='return adminTasks.enterPressed(event)'><div class='searchButton'>" +
-	"<img src='https://access.willis.com/site/ExpertiseBrokersArgentina/PublishingImages/search-3-xxl.png'>" +
-"</div>" +
-  "</div>" +
+            "<input type='text' class='searchBox' placeholder='Escriba su BÃºsqueda...' onkeypress='return adminTasks.enterPressed(event)'><div class='searchButton'>" +
+            "<img src='https://access.willis.com/site/ExpertiseBrokersArgentina/PublishingImages/search-3-xxl.png'>" +
+            "</div>" +
+            "</div>" +
             "<div id='SinisterContainer'>" +
-            "</div>";
+            "</div>" +
+            '<button type="button" onclick="modalAskDelete();" >Eliminar Siniestro' +
+            '</button>' +
+            '<div id="modalConfirmation">' +
+            '</div>';
         $("#Sinisters").html(headerContainer);
         $(resData).each(function (i, item) {
             sinistersObjs.push(item);
             var asignado = "";
             if (item.AsignadoA != null) {
-                asignado = item.AsignadoA.Título;
+                asignado = item.AsignadoA.TÃ­tulo;
             }
-            var estado = item.Estado.Título;
+            var estado = item.Estado.TÃ­tulo;
             var siniestro = item.Siniestro;
             var grupo = item.Grupo;
             var orden = item.Orden;
@@ -227,7 +232,7 @@ var adminTasks = (function () {
                 $(item).parent().parent().css("display", "block");
             }
         })
-        //var listSiniestrosURLSearch = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$select=*,Siniestro&$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/Título ne 'M - Siniestro Cerrado') and (Siniestro eq '" + filter + "')";
+        //var listSiniestrosURLSearch = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$select=*,Siniestro&$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/TÃ­tulo ne 'M - Siniestro Cerrado') and (Siniestro eq '" + filter + "')";
         //$.ajax({
         //    url: listSiniestrosURLSearch,
         //    async: true,
@@ -340,7 +345,7 @@ var adminTasks = (function () {
         var camlQuery = new SP.CamlQuery();
 
         camlQuery.set_viewXml('<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>' + userID + '</Value></Eq>' +
-        '</Where></Query><RowLimit>1</RowLimit></View>');
+            '</Where></Query><RowLimit>1</RowLimit></View>');
 
         this.collListItem = userInfoList.getItems(camlQuery);
         context.load(collListItem);
@@ -700,38 +705,38 @@ var adminTasks = (function () {
             }
             if (oldStatus != newStatus) {
                 $.when(getVencimientos(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2)
-               //       venc1=getVencByStatus(newStatus, "venc1"),
-               // venc2 = getVencByStatus(newStatus, "venc2"),
+                    //       venc1=getVencByStatus(newStatus, "venc1"),
+                    // venc2 = getVencByStatus(newStatus, "venc2"),
 
-               //  statusLetter = oldStatus.charAt(0),
-               //  statusList = "Tareas" + statusLetter,
-               //  listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList+"?$expand=AsignadoA&$filter=IDSiniestro eq " + idSin,
-               // //getOldTaskID(sin, idSin, oldStatus, listTareasURL,newStatus),         //Completa Tarea Anterior
-               //getOldTaskIDJSOM(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2)
-                //updateSinisterJSOM(sin, idSin, newStatus),                      //Actualiza Siniestro
-                //deleteOldVenc(),                                            //Elimina Antiguo Vencimiento
-                //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2),          //Crea Nueva tarea
-                //createNewVenc(venc1, venc2, newStatus)                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
+                    //  statusLetter = oldStatus.charAt(0),
+                    //  statusList = "Tareas" + statusLetter,
+                    //  listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList+"?$expand=AsignadoA&$filter=IDSiniestro eq " + idSin,
+                    // //getOldTaskID(sin, idSin, oldStatus, listTareasURL,newStatus),         //Completa Tarea Anterior
+                    //getOldTaskIDJSOM(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2)
+                    //updateSinisterJSOM(sin, idSin, newStatus),                      //Actualiza Siniestro
+                    //deleteOldVenc(),                                            //Elimina Antiguo Vencimiento
+                    //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2),          //Crea Nueva tarea
+                    //createNewVenc(venc1, venc2, newStatus)                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
 
-                    ).done(function () {
-                        // retrieveAllUsersAllGroups();
-                        //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);          //Crea Nueva tarea
-                        //createNewVenc(venc1, venc2, newStatus)                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
-                        //venc1=getVencByStatus(newStatus, "venc1");
-                        //venc2 = getVencByStatus(newStatus, "venc2");
-                        //var statusLetter = oldStatus.charAt(0);
-                        //var statusList = "Tareas" + statusLetter;
-                        //var listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList+"?$expand=AsignadoA&$filter=IDSiniestro eq " + idSin;
-                        //getOldTaskID(sin, idSin, oldStatus, listTareasURL,newStatus);         //Completa Tarea Anterior
-                        //updateSinister(sin, idSin, newStatus);                      //Actualiza Siniestro
-                        //deleteOldVenc();                                            //Elimina Antiguo Vencimiento
-                        //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);          //Crea Nueva tarea
-                        //createNewVenc(venc1, venc, 2, newStatus);                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
+                ).done(function () {
+                    // retrieveAllUsersAllGroups();
+                    //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);          //Crea Nueva tarea
+                    //createNewVenc(venc1, venc2, newStatus)                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
+                    //venc1=getVencByStatus(newStatus, "venc1");
+                    //venc2 = getVencByStatus(newStatus, "venc2");
+                    //var statusLetter = oldStatus.charAt(0);
+                    //var statusList = "Tareas" + statusLetter;
+                    //var listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList+"?$expand=AsignadoA&$filter=IDSiniestro eq " + idSin;
+                    //getOldTaskID(sin, idSin, oldStatus, listTareasURL,newStatus);         //Completa Tarea Anterior
+                    //updateSinister(sin, idSin, newStatus);                      //Actualiza Siniestro
+                    //deleteOldVenc();                                            //Elimina Antiguo Vencimiento
+                    //generateNewTaskInSpecificList(sin, idSin, oldStatus, newStatus, statusLetter, group, order, venc1, venc2);          //Crea Nueva tarea
+                    //createNewVenc(venc1, venc, 2, newStatus);                   //Crea nuevo Vencimiento y actualiza tarea nueva con el  IdVencimiento
 
 
-                        //completeOldTask(sin, idSin, oldStatus);
+                    //completeOldTask(sin, idSin, oldStatus);
 
-                    });
+                });
             } else {
                 updateOrderAndGroupInTask(sin, oldStatus, idSin, groupNew, orderNew);
             }
@@ -1263,7 +1268,7 @@ var adminTasks = (function () {
         var camlQuery = new SP.CamlQuery();
 
         camlQuery.set_viewXml('<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>' + userID + '</Value></Eq>' +
-        '</Where></Query><RowLimit>1</RowLimit></View>');
+            '</Where></Query><RowLimit>1</RowLimit></View>');
 
         this.collListItem = userInfoList.getItems(camlQuery);
         context.load(collListItem);
@@ -1458,7 +1463,7 @@ var adminTasks = (function () {
     }
     //var getUserID = function (status,idSin) {
     //    var list = getListNameFromStatus(status, status[0]);
-    //    var listTaskURL= host + "/_vti_bin/listdata.svc/" + list + "?$select=Alerta1,Alerta2,Título,TareaGenérica"
+    //    var listTaskURL= host + "/_vti_bin/listdata.svc/" + list + "?$select=Alerta1,Alerta2,TÃ­tulo,TareaGenÃ©rica"
     //    $.ajax({
     //        url: listEstadosURL,
     //        async: true,
@@ -1762,9 +1767,9 @@ var adminTasks = (function () {
                         curritem.set_item("Estado", lookupFld);
                         var resolution = getResTypeByStatus(newStatus);
                         if (resolution == "LSD") {
-                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "LIQUIDACIÓN DE SALDO DEUDOR");
+                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "LIQUIDACIÃ“N DE SALDO DEUDOR");
                         } else if (resolution == "RU") {
-                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "REPOSICIÓN DE UNIDAD");
+                            curritem.set_item("Tipo_x0020_de_x0020_resuloci_x00", "REPOSICIÃ“N DE UNIDAD");
                         }
                         if (oldStatus == "A - Asignacion de responsable") {
                             curritem.set_item("Responsable", usrAssigned);
@@ -1838,7 +1843,7 @@ var adminTasks = (function () {
         ////objSin.EstadoId = getStatusValue(newStatus);
         //objSin.Creado = getFormattedDate(objSin.Creado);
         //objSin.FechaSiniestro = getFormattedDate(objSin.FechaSiniestro);
-        //objSin.FechaDeCancelación = getFormattedDate(objSin.FechaDeCancelación);
+        //objSin.FechaDeCancelaciÃ³n = getFormattedDate(objSin.FechaDeCancelaciÃ³n);
         //objSin.FechaDeCierreDeSiniestro = getFormattedDate(objSin.FechaDeCierreDeSiniestro);
         //objSin.Modificado = getFormattedDate(objSin.Modificado);
 
@@ -2010,7 +2015,7 @@ var adminTasks = (function () {
         task.Modificado = getFormattedDate(task.Modificado);
         task.EstadoValue = "Completada";
         //idVencRelated = task["IdVencimiento"];
-        //usrAssigned = task["AsignadoA"].Título;
+        //usrAssigned = task["AsignadoA"].TÃ­tulo;
         //idVencRelated = curritem.get_item("IdVencimiento");
         //usrAssigned = curritem.get_item("AsignadoA");
         closeTaskInHistory(task.Identificador, sin, newStatus);
@@ -2080,11 +2085,11 @@ var adminTasks = (function () {
         $(resData).each(function (i, item) {
             var venc1 = item.Alerta1;
             var venc2 = Number(item.Alerta2);
-            var esGenerica = item["TareaGenérica"];
-            var title = item.Título;
+            var esGenerica = item["TareaGenÃ©rica"];
+            var title = item.TÃ­tulo;
             var groupName = item.Grupo;
             if (groupName != null) {
-                groupName = groupName.Título;
+                groupName = groupName.TÃ­tulo;
             } else {
                 groupName = "";
             }
@@ -2170,7 +2175,9 @@ var adminTasks = (function () {
             //if (buttonCreated == false) {
             $(this).parent().parent().css("background-color", "#eaea1c");
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).find("option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
+
+
 
             $(this).parent().parent().find(".button").html(applyButton);
             $(this).parent().parent().find(".button").html(fullEditButton);
@@ -2186,11 +2193,11 @@ var adminTasks = (function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
 
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' onclick ='updateCurrentSinister();' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
-
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
 
             $(this).parent().parent().find(".button").html(applyButton);
             $(this).parent().parent().find(".button").html(fullEditButton);
+
 
             // updateButton();
             buttonCreated = true;
@@ -2198,7 +2205,7 @@ var adminTasks = (function () {
         $(".order>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
             var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='adminTasks.fullUpdate();' type='button'>Edición completa</button>";
+            var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='fullUpdate();' type='button'>EdiciÃ³n completa</button>";
 
 
             $(this).parent().parent().find(".button").html(applyButton);
@@ -2224,6 +2231,33 @@ var adminTasks = (function () {
         var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         window.location = currentPage + "/Lists/Siniestros/EditForm.aspx?ID=" + sinisterId + "&ContentTypeId=0x01009C8D5AF7175C2447B4163BF8A6A26635&IsDlg=1";
+
+    }
+
+
+    var modalAskDelete = function () {
+
+        var modal = '<div class="modal fade" id="myModal" role="dialog">';
+        modal += '<div class="modal-dialog">';
+        modal += '<div class="modal-content">';
+        modal += '<div class="modal-header">';
+        modal += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
+        modal += '<h4 class="modal-title">Modal Header</h4>';
+        modal += '</div>';
+        modal += '<div class="modal-body">';
+        modal += '<p>Se van a eliminar todos los registros relacionados con el siniestro Â¿confirma la acciÃ³n?</p>';
+        modal += '</div>';
+        modal += '<div class="modal-footer">';
+        modal += '<button type="button" class="btn btn-Error" data-dismiss="modal" onclick="deleteCurrentSinisterHistory();">Aceptar</button>';
+        modal += '<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>';
+        modal += '</div>';
+        modal += '</div >';
+        modal += '</div >';
+        modal += '</div >';
+
+        $("#modalConfirmation").html(modal);
+        $("#myModal").modal('show');
+
 
     }
 
@@ -2259,15 +2293,95 @@ var adminTasks = (function () {
                 alert("Siniestro actualizado");
 
             },
-            error: console.log("Error en la edición rapida")
+            error: console.log("Error en la ediciÃ³n rapida")
         });
 
 
     }
+
+
+    var deleteCurrentSinisterHistory = function () {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+
+            url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
+            type: "DELETE",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*"
+            },
+            success: function (data) {
+                console.log("Historial del siniestro eliminado.");
+                deleteSinisterAttachments();
+
+            },
+            error: function (err) {
+                console.log("Error al eliminar el historial del siniestro");
+            }
+        });
+    }
+
+    var deleteSinisterAttachments = function () {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+
+            url: currentPage + "/_vti_bin/listdata.svc/Legajos?$filter=Nombre eq '" + sinisterId + "'",
+            type: "DELETE",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*"
+            },
+            success: function (data) {
+                console.log("Adjuntos del siniestro eliminados.");
+                deleteSinister();
+            },
+            error: function (err) {
+                console.log("Error al eliminar los adjuntos del siniestro");
+            }
+        });
+    }
+
+    var deleteSinister = function () {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+            url: currentPage + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + sinisterId,
+            type: "DELETE",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*"
+            },
+            success: function (data) {
+                console.log("Siniestro eliminado.");
+                alert("Siniestro eliminado.");
+                getAllStatusFromList();
+            },
+            error: function (err) {
+                console.log("Error al eliminar el siniestro");
+            }
+        });
+    }
+
+
     return {
         init: init,
         getAllStatus: getAllStatus,
-        enterPressed: enterPressed,
-        fullUpdate: fullUpdate
+        enterPressed: enterPressed
     }
 })(jQuery);
