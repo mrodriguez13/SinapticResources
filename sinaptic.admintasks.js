@@ -178,8 +178,6 @@ sinaptic.adminTasks = (function () {
             "</div>" +
             "</div>" +
             "<div id='SinisterContainer'>" +
-            '<button type="button" onclick="sinaptic.adminTasks.modalAskDelete();" >Eliminar Siniestro' +
-            '</button>' +
             "</div>" +
             '<div id="modalConfirmation">' +
             '</div>';
@@ -199,7 +197,10 @@ sinaptic.adminTasks = (function () {
                 tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'></div></div>";
+                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><button type='button' onclick='sinaptic.adminTasks.modalAskDelete();'>Eliminar Siniestro</button><div class='button' data-oldTask='" + estado + "'></div></div>";
+
+              
+                     
             }
 
             //<div class='asigned'>"+asignado+"</div>
