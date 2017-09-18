@@ -2318,6 +2318,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
                 "X-Http-Method": "DELETE"
             },
             success: function (data) {
@@ -2345,6 +2346,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
                 "X-Http-Method": "DELETE"
             },
             success: function (data) {
@@ -2369,6 +2371,7 @@ sinaptic.adminTasks = (function () {
             headers: {
                 "accept": "application/json;odata=verbose",
                 "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+                "IF-MATCH": "*",
                 "X-Http-Method": "DELETE"
             },
             success: function (data) {
