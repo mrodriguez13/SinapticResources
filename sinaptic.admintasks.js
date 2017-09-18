@@ -2246,7 +2246,7 @@ sinaptic.adminTasks = (function () {
         modal += '<div class="modal-content">';
         modal += '<div class="modal-header">';
         modal += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
-        modal += '<h4 class="modal-title">Modal Header</h4>';
+        modal += '<h4 class="modal-title">Eliminar siniestro</h4>';
         modal += '</div>';
         modal += '<div class="modal-body">';
         modal += '<p>Se van a eliminar todos los registros relacionados con el siniestro ¿confirma la acción?</p>';
