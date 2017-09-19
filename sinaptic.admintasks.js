@@ -2320,15 +2320,14 @@ sinaptic.adminTasks = (function () {
              
             },
             success: function (data) {
-                console.log(data.d.results);
-
+               
                 var calls = data.d.results.length;
      
                 for (var i = 0; i < calls; i++) {
                     sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador)
-
                 }
                 
+                getCurrentSinisterAttachments();
 
             },
             error: function (err) {
@@ -2359,7 +2358,7 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
                 console.log("Historial del siniestro eliminado.");
-                //deleteSinisterAttachments();
+              
 
             },
             error: function (err) {
@@ -2369,16 +2368,51 @@ sinaptic.adminTasks = (function () {
 
     }
 
-    var deleteSinisterAttachments = function () {
+
+    var getCurrentSinisterAttachments = function () {
 
         var currentPage = window.location.href;
-        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
+
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+            url: currentPage + "/_vti_bin/listdata.svc/Legajos?$filter=Nombre eq '" + sinisterId+"'",
+            type: "GET",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+
+            },
+            success: function (data) {
+               
+
+                var calls = data.d.results.length;
+
+                for (var i = 0; i < calls; i++) {
+                    sinaptic.adminTasks.deleteSinisterAttachments(data.d.results[i].Identificador)
+                }
+
+                getSinisterTrackingNumber();
+            },
+            error: function (err) {
+                console.log("Error al eliminar el historial del siniestro");
+            }
+        });
+
+    }
+
+
+    var deleteSinisterAttachments = function (trackingId) {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
         var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
 
-            url: currentPage + "/_vti_bin/listdata.svc/Legajos?$filter=Nombre eq '" + sinisterId + "'",
+            url: currentPage + "/_vti_bin/listdata.svc/Legajos(" + trackingId + ")",
             type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
@@ -2387,8 +2421,8 @@ sinaptic.adminTasks = (function () {
                 "X-Http-Method": "DELETE"
             },
             success: function (data) {
-                console.log("Adjuntos del siniestro eliminados.");
-                deleteSinister();
+                console.log("Adjunto del siniestro eliminado.");
+               
             },
             error: function (err) {
                 console.log("Error al eliminar los adjuntos del siniestro");
@@ -2396,14 +2430,47 @@ sinaptic.adminTasks = (function () {
         });
     }
 
-    var deleteSinister = function () {
+    var getSinisterTrackingNumber = function () {
 
         var currentPage = window.location.href;
-        currentPage = currentPage.substr(0, pagina.indexOf('/Paginas'));
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
+
         var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + sinisterId,
+            type: "GET",
+            headers: {
+                "accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+
+            },
+            success: function (data) {
+
+                var calls = data.d.results.length;
+
+                for (var i = 0; i < calls; i++) {
+                    sinaptic.adminTasks.deleteSinister(data.d.results[i].Identificador)
+                }
+
+                alert("Siniestro eliminado.");
+                sinaptic.adminTasks.init();
+            },
+            error: function (err) {
+                console.log("Error al eliminar el historial del siniestro");
+            }
+        });
+
+    }
+
+    var deleteSinister = function (trackingId) {
+
+        var currentPage = window.location.href;
+        currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
+        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+
+        $.ajax({
+            url: currentPage + "/_vti_bin/listdata.svc/Siniestros(" + trackingId + ")",
             type: "POST",
             headers: {
                 "accept": "application/json;odata=verbose",
@@ -2413,8 +2480,7 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
                 console.log("Siniestro eliminado.");
-                alert("Siniestro eliminado.");
-                getAllStatusFromList();
+               
             },
             error: function (err) {
                 console.log("Error al eliminar el siniestro");
@@ -2431,6 +2497,7 @@ sinaptic.adminTasks = (function () {
         fullUpdate: fullUpdate,
         modalAskDelete: modalAskDelete,
         getCurrentSinisterHistory: getCurrentSinisterHistory,
-        deleteCurrentSinisterHistory: deleteCurrentSinisterHistory
+        deleteCurrentSinisterHistory: deleteCurrentSinisterHistory,
+        deleteSinister: deleteSinister
     }
 })(jQuery);
