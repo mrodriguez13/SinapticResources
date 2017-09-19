@@ -2498,6 +2498,7 @@ sinaptic.adminTasks = (function () {
         modalAskDelete: modalAskDelete,
         getCurrentSinisterHistory: getCurrentSinisterHistory,
         deleteCurrentSinisterHistory: deleteCurrentSinisterHistory,
+        deleteSinisterAttachments: deleteSinisterAttachments,
         deleteSinister: deleteSinister
     }
 })(jQuery);
