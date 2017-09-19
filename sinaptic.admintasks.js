@@ -194,7 +194,7 @@ sinaptic.adminTasks = (function () {
             var orden = item.Orden;
             var idSiniestro = item.Identificador;
             if (item["SiniestroCancelado"]) {
-                tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
+                tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'><button type='button' class='btn btn-primary btn-xs restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
                 tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
@@ -2451,7 +2451,7 @@ sinaptic.adminTasks = (function () {
             }
         });
     }
-
+    
 
     return {
         init: init,
