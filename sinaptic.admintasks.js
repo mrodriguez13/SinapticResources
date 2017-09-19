@@ -2204,11 +2204,9 @@ sinaptic.adminTasks = (function () {
 
 
     var fullUpdate = function (sinisterId) {
-        console.log(id);
+
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
-
-        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         window.location = currentPage + "/Lists/Siniestros/EditForm.aspx?ID=" + sinisterId + "&ContentTypeId=0x01009C8D5AF7175C2447B4163BF8A6A26635";
 
@@ -2247,8 +2245,6 @@ sinaptic.adminTasks = (function () {
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
-
         payload = {
             EstadoId: $(".status option:selected").val(),
             Grupo: $(".groupInbox").val(),
@@ -2285,8 +2281,6 @@ sinaptic.adminTasks = (function () {
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
-
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
             type: "GET",
@@ -2300,10 +2294,10 @@ sinaptic.adminTasks = (function () {
                 var calls = data.d.results.length;
      
                 for (var i = 0; i < calls; i++) {
-                    sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador, sinisterId)
+                    sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador)
                 }
                 
-                getCurrentSinisterAttachments();
+                getCurrentSinisterAttachments(sinisterId);
 
             },
             error: function (err) {
@@ -2314,12 +2308,11 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var deleteCurrentSinisterHistory = function (trackingId, sinisterId) {
+    var deleteCurrentSinisterHistory = function (trackingId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
 
@@ -2345,12 +2338,10 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var getCurrentSinisterAttachments = function () {
+    var getCurrentSinisterAttachments = function (sinisterId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
-
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Legajos?$filter=Nombre eq '" + sinisterId+"'",
@@ -2369,7 +2360,7 @@ sinaptic.adminTasks = (function () {
                     sinaptic.adminTasks.deleteSinisterAttachments(data.d.results[i].Identificador)
                 }
 
-                getSinisterTrackingNumber();
+                getSinisterTrackingNumber(sinisterId);
             },
             error: function (err) {
                 console.log("Error al eliminar el historial del siniestro");
@@ -2406,12 +2397,10 @@ sinaptic.adminTasks = (function () {
         });
     }
 
-    var getSinisterTrackingNumber = function () {
+    var getSinisterTrackingNumber = function (sinisterId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
-
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + sinisterId,
@@ -2443,7 +2432,6 @@ sinaptic.adminTasks = (function () {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Siniestros(" + trackingId + ")",
