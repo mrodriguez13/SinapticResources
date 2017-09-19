@@ -197,7 +197,7 @@ sinaptic.adminTasks = (function () {
                 tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' class='orderInbox' value='" + orden + "'/></div><div class='button' data-oldTask='" + estado + "'><button type='button' class='restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><button type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete();'>Eliminar Siniestro</button> <button id= '" + idSiniestro + "' class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister()'> Aplicar Cambios</button> <button id='" + idSiniestro + "' class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.id);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
+                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><button data-idSinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.data-idSinister);'>Eliminar Siniestro</button> <button data-idSinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.data-idSinister)'> Aplicar Cambios</button> <button data-idSinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.data-idSinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
                 
                 
 
@@ -2177,14 +2177,6 @@ sinaptic.adminTasks = (function () {
         $(".statusBox").change(function () {
             //if (buttonCreated == false) {
             $(this).parent().parent().css("background-color", "#eaea1c");
-            //var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' type='sinaptic.adminTasks.button' data-newTask='" + $(this).find("option:selected").text() + "'>Aplicar</button>"
-            //var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
-
-
-
-            //$(this).parent().parent().find(".button").html(applyButton);
-            //$(this).parent().parent().find(".button").html(fullEditButton);
-            // updateButton();
             buttonCreated = true;
             //} else {
             //    $(this).parent().parent().find(".button").find("button").css("display", "block");
@@ -2195,27 +2187,11 @@ sinaptic.adminTasks = (function () {
         $(".group>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
 
-            //var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' onclick ='sinaptic.adminTasks.updateCurrentSinister();' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
-            //var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
-
-            //$(this).parent().parent().find(".button").html(applyButton);
-            //$(this).parent().parent().find(".button").html(fullEditButton);
-
-
-            // updateButton();
             buttonCreated = true;
         });
         $(".order>input").change(function () {
             $(this).parent().parent().css("background-color", "#eaea1c");
-            //var applyButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='update' onclick ='sinaptic.adminTasks.updateCurrentSinister();' type='button' data-newTask='" + $(this).parent().parent().find("div.status option:selected").text() + "'>Aplicar</button>"
 
-            //var fullEditButton = "<button id='" + $(this).parent().parent().find(".idSinister").text() + "' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate();' type='button'>Edición completa</button>";
-
-
-            //$(this).parent().parent().find(".button").html(applyButton);
-            //$(this).parent().parent().find(".button").html(fullEditButton);
-
-            // updateButton();
             buttonCreated = true;
         });
     }
@@ -2227,19 +2203,19 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var fullUpdate = function (id) {
+    var fullUpdate = function (sinisterId) {
         console.log(id);
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         window.location = currentPage + "/Lists/Siniestros/EditForm.aspx?ID=" + sinisterId + "&ContentTypeId=0x01009C8D5AF7175C2447B4163BF8A6A26635";
 
     }
 
 
-    var modalAskDelete = function () {
+    var modalAskDelete = function (sinisterId) {
 
         var modal = '<div class="modal fade" id="myModal" role="dialog">';
         modal += '<div class="modal-dialog">';
@@ -2252,7 +2228,7 @@ sinaptic.adminTasks = (function () {
         modal += '<p>Se van a eliminar todos los registros relacionados con el siniestro ¿confirma la acción?</p>';
         modal += '</div>';
         modal += '<div class="modal-footer">';
-        modal += '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sinaptic.adminTasks.getCurrentSinisterHistory();">Aceptar</button>';
+        modal += '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sinaptic.adminTasks.getCurrentSinisterHistory('+sinisterId+');">Aceptar</button>';
         modal += '<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>';
         modal += '</div>';
         modal += '</div >';
@@ -2266,12 +2242,12 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var updateCurrentSinister = function () {
+    var updateCurrentSinister = function (sinisterId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         payload = {
             EstadoId: $(".status option:selected").val(),
@@ -2304,12 +2280,12 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var getCurrentSinisterHistory = function () {
+    var getCurrentSinisterHistory = function (sinisterId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
             url: currentPage + "/_vti_bin/listdata.svc/Historial?$filter=SiniestroId eq " + sinisterId,
@@ -2324,7 +2300,7 @@ sinaptic.adminTasks = (function () {
                 var calls = data.d.results.length;
      
                 for (var i = 0; i < calls; i++) {
-                    sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador)
+                    sinaptic.adminTasks.deleteCurrentSinisterHistory(data.d.results[i].Identificador, sinisterId)
                 }
                 
                 getCurrentSinisterAttachments();
@@ -2338,12 +2314,12 @@ sinaptic.adminTasks = (function () {
     }
 
 
-    var deleteCurrentSinisterHistory = function (trackingId) {
+    var deleteCurrentSinisterHistory = function (trackingId, sinisterId) {
 
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+        //var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
 
         $.ajax({
 
