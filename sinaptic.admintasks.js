@@ -2251,7 +2251,7 @@ sinaptic.adminTasks = (function () {
                 var sinisterData = {
                     name: data.d.results[0].Siniestro,
                     currentStatus: data.d.results[0].EstadoId,
-                    id: data.d.results[0].identificador
+                    id: data.d.results[0].Identificador
                 }
 
                 getNextStatusData(sinisterData, nextStatus);
