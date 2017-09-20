@@ -2365,8 +2365,10 @@ sinaptic.adminTasks = (function () {
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
+        var idNuevoEstado = $("." + sinisterId + ".status option:selected").val();
+
         payload = {
-            EstadoId: $("." + sinisterId +".status option:selected").val(),
+            EstadoId: idNuevoEstado,
             Grupo: $("." + sinisterId +".groupInbox").val(),
             Orden: $("." + sinisterId +".orderInbox").val()
         };
@@ -2387,7 +2389,7 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
 
-                getNextStatusData(payload, EstadoId);
+                getNextStatusData(sinisterId, idNuevoEstado);
 
                 alert("Siniestro actualizado");
                 sinaptic.adminTasks.init();
