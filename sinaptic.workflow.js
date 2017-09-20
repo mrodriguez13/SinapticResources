@@ -678,7 +678,7 @@ sinaptic.wf = function () {
 
         for (var i = 0; i < sinaptic.vm.status.length; i++) {
             if (sinaptic.vm.status[i].Identificador == payload.EstadoId) {
-                sinisterNewState = sinaptic.vm.status[i].Identificador;
+                sinisterNewState = sinaptic.vm.status[i].Descripción;
             }
         }
 
