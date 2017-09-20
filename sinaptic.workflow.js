@@ -618,6 +618,96 @@ sinaptic.wf = function () {
         })
     }
 
+    function getNextStatusData(payload, nextStatus) {
+
+        var statusUrl = settings.host + "/_vti_bin/listdata.svc/Estados?$filter=Identificador eq " + nextStatus;
+        $.ajax({
+            url: statusUrl,
+            type: "GET",
+            async: true,
+            headers: {
+                "accept": "application/json;odata=verbose"
+            },
+            success: function (data) {
+                var groupId = data.d.results[0].GrupoId;
+                getEmails(payload, nextStatus, groupId)
+               
+            },
+            error: errorHandler
+        });
+
+   
+    }
+
+
+    function getEmails(payload, nextStatus, groupId) {
+
+
+        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId+")";
+        $.ajax({
+            url: usersUrl,
+            type: "GET",
+            async: true,
+            headers: {
+                "accept": "application/json;odata=verbose"
+            },
+            success: function (data) {
+
+
+                console.log(data.d.results);
+
+               //createEmail(payload, nextStatus, emails);
+
+            },
+            error: errorHandler
+        });
+
+
+
+         
+    }
+
+    function createEmail(payload, nextStatus, emails) {
+
+        var sinisterNewState = "";
+
+        for (var i = 0; i < sinaptic.vm.status.length; i++) {
+            if (sinaptic.vm.status[i].Identificador == payload.EstadoId) {
+                sinisterNewState = sinaptic.vm.status[i].Identificador;
+            }
+        }
+
+        var sinisterTitle = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' - '" + sinisterNewState + "'";
+        var sinisterSubject = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' ha sido asignado al estado '" + sinisterNewState + "'.";
+        var sinisterEmailStructure = "El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState +"'.";
+       
+        var props = {
+            T\u00edtulo: sinisterTitle,
+            Destinatarios: emails,
+            EmailBody: sinisterEmailStructure,
+            EmailSubject: sinisterSubject
+        }
+
+
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/MailDelivery",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(props),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                console.log("Mailing item creado.");
+                
+            },
+            error: errorHandler
+        })
+    }
+
+
     function closeStatusById(id) {
         var toDate = {
             "FechaHasta": new Date().toJSON()
@@ -681,6 +771,11 @@ sinaptic.wf = function () {
             payload.VencimientoEstado2 = dueDate.alertDate2.toJSON();
             updateSinister(sinisterId, payload);
         });
+
+
+        getNextStatusData(payload, nextStatus)
+       
+
     }
 
     var saveComment = function () {
