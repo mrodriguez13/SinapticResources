@@ -657,23 +657,18 @@ sinaptic.wf = function () {
                 
                 for (var i = 0; i < data.d.results.length; i++) {
                     if (data.d.results[i].Usuario.CorreoElectrónico != null) {
-                        emails += data.d.results[i].Usuario.CorreoElectrónico+",";
+                        emails += data.d.results[i].Usuario.CorreoElectrónico + ";";
                     } else {
-                        console.log(data.d.results[i].Usuario.Nombre + " no tiene asignado un correo electronico.")
+                        console.log("El usuario: '"+ data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
                     }
                 }
 
-               
-                emails = emails.substring(0, emails.length - 1);
-                console.log(emails);
-               //createEmail(payload, nextStatus, emails);
+               emails = emails.substring(0, emails.length - 1);
+               createEmail(payload, nextStatus, emails);
 
             },
             error: errorHandler
         });
-
-
-
          
     }
 
@@ -689,11 +684,12 @@ sinaptic.wf = function () {
 
         var sinisterTitle = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' - '" + sinisterNewState + "'";
         var sinisterSubject = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' ha sido asignado al estado '" + sinisterNewState + "'.";
-        var sinisterEmailStructure = "El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState +"'.";
+        var detalleLink = settings.host + "/Paginas/DetallesSiniestro.aspx?$ID=" + sinaptic.vm.currentSinister.Identificador;
+        var sinisterEmailStructure = "El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.Puede acceder al detalle del siniestro en el siguiente link: " + detalleLink + ". También puede acceder al dashboard desde el siguiente link: " + settings.host + ".";
        
         var props = {
             T\u00edtulo: sinisterTitle,
-            Destinatarios: emails,
+            Destinatarios: "cdominguez@sinaptic.com.ar",
             EmailBody: sinisterEmailStructure,
             EmailSubject: sinisterSubject
         }
