@@ -2256,8 +2256,7 @@ sinaptic.adminTasks = (function () {
 
                 getNextStatusData(sinisterData, nextStatus);
 
-            },
-            error: console.log("Error en checkState")
+            }
         });
 
 
@@ -2283,8 +2282,7 @@ sinaptic.adminTasks = (function () {
 
                 getEmails(sinisterData, nextStatusData)
 
-            },
-            error: console.log("Error en getNextStatusData")
+            }
         });
 
 
@@ -2315,8 +2313,7 @@ sinaptic.adminTasks = (function () {
                 emails = emails.substring(0, emails.length - 1);
                 createEmail(sinisterData, nextStatusData, emails);
 
-            },
-            error: console.log("Error en getEmails")
+            }
         });
 
     }
@@ -2331,7 +2328,7 @@ sinaptic.adminTasks = (function () {
 
         var props = {
             T\u00edtulo: sinisterTitle,
-            Destinatarios: "cdominguez@sinaptic.com.ar",
+            Destinatarios: emails,
             EmailBody: sinisterEmailStructure,
             EmailSubject: sinisterSubject
         }
@@ -2350,8 +2347,7 @@ sinaptic.adminTasks = (function () {
             success: function (data) {
                 console.log("Mailing item creado.");
 
-            },
-            error: console.log("Error en createEmail")
+            }
         })
     }
 
