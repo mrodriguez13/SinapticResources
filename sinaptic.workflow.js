@@ -685,11 +685,11 @@ sinaptic.wf = function () {
         var sinisterTitle = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' - '" + sinisterNewState + "'";
         var sinisterSubject = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' ha sido asignado al estado '" + sinisterNewState + "'.";
         var detalleLink = settings.host + "/Paginas/DetallesSiniestro.aspx?$ID=" + sinaptic.vm.currentSinister.identificador;
-        var sinisterEmailStructure = "<p>El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.Puede acceder al detalle del siniestro en el siguiente link: </p><a href='" + detalleLink + "'> Link al detalle</a>.<p>También puede acceder al dashboard desde el siguiente link:</p> <a href='" + settings.host + "'>Link al dashboard</a>.";
+        var sinisterEmailStructure = "<p>El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.</p><a href='" + detalleLink + "'> Link al detalle</a>. <br/> <a href='" + settings.host + "'>Link al dashboard</a>.";
        
         var props = {
             T\u00edtulo: sinisterTitle,
-            Destinatarios: "cdominguez@sinaptic.com.ar",
+            Destinatarios: emails,
             EmailBody: sinisterEmailStructure,
             EmailSubject: sinisterSubject
         }
