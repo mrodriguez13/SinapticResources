@@ -197,15 +197,9 @@ sinaptic.adminTasks = (function () {
                 tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'><button type='button' class='btn btn-primary btn-xs restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
-                
-                
-
-              
-                     
+                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div  class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
+                                
             }
-
-            //<div class='asigned'>"+asignado+"</div>
 
         });
 
@@ -2240,6 +2234,132 @@ sinaptic.adminTasks = (function () {
     }
 
 
+
+    function checkState(idSiniestro,nextStatus) {
+
+        var checkStateUrl = host + "/_vti_bin/listdata.svc/Siniestros?$filter=Identificador eq " + idSiniestro;
+        $.ajax({
+            url: checkStateUrl,
+            type: "GET",
+            async: true,
+            headers: {
+                "accept": "application/json;odata=verbose"
+            },
+            success: function (data) {
+                var currentStatus = data.d.results[0].EstadoId;
+
+                var sinisterData = {
+                    name: data.d.results[0].Siniestro,
+                    currentStatus: data.d.results[0].EstadoId,
+                    id: data.d.results[0].identificador
+
+                }
+
+                getNextStatusData(sinisterData, nextStatus);
+
+            },
+            error: errorHandler
+        });
+
+
+    }
+
+    function getNextStatusData(sinisterData,nextStatus) {
+
+        var statusUrl = host + "/_vti_bin/listdata.svc/Estados?$filter=Identificador eq " + nextStatus;
+        $.ajax({
+            url: statusUrl,
+            type: "GET",
+            async: true,
+            headers: {
+                "accept": "application/json;odata=verbose"
+            },
+            success: function (data) {
+                //var groupId = data.d.results[0].GrupoId;
+
+                var nextStatusData = {
+                    groupId: data.d.results[0].GrupoId,
+                    name: data.d.results[0].Descripción
+                }
+
+                getEmails(sinisterData, nextStatusData)
+
+            },
+            error: errorHandler
+        });
+
+
+    }
+
+    function getEmails(sinisterData, nextStatusData) {
+
+        var usersUrl = host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + nextStatusData.groupId + ")";
+        $.ajax({
+            url: usersUrl,
+            type: "GET",
+            async: true,
+            headers: {
+                "accept": "application/json;odata=verbose"
+            },
+            success: function (data) {
+
+                var emails = "";
+
+                for (var i = 0; i < data.d.results.length; i++) {
+                    if (data.d.results[i].Usuario.CorreoElectrónico != null) {
+                        emails += data.d.results[i].Usuario.CorreoElectrónico + ";";
+                    } else {
+                        console.log("El usuario: '" + data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
+                    }
+                }
+
+                emails = emails.substring(0, emails.length - 1);
+                createEmail(sinisterData, nextStatusData, emails);
+
+            },
+            error: errorHandler
+        });
+
+    }
+
+    function createEmail(sinisterData, nextStatusData, emails) {
+
+
+        var sinisterTitle = "Siniestro '" + sinisterData.name + "' - '" + nextStatusData.name + "'";
+        var sinisterSubject = "Siniestro '" + sinisterData.name + "' ha sido asignado al estado '" + nextStatusData.name + "'.";
+        var detalleLink = host + "/Paginas/DetallesSiniestro.aspx?$ID=" + sinisterData.id;
+        var sinisterEmailStructure = "<p>El siniestro '" + sinisterData.name + "' se cambió al estado '" + nextStatusData.name + "'.</p><a href='" + detalleLink + "'> Link al detalle</a>. <br/> <a href='" + host + "'>Link al dashboard</a>.";
+
+        var props = {
+            T\u00edtulo: sinisterTitle,
+            Destinatarios: "cdominguez@sinaptic.com.ar",
+            EmailBody: sinisterEmailStructure,
+            EmailSubject: sinisterSubject
+        }
+
+
+        $.ajax({
+            url: host + "/_vti_bin/listdata.svc/MailDelivery",
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(props),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                console.log("Mailing item creado.");
+
+            },
+            error: errorHandler
+        })
+    }
+
+
+
+
+
     var updateCurrentSinister = function (sinisterId) {
 
         var currentPage = window.location.href;
@@ -2266,6 +2386,9 @@ sinaptic.adminTasks = (function () {
                 "If-Match": "*"
             },
             success: function (data) {
+
+                getNextStatusData(payload, EstadoId);
+
                 alert("Siniestro actualizado");
                 sinaptic.adminTasks.init();
             },
