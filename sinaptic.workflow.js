@@ -1165,6 +1165,7 @@ sinaptic.wf = function () {
         showCreateSinister: showCreateSinister,
         addComment: addComment,
         completeTask: completeTask,
-        hasPressedEnter: hasPressedEnter
+        hasPressedEnter: hasPressedEnter,
+        getNextStatusData: getNextStatusData
     };
 }();
