@@ -653,9 +653,19 @@ sinaptic.wf = function () {
             },
             success: function (data) {
 
+                var emails = "";
+                
+                for (var i = 0; i < data.d.results.length; i++) {
+                    if (data.d.results[i].Usuario.CorreoElectrónico != null) {
+                        emails += data.d.results[i].Usuario.CorreoElectrónico+",";
+                    } else {
+                        console.log(data.d.results[i].Usuario.Nombre + " no tiene asignado un correo electronico.")
+                    }
+                }
 
-                console.log(data.d.results);
-
+               
+                emails = emails.substring(0, emails.length - 1);
+                console.log(emails);
                //createEmail(payload, nextStatus, emails);
 
             },
