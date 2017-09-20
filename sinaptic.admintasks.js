@@ -2251,10 +2251,10 @@ sinaptic.adminTasks = (function () {
             Orden: $("." + sinisterId +".orderInbox").val()
         };
 
-
+        var postUrl = currentPage + "/_vti_bin/listdata.svc/Siniestros(" + sinisterId + ")";
 
         $.ajax({
-            url: currentPage + "/_vti_bin/listdata.svc/Siniestros(" + sinisterId + ")",
+            url: postUrl ,
             type: "POST",
             processData: false,
             contentType: "application/json;odata=verbose",
@@ -2267,7 +2267,7 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
                 alert("Siniestro actualizado");
-
+                sinaptic.adminTasks.init();
             },
             error: console.log("Error en la edición rapida")
         });
