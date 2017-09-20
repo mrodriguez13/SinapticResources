@@ -197,7 +197,7 @@ sinaptic.adminTasks = (function () {
                 tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'><button type='button' class='btn btn-primary btn-xs restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
+                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div   class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
                 
                 
 
@@ -2246,9 +2246,9 @@ sinaptic.adminTasks = (function () {
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
         payload = {
-            EstadoId: $(".status option:selected").val(),
-            Grupo: $(".groupInbox").val(),
-            Orden: $(".orderInbox").val()
+            EstadoId: $("." + sinisterId +" .status option:selected").val(),
+            Grupo: $("." + sinisterId +" .groupInbox").val(),
+            Orden: $("." + sinisterId +" .orderInbox").val()
         };
 
 
@@ -2375,7 +2375,7 @@ sinaptic.adminTasks = (function () {
         var currentPage = window.location.href;
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
-        var sinisterId = $(".idSinister").text().replace("ID Siniestro", "");
+       
 
         $.ajax({
 
