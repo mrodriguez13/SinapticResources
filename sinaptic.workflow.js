@@ -729,111 +729,130 @@ sinaptic.wf = function () {
     var completeTask = function (estadoId) {
         var closeTaskOk = true;
         switch (estadoId) {
-        case 21:
-            var payload = {
-                ResponsableId: $("#responsablewillis").val(),
-                TeamLeaderId: $("#teamleaderwillis").val(),
-                EstadoId: 22
-            };
-            updateStatusChange(payload);
-            break;
-        case 22:
-            var payload = {
-                EstadoId: 23
-            };		
-			if($("#dropzone")[0].dropzone.files.length < 1){
-			    alert("Debe adjuntar el Formulario 04");
-			    $("#dropzone").focus();
-			    closeTaskOk = false;
-			    break;
-			}
-            updateStatusChange(payload);
-            getFile("#dropzone");
-            break;
+            case 21:
+                var payload = {
+                    ResponsableId: $("#responsablewillis").val(),
+                    TeamLeaderId: $("#teamleaderwillis").val(),
+                    EstadoId: 22
+                };
+                updateStatusChange(payload);
+                break;
+            case 22:
+                var payload = {
+                    EstadoId: 23
+                };
+                if ($("#dropzone")[0].dropzone.files.length < 1) {
+                    alert("Debe adjuntar el Formulario 04");
+                    $("#dropzone").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                updateStatusChange(payload);
+                getFile("#dropzone");
+                break;
 
-        case 23:
-            var isCompleted = false;
-            if ($("input#docCompletaSi")[0].checked === true) {
-                isCompleted = true;
-            }
-            var payload = {
-                DocCertCompleta: isCompleted,
-                EstadoId: isCompleted ? 24 : 42
+            case 23:
+                var isCompleted = false;
+                if ($("input#docCompletaSi")[0].checked === true) {
+                    isCompleted = true;
+                }
+                var payload = {
+                    DocCertCompleta: isCompleted,
+                    EstadoId: isCompleted ? 24 : 42
 
-            }
-            updateStatusChange(payload);
-            break;
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 24:
-            var resolucion = $("#tipoResolucion option:selected").text();
-            var reslvalue = $("#tipoResolucion option:selected").val();
-            var payload = {
-                TipoDeResuloci\u00f3nValue: resolucion,
-                EstadoId: reslvalue == "1" ? 25 : 33
-            }
-            updateStatusChange(payload);
-            break;
+            case 24:
+                var resolucion = $("#tipoResolucion option:selected").text();
+                var reslvalue = $("#tipoResolucion option:selected").val();
+                var payload = {
+                    TipoDeResuloci\u00f3nValue: resolucion,
+                    EstadoId: reslvalue == "1" ? 25 : 33
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 25:
+            case 25:
             var payload = {
                 SaldoPendiente: $("#saldodeudor").val(),
                 VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                 EstadoId: 26
             };
-			var inputDate = $("#vencimientodeuda").val();	
-			var hoy = new Date();
-			var dd = hoy.getDate();
-			var mm = hoy.getMonth()+1;
-			var yyyy = hoy.getFullYear();
-			if(dd<10) {
-				dd = '0'+dd
-			} 
-			if(mm<10) {
-				mm = '0'+mm
-			} 
-			hoy = dd + '/' + mm + '/' + yyyy;
-			if(inputDate == "") {
-			    alert("Debe ingresar la fecha de vencimiento de la deuda");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(inputDate < hoy) {
-			    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-			    $("#vencimientodeuda").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			
-			if($("#saldodeudor").val().substring(0,1) == "-"){
-			    alert("El saldo deudor no puede ser negativo");
-			    $("#saldodeudor").focus();
-			    closeTaskOk = false;
-			    break;
-			}
-			if($("#saldodeudor").val() == ""){
-			    alert("Debe ingresar el saldo deudor");
-			    $("#saldodeudor").focus();
-			    closeTaskOk = false;
-				break;
-			}					
-			if($("#saldodeudor").val() == "0"){
-			    alert("El saldo deudor no puede ser 0");
-			    $("#saldodeudor").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			
-			if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
-			{
-				alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada +"]");
-				$("#saldodeudor").focus();
-				closeTaskOk = false;
-				break;
-			}			
+            var inputDate = $("#vencimientodeuda").val();
+            var hoy = new Date();
+            var dd = hoy.getDate();
+            var mm = hoy.getMonth() + 1;
+            var yyyy = hoy.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            
+            hoy = yyyy + '' + mm + '' + dd;
+
+            var validationinputDate = inputDate.split("-");
+            validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
+            if (parseInt(validationinputDate) < parseInt(hoy)) {
+                alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+                $("#vencimientodeuda").focus();
+                closeTaskOk = false;
+                break;
+            }
+
+            if (inputDate == "") {
+                alert("Debe ingresar la fecha de vencimiento de la deuda");
+                $("#vencimientodeuda").focus();
+                closeTaskOk = false;
+                break;
+            }
+            if (parseInt(validationinputDate) < parseInt(hoy)) {
+                alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+                $("#vencimientodeuda").focus();
+                closeTaskOk = false;
+                break;
+            }
+
+            if ($("#saldodeudor").val().substring(0, 1) == "-") {
+                alert("El saldo deudor no puede ser negativo");
+                $("#saldodeudor").focus();
+                closeTaskOk = false;
+                break;
+            }
+            if ($("#saldodeudor").val() == "") {
+                alert("Debe ingresar el saldo deudor");
+                $("#saldodeudor").focus();
+                closeTaskOk = false;
+                break;
+            }
+            if ($("#saldodeudor").val() == "0") {
+                alert("El saldo deudor no puede ser 0");
+                $("#saldodeudor").focus();
+                closeTaskOk = false;
+                break;
+            }
+   
+
+            if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
+            {
+                alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada + "]");
+                $("#saldodeudor").focus();
+                closeTaskOk = false;
+                break;
+            }
+
+            if ($("#saldodeudor").val() == "0") {
+                alert("El saldo deudor no puede ser 0");
+                $("#saldodeudor").focus();
+                closeTaskOk = false;
+                break;
+            }	
+
+		    sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
 		
-			sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
-			
             break;
 
         case 26:
@@ -873,20 +892,20 @@ sinaptic.wf = function () {
 				mm = '0'+mm
 			} 		
 			hoy = dd + '/' + mm + '/' + yyyy;
-			
-			if(inputDate == "") {
-			    alert("Ingrese una fecha válida")
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(inputDate < hoy) {
-			    alert("La fecha de cancelación debe ser mayor que la fecha actual");
-			    $("#cancelDate").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			
+
+            if (inputDate == "") {
+                alert("Ingrese una fecha válida");
+                $("#cancelDate").focus();
+                closeTaskOk = false;
+                break;
+            }
+            if (inputDate < hoy) {
+                alert("La fecha de cancelación debe ser mayor que la fecha actual");
+                $("#cancelDate").focus();
+                closeTaskOk = false;
+                break;
+            }
+
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
@@ -907,7 +926,7 @@ sinaptic.wf = function () {
 			    closeTaskOk = false;
 				break;
 			}					
-		
+	
             updateStatusChange(payload);
             getFile("#dropzone");
             break;
