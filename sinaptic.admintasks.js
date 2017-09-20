@@ -2258,7 +2258,7 @@ sinaptic.adminTasks = (function () {
                 getNextStatusData(sinisterData, nextStatus);
 
             },
-            error: errorHandler
+            error: console.log("Error en checkState")
         });
 
 
@@ -2285,7 +2285,7 @@ sinaptic.adminTasks = (function () {
                 getEmails(sinisterData, nextStatusData)
 
             },
-            error: errorHandler
+            error: console.log("Error en getNextStatusData")
         });
 
 
@@ -2317,7 +2317,7 @@ sinaptic.adminTasks = (function () {
                 createEmail(sinisterData, nextStatusData, emails);
 
             },
-            error: errorHandler
+            error: console.log("Error en getEmails")
         });
 
     }
@@ -2352,7 +2352,7 @@ sinaptic.adminTasks = (function () {
                 console.log("Mailing item creado.");
 
             },
-            error: errorHandler
+            error: console.log("Error en createEmail")
         })
     }
 
