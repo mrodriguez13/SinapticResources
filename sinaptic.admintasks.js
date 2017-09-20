@@ -2246,9 +2246,9 @@ sinaptic.adminTasks = (function () {
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
         payload = {
-            EstadoId: $("." + sinisterId +" .status option:selected").val(),
-            Grupo: $("." + sinisterId +" .groupInbox").val(),
-            Orden: $("." + sinisterId +" .orderInbox").val()
+            EstadoId: $("." + sinisterId +".status option:selected").val(),
+            Grupo: $("." + sinisterId +".groupInbox").val(),
+            Orden: $("." + sinisterId +".orderInbox").val()
         };
 
 
