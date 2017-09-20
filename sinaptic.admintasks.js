@@ -2388,7 +2388,7 @@ sinaptic.adminTasks = (function () {
             },
             success: function (data) {
 
-                getNextStatusData(sinisterId, idNuevoEstado);
+                checkState(sinisterId, idNuevoEstado);
 
                 alert("Siniestro actualizado");
                 sinaptic.adminTasks.init();
