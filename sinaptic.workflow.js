@@ -878,20 +878,29 @@ sinaptic.wf = function () {
 			    closeTaskOk = false;
 				break;
 			}
-			
-			var inputDate = $("#cancelDate").val();
-			var hoy = new Date();
-			var dd = hoy.getDate();
-			var mm = hoy.getMonth()+1;
-			var yyyy = hoy.getFullYear();
-			
-			if(dd<10) {
-				dd = '0'+dd
-			} 
-			if(mm<10) {
-				mm = '0'+mm
-			} 		
-			hoy = dd + '/' + mm + '/' + yyyy;
+
+            var inputDate = $("#cancelDate").val();
+            var hoy = new Date();
+            var dd = hoy.getDate();
+            var mm = hoy.getMonth() + 1;
+            var yyyy = hoy.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            hoy = yyyy + '' + mm + '' + dd;
+
+            var validationinputDate = inputDate.split("-");
+            validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
+            if (parseInt(validationinputDate) < parseInt(hoy)) {
+                alert("La fecha de cancelación debe ser mayor que la fecha actual");
+                $("#cancelDate").focus();
+                closeTaskOk = false;
+                break;
+            }
 
             if (inputDate == "") {
                 alert("Ingrese una fecha válida");
@@ -899,13 +908,7 @@ sinaptic.wf = function () {
                 closeTaskOk = false;
                 break;
             }
-            if (inputDate < hoy) {
-                alert("La fecha de cancelación debe ser mayor que la fecha actual");
-                $("#cancelDate").focus();
-                closeTaskOk = false;
-                break;
-            }
-
+ 
 			var importe = $("#cancelImport").val();
 			
 			if(importe.substring(0,1) == "-"){
