@@ -643,7 +643,15 @@ sinaptic.wf = function () {
     function getEmails(payload, nextStatus, groupId) {
 
 
-        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId+")";
+        if (groupId == 4) //si el grupo es "operadores willis"
+        {
+            var responsableId = sinaptic.vm.currentSinister.responsableId;
+            var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
+
+        } else { 
+            var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
+        }
+
         $.ajax({
             url: usersUrl,
             type: "GET",
@@ -669,7 +677,7 @@ sinaptic.wf = function () {
             },
             error: errorHandler
         });
-         
+       
     }
 
     function createEmail(payload, nextStatus, emails) {
