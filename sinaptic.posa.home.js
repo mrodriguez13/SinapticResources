@@ -244,6 +244,7 @@ sinaptic.posa = function (options) {
                 tomador: sinister.Tomador,
                 carrier: sinister.Carrier["T\u00edtulo"],
                 dominio: sinister.Dominio,
+                responsableId: sinister.ResponsableId,
                 fechaSiniestro: sinister.FechaSiniestro,
                 mailcliente: sinister.MailCliente,
                 mailcompania: sinister.MailCia,
@@ -317,6 +318,7 @@ sinaptic.posa = function (options) {
         renderTasksByStatusChart();
         renderOverdueByStatuschart();
 
+    
     }
 
     function renderTasksByStatusChart() {
