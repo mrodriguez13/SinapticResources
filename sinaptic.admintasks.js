@@ -2251,6 +2251,7 @@ sinaptic.adminTasks = (function () {
                 var sinisterData = {
                     name: data.d.results[0].Siniestro,
                     currentStatus: data.d.results[0].EstadoId,
+                    responsableId: data.d.results[0].ResponsableId,
                     id: data.d.results[0].Identificador
                 }
 
@@ -2290,7 +2291,16 @@ sinaptic.adminTasks = (function () {
 
     function getEmails(sinisterData, nextStatusData) {
 
-        var usersUrl = host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + nextStatusData.groupId + ")";
+        var usersUrl = "";
+        if (nextStatusData.groupId == 4) {
+            var responsableId = sinaptic.vm.currentSinister.responsableId;
+            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + sinisterData.responsableId + ")";
+
+        } else {
+            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + nextStatusData.groupId + ")";
+        }
+
+
         $.ajax({
             url: usersUrl,
             type: "GET",
