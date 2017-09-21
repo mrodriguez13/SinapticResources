@@ -646,7 +646,7 @@ sinaptic.wf = function () {
         if (groupId == 4) //si el grupo es "operadores willis"
         {
             var responsableId = sinaptic.vm.currentSinister.responsableId;
-            var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
+            var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
 
         } else { 
             var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
