@@ -32,9 +32,9 @@ function getFromHistory() {
             }
 
             for (var i = 0; i < result; i++) {
-                sinisterData.Siniestro = data.d.results[i].Siniestro;
-                sinisterData.Estado = data.d.results[i].EstadoId;
-                sinisterData.FechaDesde = data.d.results[i].FechaDesde;
+                sinisterData.Siniestro = data.d.results[i].Siniestro.Siniestro;
+                sinisterData.Estado = data.d.results[i].Estado.Descripción;
+
                 sinisterData.FechaHasta = data.d.results[i].FechaHasta;
 
                 $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
