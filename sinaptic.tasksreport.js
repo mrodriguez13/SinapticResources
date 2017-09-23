@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 
 function getFromHistory() {
-    var usersUrl = host + "/_vti_bin/listdata.svc/Historial";
+    var usersUrl = host + "/_vti_bin/listdata.svc/Historial(1628)";
 
     $.ajax({
         url: usersUrl,
