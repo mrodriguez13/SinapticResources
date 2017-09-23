@@ -20,7 +20,7 @@ function getFromHistory() {
             "accept": "application/json;odata=verbose"
         },
         success: function (data) {
-
+            console.log(data.d.results.length);
             console.log(data.d.results);
 
         },
