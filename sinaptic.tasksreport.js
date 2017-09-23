@@ -38,7 +38,9 @@ function getFromHistory() {
 
                 sinisterData.FechaHasta = data.d.results[i].FechaHasta;
 
-                $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
+                if (sinisterData.FechaHasta  != null) {
+                    $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
+                }
 
             }
 
