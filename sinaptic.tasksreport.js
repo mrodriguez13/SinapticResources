@@ -24,7 +24,7 @@ function getFromHistory() {
             console.log(data.d.results);
 
         },
-        error: errorHandler
+        error: console.log("error.")
     });
 }
 
