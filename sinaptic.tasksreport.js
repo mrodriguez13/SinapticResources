@@ -5,6 +5,8 @@ $(document).ready(function () {
     
     getFromHistory();
     buildDatatask();
+
+    $("#reportContainerTable").DataTable();
 });
 
 
@@ -20,8 +22,26 @@ function getFromHistory() {
             "accept": "application/json;odata=verbose"
         },
         success: function (data) {
-            console.log(data.d.results.length);
+            var result = data.d.results.length;
             console.log(data.d.results);
+
+            var sinisterData = {
+                Siniestro: "",
+                Estado: "",
+                FechaDesde: "",
+                FechaHasta:""
+            }
+
+            for (var i = 0; i < result; i++) {
+                sinisterData.Siniestro = data.d.results[i].Siniestro;
+                sinisterData.Estado = data.d.results[i].EstadoId;
+                sinisterData.FechaDesde = data.d.results[i].FechaDesde;
+                sinisterData.FechaHasta = data.d.results[i].FechaHasta;
+
+                $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
+
+            }
+
 
         },
         error: console.log("error.")
