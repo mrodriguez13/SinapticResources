@@ -6,7 +6,6 @@ $(document).ready(function () {
     getFromHistory();
     buildDatatask();
 
-    $("#reportContainerTable").DataTable();
 });
 
 
@@ -42,6 +41,7 @@ function getFromHistory() {
 
             }
 
+            $("#reportContainerTable").DataTable();
 
         },
         error: console.log("error.")
