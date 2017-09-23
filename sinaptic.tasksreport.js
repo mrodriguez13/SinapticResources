@@ -32,7 +32,7 @@ function getFromHistory() {
             }
 
             for (var i = 0; i < result; i++) {
-                sinisterData.Siniestro = data.d.results[i].Siniestro.Siniestro;
+                sinisterData.Siniestro = ((data.d.results[i].Siniestro.Siniestro != null) ? data.d.results[i].Siniestro.Siniestro : "") ;
                 sinisterData.Estado = data.d.results[i].Estado.Descripción;
                 sinisterData.FechaDesde = data.d.results[i].FechaDesde;
 
