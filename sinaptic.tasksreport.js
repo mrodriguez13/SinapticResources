@@ -1,4 +1,6 @@
 ﻿
+var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
+
 $(document).ready(function () {
     
     getFromHistory();
@@ -8,7 +10,7 @@ $(document).ready(function () {
 
 
 function getFromHistory() {
-    var usersUrl = settings.host + "/_vti_bin/listdata.svc/Historial";
+    var usersUrl = host + "/_vti_bin/listdata.svc/Historial";
 
     $.ajax({
         url: usersUrl,
