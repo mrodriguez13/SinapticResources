@@ -39,7 +39,7 @@ function getFromHistory() {
                 fechaDesde = fechaDesde.replace("/Date(", "");
                 fechaDesde = fechaDesde.replace(")/", "");
 
-                var date_Desde = new Date(fechaDesde);
+                var date_Desde = new Date(parseInt(fechaDesde));
                 var diaDesde = date_Desde.getDay();
                 var mesDesde = date_Desde.getMonth() + 1;
                 var añoDesde = date_Desde.getYear();
@@ -51,7 +51,7 @@ function getFromHistory() {
                 fechaHasta = fechaHasta.replace("/Date(", "");
                 fechaHasta = fechaHasta.replace(")/", "");
 
-                var date_Hasta = new Date(fechaHasta);
+                var date_Hasta = new Date(parseInt(fechaHasta));
                 var diaHasta = date_Hasta.getDay();
                 var mesHasta = date_Hasta.getMonth() + 1;
                 var añoHasta = date_Hasta.getYear();
