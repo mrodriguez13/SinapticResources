@@ -82,9 +82,8 @@ function getFromHistory() {
 
             //$("#reportContainerTable").DataTable();
 
-            var table = $('#reportContainerTable').DataTable();
-
-            new $.fn.dataTable.Buttons(table, {
+            $('#reportContainerTable').DataTable({
+                dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
