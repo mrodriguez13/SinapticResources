@@ -2,15 +2,10 @@
 var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
 
 $(document).ready(function () {
-    getCurrentUser();
     getFromHistory();
-
 
 });
 
-function getCurrentUser() {
-
-}
 
 function getFromHistory() {
     var usersUrl = host + "/_vti_bin/listdata.svc/Historial?$expand=Siniestro,Estado";
@@ -96,7 +91,6 @@ function getFromHistory() {
             });
 
 
-        },
-        error: console.log("error.")
+        }
     });
 }
