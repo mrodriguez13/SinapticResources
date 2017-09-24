@@ -32,13 +32,13 @@ function getFromHistory() {
             }
 
             for (var i = 0; i < result; i++) {
-                sinisterData.Siniestro = (data.d.results[i].Siniestro != null) ? data.d.results[i].Siniestro.Siniestro : continue ;
+                sinisterData.Siniestro = (data.d.results[i].Siniestro != null) ? data.d.results[i].Siniestro.Siniestro : "";
                 sinisterData.Estado = data.d.results[i].Estado.Descripción;
                 sinisterData.FechaDesde = data.d.results[i].FechaDesde;
-
                 sinisterData.FechaHasta = data.d.results[i].FechaHasta;
 
-                if (sinisterData.FechaHasta  != null) {
+
+                if (sinisterData.FechaHasta != null && sinisterData.Siniestro != "") {
                     $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
                 }
 
