@@ -52,9 +52,9 @@ function getFromHistory() {
                 fechaHasta = fechaHasta.replace(")/", "");
 
                 var date_Hasta = new Date(fechaHasta);
-                var diaHasta = date.getDay();
-                var mesHasta = date.getMonth() + 1;
-                var añoHasta = date.getYear();
+                var diaHasta = date_Hasta.getDay();
+                var mesHasta = date_Hasta.getMonth() + 1;
+                var añoHasta = date_Hasta.getYear();
                 sinisterData.FechaHasta = diaHasta + "/" + mesHasta + "/" + añoHasta;
  
                 if (sinisterData.FechaHasta != null && sinisterData.Siniestro != "") {
