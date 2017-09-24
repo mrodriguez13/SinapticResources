@@ -36,27 +36,33 @@ function getFromHistory() {
                 sinisterData.Estado = data.d.results[i].Estado.Descripción;
 
                 var fechaDesde = data.d.results[i].FechaDesde;
-                fechaDesde = fechaDesde.replace("/Date(", "");
-                fechaDesde = fechaDesde.replace(")/", "");
 
-                var date_Desde = new Date(parseInt(fechaDesde));
-                var diaDesde = date_Desde.getDate() < 10 ? 0 + date_Desde.getDate() : date_Desde.getDate();
-                var mesDesde = date_Desde.getMonth() + 1 < 10 ? 0 + date_Desde.getMonth() : date_Desde.getMonth();
-                var añoDesde = date_Desde.getFullYear();
+                if (fechaDesde != null || fechaDesde != "") {
+                    fechaDesde = fechaDesde.replace("/Date(", "");
+                    fechaDesde = fechaDesde.replace(")/", "");
 
-                sinisterData.FechaDesde = diaDesde + "/" + mesDesde + "/" + añoDesde;
+                    var date_Desde = new Date(parseInt(fechaDesde));
+                    var diaDesde = date_Desde.getDate() < 10 ? 0 + "" + date_Desde.getDate() : date_Desde.getDate();
+                    var mesDesde = date_Desde.getMonth() + 1 < 10 ? 0 + "" + date_Desde.getMonth() : date_Desde.getMonth();
+                    var añoDesde = date_Desde.getFullYear();
 
+                    sinisterData.FechaDesde = diaDesde + "/" + mesDesde + "/" + añoDesde;
+                }
 
                 var fechaHasta = data.d.results[i].FechaHasta;
+
+                if (fechaHasta != null || fechaHasta != "") {
+                
                 fechaHasta = fechaHasta.replace("/Date(", "");
                 fechaHasta = fechaHasta.replace(")/", "");
-
                 var date_Hasta = new Date(parseInt(fechaHasta));
-                var diaHasta = date_Hasta.getDate() < 10 ? 0 + date_Hasta.getDate() : date_Hasta.getDate();
-                var mesHasta = date_Hasta.getMonth() + 1 < 10 ? 0 + date_Hasta.getMonth() : date_Hasta.getMonth();
+                var diaHasta = date_Hasta.getDate() < 10 ? 0 + "" + date_Hasta.getDate() : date_Hasta.getDate();
+                var mesHasta = date_Hasta.getMonth() + 1 < 10 ? 0 +""+ date_Hasta.getMonth() : date_Hasta.getMonth();
                 var añoHasta = date_Hasta.getFullYear();
                 sinisterData.FechaHasta = diaHasta + "/" + mesHasta + "/" + añoHasta;
- 
+                }
+
+
                 if (sinisterData.FechaHasta != null && sinisterData.Siniestro != "") {
                     $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
                 }
