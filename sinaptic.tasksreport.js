@@ -40,9 +40,9 @@ function getFromHistory() {
                 fechaDesde = fechaDesde.replace(")/", "");
 
                 var date_Desde = new Date(parseInt(fechaDesde));
-                var diaDesde = date_Desde.getDay();
-                var mesDesde = date_Desde.getMonth() + 1;
-                var añoDesde = date_Desde.getYear();
+                var diaDesde = date_Desde.getDate() < 10 ? 0 + date_Desde.getDate() : date_Desde.getDate();
+                var mesDesde = date_Desde.getMonth() + 1 < 10 ? 0 + date_Desde.getMonth() : date_Desde.getMonth();
+                var añoDesde = date_Desde.getFullYear();
 
                 sinisterData.FechaDesde = diaDesde + "/" + mesDesde + "/" + añoDesde;
 
@@ -52,9 +52,9 @@ function getFromHistory() {
                 fechaHasta = fechaHasta.replace(")/", "");
 
                 var date_Hasta = new Date(parseInt(fechaHasta));
-                var diaHasta = date_Hasta.getDay();
-                var mesHasta = date_Hasta.getMonth() + 1;
-                var añoHasta = date_Hasta.getYear();
+                var diaHasta = date_Hasta.getDate() < 10 ? 0 + date_Hasta.getDate() : date_Hasta.getDate();
+                var mesHasta = date_Hasta.getMonth() + 1 < 10 ? 0 + date_Hasta.getMonth() : date_Hasta.getMonth();
+                var añoHasta = date_Hasta.getFullYear();
                 sinisterData.FechaHasta = diaHasta + "/" + mesHasta + "/" + añoHasta;
  
                 if (sinisterData.FechaHasta != null && sinisterData.Siniestro != "") {
