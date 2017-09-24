@@ -69,7 +69,14 @@ function getFromHistory() {
 
             }
 
-            $("#reportContainerTable").DataTable();
+            //$("#reportContainerTable").DataTable();
+
+
+            $('#reportContainerTable').DataTable({
+                buttons: [
+                    'copy', 'csv', 'excel',  'pdf', 'print'
+                ]
+            });
 
         },
         error: console.log("error.")
