@@ -42,8 +42,14 @@ function getFromHistory() {
                     fechaDesde = fechaDesde.replace(")/", "");
 
                     var date_Desde = new Date(parseInt(fechaDesde));
-                    var diaDesde = date_Desde.getDate() < 10 ? 0 + "" + date_Desde.getDate() : date_Desde.getDate();
-                    var mesDesde = date_Desde.getMonth() + 1 < 10 ? 0 + "" + (date_Desde.getMonth() + 1) : date_Desde.getMonth();
+                    var diaDesde = date_Desde.getDate() < 10 ? "0" + date_Desde.getDate() : date_Desde.getDate();
+
+                    var mesDesde = date_Desde.getMonth() + 1;
+
+                    if (mesDesde < 10) {
+                        mesDesde = "0" + mesDesde;
+                    }
+
                     var añoDesde = date_Desde.getFullYear();
 
                     sinisterData.FechaDesde = diaDesde + "/" + mesDesde + "/" + añoDesde;
@@ -56,8 +62,13 @@ function getFromHistory() {
                 fechaHasta = fechaHasta.replace("/Date(", "");
                 fechaHasta = fechaHasta.replace(")/", "");
                 var date_Hasta = new Date(parseInt(fechaHasta));
-                var diaHasta = date_Hasta.getDate() < 10 ? 0 + "" + date_Hasta.getDate() : date_Hasta.getDate();
-                var mesHasta = date_Hasta.getMonth() + 1 < 10 ? 0 +""+ (date_Hasta.getMonth() + 1) : date_Hasta.getMonth();
+                var diaHasta = date_Hasta.getDate() < 10 ? "0" + date_Hasta.getDate() : date_Hasta.getDate();
+                var mesHasta = date_Hasta.getMonth() + 1;
+
+                if (mesHasta < 10) {
+                    mesHasta = "0" + mesHasta;
+                }
+
                 var añoHasta = date_Hasta.getFullYear();
                 sinisterData.FechaHasta = diaHasta + "/" + mesHasta + "/" + añoHasta;
                 }
@@ -71,12 +82,14 @@ function getFromHistory() {
 
             //$("#reportContainerTable").DataTable();
 
+            var table = $('#reportContainerTable').DataTable();
 
-            $('#reportContainerTable').DataTable({
+            new $.fn.dataTable.Buttons(table, {
                 buttons: [
-                    'copy', 'csv', 'excel',  'pdf', 'print'
+                    'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
+
 
         },
         error: console.log("error.")
