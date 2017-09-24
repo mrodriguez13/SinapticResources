@@ -37,7 +37,7 @@ function getFromHistory() {
 
                 var fechaDesde = data.d.results[i].FechaDesde;
 
-                if (fechaDesde != null || fechaDesde != "") {
+                if (fechaDesde != null && fechaDesde != "") {
                     fechaDesde = fechaDesde.replace("/Date(", "");
                     fechaDesde = fechaDesde.replace(")/", "");
 
@@ -51,7 +51,7 @@ function getFromHistory() {
 
                 var fechaHasta = data.d.results[i].FechaHasta;
 
-                if (fechaHasta != null || fechaHasta != "") {
+                if (fechaHasta != null && fechaHasta != "") {
                 
                 fechaHasta = fechaHasta.replace("/Date(", "");
                 fechaHasta = fechaHasta.replace(")/", "");
