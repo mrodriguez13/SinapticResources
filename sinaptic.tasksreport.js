@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 
 function getFromHistory() {
-    var usersUrl = host + "/_vti_bin/listdata.svc/Historial?$expand=Siniestro,Estado&$select=*,Siniestro/Siniestro,Estado/Descripci%C3%B3n";
+    var usersUrl = host + "/_vti_bin/listdata.svc/Historial?$expand=Siniestro,Estado&$select=*,Siniestro/Siniestro,Estado";
 
     $.ajax({
         url: usersUrl,
