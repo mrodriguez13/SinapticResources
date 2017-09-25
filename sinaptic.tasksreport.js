@@ -8,7 +8,7 @@ $(document).ready(function () {
 });
 
 function injectHtml() {
-    $("#reportContainer").append("<img style='text-align:center;' id='loading_Gif' src='https://access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/cargando-1.gif'>");
+    $("#reportContainer").append("<img align='middle' id='loading_Gif' src='https://access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/cargando-1.gif'>");
 
     $("#reportContainer").append("<table id='reportContainerTable' style='display:none;' cellspacing='0' width='100%'><thead><tr><th>Siniestro</th><th>Estado</th><th>Fecha Desde</th><th>Fecha Hasta</th></tr></thead><tbody id='reportBody'></tbody></table>");
     getFromHistory();
