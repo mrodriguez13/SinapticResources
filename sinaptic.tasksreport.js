@@ -115,7 +115,7 @@ function getFromHistory() {
                 ]
             });
 
-            $("#reportContainerTable").css("display", "block");
+            $("#reportContainerTable").css("display", "");
 
         }
     });
