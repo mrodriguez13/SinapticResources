@@ -2,10 +2,16 @@
 var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
 
 $(document).ready(function () {
-    getFromHistory();
+
+    injectHtml();
 
 });
 
+function injectHtml() {
+    $("#reportContainer").append("<table id='reportContainerTable' style='display:none;' cellspacing='0' width='100%'><thead><tr><th>Siniestro</th><th>Estado</th><th>Fecha Desde</th><th>Fecha Hasta</th></tr></thead><tbody id='reportBody'></tbody></table>");
+    getFromHistory();
+     
+}
 
 function getFromHistory() {
     var usersUrl = host + "/_vti_bin/listdata.svc/Historial?$expand=Siniestro,Estado";
@@ -72,16 +78,11 @@ function getFromHistory() {
                 sinisterData.FechaHasta = diaHasta + "/" + mesHasta + "/" + añoHasta;
                 }
 
-                
-
-
                 if (sinisterData.FechaHasta != null && sinisterData.Siniestro != "" && data.d.results[i].ModificadoPorId == currentUserId) {
                     $("#reportBody").append("<tr><td>" + sinisterData.Siniestro + "</td><td>" + sinisterData.Estado + "</td><td>" + sinisterData.FechaDesde + "</td><td>" + sinisterData.FechaHasta + "</td></tr>");
                 }
 
             }
-
-            //$("#reportContainerTable").DataTable();
 
             $('#reportContainerTable').DataTable({
                 "language": {
@@ -114,6 +115,7 @@ function getFromHistory() {
                 ]
             });
 
+            $("#reportContainerTable").css("display", "block");
 
         }
     });
