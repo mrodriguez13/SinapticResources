@@ -84,9 +84,33 @@ function getFromHistory() {
             //$("#reportContainerTable").DataTable();
 
             $('#reportContainerTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ tareas",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando tareas del _START_ al _END_ de un total de _TOTAL_ tareas",
+                    "sInfoEmpty": "Mostrando tareas del 0 al 0 de un total de 0 tareas",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ tareas)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar Tarea:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                "dom": "Bfrtip",
+                "buttons": [
+                    "copy", "csv", "excel", "pdf", "print"
                 ]
             });
 
