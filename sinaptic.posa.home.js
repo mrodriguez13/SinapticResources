@@ -61,7 +61,7 @@ sinaptic.posa = function (options) {
                     struActions.push("<div class=\"btn actionButton\" onclick=\"sinaptic.wf.showCreateSinister();\"><i class=\"glyphicon glyphicon-list-alt pull-left\"></i> Nuevo Siniestro</div>");
                     break;
                 case "ADMINSINIESTRO":
-                    struActions.push("<div class=\"btn actionButton\" onclick=\"window.location.href='https://access.willis.com/site/ExpertiseBrokersArgentina/Paginas/AdminTasks.aspx'\"><i class=\"glyphicon glyphicon-cog pull-left\"></i> Aministraci\u00F3n de Siniestros</div>");
+                    struActions.push("<div class=\"btn actionButton\" onclick=\"window.location.href='" + settings.host + "/Paginas/AdminTasks.aspx'\"><i class=\"glyphicon glyphicon-cog pull-left\"></i> Aministraci\u00F3n de Siniestros</div>");
                     break;
             }
         });
@@ -244,7 +244,6 @@ sinaptic.posa = function (options) {
                 tomador: sinister.Tomador,
                 carrier: sinister.Carrier["T\u00edtulo"],
                 dominio: sinister.Dominio,
-                responsableId: sinister.ResponsableId,
                 fechaSiniestro: sinister.FechaSiniestro,
                 mailcliente: sinister.MailCliente,
                 mailcompania: sinister.MailCia,
