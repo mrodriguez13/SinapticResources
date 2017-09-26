@@ -259,7 +259,8 @@ sinaptic.posa = function (options) {
                 tipovehiculo: sinister.TipoVehiculo,
                 tiporesolucion: sinister["TipoDeResuloci\u00f3nValue"],
                 tiposiniestro: sinister.TipoDeSiniestroValue,
-                vencimientodeuda: vencimientoDeuda
+                vencimientodeuda: vencimientoDeuda,
+                linksiniestro: settings.host + "/DetallesSiniestro.aspx?#ID=" + sinister.Identificador
             };
             var task = {
                 ID: sinister.Identificador,
