@@ -641,17 +641,9 @@ sinaptic.wf = function () {
 
 
     function getEmails(payload, nextStatus, groupId) {
-        var usersUrl = "";
 
-        if (groupId == 4) //si el grupo es "operadores willis"
-        {
-            var responsableId = sinaptic.vm.currentSinister.responsableId;
-            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
 
-        } else { 
-            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
-        }
-
+        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId+")";
         $.ajax({
             url: usersUrl,
             type: "GET",
@@ -677,7 +669,7 @@ sinaptic.wf = function () {
             },
             error: errorHandler
         });
-       
+         
     }
 
     function createEmail(payload, nextStatus, emails) {
@@ -693,7 +685,8 @@ sinaptic.wf = function () {
         var sinisterTitle = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' - '" + sinisterNewState + "'";
         var sinisterSubject = "Siniestro '" + sinaptic.vm.currentSinister.siniestro + "' ha sido asignado al estado '" + sinisterNewState + "'.";
         var detalleLink = settings.host + "/Paginas/DetallesSiniestro.aspx?$ID=" + sinaptic.vm.currentSinister.identificador;
-        var sinisterEmailStructure = "<p>El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.</p><a href='" + detalleLink + "'> Link al detalle</a>. <br/> <a href='" + settings.host + "'>Link al dashboard</a>.";
+        var sinisterEmailStructure = "<p>El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.</p>";
+        sinisterEmailStructure += '<a href="' + detalleLink + '">Link al detalle</a><span>.</span><br /> <a href="' + settings.host + '">Link al dashboard</a><span>.</span></br>';
        
         var props = {
             T\u00edtulo: sinisterTitle,
