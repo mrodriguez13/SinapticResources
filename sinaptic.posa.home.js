@@ -244,6 +244,7 @@ sinaptic.posa = function (options) {
                 tomador: sinister.Tomador,
                 carrier: sinister.Carrier["T\u00edtulo"],
                 dominio: sinister.Dominio,
+                responsableId: sinister.ResponsableId,
                 fechaSiniestro: sinister.FechaSiniestro,
                 mailcliente: sinister.MailCliente,
                 mailcompania: sinister.MailCia,
@@ -260,7 +261,7 @@ sinaptic.posa = function (options) {
                 tiporesolucion: sinister["TipoDeResuloci\u00f3nValue"],
                 tiposiniestro: sinister.TipoDeSiniestroValue,
                 vencimientodeuda: vencimientoDeuda,
-                linksiniestro: settings.host + "/DetallesSiniestro.aspx?#ID=" + sinister.Identificador
+                linksiniestro: settings.host + "/Paginas/DetallesSiniestro.aspx?#ID=" + sinister.Identificador
             };
             var task = {
                 ID: sinister.Identificador,
