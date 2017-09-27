@@ -218,7 +218,7 @@ sinaptic.adminTasks = (function () {
                 tasksStructure.push("<input type='text' style='height: 24px;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div>");
                 tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' title='Gardar cambios' type='button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'><i class='glyphicon glyphicon-floppy-disk'></i></button>");
                 tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs fullUpdate' title='Editar siniestro' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'><i class='glyphicon glyphicon-edit'></i></button>");
-                tasksStructure.push("<button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' title='Eliminar siniestro' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'><i class='glyphicon glyphicon-trash'></i></button>");
+                tasksStructure.push("<button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs delButton' title='Eliminar siniestro' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'><i class='glyphicon glyphicon-trash'></i></button>");
                 tasksStructure.push("<div class='button' data-oldTask='" + estado + "'></div></div>");
                                 
             }

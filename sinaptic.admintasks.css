@@ -86,3 +86,8 @@ button.btn.btn-primary.btn-xs {
 .itemTask.canceled>div.title, .itemTask.canceled>div.idSinister {
     color: #fff;
 }
+
+.delButton{
+    background-color: #e66;
+    border-color:#e66;
+}
