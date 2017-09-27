@@ -150,7 +150,7 @@ sinaptic.adminTasks = (function () {
         titleURL = getStatusFullName(titleURL);
 
 
-        var listSiniestrosURLWithParams = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/T%C3%ADtulo ne 'M - Siniestro Cerrado') and (Grupo eq '" + groupURL + "') and (Orden eq '" + orderURL + "') and (Estado/T%C3%ADtulo eq '" + titleURL + "')";
+        var listSiniestrosURLWithParams = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$expand=CreadoPor,Carrier,AsignadoA,Estado&$top=5000&$filter=(Estado/T%C3%ADtulo ne 'M - Siniestro Cerrado') and (Grupo eq '" + groupURL + "') and (Orden eq '" + orderURL + "') and (Estado/T%C3%ADtulo eq '" + titleURL + "')";
         $.ajax({
             url: listSiniestrosURLWithParams,
             async: true,
@@ -170,7 +170,8 @@ sinaptic.adminTasks = (function () {
     }
     var getSiniestrosData = function (data) {
         var resData = data.d.results;
-        var tasksStructure = "<div class='itemTask header'><div class='title'>Siniestro</div><div class='idSinister'>ID Siniestro</div><div class='status'>Estado</div><div class='group'>Grupo</div><div class='order'>Orden</div><div class='button'></div></div>";
+        var tasksStructure = [];
+        tasksStructure.push("<div class='itemTask header'><div class='title'>Siniestro</div><div class='idSinister'>ID Siniestro</div><div class='status'>Estado</div><div class='group'>Grupo</div><div class='order'>Orden</div><div class='button'></div></div>");
         var headerContainer = "<div class='titleContainer'><h2>Panel de Control de Siniestros Abiertos</h2>" +
             "<div class='searchContainer'>" +
             "<input type='text' class='searchBox' placeholder='Escriba su Búsqueda...' onkeypress='return adminTasks.enterPressed(event)'><div class='searchButton'>" +
@@ -194,15 +195,36 @@ sinaptic.adminTasks = (function () {
             var orden = item.Orden;
             var idSiniestro = item.Identificador;
             if (item["SiniestroCancelado"]) {
-                tasksStructure += "<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'><div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div class='status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div><div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'><button type='button' class='btn btn-primary btn-xs restoreSinister'>Restaurar Siniestro Cancelado</button></div></div>";
+                tasksStructure.push("<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'>");
+                tasksStructure.push("<div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
+                tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
+                tasksStructure.push("<div class='status'>" + buildComboBox(estado) + "</div>");
+                tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
+                tasksStructure.push("<input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div>");
+                tasksStructure.push("<div class='order' data-order='" + orden + "'>");
+                tasksStructure.push("<input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div>");
+                tasksStructure.push("<div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'>");
+                tasksStructure.push("<button type='button' class='btn btn-primary btn-xs restoreSinister'>Restaurar Siniestro Cancelado</button>");
+                tasksStructure.push("</div></div>");
 
             } else {
-                tasksStructure += "<div class='itemTask' data-idHistory='" + item.IdHistorial + "'><div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div><div class='idSinister'>" + idSiniestro + "</div><div  class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div><div class='group' data-group='" + grupo + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/></div><div class='order' data-order='" + orden + "'><input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div><button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'>Eliminar Siniestro</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' type= 'button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'> Aplicar Cambios</button> <button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' class='fullUpdate' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'>Edición completa</button>   <div class='button' data-oldTask='" + estado + "'></div></div>";
+                tasksStructure.push("<div class='itemTask' data-idHistory='" + item.IdHistorial + "'>");
+                tasksStructure.push("<div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
+                tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
+                tasksStructure.push("<div  class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div>");
+                tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
+                tasksStructure.push("<input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/>");
+                tasksStructure.push("</div><div class='order' data-order='" + orden + "'>");
+                tasksStructure.push("<input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div>");
+                tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' title='Gardar cambios' type='button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'><i class='glyphicon glyphicon-floppy-disk'></i></button");
+                tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs fullUpdate' title='Editar siniestro' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'><i class='glyphicon glyphicon-edit'></i></button>");
+                tasksStructure.push("<button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' title='Eliminar siniestro' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'><i class='glyphicon glyphicon-trash'></i></button>");
+                tasksStructure.push("<div class='button' data-oldTask='" + estado + "'></div></div>");
                                 
             }
 
         });
-
+        tasksStructure = tasksStructure.join("");
         $("#SinisterContainer").html(tasksStructure);
         changeState();
         updateButton();
