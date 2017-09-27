@@ -203,7 +203,7 @@ sinaptic.adminTasks = (function () {
                 tasksStructure.push("<input type='text' style='height: 24px;' class='groupInbox' value='" + grupo + "'/></div>");
                 tasksStructure.push("<div class='order' data-order='" + orden + "'>");
                 tasksStructure.push("<input type='text' style='height: 24px;' class='orderInbox' value='" + orden + "'/></div>");
-                tasksStructure.push("<button type='button' class='btn btn-primary btn-xs restoreSinister'><i class='glyphicon glyphicon-share'></i></button>");
+                tasksStructure.push("<button type='button' class='btn btn-primary btn-xs restoreSinister' title='Restaurar siniestro cancelado'><i class='glyphicon glyphicon-share'></i></button>");
                 tasksStructure.push("<div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'>");
                 tasksStructure.push("</div></div>");
 
