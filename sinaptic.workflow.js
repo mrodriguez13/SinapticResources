@@ -664,7 +664,7 @@ sinaptic.wf = function () {
                 var emails = "";
                 
                 for (var i = 0; i < data.d.results.length; i++) {
-                    if (data.d.results[i].Usuario.Email != null) {
+                    if (data.d.results[i].Email != null) {
                         emails += data.d.results[i].Email + ";";
                     } else {
                         console.log("El usuario: '"+ data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
