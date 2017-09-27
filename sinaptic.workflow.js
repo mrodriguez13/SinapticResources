@@ -519,7 +519,7 @@ sinaptic.wf = function () {
             $("#newSinister_dominio").focus();
         }
         if (errors.length > 0) {
-            alert(errors.join(""));
+            alert(errors.join("\r\n"));
             return false;
         }
         return true;
