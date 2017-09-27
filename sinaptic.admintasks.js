@@ -198,7 +198,7 @@ sinaptic.adminTasks = (function () {
                 tasksStructure.push("<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'>");
                 tasksStructure.push("<div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
                 tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
-                tasksStructure.push("<div class='status' style='height: 24px;>" + buildComboBox(estado) + "</div>");
+                tasksStructure.push("<div class='status' style='height:24px;'>" + buildComboBox(estado) + "</div>");
                 tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
                 tasksStructure.push("<input type='text' style='height: 24px;' class='groupInbox' value='" + grupo + "'/></div>");
                 tasksStructure.push("<div class='order' data-order='" + orden + "'>");
