@@ -641,9 +641,17 @@ sinaptic.wf = function () {
 
 
     function getEmails(payload, nextStatus, groupId) {
+        var usersUrl = "";
 
+        if (groupId == 4) //si el grupo al que cambiará de estado el siniestro es "operadores willis"
+        {
+            var responsableId = sinaptic.vm.currentSinister.responsableId;
+            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
 
-        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId+")";
+        } else { 
+            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
+        }
+
         $.ajax({
             url: usersUrl,
             type: "GET",
@@ -656,8 +664,8 @@ sinaptic.wf = function () {
                 var emails = "";
                 
                 for (var i = 0; i < data.d.results.length; i++) {
-                    if (data.d.results[i].Usuario.CorreoElectrónico != null) {
-                        emails += data.d.results[i].Usuario.CorreoElectrónico + ";";
+                    if (data.d.results[i].Usuario.Email != null) {
+                        emails += data.d.results[i].Email + ";";
                     } else {
                         console.log("El usuario: '"+ data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
                     }
@@ -669,7 +677,7 @@ sinaptic.wf = function () {
             },
             error: errorHandler
         });
-         
+       
     }
 
     function createEmail(payload, nextStatus, emails) {
