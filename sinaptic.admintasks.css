@@ -17,7 +17,9 @@
 .itemTask.header {
     background-color: #5c75a0;
     color: white;
-    height: 19px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bolder;
 }
 .itemTask>.idSinister {
     width: 10%!important;
