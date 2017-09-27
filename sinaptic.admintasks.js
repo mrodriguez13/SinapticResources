@@ -198,24 +198,24 @@ sinaptic.adminTasks = (function () {
                 tasksStructure.push("<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'>");
                 tasksStructure.push("<div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
                 tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
-                tasksStructure.push("<div class='status'>" + buildComboBox(estado) + "</div>");
+                tasksStructure.push("<div class='status' style='height: 24px;>" + buildComboBox(estado) + "</div>");
                 tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
-                tasksStructure.push("<input type='text' style='height: 100%;' class='groupInbox' value='" + grupo + "'/></div>");
+                tasksStructure.push("<input type='text' style='height: 24px;' class='groupInbox' value='" + grupo + "'/></div>");
                 tasksStructure.push("<div class='order' data-order='" + orden + "'>");
-                tasksStructure.push("<input type='text' style='height: 100%;' class='orderInbox' value='" + orden + "'/></div>");
-                tasksStructure.push("<div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'>");
                 tasksStructure.push("<button type='button' class='btn btn-primary btn-xs restoreSinister'><i class='glyphicon glyphicon-share'></i></button>");
+                tasksStructure.push("<input type='text' style='height: 24px;' class='orderInbox' value='" + orden + "'/></div>");
+                tasksStructure.push("<div style='padding-top: 5px;padding-bottom: 5px;'  class='button' data-oldTask='" + estado + "'>");
                 tasksStructure.push("</div></div>");
 
             } else {
                 tasksStructure.push("<div class='itemTask' data-idHistory='" + item.IdHistorial + "'>");
                 tasksStructure.push("<div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
                 tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
-                tasksStructure.push("<div  class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div>");
+                tasksStructure.push("<div  class='" + idSiniestro + " status'  style='height: 24px;'>" + buildComboBox(estado) + "</div>");
                 tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
-                tasksStructure.push("<input type='text' style='height: 100%;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/>");
+                tasksStructure.push("<input type='text' style='height: 24px;' class='" + idSiniestro + " groupInbox' value='" + grupo + "'/>");
                 tasksStructure.push("</div><div class='order' data-order='" + orden + "'>");
-                tasksStructure.push("<input type='text' style='height: 100%;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div>");
+                tasksStructure.push("<input type='text' style='height: 24px;' class='" + idSiniestro + " orderInbox' value='" + orden + "'/></div>");
                 tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs' title='Gardar cambios' type='button' onclick='sinaptic.adminTasks.updateCurrentSinister(this.dataset.idsinister)'><i class='glyphicon glyphicon-floppy-disk'></i></button>");
                 tasksStructure.push("<button data-idsinister= '" + idSiniestro + "'  class='btn btn-primary btn-xs fullUpdate' title='Editar siniestro' onclick='sinaptic.adminTasks.fullUpdate(this.dataset.idsinister);' type='button'><i class='glyphicon glyphicon-edit'></i></button>");
                 tasksStructure.push("<button data-idsinister= '" + idSiniestro + "' type='button' class='btn btn-primary btn-xs' title='Eliminar siniestro' onclick='sinaptic.adminTasks.modalAskDelete(this.dataset.idsinister);'><i class='glyphicon glyphicon-trash'></i></button>");

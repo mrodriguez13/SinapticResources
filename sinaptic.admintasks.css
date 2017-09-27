@@ -69,8 +69,20 @@ input.searchBox {
     width: 87%;
 }
 .itemTask.canceled>div {
-    color: white;
+    color: #000;
 }
 .itemTask.canceled {
     background-color: #fb9e9e!important;
+}
+
+button.btn.btn-primary.btn-xs {
+    height: 28px;
+    width: 35px;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.itemTask.canceled>div.title, .itemTask.canceled>div.idSinister {
+    color: #fff;
 }
