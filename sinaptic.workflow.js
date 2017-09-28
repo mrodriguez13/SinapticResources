@@ -642,6 +642,7 @@ sinaptic.wf = function () {
 
     function getEmails(payload, nextStatus, groupId) {
         var usersUrl = "";
+        var protocol = "http";
 
         if (groupId == 4) //si el grupo al que cambiará de estado el siniestro es "operadores willis"
         {
@@ -650,6 +651,7 @@ sinaptic.wf = function () {
 
         } else { 
             usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
+            protocol = "https";
         }
 
         $.ajax({
@@ -672,7 +674,7 @@ sinaptic.wf = function () {
                 }
 
                emails = emails.substring(0, emails.length - 1);
-               createEmail(payload, nextStatus, emails);
+               createEmail(payload, nextStatus, emails, protocol);
 
             },
             error: errorHandler
@@ -680,7 +682,7 @@ sinaptic.wf = function () {
        
     }
 
-    function createEmail(payload, nextStatus, emails) {
+    function createEmail(payload, nextStatus, emails, protocol) {
 
         var sinisterNewState = "";
 
@@ -700,7 +702,8 @@ sinaptic.wf = function () {
             T\u00edtulo: sinisterTitle,
             Destinatarios: emails,
             EmailBody: sinisterEmailStructure,
-            EmailSubject: sinisterSubject
+            EmailSubject: sinisterSubject,
+            Protocol: protocol
         }
 
 
