@@ -502,7 +502,7 @@ sinaptic.wf = function () {
             errors.push("Debe ingresar un título para el siniestro");
             $("#newSinister_siniestro").focus();
         }
-        if (Object.prototype.toString.call(sinisterDate) ==! '[object Date]') {
+        if (Object.prototype.toString.call(sinisterDate) == ! '[object Date]' || isNaN(sinisterDate.getTime())) {
             errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
             $("#newSinister_fechaSiniestro").focus();
         }
@@ -911,7 +911,7 @@ sinaptic.wf = function () {
 
                 hoy = yyyy + '' + mm + '' + dd;
 
-                if (Object.prototype.toString.call() ==! '[object Date]') {
+                if (Object.prototype.toString.call(inputDate) ==! '[object Date]'  || isNaN(inputDate.getTime())) {
                     alert("El formato de la fecha  de vencimiento ingresada no es válido [dd/MM/aaaa]");
                     $("#vencimientodeuda").focus();
                     closeTaskOk = false;
@@ -1016,7 +1016,7 @@ sinaptic.wf = function () {
 
                 hoy = yyyy + '' + mm + '' + dd;
 
-                if (Object.prototype.toString.call(inputDate) ==! '[object Date]') {
+                if (Object.prototype.toString.call(inputDate) == ! '[object Date]' || isNaN(inputDate.getTime())) {
                     alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
                     $("#cancelDate").focus();
                     closeTaskOk = false;
