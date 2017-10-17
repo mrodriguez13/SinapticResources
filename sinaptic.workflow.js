@@ -912,8 +912,10 @@ sinaptic.wf = function () {
                 hoy = yyyy + '' + mm + '' + dd;
 
                 if (Object.prototype.toString.call(inputDate) === '[object Date]') {
-                    errors.push("El formato de la fecha  de vencimiento ingresada no es válido [dd/MM/aaaa]");
+                    alert("El formato de la fecha  de vencimiento ingresada no es válido [dd/MM/aaaa]");
                     $("#vencimientodeuda").focus();
+                    closeTaskOk = false;
+                    break;
                 }
 
                 var validationinputDate = inputDate.split("-");
@@ -1015,8 +1017,10 @@ sinaptic.wf = function () {
                 hoy = yyyy + '' + mm + '' + dd;
 
                 if (Object.prototype.toString.call(inputDate) === '[object Date]') {
-                    errors.push("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
+                    alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
                     $("#vencimientodeuda").focus();
+                    closeTaskOk = false;
+                    break;
                 }
 
                 var validationinputDate = inputDate.split("-");
