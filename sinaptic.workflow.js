@@ -120,244 +120,244 @@ sinaptic.wf = function () {
         var siniesterInfo = [];
         var infoHeight = 0;
         switch (estadoId) {
-        case 21:
-            $(sinaptic.vm.willisusers).each(function (i, user) {
-                if (user.Grupo.Identificador === 4) {
-                    responsables.push("<option value='");
-                    responsables.push(user.Usuario.Identificador);
-                    responsables.push("'>");
-                    responsables.push(user.Usuario.Nombre);
-                    responsables.push("</option>");
-                } else {
-                    teamleaders.push("<option value='");
-                    teamleaders.push(user.Usuario.Identificador);
-                    teamleaders.push("'>");
-                    teamleaders.push(user.Usuario.Nombre);
-                    teamleaders.push("</option>");
-                }
-            });
-            // RESPONSABLE WILLIS
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Responsable Willis</label>");
-            taskContent.push("<select id='responsablewillis' class='form-control'>");
-            taskContent.push(responsables.join(""));
-            taskContent.push("</select>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            // TEAM LEADER WILLIS
-            taskContent.push(" <div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Team Leader Willis</label>");
-            taskContent.push("<select id='teamleaderwillis' class='form-control'>");
-            taskContent.push(teamleaders.join(""));
-            taskContent.push("</select>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
-        case 22: // Procesar Formularios y Certificado
+            case 21:
+                $(sinaptic.vm.willisusers).each(function (i, user) {
+                    if (user.Grupo.Identificador === 4) {
+                        responsables.push("<option value='");
+                        responsables.push(user.Usuario.Identificador);
+                        responsables.push("'>");
+                        responsables.push(user.Usuario.Nombre);
+                        responsables.push("</option>");
+                    } else {
+                        teamleaders.push("<option value='");
+                        teamleaders.push(user.Usuario.Identificador);
+                        teamleaders.push("'>");
+                        teamleaders.push(user.Usuario.Nombre);
+                        teamleaders.push("</option>");
+                    }
+                });
+                // RESPONSABLE WILLIS
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Responsable Willis</label>");
+                taskContent.push("<select id='responsablewillis' class='form-control'>");
+                taskContent.push(responsables.join(""));
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                // TEAM LEADER WILLIS
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Team Leader Willis</label>");
+                taskContent.push("<select id='teamleaderwillis' class='form-control'>");
+                taskContent.push(teamleaders.join(""));
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+            case 22: // Procesar Formularios y Certificado
 
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Formulario 04</label>");
-            taskContent.push("<div id='dropzone' class='dropzone'>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            startDropZone = true;
-            dropZoneMessage = "Arrastre o haga click para seleccionar el Formulario 04";
-            break;
-        case 23:
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-12'>");
-            taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
-            taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
-            taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
-        case 24:
-            taskContent.push(" <div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Tipo de resolución</label>");
-            taskContent.push("<select id='tipoResolucion' class='form-control'>");
-            taskContent.push("<option value='1'>Liquidación de saldo deudor</option>");
-            taskContent.push("<option value='2'>Reposición de unidad</option>");
-            taskContent.push("</select>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
-        case 25:
-            taskContent.push(" <div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Saldo deudor</label>");
-            taskContent.push("<div class='input-group'>");
-            taskContent.push("<span class='input-group-addon'>$</span>");
-            taskContent.push("<input id='saldodeudor' type='number' step='0.01' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Formulario 04</label>");
+                taskContent.push("<div id='dropzone' class='dropzone'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                startDropZone = true;
+                dropZoneMessage = "Arrastre o haga click para seleccionar el Formulario 04";
+                break;
+            case 23:
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+            case 24:
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Tipo de resolución</label>");
+                taskContent.push("<select id='tipoResolucion' class='form-control'>");
+                taskContent.push("<option value='1'>Liquidación de saldo deudor</option>");
+                taskContent.push("<option value='2'>Reposición de unidad</option>");
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
+            case 25:
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Saldo deudor</label>");
+                taskContent.push("<div class='input-group'>");
+                taskContent.push("<span class='input-group-addon'>$</span>");
+                taskContent.push("<input id='saldodeudor' type='number' step='0.01' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push(" <div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Vencimiento de deuda</label>");
-            taskContent.push("<input id='vencimientodeuda' type='date' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Vencimiento de deuda</label>");
+                taskContent.push("<input id='vencimientodeuda' type='date' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
 
-        case 26:  // Informar saldo deudor a compañía
-            siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Saldo Deudor</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldo'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+            case 26:  // Informar saldo deudor a compañía
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Saldo Deudor</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldo'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-8'>");
-            siniesterInfo.push("<label>Vencimiento de deuda</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldovenc'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.vencimientodeuda);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
-            infoHeight = 110;
-            break;
-        case 27: // informar rendicion plan ovalo
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Importe a cancelar</label>");
-            taskContent.push("<input id='cancelImport' type='number' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                siniesterInfo.push("<div class='col-md-8'>");
+                siniesterInfo.push("<label>Vencimiento de deuda</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrosaldovenc'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.vencimientodeuda);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
+                infoHeight = 110;
+                break;
+            case 27: // informar rendicion plan ovalo
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Importe a cancelar</label>");
+                taskContent.push("<input id='cancelImport' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Modo de Cancelación</label>");
-            taskContent.push("<select id='cancelationMode' class='form-control'>");
-            taskContent.push("<option value='Transferencia'>");
-            taskContent.push("Transferencia");
-            taskContent.push("</option>");
-            taskContent.push("<option value='Cheque'>");
-            taskContent.push("Cheque");
-            taskContent.push("</option>");
-            taskContent.push("</select>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Modo de Cancelación</label>");
+                taskContent.push("<select id='cancelationMode' class='form-control'>");
+                taskContent.push("<option value='Transferencia'>");
+                taskContent.push("Transferencia");
+                taskContent.push("</option>");
+                taskContent.push("<option value='Cheque'>");
+                taskContent.push("Cheque");
+                taskContent.push("</option>");
+                taskContent.push("</select>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push(" <div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Fecha de Cacelación</label>");
-            taskContent.push("<input id='cancelDate' type='date' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                taskContent.push(" <div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Fecha de Cacelación</label>");
+                taskContent.push("<input id='cancelDate' type='date' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Numero de Cheque</label>");
-            taskContent.push("<input id='checkNumber' type='number' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Numero de Cheque</label>");
+                taskContent.push("<input id='checkNumber' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Comprobante Nº</label>");
-            taskContent.push("<input id='comprobanteNumber' type='number' class='form-control'/>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Comprobante Nº</label>");
+                taskContent.push("<input id='comprobanteNumber' type='number' class='form-control'/>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
 
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Rendición del pago</label>");
-            taskContent.push("<div id='dropzone' class='dropzone'>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            startDropZone = true;
-            dropZoneMessage = "Arrastre o haga click para seleccionar la rendición del pago";
-            break;
-            infoHeight = 150;
-            break;
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Rendición del pago</label>");
+                taskContent.push("<div id='dropzone' class='dropzone'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                startDropZone = true;
+                dropZoneMessage = "Arrastre o haga click para seleccionar la rendición del pago";
+                break;
+                infoHeight = 150;
+                break;
 
-        case 28: // acreditar fondos a cuenta plan ovalo
+            case 28: // acreditar fondos a cuenta plan ovalo
 
-            siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Carrier</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='iniestrocarrier'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.carrier);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Carrier</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='iniestrocarrier'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.carrier);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Importe a cancelar</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestroimporteacaancelar'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Importe a cancelar</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestroimporteacaancelar'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Modo de cancelación</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestromodocancelacion'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.modocancelacion);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Modo de cancelación</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestromodocancelacion'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.modocancelacion);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Fecha de cancelación</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrofechacancelacion'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.fechadecancelacion);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-12' style='height:10px;'></div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Fecha de cancelación</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrofechacancelacion'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.fechadecancelacion);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Número de cheque</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestronumerocheque'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.numerodecheque ? sinaptic.vm.currentSinister.numerodecheque : 0);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Número de cheque</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestronumerocheque'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.numerodecheque ? sinaptic.vm.currentSinister.numerodecheque : 0);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            siniesterInfo.push("<div class='col-md-4'>");
-            siniesterInfo.push("<label>Comprobante número</label>");
-            siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrocomprobantenro'>");
-            siniesterInfo.push(sinaptic.vm.currentSinister.comprobantenumero);
-            siniesterInfo.push("</div>");
-            siniesterInfo.push("</div>");
+                siniesterInfo.push("<div class='col-md-4'>");
+                siniesterInfo.push("<label>Comprobante número</label>");
+                siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestrocomprobantenro'>");
+                siniesterInfo.push(sinaptic.vm.currentSinister.comprobantenumero);
+                siniesterInfo.push("</div>");
+                siniesterInfo.push("</div>");
 
-            break;
+                break;
 
-        case 33: //Autorizar reposicion
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-12'>");
-            taskContent.push("<div class='col-md-6'><label class='control-label'>¿Autorizar Reposicion?</label></div>");
-            taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='autRepoSi'>SI</label>");
-            taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo'>NO</label></div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
+            case 33: //Autorizar reposicion
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Autorizar Reposicion?</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='autRepoSi'>SI</label>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo'>NO</label></div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
 
-        case 35: //Remitir factura a plan Ovalo
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-8'>");
-            taskContent.push("<label class='control-label'>Factura de nueva unidad</label>");
-            taskContent.push("<div id='dropzone' class='dropzone'>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            startDropZone = true;
-            dropZoneMessage = "Arrastre aquí o haga click para seleccionar la Factura de la nueva unidad";
-            break;
+            case 35: //Remitir factura a plan Ovalo
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-8'>");
+                taskContent.push("<label class='control-label'>Factura de nueva unidad</label>");
+                taskContent.push("<div id='dropzone' class='dropzone'>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                startDropZone = true;
+                dropZoneMessage = "Arrastre aquí o haga click para seleccionar la Factura de la nueva unidad";
+                break;
 
-        case 39: // Verificar nueva prenda
-            taskContent.push("<div class='form-group'>");
-            taskContent.push("<div class='col-md-12'>");
-            taskContent.push("<div class='col-md-6'><label class='control-label'>¿Verificar nueva prenda?</label></div>");
-            taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='verifPrendaSi'>SI</label>");
-            taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='verifPrendaNo'>NO</label></div>");
-            taskContent.push("</div>");
-            taskContent.push("</div>");
-            break;
+            case 39: // Verificar nueva prenda
+                taskContent.push("<div class='form-group'>");
+                taskContent.push("<div class='col-md-12'>");
+                taskContent.push("<div class='col-md-6'><label class='control-label'>¿Verificar nueva prenda?</label></div>");
+                taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='verifPrendaSi'>SI</label>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='verifPrendaNo'>NO</label></div>");
+                taskContent.push("</div>");
+                taskContent.push("</div>");
+                break;
         }
         renderTemplate("#modalsContainer", "#modalTask-template", sinaptic.context);
         if (siniesterInfo.length > 0) {
@@ -408,15 +408,15 @@ sinaptic.wf = function () {
             $('#comentariosContainer').toggle();
         });
 
-		$("#showAttach").on("click", function () {
+        $("#showAttach").on("click", function () {
 
             $('#attachContainer').toggle();
         });
-		
-		$("#uploadFile").on("click", function () {
-		    getFile("#dropzoneCommon");
-		    $('#attachContainer').toggle();
-		});
+
+        $("#uploadFile").on("click", function () {
+            getFile("#dropzoneCommon");
+            $('#attachContainer').toggle();
+        });
 
         $("#saveComment").on("click", function () {
             $("#comentario").prop("disabled", true);
@@ -424,7 +424,7 @@ sinaptic.wf = function () {
             saveComment();
         });
     };
-	
+
     //dropzone
     function getFile(selector) {
         var file = "";
@@ -443,7 +443,7 @@ sinaptic.wf = function () {
         reader.onload = loaded;
         reader.onerror = errorHandler;
     }
- 
+
     function Upload(txtContent, destinationUrl) {
         var jsStream = arrayBufferToBase64(txtContent);
         var soapEnv = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
@@ -478,7 +478,7 @@ sinaptic.wf = function () {
         Upload(fileString, settings.host + "/Legajos/" + sinaptic.vm.currentSinister.identificador + "/" + sinaptic.vm.uploadingFileName)
     }
 
-    function updateProgress(evt) {}
+    function updateProgress(evt) { }
 
     function arrayBufferToBase64(buffer) {
         var binary = '';
@@ -502,11 +502,11 @@ sinaptic.wf = function () {
             errors.push("Debe ingresar un título para el siniestro");
             $("#newSinister_siniestro").focus();
         }
-        if(Object.prototype.toString.call(sinisterDate) === '[object Date]'){
+        if (Object.prototype.toString.call(sinisterDate) === '[object Date]') {
             errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
             $("#newSinister_orden").focus();
         }
-        if ( sinisterDate > new Date()) {
+        if (sinisterDate > new Date()) {
             errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
             $("#newSinister_orden").focus();
         }
@@ -575,13 +575,13 @@ sinaptic.wf = function () {
     var addComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "none");
         $("#estado" + estadoId + "acciones").css("display", "inline");
-       // $(".modal-footer").children().prop('disabled', false);
+        // $(".modal-footer").children().prop('disabled', false);
     };
 
     var showAddComment = function (estadoId) {
         $("#estado" + estadoId + "comentarios").css("display", "inline");
         $("#estado" + estadoId + "acciones").css("display", "none");
-     //   $(".modal-footer").children().prop('disabled', true);
+        //   $(".modal-footer").children().prop('disabled', true);
     };
 
     var getDueDates = function (estadoId) {
@@ -635,12 +635,12 @@ sinaptic.wf = function () {
             success: function (data) {
                 var groupId = data.d.results[0].GrupoId;
                 getEmails(payload, nextStatus, groupId)
-               
+
             },
             error: errorHandler
         });
 
-   
+
     }
 
 
@@ -653,7 +653,7 @@ sinaptic.wf = function () {
             var responsableId = sinaptic.vm.currentSinister.responsableId;
             usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
 
-        } else { 
+        } else {
             usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
             protocol = "https";
         }
@@ -668,22 +668,22 @@ sinaptic.wf = function () {
             success: function (data) {
 
                 var emails = "";
-                
+
                 for (var i = 0; i < data.d.results.length; i++) {
                     if (data.d.results[i].Email != null) {
                         emails += data.d.results[i].Email + ",";
                     } else {
-                        console.log("El usuario: '"+ data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
+                        console.log("El usuario: '" + data.d.results[i].Usuario.Nombre + "' no tiene asignado un correo electronico.")
                     }
                 }
 
-               emails = emails.substring(0, emails.length - 1);
-               createEmail(payload, nextStatus, emails, protocol);
+                emails = emails.substring(0, emails.length - 1);
+                createEmail(payload, nextStatus, emails, protocol);
 
             },
             error: errorHandler
         });
-       
+
     }
 
     function createEmail(payload, nextStatus, emails, protocol) {
@@ -701,7 +701,7 @@ sinaptic.wf = function () {
         var detalleLink = settings.host + "/Paginas/DetallesSiniestro.aspx?$ID=" + sinaptic.vm.currentSinister.identificador;
         var sinisterEmailStructure = "<p>El siniestro '" + sinaptic.vm.currentSinister.siniestro + "' se cambió al estado '" + sinisterNewState + "'.</p>";
         sinisterEmailStructure += '<a href="' + detalleLink + '">Link al detalle</a><span>.</span><br /> <a href="' + settings.host + '">Link al dashboard</a><span>.</span></br>';
-       
+
         var props = {
             T\u00edtulo: sinisterTitle,
             Destinatarios: emails,
@@ -723,7 +723,7 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 console.log("Mailing item creado.");
-                
+
             },
             error: errorHandler
         })
@@ -796,17 +796,17 @@ sinaptic.wf = function () {
 
 
         getNextStatusData(payload, nextStatus)
-       
+
 
     }
 
     var saveComment = function () {
         var properties = {
-                T\u00edtulo: sinaptic.vm.currentSinister.siniestro,
-                Comentario: $("#comentario").val(),
-                IDSiniestro: sinaptic.vm.currentSinister.identificador,
-                EstadoComentario: sinaptic.vm.currentSinister.estado,
-                ComentaristaId: _spPageContextInfo.userId
+            T\u00edtulo: sinaptic.vm.currentSinister.siniestro,
+            Comentario: $("#comentario").val(),
+            IDSiniestro: sinaptic.vm.currentSinister.identificador,
+            EstadoComentario: sinaptic.vm.currentSinister.estado,
+            ComentaristaId: _spPageContextInfo.userId
         }
 
         $.ajax({
@@ -892,287 +892,296 @@ sinaptic.wf = function () {
                 break;
 
             case 25:
-            var payload = {
-                SaldoPendiente: $("#saldodeudor").val(),
-                VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
-                EstadoId: 26
-            };
-            var inputDate = $("#vencimientodeuda").val();
-            var hoy = new Date();
-            var dd = hoy.getDate();
-            var mm = hoy.getMonth() + 1;
-            var yyyy = hoy.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            
-            hoy = yyyy + '' + mm + '' + dd;
+                var payload = {
+                    SaldoPendiente: $("#saldodeudor").val(),
+                    VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
+                    EstadoId: 26
+                };
+                var inputDate = $("#vencimientodeuda").val();
+                var hoy = new Date();
+                var dd = hoy.getDate();
+                var mm = hoy.getMonth() + 1;
+                var yyyy = hoy.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
 
-            var validationinputDate = inputDate.split("-");
-            validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
-            if (parseInt(validationinputDate) < parseInt(hoy)) {
-                alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-                $("#vencimientodeuda").focus();
-                closeTaskOk = false;
+                hoy = yyyy + '' + mm + '' + dd;
+
+                if (Object.prototype.toString.call(inputDate) === '[object Date]') {
+                    errors.push("El formato de la fecha  de vencimiento ingresada no es válido [dd/MM/aaaa]");
+                    $("#vencimientodeuda").focus();
+                }
+
+                var validationinputDate = inputDate.split("-");
+                validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
+                if (parseInt(validationinputDate) < parseInt(hoy)) {
+                    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+                    $("#vencimientodeuda").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if (inputDate == "") {
+                    alert("Debe ingresar la fecha de vencimiento de la deuda");
+                    $("#vencimientodeuda").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                if (parseInt(validationinputDate) < parseInt(hoy)) {
+                    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
+                    $("#vencimientodeuda").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if ($("#saldodeudor").val().substring(0, 1) == "-") {
+                    alert("El saldo deudor no puede ser negativo");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                if ($("#saldodeudor").val() == "") {
+                    alert("Debe ingresar el saldo deudor");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                if ($("#saldodeudor").val() == "0") {
+                    alert("El saldo deudor no puede ser 0");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+
+                if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada) {
+                    alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada + "]");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if ($("#saldodeudor").val() == "0") {
+                    alert("El saldo deudor no puede ser 0");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
+
                 break;
-            }
 
-            if (inputDate == "") {
-                alert("Debe ingresar la fecha de vencimiento de la deuda");
-                $("#vencimientodeuda").focus();
-                closeTaskOk = false;
+            case 26:
+                var payload = {
+                    EstadoId: 27
+                }
+                updateStatusChange(payload);
                 break;
-            }
-            if (parseInt(validationinputDate) < parseInt(hoy)) {
-                alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-                $("#vencimientodeuda").focus();
-                closeTaskOk = false;
+
+            case 27:
+                var payload = {
+                    ImporteACancelar: $("#cancelImport").val(),
+                    ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
+                    FechaDeCancelaci\u00f3n: $("#cancelDate").val() + "T00:00:00",
+                    NumeroDeCheque: $("#checkNumber").val(),
+                    ComprobanteN: $("#comprobanteNumber").val(),
+                    EstadoId: 28
+                }
+
+                if ($("#dropzone")[0].dropzone.files.length < 1) {
+                    alert("Debe adjuntar la Rendición del pago");
+                    $("#dropzone").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                var inputDate = $("#cancelDate").val();
+                var hoy = new Date();
+                var dd = hoy.getDate();
+                var mm = hoy.getMonth() + 1;
+                var yyyy = hoy.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+
+                hoy = yyyy + '' + mm + '' + dd;
+
+                if (Object.prototype.toString.call(inputDate) === '[object Date]') {
+                    errors.push("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
+                    $("#vencimientodeuda").focus();
+                }
+
+                var validationinputDate = inputDate.split("-");
+                validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
+                if (parseInt(validationinputDate) < parseInt(hoy)) {
+                    alert("La fecha de cancelación debe ser mayor que la fecha actual");
+                    $("#cancelDate").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if (inputDate == "") {
+                    alert("Ingrese una fecha válida");
+                    $("#cancelDate").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                var importe = $("#cancelImport").val();
+
+                if (importe.substring(0, 1) == "-") {
+                    alert("El importe no puede ser negativo");
+                    $("#cancelImport").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                if (importe == "") {
+                    alert("Debe ingresar el importe a cancelar");
+                    $("#cancelImport").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+                if (importe == "0") {
+                    alert("El importe no puede ser 0");
+                    $("#cancelImport").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                updateStatusChange(payload);
+                getFile("#dropzone");
                 break;
-            }
 
-            if ($("#saldodeudor").val().substring(0, 1) == "-") {
-                alert("El saldo deudor no puede ser negativo");
-                $("#saldodeudor").focus();
-                closeTaskOk = false;
+            case 28:
+                var payload = {
+                    EstadoId: 29
+                }
+                updateStatusChange(payload);
                 break;
-            }
-            if ($("#saldodeudor").val() == "") {
-                alert("Debe ingresar el saldo deudor");
-                $("#saldodeudor").focus();
-                closeTaskOk = false;
+
+            case 29:
+                var payload = {
+                    EstadoId: 30
+                }
+                updateStatusChange(payload);
                 break;
-            }
-            if ($("#saldodeudor").val() == "0") {
-                alert("El saldo deudor no puede ser 0");
-                $("#saldodeudor").focus();
-                closeTaskOk = false;
+
+            case 30:
+                var payload = {
+                    EstadoId: 31
+                }
+                updateStatusChange(payload);
                 break;
-            }
-   
 
-            if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada)
-            {
-                alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada + "]");
-                $("#saldodeudor").focus();
-                closeTaskOk = false;
+            case 31:
+                var payload = {
+                    FechaDeCierreDeSiniestro: new Date().toISOString(),
+                    EstadoId: 32
+                }
+                updateStatusChange(payload);
                 break;
-            }
 
-            if ($("#saldodeudor").val() == "0") {
-                alert("El saldo deudor no puede ser 0");
-                $("#saldodeudor").focus();
-                closeTaskOk = false;
+            case 33:
+                var isAuthorized = false;
+                if ($("input#autRepoSi")[0].checked === true) {
+                    isAuthorized = true;
+                }
+                var payload = {
+                    EstadoId: isAuthorized ? 34 : 25
+                }
+                updateStatusChange(payload);
                 break;
-            }	
 
-		    sinaptic.wf.validateForm(payload, 25, function () { updateStatusChange(payload) })
-		
-            break;
-
-        case 26:
-            var payload = {
-                EstadoId: 27
-            }
-            updateStatusChange(payload);
-            break;
-
-        case 27:
-            var payload = {
-                ImporteACancelar: $("#cancelImport").val(),
-                ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
-                FechaDeCancelaci\u00f3n: $("#cancelDate").val() + "T00:00:00",
-                NumeroDeCheque: $("#checkNumber").val(),
-                ComprobanteN: $("#comprobanteNumber").val(),
-                EstadoId: 28
-            }
-			
-			if($("#dropzone")[0].dropzone.files.length < 1){
-			    alert("Debe adjuntar la Rendición del pago");
-			    $("#dropzone").focus();
-			    closeTaskOk = false;
-				break;
-			}
-
-            var inputDate = $("#cancelDate").val();
-            var hoy = new Date();
-            var dd = hoy.getDate();
-            var mm = hoy.getMonth() + 1;
-            var yyyy = hoy.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-
-            hoy = yyyy + '' + mm + '' + dd;
-
-            var validationinputDate = inputDate.split("-");
-            validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
-            if (parseInt(validationinputDate) < parseInt(hoy)) {
-                alert("La fecha de cancelación debe ser mayor que la fecha actual");
-                $("#cancelDate").focus();
-                closeTaskOk = false;
+            case 34:
+                var payload = {
+                    EstadoId: 35
+                }
+                updateStatusChange(payload);
                 break;
-            }
 
-            if (inputDate == "") {
-                alert("Ingrese una fecha válida");
-                $("#cancelDate").focus();
-                closeTaskOk = false;
+            case 35:
+                // FALTA ADJUNTAR FACTURA
+                var payload = {
+                    EstadoId: 36
+                }
+
+                if ($("#dropzone")[0].dropzone.files.length < 1) {
+                    alert("Debe adjuntar un documento");
+                    $("#dropzone").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                updateStatusChange(payload);
                 break;
-            }
- 
-			var importe = $("#cancelImport").val();
-			
-			if(importe.substring(0,1) == "-"){
-			    alert("El importe no puede ser negativo");
-			    $("#cancelImport").focus();
-			    closeTaskOk = false;
-				break;
-			}
-			if(importe == ""){
-			    alert("Debe ingresar el importe a cancelar");
-			    $("#cancelImport").focus();
-			    closeTaskOk = false;
-				break;
-			}					
-			if(importe == "0"){
-			    alert("El importe no puede ser 0");
-			    $("#cancelImport").focus();
-			    closeTaskOk = false;
-				break;
-			}					
-	
-            updateStatusChange(payload);
-            getFile("#dropzone");
-            break;
 
-        case 28:
-            var payload = {
-                EstadoId: 29
-            }
-            updateStatusChange(payload);
-            break;
+            case 36:
+                var payload = {
+                    EstadoId: 37
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 29:
-            var payload = {
-                EstadoId: 30
-            }
-            updateStatusChange(payload);
-            break;
+            case 37:
+                var payload = {
+                    EstadoId: 38
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 30:
-            var payload = {
-                EstadoId: 31
-            }
-            updateStatusChange(payload);
-            break;
+            case 38:
+                var payload = {
+                    EstadoId: 39
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 31:
-            var payload = {
-                FechaDeCierreDeSiniestro: new Date().toISOString(),
-                EstadoId: 32
-            }
-            updateStatusChange(payload);
-            break;
+            case 39:
+                verifPrenda
+                var verifPrenda = false;
+                if ($("input#verifPrendaSi")[0].checked === true) {
+                    verifPrenda = true;
+                }
+                var payload = {
+                    EstadoId: verifPrenda ? 30 : 40
+                }
+                updateStatusChange(payload);
+                break;
 
-        case 33:
-            var isAuthorized = false;
-            if ($("input#autRepoSi")[0].checked === true) {
-                isAuthorized = true;
-            }
-            var payload = {
-                EstadoId: isAuthorized? 34: 25
-            }
-            updateStatusChange(payload);
-            break;
+            case 40:
+                var payload = {
+                    EstadoId: 41
+                }
 
-        case 34:
-            var payload = {
-                EstadoId: 35
-            }
-            updateStatusChange(payload);
-            break;
+                updateStatusChange(payload);
 
-        case 35:
-            // FALTA ADJUNTAR FACTURA
-            var payload = {
-                EstadoId: 36
-            }
-			
-			if($("#dropzone")[0].dropzone.files.length < 1){
-			    alert("Debe adjuntar un documento");
-			    $("#dropzone").focus();
-			    closeTaskOk = false;
-			    break;
-			}
-			
-            updateStatusChange(payload);
-            break;
+                break;
 
-        case 36:
-            var payload = {
-                EstadoId: 37
-            }
-            updateStatusChange(payload);
-            break;
+            case 41:
 
-        case 37:
-            var payload = {
-                EstadoId: 38
-            }
-            updateStatusChange(payload);
-            break;
+                var payload = {
+                    EstadoId: 39
+                }
 
-        case 38:
-            var payload = {
-                EstadoId: 39
-            }
-            updateStatusChange(payload);
-            break;
+                updateStatusChange(payload);
 
-        case 39:
-            verifPrenda
-            var verifPrenda = false;
-            if ($("input#verifPrendaSi")[0].checked === true) {
-                verifPrenda = true;
-            }
-            var payload = {
-                EstadoId: verifPrenda?30:40
-            }
-            updateStatusChange(payload);
-            break;
+                break;
+            case 42:
+                var payload = {
+                    EstadoId: 24
+                }
 
-        case 40:
-            var payload = {
-                EstadoId: 41
-            }
+                updateStatusChange(payload);
 
-            updateStatusChange(payload);
-
-            break;
-
-        case 41:
-
-            var payload = {
-                EstadoId: 39
-            }
-
-            updateStatusChange(payload);
-
-            break;
-        case 42:
-            var payload = {
-                EstadoId: 24
-            }
-
-            updateStatusChange(payload);
-
-            break;
+                break;
 
         };
 
