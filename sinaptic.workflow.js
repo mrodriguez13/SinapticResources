@@ -504,11 +504,11 @@ sinaptic.wf = function () {
         }
         if (Object.prototype.toString.call(sinisterDate) ==! '[object Date]') {
             errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
-            $("#newSinister_orden").focus();
+            $("#newSinister_fechaSiniestro").focus();
         }
         if (sinisterDate > new Date()) {
             errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
-            $("#newSinister_orden").focus();
+            $("#newSinister_fechaSiniestro").focus();
         }
         if (group === null || group === "") {
             errors.push("Debe ingresar el grupo");
@@ -1018,7 +1018,7 @@ sinaptic.wf = function () {
 
                 if (Object.prototype.toString.call(inputDate) ==! '[object Date]') {
                     alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
-                    $("#vencimientodeuda").focus();
+                    $("#cancelDate").focus();
                     closeTaskOk = false;
                     break;
                 }
