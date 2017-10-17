@@ -493,7 +493,7 @@ sinaptic.wf = function () {
     function validateCreateSinister() {
         var errors = [];
         var sinisterName = $("#newSinister_siniestro").val();
-        var sinisterDate = $("#newSinister_fechaSiniestro").val() + "T00:00:00";
+        var sinisterDate = new Date($("#newSinister_fechaSiniestro").val() + "T00:00:00");
         var group = $("#newSinister_grupo").val();
         var order = $("#newSinister_orden").val();
         var domain = $("#newSinister_dominio").val();
@@ -502,7 +502,11 @@ sinaptic.wf = function () {
             errors.push("Debe ingresar un título para el siniestro");
             $("#newSinister_siniestro").focus();
         }
-        if (new Date(sinisterDate) > new Date()) {
+        if(Object.prototype.toString.call(sinisterDate) === '[object Date]'){
+            errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
+            $("#newSinister_orden").focus();
+        }
+        if ( sinisterDate > new Date()) {
             errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
             $("#newSinister_orden").focus();
         }
