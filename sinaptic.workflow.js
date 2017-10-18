@@ -497,7 +497,17 @@ sinaptic.wf = function () {
         var group = $("#newSinister_grupo").val();
         var order = $("#newSinister_orden").val();
         var domain = $("#newSinister_dominio").val();
+        var amount = $("#newSinister_suma").val();
+        var taker = $("#newSinister_tomador").val();
 
+        if (isNaN(sinisterName)) {
+            errors.push("El título del siniestro debe ser numérico");
+            $("#newSinister_siniestro").focus();
+        }
+        if (!isNaN(taker)) {
+            errors.push("El valor ingresado en Tomador es incorreccto");
+            $("#newSinister_tomador").focus();
+        }
         if (sinisterName === null || sinisterName === "") {
             errors.push("Debe ingresar un título para el siniestro");
             $("#newSinister_siniestro").focus();
@@ -510,9 +520,17 @@ sinaptic.wf = function () {
             errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
             $("#newSinister_fechaSiniestro").focus();
         }
+        if (isNaN(group)) {
+            errors.push("El grupo debe ser numérico");
+            $("#newSinister_grupo").focus();
+        }
         if (group === null || group === "") {
             errors.push("Debe ingresar el grupo");
             $("#newSinister_grupo").focus();
+        }
+        if (isNaN(order)) {
+            errors.push("El Orden debe ser numérico");
+            $("#newSinister_orden").focus();
         }
         if (order === null || order === "") {
             errors.push("Debe ingresar el orden");
@@ -521,6 +539,10 @@ sinaptic.wf = function () {
         if (domain === null || domain === "") {
             errors.push("Debe ingresar el dominio el vehículo");
             $("#newSinister_dominio").focus();
+        }
+        if (isNaN(amount)) {
+            errors.push("El valor ingresado en el monto asegurado no es válido");
+            $("#newSinister_suma").focus();
         }
         if (errors.length > 0) {
             alert(errors.join("\r\n"));
@@ -912,21 +934,19 @@ sinaptic.wf = function () {
                 hoy = yyyy + '' + mm + '' + dd;
 
                 if (Object.prototype.toString.call(inputDate) ==! '[object Date]'  || isNaN(inputDate.getTime())) {
-                    alert("El formato de la fecha  de vencimiento ingresada no es válido [dd/MM/aaaa]");
+                    alert("El formato de la fecha de vencimiento ingresada no es válido [dd/MM/aaaa]");
                     $("#vencimientodeuda").focus();
                     closeTaskOk = false;
                     break;
                 }
-
+                if (isNaN(payload.SaldoPendiente)) {
+                    alert("El valor ingresado en Saldo Pendiente no es válido [debe ser un número]");
+                    $("#saldodeudor").focus();
+                    closeTaskOk = false;
+                    break;
+                }
                 var validationinputDate = inputDate.split("-");
                 validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
-                if (parseInt(validationinputDate) < parseInt(hoy)) {
-                    alert("La fecha de vencimiento debe ser mayor a la fecha actual");
-                    $("#vencimientodeuda").focus();
-                    closeTaskOk = false;
-                    break;
-                }
-
                 if (inputDate == "") {
                     alert("Debe ingresar la fecha de vencimiento de la deuda");
                     $("#vencimientodeuda").focus();
@@ -939,7 +959,6 @@ sinaptic.wf = function () {
                     closeTaskOk = false;
                     break;
                 }
-
                 if ($("#saldodeudor").val().substring(0, 1) == "-") {
                     alert("El saldo deudor no puede ser negativo");
                     $("#saldodeudor").focus();
@@ -958,8 +977,6 @@ sinaptic.wf = function () {
                     closeTaskOk = false;
                     break;
                 }
-
-
                 if (parseInt($("#saldodeudor").val()) > sinaptic.vm.currentSinister.sumaasegurada) {
                     alert("El saldo deudor no puede ser mayor a la suma asegurada: [$" + sinaptic.vm.currentSinister.sumaasegurada + "]");
                     $("#saldodeudor").focus();
@@ -993,6 +1010,27 @@ sinaptic.wf = function () {
                     NumeroDeCheque: $("#checkNumber").val(),
                     ComprobanteN: $("#comprobanteNumber").val(),
                     EstadoId: 28
+                }
+
+                if (isNaN(payload.ImporteACancelar)) {
+                    alert("El valor ingresado en Importe a Cancelar no es válido [debe ser numérico]");
+                    $("#cancelImport").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if (isNaN(payload.NumeroDeCheque)) {
+                    alert("El valor ingresado en Número de Cheque no es válido [debe ser numérico]");
+                    $("#checkNumber").focus();
+                    closeTaskOk = false;
+                    break;
+                }
+
+                if (isNaN(payload.ComprobanteN)) {
+                    alert("El valor ingresado en Comprobante Número no es válido [debe ser numérico]");
+                    $("#comprobanteNumber").focus();
+                    closeTaskOk = false;
+                    break;
                 }
 
                 if ($("#dropzone")[0].dropzone.files.length < 1) {
