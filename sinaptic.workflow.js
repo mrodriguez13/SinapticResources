@@ -682,7 +682,7 @@ sinaptic.wf = function () {
 
         switch (groupId) {
             case 4:
-                var responsableId = sinaptic.vm.currentSinister.responsableId;
+                var responsableId = nestStatus = 22 ? payload.ResponsableId : sinaptic.vm.currentSinister.responsableId;
                 usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
                 break;
             default:
