@@ -78,6 +78,10 @@ sinaptic.wf = function () {
         console.log("Error: " + data.responseText);
     }
 
+    function showError(data) {
+        alert( data.responseText);
+    }
+
     function applyContentFormatters() {
         $("#saldodeudor").on("input", function () {
             var v = $(this).val(),
@@ -574,24 +578,22 @@ sinaptic.wf = function () {
             VencimientoEstado: vencimiento,
             EstadoId: 21 //ASIGNACIÓN DE RESPONSABLE
         };
-        sinaptic.wf.validateForm(nuevoSiniestro, 0, function () {
-            $.ajax({
-                url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName,
-                type: "POST",
-                processData: false,
-                contentType: "application/json;odata=verbose",
-                data: JSON.stringify(nuevoSiniestro),
-                headers: {
-                    "Accept": "application/json;odata=verbose",
-                    "X-RequestDigest": $("#__REQUESTDIGEST").val()
-                },
-                success: function (data) {
-                    console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
-                    sinaptic.posa();
-                },
-                error: errorHandler
-            })
-        }, errorHandler);
+        $.ajax({
+            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName,
+            type: "POST",
+            processData: false,
+            contentType: "application/json;odata=verbose",
+            data: JSON.stringify(nuevoSiniestro),
+            headers: {
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+            },
+            success: function (data) {
+                console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
+                sinaptic.posa();
+            },
+            error: errorHandler
+        })
     };
 
     var addComment = function (estadoId) {
