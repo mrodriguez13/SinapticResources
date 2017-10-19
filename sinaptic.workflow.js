@@ -678,10 +678,6 @@ sinaptic.wf = function () {
         var protocol = "http";
 
         switch (groupId) {
-            case 1:
-                var responsableId = sinaptic.vm.currentSinister.teamleaderId;
-                usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
-                break;
             case 4:
                 var responsableId = sinaptic.vm.currentSinister.responsableId;
                 usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
