@@ -590,6 +590,12 @@ sinaptic.wf = function () {
             },
             success: function (data) {
                 console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
+                var payload = {
+                    EstadoId: 21
+                };
+                var nextStatus = 21;
+                var groupId = 1;
+                getEmails(payload, nextStatus, groupId)
                 sinaptic.posa();
             },
             error: errorHandler
@@ -667,20 +673,34 @@ sinaptic.wf = function () {
 
     }
 
-
     function getEmails(payload, nextStatus, groupId) {
         var usersUrl = "";
         var protocol = "http";
 
-        if (groupId == 4) //si el grupo al que cambiará de estado el siniestro es "operadores willis"
-        {
-            var responsableId = sinaptic.vm.currentSinister.responsableId;
-            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
-
-        } else {
-            usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
-            protocol = "https";
+        switch (groupId) {
+            case 1:
+                var responsableId = sinaptic.vm.currentSinister.teamleaderId;
+                usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
+                break;
+            case 4:
+                var responsableId = sinaptic.vm.currentSinister.responsableId;
+                usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
+                break;
+            default:
+                usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
+                protocol = "https";
+                break;
         }
+
+        //if (groupId == 4) //si el grupo al que cambiará de estado el siniestro es "operadores willis"
+        //{
+        //    var responsableId = sinaptic.vm.currentSinister.responsableId;
+        //    usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario&$filter=(Usuario/Identificador eq " + responsableId + ")";
+
+        //} else {
+        //    usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo,Usuario&$filter=(Grupo/Identificador eq " + groupId + ")";
+        //    protocol = "https";
+        //}
 
         $.ajax({
             url: usersUrl,
