@@ -516,9 +516,11 @@ sinaptic.wf = function () {
             errors.push("Debe ingresar un título para el siniestro");
             $("#newSinister_siniestro").focus();
         }
-        if (Object.prototype.toString.call(sinisterDate) !== '[object Date]' || isNaN(sinisterDate.getTime())) {
-            errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
-            $("#newSinister_fechaSiniestro").focus();
+        if (navigator.userAgent.match(/trident/i)) {
+            if (Object.prototype.toString.call(sinisterDate) !== '[object Date]' || isNaN(sinisterDate.getTime())) {
+                errors.push("El formato de la fecha ingresada no es válido [dd/MM/aaaa]");
+                $("#newSinister_fechaSiniestro").focus();
+            }
         }
         if (sinisterDate > new Date()) {
             errors.push("La fecha del siniestro debe ser menor o igual a la fecha del día");
@@ -951,12 +953,13 @@ sinaptic.wf = function () {
                 }
 
                 hoy = yyyy + '' + mm + '' + dd;
-
-                if (Object.prototype.toString.call(inputDate) !== '[object Date]'  || isNaN(inputDate.getTime())) {
-                    alert("El formato de la fecha de vencimiento ingresada no es válido [dd/MM/aaaa]");
-                    $("#vencimientodeuda").focus();
-                    closeTaskOk = false;
-                    break;
+                if (navigator.userAgent.match(/trident/i)) {
+                    if (Object.prototype.toString.call(payload.VencimientoDeuda) !== '[object Date]' || isNaN(payload.VencimientoDeuda.getTime())) {
+                        alert("El formato de la fecha de vencimiento ingresada no es válido [dd/MM/aaaa]");
+                        $("#vencimientodeuda").focus();
+                        closeTaskOk = false;
+                        break;
+                    }
                 }
                 if (isNaN(payload.SaldoPendiente)) {
                     alert("El valor ingresado en Saldo Pendiente no es válido [debe ser un número]");
@@ -1072,12 +1075,13 @@ sinaptic.wf = function () {
                 }
 
                 hoy = yyyy + '' + mm + '' + dd;
-
-                if (Object.prototype.toString.call(inputDate) !== '[object Date]' || isNaN(inputDate.getTime())) {
-                    alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
-                    $("#cancelDate").focus();
-                    closeTaskOk = false;
-                    break;
+                if(navigator.userAgent.match(/trident/i) ){
+                    if (Object.prototype.toString.call(inputDate) !== '[object Date]' || isNaN(inputDate.getTime())) {
+                        alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
+                        $("#cancelDate").focus();
+                        closeTaskOk = false;
+                        break;
+                    }
                 }
 
                 var validationinputDate = inputDate.split("-");
