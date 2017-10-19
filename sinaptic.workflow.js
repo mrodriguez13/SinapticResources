@@ -1218,7 +1218,7 @@ sinaptic.wf = function () {
                 break;
             case 42:
                 var payload = {
-                    EstadoId: 24
+                    EstadoId: 23
                 }
 
                 updateStatusChange(payload);
