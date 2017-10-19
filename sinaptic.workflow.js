@@ -593,6 +593,7 @@ sinaptic.wf = function () {
                 var payload = {
                     EstadoId: 21
                 };
+                sinaptic.vm.currentSinister = { siniestro: nuevoSiniestro.Siniestro, identificador: data.d.Identificador };
                 var nextStatus = 21;
                 var groupId = 1;
                 getEmails(payload, nextStatus, groupId)
