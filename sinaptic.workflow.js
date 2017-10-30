@@ -176,7 +176,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo' checked='checked'>NO</label></div>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo'>NO</label></div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
@@ -336,7 +336,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>¿Autorizar Reposicion?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='autRepoSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo' checked='checked'>NO</label></div>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo'>NO</label></div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
@@ -469,9 +469,10 @@ sinaptic.wf = function () {
             beforeSend: function (xhr) { xhr.setRequestHeader('SOAPAction', 'http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems'); },
             contentType: "text/xml; charset=\"utf-8\"",
             success: function (data) {
-                console.log("Documento creado correctamente");
+                console.log("Documento adjuntado correctamente");
             },
             error: function (err) {
+                alert("No se pudo adjuntar el documento: " + err.responseText);
                 console.log("No se pudo creae el documento: " + err.responseText);
             },
         });
