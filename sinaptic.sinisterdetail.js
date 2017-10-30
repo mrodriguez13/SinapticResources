@@ -60,7 +60,7 @@
          d.push("</div>"), d = d.join(""), $("#PrincipalData").html(d)
      }, u = function (e) { $("#tabs").tabs(); };
     function getUserGruop(adminLink) {
-        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo&$filter=(UsuarioId eq " + settings.userId + ")";
+        var usersUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo&$filter=(UsuarioId eq " + _spPageContextInfo.userId + ")";
         $.ajax({
             url: usersUrl,
             type: "GET",
