@@ -73,7 +73,7 @@
                     insertAdminLink(adminLink);
                 }
             },
-            error: errorHandler
+            error: function(error){console.log(error.message)}
         });
     }
     function insertAdminLink(adminLink) {
