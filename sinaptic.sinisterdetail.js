@@ -16,8 +16,8 @@
      }
      , a = function (r) {
          var s = r.d.results[0]; $("#SinesterTitleID h1").html("Siniestro: " + s.Siniestro);
-         var t = window.location.protocol + "://access.willis.com/site/ExpertiseBrokersArgentina/Paginas/AdminTasks.aspx?"; t += "gp=" + s.Grupo + "&or=" + s.Orden + "&title=" + s.Estado["Descripción"];
-         getUserGruop('<a  href="' + t + '"><img src="' + window.location.protocol + '://access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/settings2.png" style="padding-top: 8px;" height="25" width="25"></a>');
+         var t = window.location.protocol + "//access.willis.com/site/ExpertiseBrokersArgentina/Paginas/AdminTasks.aspx?"; t += "gp=" + s.Grupo + "&or=" + s.Orden + "&title=" + s.Estado["Descripción"];
+         getUserGruop('<a  href="' + t + '"><img src="' + window.location.protocol + '//access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/settings2.png" style="padding-top: 8px;" height="25" width="25"></a>');
          //if(true){
          //    $("#SinesterTitleID h1").after('<a  href="' + t + '"><img src="'+window.location.protocol+'://access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/settings2.png" style="padding-top: 8px;" height="25" width="25"></a>');
          //}
