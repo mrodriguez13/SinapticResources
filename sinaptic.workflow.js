@@ -469,6 +469,7 @@ sinaptic.wf = function () {
             beforeSend: function (xhr) { xhr.setRequestHeader('SOAPAction', 'http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems'); },
             contentType: "text/xml; charset=\"utf-8\"",
             success: function (data) {
+                alert("Documento adjuntado correctamente");
                 console.log("Documento adjuntado correctamente");
             },
             error: function (err) {
