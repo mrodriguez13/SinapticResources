@@ -908,6 +908,12 @@ sinaptic.wf = function () {
                 if ($("input#docCompletaSi")[0].checked === true) {
                     isCompleted = true;
                 }
+                if (!isCompleted && $("input#docCompletaNo")[0].checked !== true) {
+                    alert("Debe seleccionar una opción");
+                    $("input#docCompletaSi").focus();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     DocCertCompleta: isCompleted,
                     EstadoId: isCompleted ? 24 : 42
@@ -1150,6 +1156,12 @@ sinaptic.wf = function () {
                 var isAuthorized = false;
                 if ($("input#autRepoSi")[0].checked === true) {
                     isAuthorized = true;
+                }
+                if (!isAuthorized && $("input#autRepoNo")[0].checked !== true) {
+                    alert("Debe seleccionar una opción");
+                    $("input#autRepoSi").focus();
+                    closeTaskOk = false;
+                    break;
                 }
                 var payload = {
                     EstadoId: isAuthorized ? 34 : 25
