@@ -125,16 +125,16 @@ sinaptic.wf = function () {
         var buttons = [];
         var infoHeight = 0;
 
-        buttons.add('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
-        buttons.add('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
+        buttons.push('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
+        buttons.push('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
         if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 33 || estadoId === 36) {
-            buttons.add('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
-            buttons.add('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
+            buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
+            buttons.push('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
         }
         else{
-            buttons.add('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Completar Tarea</button>');
+            buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Completar Tarea</button>');
         }
-        buttons.add('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
+        buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
 
         switch (estadoId) {
             case 21:
