@@ -1268,29 +1268,41 @@ sinaptic.wf = function () {
         taskContent.push('<div class="form-group">');
         taskContent.push('<label for="comment">Comentario de rechazo:</label>');
         taskContent.push('<textarea class="form-control" rows="5" id="rejectComment"></textarea>');
-        taskContent.push('</div>");');
+        taskContent.push('</div>');
 
         buttons.push('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar</button>');
-        buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
+        buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
 
         $("#taskcontent").append(taskContent);
         $("#modaltask > div > div > div.modal-footer").html(buttons.join(""));
     }
     var rejectTask = function (estadoId) {
         var closeTaskOk = true;
-
+        var motivo = $("#rejectComment").val();
+        var nextStatus = 0;
         switch (estadoId) {
             case 25:
-                var motivo = $("#rejectComment").val();
-                var payload = {
-                    MotivoRechazo: motivo,
-                    EstadoId: 24
-                };
-                updateStatusChange(payload);
+                nextStatus = 24;
                 break;
-            default:
+            case 28:
+                nextStatus = 27;
+                break;
+            case 29:
+                nextStatus = 27;
+                break;
+            case 33:
+                nextStatus = 24;
+                break;
+            case 36:
+                nextStatus = 34;
+                break;
 
         }
+        var payload = {
+            MotivoRechazo: motivo,
+            EstadoId: nextStatus
+        };
+        updateStatusChange(payload);
     }
     return {
         createSinister: createSinister,
