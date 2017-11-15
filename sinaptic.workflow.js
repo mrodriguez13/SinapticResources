@@ -129,12 +129,13 @@ sinaptic.wf = function () {
         buttons.push('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
         if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 33 || estadoId === 36) {
             buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
-            buttons.push('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
+            buttons.push('<button type="button" onclick="sinaptic.wf.showRejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
+            buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');           
         }
         else{
             buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Completar Tarea</button>');
+            buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
         }
-        buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
 
         switch (estadoId) {
             case 21:
@@ -930,7 +931,8 @@ sinaptic.wf = function () {
                 var reslvalue = $("#tipoResolucion option:selected").val();
                 var payload = {
                     TipoDeResuloci\u00f3nValue: resolucion,
-                    EstadoId: reslvalue == "1" ? 25 : 33
+                    EstadoId: reslvalue == "1" ? 25 : 33,
+                    MotivoRechazo: ""
                 }
                 updateStatusChange(payload);
                 break;
@@ -1032,7 +1034,9 @@ sinaptic.wf = function () {
                     FechaDeCancelaci\u00f3n: $("#cancelDate").val() + "T00:00:00",
                     NumeroDeCheque: $("#checkNumber").val(),
                     ComprobanteN: $("#comprobanteNumber").val(),
-                    EstadoId: 28
+                    EstadoId: 28,
+                    MotivoRechazo: ""
+
                 }
 
                 if (isNaN(payload.ImporteACancelar)) {
@@ -1168,7 +1172,8 @@ sinaptic.wf = function () {
 
             case 34:
                 var payload = {
-                    EstadoId: 35
+                    EstadoId: 35,
+                    MotivoRechazo: ""
                 }
                 updateStatusChange(payload);
                 break;
@@ -1256,13 +1261,27 @@ sinaptic.wf = function () {
         }
     }
 
+    var showRejectTask = function (estadoId) {
+        var taskContent = [];
+        var buttons = [];
 
+        taskContent.push('<div class="form-group">');
+        taskContent.push('<label for="comment">Comentario de rechazo:</label>');
+        taskContent.push('<textarea class="form-control" rows="5" id="rejectComment"></textarea>');
+        taskContent.push('</div>");');
+
+        buttons.push('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar</button>');
+        buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
+
+        $("#taskcontent").append(taskContent);
+        $("#modaltask > div > div > div.modal-footer").html(buttons.join(""));
+    }
     var rejectTask = function (estadoId) {
         var closeTaskOk = true;
 
         switch (estadoId) {
             case 25:
-                var motivo = $("#").val();
+                var motivo = $("#rejectComment").val();
                 var payload = {
                     MotivoRechazo: motivo,
                     EstadoId: 24
