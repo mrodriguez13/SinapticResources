@@ -1299,6 +1299,8 @@ sinaptic.wf = function () {
         addComment: addComment,
         completeTask: completeTask,
         hasPressedEnter: hasPressedEnter,
-        getNextStatusData: getNextStatusData
+        getNextStatusData: getNextStatusData,
+        showRejectTask: showRejectTask,
+        rejectTask: rejectTask
     };
 }();
