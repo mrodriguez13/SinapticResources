@@ -104,7 +104,7 @@ sinaptic.wf = function () {
             carriers: _carriers
         };
         renderTemplate("#modalsContainer", "#newSinister-template", payload);
-        $("#newSinister > div > div > div.modal-footer > button.btn.btn-success").data("dismiss", "");
+        $("#newSinister > div > div > div.modal-footer > button.btn.btn-success").attr("data-dismiss", "");
         $("#newSinister").modal();
     };
 
