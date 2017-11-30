@@ -104,6 +104,7 @@ sinaptic.wf = function () {
             carriers: _carriers
         };
         renderTemplate("#modalsContainer", "#newSinister-template", payload);
+        $("#newSinister > div > div > div.modal-footer > button.btn.btn-success").data("dismiss", "");
         $("#newSinister").modal();
     };
 
@@ -637,6 +638,7 @@ sinaptic.wf = function () {
                             var groupId = 1;
                             getEmails(payload, nextStatus, groupId)
                             sinaptic.posa();
+                            $("#newSinister").modal("hide");
                         },
                         error: errorHandler
                     })
