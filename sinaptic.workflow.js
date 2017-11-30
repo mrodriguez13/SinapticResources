@@ -122,7 +122,25 @@ sinaptic.wf = function () {
         var dropZoneMessage = "";
         var taskContent = [];
         var siniesterInfo = [];
+        var rejectMessage = [];
+        var buttons = [];
         var infoHeight = 0;
+
+        buttons.push('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
+        buttons.push('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
+        if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 33 || estadoId === 36) {
+            buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
+            buttons.push('<button type="button" onclick="sinaptic.wf.showRejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
+            buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');           
+        }
+        else{
+            buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Completar Tarea</button>');
+            buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
+        }
+        if (sinaptic.vm.currentSinister.motivoRechazo !== undefined && sinaptic.vm.currentSinister.motivoRechazo !== null && sinaptic.vm.currentSinister.motivoRechazo !== "") {
+            rejectMessage.push('<div class="rejectMessage">' + sinaptic.vm.currentSinister.motivoRechazo + '</div>');
+        }
+
         switch (estadoId) {
             case 21:
                 $(sinaptic.vm.willisusers).each(function (i, user) {
@@ -328,9 +346,7 @@ sinaptic.wf = function () {
                 siniesterInfo.push(sinaptic.vm.currentSinister.comprobantenumero);
                 siniesterInfo.push("</div>");
                 siniesterInfo.push("</div>");
-
                 break;
-
             case 33: //Autorizar reposicion
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-12'>");
@@ -340,7 +356,6 @@ sinaptic.wf = function () {
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
-
             case 35: //Remitir factura a plan Ovalo
                 taskContent.push("<div class='form-group'>");
                 taskContent.push("<div class='col-md-8'>");
@@ -372,6 +387,10 @@ sinaptic.wf = function () {
         taskContent = taskContent.join("");
         $("#taskcontent").append(taskContent);
         applyContentFormatters();
+        if (rejectMessage.length > 0) {
+            $(".sinisterInfo").after(rejectMessage.join(""));
+        }
+        $("#modaltask > div > div > div.modal-footer").html(buttons.join(""));
         $("#modaltask").modal();
         if (startDropZone) {
             $("#dropzone").dropzone({
@@ -469,7 +488,6 @@ sinaptic.wf = function () {
             beforeSend: function (xhr) { xhr.setRequestHeader('SOAPAction', 'http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems'); },
             contentType: "text/xml; charset=\"utf-8\"",
             success: function (data) {
-                alert("Documento adjuntado correctamente");
                 console.log("Documento adjuntado correctamente");
             },
             error: function (err) {
@@ -764,7 +782,6 @@ sinaptic.wf = function () {
         })
     }
 
-
     function closeStatusById(id) {
         var toDate = {
             "FechaHasta": new Date().toJSON()
@@ -883,6 +900,7 @@ sinaptic.wf = function () {
         switch (estadoId) {
             case 21:
                 var payload = {
+                    MotivoRechazo: "",
                     ResponsableId: $("#responsablewillis").val(),
                     TeamLeaderId: $("#teamleaderwillis").val(),
                     EstadoId: 22
@@ -891,6 +909,7 @@ sinaptic.wf = function () {
                 break;
             case 22:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 23
                 };
                 if ($("#dropzone")[0].dropzone.files.length < 1) {
@@ -908,13 +927,8 @@ sinaptic.wf = function () {
                 if ($("input#docCompletaSi")[0].checked === true) {
                     isCompleted = true;
                 }
-                if (!isCompleted && $("input#docCompletaNo")[0].checked !== true) {
-                    alert("Debe seleccionar una opción");
-                    $("input#docCompletaSi").focus();
-                    closeTaskOk = false;
-                    break;
-                }
                 var payload = {
+                    MotivoRechazo: "",
                     DocCertCompleta: isCompleted,
                     EstadoId: isCompleted ? 24 : 42
 
@@ -926,14 +940,17 @@ sinaptic.wf = function () {
                 var resolucion = $("#tipoResolucion option:selected").text();
                 var reslvalue = $("#tipoResolucion option:selected").val();
                 var payload = {
+                    MotivoRechazo: "",
                     TipoDeResuloci\u00f3nValue: resolucion,
-                    EstadoId: reslvalue == "1" ? 25 : 33
+                    EstadoId: reslvalue == "1" ? 25 : 33,
+                    MotivoRechazo: ""
                 }
                 updateStatusChange(payload);
                 break;
 
             case 25:
                 var payload = {
+                    MotivoRechazo: "",
                     SaldoPendiente: $("#saldodeudor").val(),
                     VencimientoDeuda: $("#vencimientodeuda").val() + "T00:00:00",
                     EstadoId: 26
@@ -1017,6 +1034,7 @@ sinaptic.wf = function () {
 
             case 26:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 27
                 }
                 updateStatusChange(payload);
@@ -1024,12 +1042,15 @@ sinaptic.wf = function () {
 
             case 27:
                 var payload = {
+                    MotivoRechazo: "",
                     ImporteACancelar: $("#cancelImport").val(),
                     ModoDeCancelaci\u00f3nValue: $("#cancelationMode option:selected").text(),
                     FechaDeCancelaci\u00f3n: $("#cancelDate").val() + "T00:00:00",
                     NumeroDeCheque: $("#checkNumber").val(),
                     ComprobanteN: $("#comprobanteNumber").val(),
-                    EstadoId: 28
+                    EstadoId: 28,
+                    MotivoRechazo: ""
+
                 }
 
                 if (isNaN(payload.ImporteACancelar)) {
@@ -1125,6 +1146,7 @@ sinaptic.wf = function () {
 
             case 28:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 29
                 }
                 updateStatusChange(payload);
@@ -1132,6 +1154,7 @@ sinaptic.wf = function () {
 
             case 29:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 30
                 }
                 updateStatusChange(payload);
@@ -1139,6 +1162,7 @@ sinaptic.wf = function () {
 
             case 30:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 31
                 }
                 updateStatusChange(payload);
@@ -1146,6 +1170,7 @@ sinaptic.wf = function () {
 
             case 31:
                 var payload = {
+                    MotivoRechazo: "",
                     FechaDeCierreDeSiniestro: new Date().toISOString(),
                     EstadoId: 32
                 }
@@ -1157,13 +1182,8 @@ sinaptic.wf = function () {
                 if ($("input#autRepoSi")[0].checked === true) {
                     isAuthorized = true;
                 }
-                if (!isAuthorized && $("input#autRepoNo")[0].checked !== true) {
-                    alert("Debe seleccionar una opción");
-                    $("input#autRepoSi").focus();
-                    closeTaskOk = false;
-                    break;
-                }
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: isAuthorized ? 34 : 25
                 }
                 updateStatusChange(payload);
@@ -1171,7 +1191,9 @@ sinaptic.wf = function () {
 
             case 34:
                 var payload = {
-                    EstadoId: 35
+                    MotivoRechazo: "",
+                    EstadoId: 35,
+                    MotivoRechazo: ""
                 }
                 updateStatusChange(payload);
                 break;
@@ -1179,6 +1201,7 @@ sinaptic.wf = function () {
             case 35:
                 // FALTA ADJUNTAR FACTURA
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 36
                 }
 
@@ -1194,6 +1217,7 @@ sinaptic.wf = function () {
 
             case 36:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 37
                 }
                 updateStatusChange(payload);
@@ -1201,6 +1225,7 @@ sinaptic.wf = function () {
 
             case 37:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 38
                 }
                 updateStatusChange(payload);
@@ -1208,6 +1233,7 @@ sinaptic.wf = function () {
 
             case 38:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 39
                 }
                 updateStatusChange(payload);
@@ -1220,6 +1246,7 @@ sinaptic.wf = function () {
                     verifPrenda = true;
                 }
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: verifPrenda ? 30 : 40
                 }
                 updateStatusChange(payload);
@@ -1227,6 +1254,7 @@ sinaptic.wf = function () {
 
             case 40:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 41
                 }
 
@@ -1237,6 +1265,7 @@ sinaptic.wf = function () {
             case 41:
 
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 39
                 }
 
@@ -1245,13 +1274,11 @@ sinaptic.wf = function () {
                 break;
             case 42:
                 var payload = {
+                    MotivoRechazo: "",
                     EstadoId: 23
                 }
-
                 updateStatusChange(payload);
-
                 break;
-
         };
 
         if (closeTaskOk) {
@@ -1259,6 +1286,56 @@ sinaptic.wf = function () {
         }
     }
 
+    var showRejectTask = function (estadoId) {
+        var taskContent = [];
+        var buttons = [];
+
+        taskContent.push('<div class="form-group">');
+        taskContent.push('<label for="comment">Comentario de rechazo:</label>');
+        taskContent.push('<textarea class="form-control" rows="5" id="rejectComment"></textarea>');
+        taskContent.push('</div>');
+
+        buttons.push('<button type="button" onclick="sinaptic.wf.rejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar</button>');
+        buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
+
+        $("#taskcontent").append(taskContent);
+        $("#modaltask > div > div > div.modal-footer").html(buttons.join(""));
+    }
+    var rejectTask = function (estadoId) {
+        var closeTaskOk = true;
+        var motivo = $("#rejectComment").val();
+        if (motivo !== "" || motivo === null) {
+            closeTaskOk = false;
+            alert("Debe ingresar un motivo de rechazo");
+        }
+        var nextStatus = 0;
+        switch (estadoId) {
+            case 25:
+                nextStatus = 24;
+                break;
+            case 28:
+                nextStatus = 27;
+                break;
+            case 29:
+                nextStatus = 27;
+                break;
+            case 33:
+                nextStatus = 24;
+                break;
+            case 36:
+                nextStatus = 34;
+                break;
+
+        }
+        var payload = {
+            MotivoRechazo: motivo,
+            EstadoId: nextStatus
+        };
+        updateStatusChange(payload);
+        if (closeTaskOk) {
+            $("#modaltask").modal('hide');
+        }
+    }
     return {
         createSinister: createSinister,
         showTaskForm: showTaskForm,
@@ -1266,6 +1343,8 @@ sinaptic.wf = function () {
         addComment: addComment,
         completeTask: completeTask,
         hasPressedEnter: hasPressedEnter,
-        getNextStatusData: getNextStatusData
+        getNextStatusData: getNextStatusData,
+        showRejectTask: showRejectTask,
+        rejectTask: rejectTask
     };
 }();

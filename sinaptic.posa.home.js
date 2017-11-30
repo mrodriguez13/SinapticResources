@@ -262,7 +262,8 @@ sinaptic.posa = function (options) {
                 tiposiniestro: sinister.TipoDeSiniestroValue,
                 teamleaderId: sinister.TeamLeaderId,
                 vencimientodeuda: vencimientoDeuda,
-                linksiniestro: settings.host + "/Paginas/DetallesSiniestro.aspx?#ID=" + sinister.Identificador
+                linksiniestro: settings.host + "/Paginas/DetallesSiniestro.aspx?#ID=" + sinister.Identificador,
+                motivoRechazo: sinister.MotivoRechazo
             };
             var task = {
                 ID: sinister.Identificador,
