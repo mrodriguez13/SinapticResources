@@ -584,7 +584,7 @@ sinaptic.wf = function () {
         var grupo =  $("#newSinister_grupo").val();
         var orden = $("#newSinister_orden").val();
 
-        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Grupo eq " + grupo + " and Orden eq " + orden + " and EstadoId ne 32";
+        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Grupo eq '" + grupo + "' and Orden eq '" + orden + "' and EstadoId ne 32";
         $.ajax({
             url: url,
             type: "GET",
