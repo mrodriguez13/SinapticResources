@@ -581,48 +581,72 @@ sinaptic.wf = function () {
         if (!validateCreateSinister()) {
             return;
         }
-        var vencimiento = getDueDates(21).alertDate1.toJSON();
-        var nuevoSiniestro = {
-            Siniestro: $("#newSinister_siniestro").val(),
-            Grupo: $("#newSinister_grupo").val(),
-            Orden: $("#newSinister_orden").val(),
-            CarrierId: $("#newSinister_carrier").val(),
-            Tomador: $("#newSinister_tomador").val(),
-            FechaSiniestro: $("#newSinister_fechaSiniestro").val() + "T00:00:00",
-            TipoDeSiniestroValue: $("#newSinister_tipoSiniestro").val(),
-            ModeloVehiculo: $("#newSinister_modeloVehiculo").val(),
-            Dominio: $("#newSinister_dominio").val(),
-            SumaAsegurada: $("#newSinister_suma").val(),
-            MailCliente: $("#newSinister_mailCliente").val(),
-            TelCliente: $("#newSinister_telCliente").val(),
-            MailCia: $("#newSinister_mailCia").val(),
-            TelCia: $("#newSinister_telCia").val(),
-            VencimientoEstado: vencimiento,
-            EstadoId: 21 //ASIGNACIÓN DE RESPONSABLE
-        };
+        var grupo =  $("#newSinister_grupo").val();
+        var orden = $("#newSinister_orden").val();
+
+        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Grupo eq " + grupo + " and Orden eq " + orden + " and EstadoId ne 32";
         $.ajax({
-            url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName,
-            type: "POST",
-            processData: false,
-            contentType: "application/json;odata=verbose",
-            data: JSON.stringify(nuevoSiniestro),
+            url: url,
+            type: "GET",
+            async: true,
             headers: {
-                "Accept": "application/json;odata=verbose",
-                "X-RequestDigest": $("#__REQUESTDIGEST").val()
+                "accept": "application/json;odata=verbose"
             },
             success: function (data) {
-                console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
-                var payload = {
-                    EstadoId: 21
-                };
-                sinaptic.vm.currentSinister = { siniestro: nuevoSiniestro.Siniestro, identificador: data.d.Identificador };
-                var nextStatus = 21;
-                var groupId = 1;
-                getEmails(payload, nextStatus, groupId)
-                sinaptic.posa();
+                var sinister = data.d.results;
+                if (data.d.results !== null && data.d.results.length > 0) {
+                    alert("Existe un siniestro con el mismo grupo y orden que aún no ha sido cerrado, no puede ingresarlo nuevamente hasta que el mismo esté cerrado.");
+                    return;
+                } else {
+                    var vencimiento = getDueDates(21).alertDate1.toJSON();
+                    var nuevoSiniestro = {
+                        Siniestro: $("#newSinister_siniestro").val(),
+                        Grupo: $("#newSinister_grupo").val(),
+                        Orden: $("#newSinister_orden").val(),
+                        CarrierId: $("#newSinister_carrier").val(),
+                        Tomador: $("#newSinister_tomador").val(),
+                        FechaSiniestro: $("#newSinister_fechaSiniestro").val() + "T00:00:00",
+                        TipoDeSiniestroValue: $("#newSinister_tipoSiniestro").val(),
+                        ModeloVehiculo: $("#newSinister_modeloVehiculo").val(),
+                        Dominio: $("#newSinister_dominio").val(),
+                        SumaAsegurada: $("#newSinister_suma").val(),
+                        MailCliente: $("#newSinister_mailCliente").val(),
+                        TelCliente: $("#newSinister_telCliente").val(),
+                        MailCia: $("#newSinister_mailCia").val(),
+                        TelCia: $("#newSinister_telCia").val(),
+                        VencimientoEstado: vencimiento,
+                        EstadoId: 21 //ASIGNACIÓN DE RESPONSABLE
+                    };
+                    $.ajax({
+                        url: settings.host + "/_vti_bin/listdata.svc/" + settings.sinistersListName,
+                        type: "POST",
+                        processData: false,
+                        contentType: "application/json;odata=verbose",
+                        data: JSON.stringify(nuevoSiniestro),
+                        headers: {
+                            "Accept": "application/json;odata=verbose",
+                            "X-RequestDigest": $("#__REQUESTDIGEST").val()
+                        },
+                        success: function (data) {
+                            console.log("Siniestro Creado: " + nuevoSiniestro.Siniestro);
+                            var payload = {
+                                EstadoId: 21
+                            };
+                            sinaptic.vm.currentSinister = { siniestro: nuevoSiniestro.Siniestro, identificador: data.d.Identificador };
+                            var nextStatus = 21;
+                            var groupId = 1;
+                            getEmails(payload, nextStatus, groupId)
+                            sinaptic.posa();
+                        },
+                        error: errorHandler
+                    })
+                }
             },
             error: errorHandler
-        })
+        });
+
+
+ 
     };
 
     var addComment = function (estadoId) {
@@ -1304,7 +1328,7 @@ sinaptic.wf = function () {
     var rejectTask = function (estadoId) {
         var closeTaskOk = true;
         var motivo = $("#rejectComment").val();
-        if (motivo !== "" || motivo === null) {
+        if (motivo === null || motivo === undefined || motivo === "") {
             closeTaskOk = false;
             alert("Debe ingresar un motivo de rechazo");
         }
