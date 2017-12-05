@@ -965,6 +965,12 @@ sinaptic.wf = function () {
             case 24:
                 var resolucion = $("#tipoResolucion option:selected").text();
                 var reslvalue = $("#tipoResolucion option:selected").val();
+                if (reslvalue !== "1" && $("#dropzone")[0].dropzone.files.length < 1) {
+                    alert("Debe adjuntar la documentación correspondiente");
+                    $("#dropzone").focus();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     MotivoRechazo: "",
                     TipoDeResuloci\u00f3nValue: resolucion,
