@@ -441,7 +441,6 @@ sinaptic.wf = function () {
         $("#uploadFile").on("click", function () {
             getFile("#dropzoneCommon");
             $('#attachContainer').toggle();
-            hasAttachedFiles = true;
         });
 
         $("#saveComment").on("click", function () {
@@ -458,6 +457,7 @@ sinaptic.wf = function () {
             file = $(selector)[0].dropzone.files[i];
             sinaptic.vm.uploadingFileName = file.name;
             UploadMe(file);
+            hasAttachedFiles = true;
         }
         $(selector)[0].dropzone.removeAllFiles();
     }
