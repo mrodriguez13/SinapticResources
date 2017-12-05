@@ -132,7 +132,7 @@ sinaptic.wf = function () {
 
         buttons.push('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
         buttons.push('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
-        if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 33 || estadoId === 36) {
+        if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 36) {
             buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
             buttons.push('<button type="button" onclick="sinaptic.wf.showRejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
             buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');           
