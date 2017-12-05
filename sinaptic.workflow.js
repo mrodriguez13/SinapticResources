@@ -110,7 +110,7 @@ sinaptic.wf = function () {
     };
 
     var showTaskForm = function (siniestro, estadoId) {
-
+        hasAttachedFiles = false;
         sinaptic.context = {
             "siniestro": JSON.parse(siniestro),
             "estado": {
