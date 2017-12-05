@@ -13,6 +13,7 @@ sinaptic.wf = function () {
         statusListname: "Estados"
     };
     var hasAttachedFiles = false;
+    var hasComment = false;
 
     getStatus();
     getCarriers();
@@ -111,6 +112,7 @@ sinaptic.wf = function () {
 
     var showTaskForm = function (siniestro, estadoId) {
         hasAttachedFiles = false;
+        hasComment = false;
         sinaptic.context = {
             "siniestro": JSON.parse(siniestro),
             "estado": {
@@ -881,9 +883,14 @@ sinaptic.wf = function () {
     }
 
     var saveComment = function () {
+        var comment = $("#comentario").val();
+        if (comment === "" || comment === undefined) {
+            return;
+        }
+        hasComment = true;
         var properties = {
             T\u00edtulo: sinaptic.vm.currentSinister.siniestro,
-            Comentario: $("#comentario").val(),
+            Comentario: comment,
             IDSiniestro: sinaptic.vm.currentSinister.identificador,
             EstadoComentario: sinaptic.vm.currentSinister.estado,
             ComentaristaId: _spPageContextInfo.userId
@@ -1179,6 +1186,12 @@ sinaptic.wf = function () {
                 break;
 
             case 28:
+                if (!hasComment) {
+                    alert("Debe ingresar un comentario antes de completar la tarea");
+                    $('#comentariosContainer').toggle();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     MotivoRechazo: "",
                     EstadoId: 29
@@ -1250,6 +1263,12 @@ sinaptic.wf = function () {
                 break;
 
             case 36:
+                if (!hasAttachedFiles) {
+                    alert("Debe adjuntar la documentación correspondiente");
+                    $('#attachContainer').toggle();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     MotivoRechazo: "",
                     EstadoId: 37
