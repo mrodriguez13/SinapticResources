@@ -12,6 +12,7 @@ sinaptic.wf = function () {
         sinistersListName: "Siniestros",
         statusListname: "Estados"
     };
+    var hasAttachedFiles = false;
 
     getStatus();
     getCarriers();
@@ -440,6 +441,7 @@ sinaptic.wf = function () {
         $("#uploadFile").on("click", function () {
             getFile("#dropzoneCommon");
             $('#attachContainer').toggle();
+            hasAttachedFiles = true;
         });
 
         $("#saveComment").on("click", function () {
@@ -965,9 +967,9 @@ sinaptic.wf = function () {
             case 24:
                 var resolucion = $("#tipoResolucion option:selected").text();
                 var reslvalue = $("#tipoResolucion option:selected").val();
-                if (reslvalue !== "1" && $("#dropzone")[0].dropzone.files.length < 1) {
+                if (reslvalue !== "1" && !hasAttachedFiles {
                     alert("Debe adjuntar la documentación correspondiente");
-                    $("#dropzone").focus();
+                    $('#attachContainer').toggle();
                     closeTaskOk = false;
                     break;
                 }
