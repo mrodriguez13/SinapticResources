@@ -967,7 +967,7 @@ sinaptic.wf = function () {
             case 24:
                 var resolucion = $("#tipoResolucion option:selected").text();
                 var reslvalue = $("#tipoResolucion option:selected").val();
-                if (reslvalue !== "1" && !hasAttachedFiles {
+                if (reslvalue !== "1" && !hasAttachedFiles) {
                     alert("Debe adjuntar la documentación correspondiente");
                     $('#attachContainer').toggle();
                     closeTaskOk = false;
