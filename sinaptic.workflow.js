@@ -198,7 +198,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>¿Documentación completa?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='docCompletaSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo' checked>NO</label></div>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='docCompletaNo' >NO</label></div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
@@ -356,7 +356,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>¿Autorizar Reposicion?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='autRepoSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo' checked>NO</label></div>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='autRepoNo' >NO</label></div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
@@ -377,7 +377,7 @@ sinaptic.wf = function () {
                 taskContent.push("<div class='col-md-12'>");
                 taskContent.push("<div class='col-md-6'><label class='control-label'>¿Verificar nueva prenda?</label></div>");
                 taskContent.push("<div class='col-md-6'><label class='radio-inline'><input name='optradio' type='radio' id='verifPrendaSi'>SI</label>");
-                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='verifPrendaNo' checked>NO</label></div>");
+                taskContent.push("<label class='radio-inline'><input type='radio' name='optradio' id='verifPrendaNo' >NO</label></div>");
                 taskContent.push("</div>");
                 taskContent.push("</div>");
                 break;
@@ -1328,7 +1328,7 @@ sinaptic.wf = function () {
             case 42:
                 var payload = {
                     MotivoRechazo: "",
-                    EstadoId: 23
+                    EstadoId: 22
                 }
                 updateStatusChange(payload);
                 break;
