@@ -493,6 +493,7 @@ sinaptic.wf = function () {
             beforeSend: function (xhr) { xhr.setRequestHeader('SOAPAction', 'http://schemas.microsoft.com/sharepoint/soap/CopyIntoItems'); },
             contentType: "text/xml; charset=\"utf-8\"",
             success: function (data) {
+                alert("Documento adjuntado correctamente");
                 console.log("Documento adjuntado correctamente");
             },
             error: function (err) {
@@ -962,6 +963,12 @@ sinaptic.wf = function () {
                 if ($("input#docCompletaSi")[0].checked === true) {
                     isCompleted = true;
                 }
+                if (!isCompleted && $("input#docCompletaNo")[0].checked !== true) {
+                    alert("Debe seleccionar una opción");
+                    $("input#docCompletaSi").focus();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     MotivoRechazo: "",
                     DocCertCompleta: isCompleted,
@@ -1228,6 +1235,12 @@ sinaptic.wf = function () {
                 var isAuthorized = false;
                 if ($("input#autRepoSi")[0].checked === true) {
                     isAuthorized = true;
+                }
+                if (!isAuthorized && $("input#autRepoNo")[0].checked !== true) {
+                    alert("Debe seleccionar una opción");
+                    $("input#autRepoSi").focus();
+                    closeTaskOk = false;
+                    break;
                 }
                 var payload = {
                     MotivoRechazo: "",
