@@ -21,7 +21,9 @@ sinaptic.tasksByUserReport = function () {
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
             success: loadReportDta,
-            error: errorHandler
+            error: function (data) {
+                alert("error:" + JSON.stringify(data));
+            }
         });
     }
 
