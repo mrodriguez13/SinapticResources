@@ -5,11 +5,13 @@ sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro","Estado","Desde","Hasta","Aging"],
+        listColumnsNames: ["Siniestro", "Estado", "Desde", "Hasta", "Aging"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
     };
+
+    getTasksByUser(23);
 
     var getTasksByUser = function (userId) {
         var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ")";
@@ -77,4 +79,12 @@ sinaptic.tasksByUserReport = function () {
         });
     }
 
+    return {
+        getTasksByUser: getTasksByUser
+    }
+
 }
+
+$(document).ready(function(){
+    sinaptic.tasksByUserReport();
+})
