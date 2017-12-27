@@ -13,7 +13,7 @@ sinaptic.tasksByUserReport = function () {
 
     getTasksByUser(23);
 
-    var getTasksByUser = function (userId) {
+    function getTasksByUser(userId) {
         var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ")";
         $.ajax({
             url: reportUrl,
