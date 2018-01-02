@@ -65,7 +65,37 @@ sinaptic.tasksByUserReport = function () {
         });
 
         // DataTable
-        var table = $('.table').DataTable();;
+        var table = $('.table').DataTable({
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ siniestros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando tareas del _START_ al _END_ de un total de _TOTAL_ siniestros",
+                "sInfoEmpty": "Mostrando tareas del 0 al 0 de un total de 0 siniestros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ siniestros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "dom": "Bfrtip",
+            "targets": [6], "searchable": false, "orderable": false, "visible": true,
+            "buttons": [
+                "copy", "csv", "excel", "pdf", "print"
+            ]
+        });;
 
         // Apply the search
         table.columns().every(function () {
