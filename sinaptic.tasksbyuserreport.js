@@ -40,7 +40,7 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tr></tfoot>');
         structure.push('<tbody>');
         $(tasks).each(function (i, item) {
-            structure.push('<tr onClick="openUrl(\'' + host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
+            structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
             structure.push('<td>' + item["Estado"].Title + '</td>');
             structure.push('<td>' + item["FechaDesde "] + '</td>');
