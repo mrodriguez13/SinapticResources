@@ -14,7 +14,7 @@ sinaptic.tasksByUserReport = function () {
     getTasksByUser(23);
 
     function getTasksByUser(userId) {
-        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ")";
+        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ") and FechHasta ne null&$expand=Siniestro,Estado";
         $.ajax({
             url: reportUrl,
             type: "GET",
@@ -42,10 +42,10 @@ sinaptic.tasksByUserReport = function () {
         $(tasks).each(function (i, item) {
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
-            structure.push('<td>' + item["Estado"].Title + '</td>');
-            structure.push('<td>' + item["FechaDesde "] + '</td>');
-            structure.push('<td>' + item["FechaHasta"] + '</td>');
-            structure.push('<td>' + item["Aging"] + '</td>');
+            structure.push('<td>' + item["Estado"].Descripción + '</td>');
+            structure.push('<td>' + item.FechaDesde + '</td>');
+            structure.push('<td>' + item.FechaHasta + '</td>');
+            structure.push('<td>' + item.Aging + '</td>');
             structure.push('</tr>');
         }
         )
