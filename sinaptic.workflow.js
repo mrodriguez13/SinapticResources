@@ -1244,7 +1244,7 @@ sinaptic.wf = function () {
                 }
                 var payload = {
                     MotivoRechazo: "",
-                    EstadoId: isAuthorized ? 34 : 25
+                    EstadoId: isAuthorized ? 34 : 24
                 }
                 updateStatusChange(payload);
                 break;
