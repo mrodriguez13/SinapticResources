@@ -11,7 +11,7 @@ sinaptic.tasksByUserReport = function () {
         footerSelector: "footer-container"
     };
 
-    getTasksByUser(23);
+    getTasksByUser(47);
 
     function getTasksByUser(userId) {
         var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ") and FechaHasta ne null&$expand=Siniestro,Estado";
@@ -43,9 +43,9 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
-            structure.push('<td>' + item.FechaDesde + '</td>');
-            structure.push('<td>' + item.FechaHasta + '</td>');
-            structure.push('<td>' + item.Aging + '</td>');
+            structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
+            structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
+            structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('</tr>');
         }
         )
@@ -56,6 +56,17 @@ sinaptic.tasksByUserReport = function () {
 
         loadFooterSearchInputs();
     }
+
+    function FormatDate(date) {
+        var auxDate = date.replace("/Date(", "");
+        auxDate = new Date(Number(auxDate.replace(")/", "")));
+        auxDate = dateToString(auxDate);
+        return auxDate;
+    }
+
+    function dateToString(date) {
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    };
 
     function loadFooterSearchInputs(elemnt) {
         // Setup - add a text input to each footer cell
