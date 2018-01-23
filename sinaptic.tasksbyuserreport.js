@@ -30,7 +30,7 @@ sinaptic.tasksByUserReport = function () {
 
     function loadUsersFilter(data) {
         var users = data.d.results;
-        $(tasks).each(function (i, item) {
+        $(users).each(function (i, item) {
             users.push(item.Usuario)
         });
         getTasksByUser(47);
