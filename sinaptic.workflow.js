@@ -1153,8 +1153,8 @@ sinaptic.wf = function () {
 
                 var validationinputDate = inputDate.split("-");
                 validationinputDate = validationinputDate[0] + '' + validationinputDate[1] + '' + validationinputDate[2];
-                if (parseInt(validationinputDate) <= parseInt(hoy)) {
-                    alert("La fecha de cancelación debe ser mayor que la fecha actual");
+                if (parseInt(validationinputDate) > parseInt(hoy)) {
+                    alert("La fecha de cancelación no puede ser posterior a la fecha actual");
                     $("#cancelDate").focus();
                     closeTaskOk = false;
                     break;
