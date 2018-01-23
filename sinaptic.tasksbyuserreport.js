@@ -55,7 +55,7 @@ sinaptic.tasksByUserReport = function () {
         } else {
             filterByUser = '(ModificadoPorId ne null) and ';
         }
-        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null&$expand=Siniestro,Estado";
+        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null and Siniestro ne null&$expand=Siniestro,Estado";
         $.ajax({
             url: reportUrl,
             type: "GET",
