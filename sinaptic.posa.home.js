@@ -234,7 +234,7 @@ sinaptic.posa = function (options) {
                 dueDate = date._d;
             }
             if (sinister["FechaDeCancelaci\u00f3n"] != undefined && sinister["FechaDeCancelaci\u00f3n"] != null) {
-                var date = moment(sinister.FechaDeCancelación);
+                var date = moment(sinister["FechaDeCancelaci\u00f3n"]);
                 date.add(date.utcOffset() * -1, 'm');
                 fechaCancelacion = dateToString(date._d);
             }
