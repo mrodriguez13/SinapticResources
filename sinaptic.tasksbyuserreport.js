@@ -29,8 +29,8 @@ sinaptic.tasksByUserReport = function () {
     }
 
     function loadUsersFilter(data) {
-        var users = data.d.results;
-        $(users).each(function (i, item) {
+        var res = data.d.results;
+        $(res).each(function (i, item) {
             users.push(item.Usuario)
         });
         getTasksByUser(47);
@@ -56,7 +56,8 @@ sinaptic.tasksByUserReport = function () {
         if (users.length > 0){
             structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter">');
             $(users).each(function (i, user) {
-                structure.push("<option " + user.Identificador === settings.userId ? "selected" : "" + " value='"+user.Identificador+"'>"+user.Nombre+"</option>");
+                var sel = user.Identificador === settings.userId ? "selected" : "";
+                structure.push("<option " + sel + " value='" + user.Identificador + "'>" + user.Nombre + "</option>");
             });
             structure.push("</select></div>");
         }
