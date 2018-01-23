@@ -219,9 +219,13 @@ sinaptic.posa = function (options) {
             var fechaCancelacion = "";
             var dueDate = new Date();
             if (sinister.VencimientoDeuda != undefined && sinister.VencimientoDeuda != null) {
-                vencimientoDeuda = sinister.VencimientoDeuda.replace("/Date(", "");
-                vencimientoDeuda = new Date(Number(vencimientoDeuda.replace(")/", "")));
-                vencimientoDeuda = dateToString(vencimientoDeuda);
+                //vencimientoDeuda = sinister.VencimientoDeuda.replace("/Date(", "");
+                //vencimientoDeuda = new Date(Number(vencimientoDeuda.replace(")/", "")));
+                //vencimientoDeuda = dateToString(vencimientoDeuda);
+                var date = moment(sinister.VencimientoDeuda);
+                date.add(date.utcOffset() * -1, 'm');
+                vencimientoDeuda = dateToString(date._d);
+
             }
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
                 var date = moment(sinister.VencimientoEstado);
@@ -230,9 +234,9 @@ sinaptic.posa = function (options) {
                 dueDate = date._d;
             }
             if (sinister["FechaDeCancelaci\u00f3n"] != undefined && sinister["FechaDeCancelaci\u00f3n"] != null) {
-                fechaCancelacion = sinister["FechaDeCancelaci\u00f3n"].replace("/Date(", "");
-                fechaCancelacion = new Date(Number(fechaCancelacion.replace(")/", "")));
-                fechaCancelacion = dateToString(fechaCancelacion);
+                var date = moment(sinister.FechaDeCancelación);
+                date.add(date.utcOffset() * -1, 'm');
+                fechaCancelacion = dateToString(date._d);
             }
             var currSinister = {
                 siniestro: sinister.Siniestro,
