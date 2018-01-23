@@ -11,7 +11,30 @@ sinaptic.tasksByUserReport = function () {
         footerSelector: "footer-container"
     };
 
-    getTasksByUser(47);
+    var users = [];
+    getUsersList();
+
+    function getUsersList() {
+        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Usuarios?$expand=Usuario";
+        $.ajax({
+            url: reportUrl,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: loadUsersFilter,
+            error: function (data) {
+                alert("error:" + JSON.stringify(data));
+            }
+        });
+    }
+
+    function loadUsersFilter(data) {
+        var users = data.d.results;
+        $(tasks).each(function (i, item) {
+            users.push(item.Usuario)
+        });
+        getTasksByUser(47);
+    }
 
     function getTasksByUser(userId) {
         var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ") and FechaHasta ne null&$expand=Siniestro,Estado";
@@ -29,7 +52,15 @@ sinaptic.tasksByUserReport = function () {
 
     function loadReportDta(data) {
         var tasks = data.d.results;
-        var structure = ['<table id="tasksList" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>'];
+        var structure = [];
+        if (users.length > 0){
+            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter">');
+            $(users).each(function (i, user) {
+                structure.push("<option " + user.Identificador === settings.userId ? "selected" : "" + " value='"+user.Identificador+"'>"+user.Nombre+"</option>");
+            });
+            structure.push("</select></div>");
+        }
+        structure.push('<table id="tasksList" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>');
         var struFooter = [];
         $.each(settings.listColumnsNames, function (key, value) {
             structure.push('<th>' + value + '</th>');
@@ -53,6 +84,10 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tbody></table>');
 
         $(settings.bodySelector).html(structure.join(""));
+
+        $("#usersFilter").change(function () {
+            getTasksByUser(this.value);
+        });
 
         loadFooterSearchInputs();
     }
