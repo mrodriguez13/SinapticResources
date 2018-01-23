@@ -30,14 +30,29 @@ sinaptic.tasksByUserReport = function () {
 
     function loadUsersFilter(data) {
         var res = data.d.results;
+        var structure = [];
         $(res).each(function (i, item) {
             users.push(item.Usuario)
         });
-        getTasksByUser(47);
+        if (users.length > 0) {
+            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><option selected value="0">TODOS</option>');
+            $(users).each(function (i, user) {
+                structure.push("<option value='" + user.Identificador + "'>" + user.Nombre + "</option>");
+            });
+            structure.push("</select></div>");
+        }
+        $("#header-container").html(structure.join(""));
+        $("#usersFilter").change(function () {
+            getTasksByUser(this.value);
+        });
+        getTasksByUser(0);
     }
 
     function getTasksByUser(userId) {
-        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=(ModificadoPorId eq " + userId + ") and FechaHasta ne null&$expand=Siniestro,Estado";
+        var filterByUser = "";
+        if (userId !== 0)
+            filterByUser = '(ModificadoPorId eq " + userId + ") and ';
+        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null&$expand=Siniestro,Estado";
         $.ajax({
             url: reportUrl,
             type: "GET",
@@ -53,14 +68,6 @@ sinaptic.tasksByUserReport = function () {
     function loadReportDta(data) {
         var tasks = data.d.results;
         var structure = [];
-        if (users.length > 0){
-            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter">');
-            $(users).each(function (i, user) {
-                var sel = user.Identificador === settings.userId ? "selected" : "";
-                structure.push("<option " + sel + " value='" + user.Identificador + "'>" + user.Nombre + "</option>");
-            });
-            structure.push("</select></div>");
-        }
         structure.push('<table id="tasksList" class="table table-striped table-bordered dataTable no-footer" cellspacing="0" width="100%"><thead><tr>');
         var struFooter = [];
         $.each(settings.listColumnsNames, function (key, value) {
@@ -85,10 +92,6 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tbody></table>');
 
         $(settings.bodySelector).html(structure.join(""));
-
-        $("#usersFilter").change(function () {
-            getTasksByUser(this.value);
-        });
 
         loadFooterSearchInputs();
     }
