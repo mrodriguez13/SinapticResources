@@ -51,7 +51,7 @@ sinaptic.tasksByUserReport = function () {
     function getTasksByUser(userId) {
         var filterByUser = "";
         if (userId !== 0){
-            filterByUser = '(ModificadoPorId eq " + userId + ") and ';
+            filterByUser = '(ModificadoPorId eq ' + userId + ') and ';
         } else {
             filterByUser = '(ModificadoPorId ne null) and ';
         }
