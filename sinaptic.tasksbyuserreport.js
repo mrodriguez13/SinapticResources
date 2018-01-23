@@ -35,7 +35,7 @@ sinaptic.tasksByUserReport = function () {
             users.push(item.Usuario)
         });
         if (users.length > 0) {
-            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><option selected value="0">TODOS</option>');
+            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><label>USUARIO</label><option selected value="0">TODOS</option>');
             $(users).each(function (i, user) {
                 structure.push("<option value='" + user.Identificador + "'>" + user.Nombre + "</option>");
             });
