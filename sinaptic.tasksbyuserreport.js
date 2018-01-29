@@ -5,7 +5,7 @@ sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro", "Estado", "Desde", "Hasta", "Aging"],
+        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Desde", "Hasta", "Aging"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
