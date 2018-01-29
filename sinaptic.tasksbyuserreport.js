@@ -85,6 +85,8 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
+            structure.push('<td>' + item.Grupo + '</td>');
+            structure.push('<td>' + item.Orden + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
