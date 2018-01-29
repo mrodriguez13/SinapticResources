@@ -63,11 +63,9 @@ sinaptic.posa = function (options) {
                 case "ADMINSINIESTRO":
                     struActions.push("<div class=\"btn actionButton\" onclick=\"window.location.href='" + settings.host + "/Paginas/AdminTasks.aspx'\"><i class=\"glyphicon glyphicon-cog pull-left\"></i> Aministraci\u00F3n de Siniestros</div>");
                     break;
-                case "REPORTE":
-                    struActions.push("<div class=\"btn actionButton\" onclick=\"window.location.href='" + settings.host + "/Paginas/tareasporusuario.aspx'\"><i class=\"glyphicon glyphicons-list-alt pull-left\"></i> Reporte de tareas por usuario</div>");
-                    break;
             }
         });
+        struActions.push("<div class=\"btn actionButton\" onclick=\"window.location.href='" + settings.host + "/Paginas/tareasporusuario.aspx'\"><i class=\"glyphicon glyphicons-list-alt pull-left\"></i> Reporte de tareas por usuario</div>");
         struActions.push("<div id=\"Buscador\" class=\"pull-right\"><input type=\"text\" class=\"searchBox\" placeholder=\"Buscador de siniestros\" onkeyup=\"return sinaptic.wf.hasPressedEnter(event)\"><img class=\"searchImg\" src=\"/site/ExpertiseBrokersArgentina/SiteAssets/home/img/search-icon-marine-hi.png\" height=\"15px\" alt=\"\"></div>");
         struActions = "<div class=\"row\">" + struActions.join("") + "</div>";
         $("#actionsBar").html(struActions);
