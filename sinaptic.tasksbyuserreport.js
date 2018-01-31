@@ -90,7 +90,7 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].SaldoPendiente + '</td>');
             structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
             structure.push('<td>' + item["Siniestro"].ImporteACancelar + '</td>');
-            structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelación"]) + '</td>');
+            structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
@@ -106,10 +106,13 @@ sinaptic.tasksByUserReport = function () {
     }
 
     function FormatDate(date) {
-        var auxDate = date.replace("/Date(", "");
-        auxDate = new Date(Number(auxDate.replace(")/", "")));
-        auxDate = dateToString(auxDate);
-        return auxDate;
+        if(date !== null){
+            var auxDate = date.replace("/Date(", "");
+            auxDate = new Date(Number(auxDate.replace(")/", "")));
+            auxDate = dateToString(auxDate);
+            return auxDate;
+        }
+        return "";
     }
 
     function dateToString(date) {
