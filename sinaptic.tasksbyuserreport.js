@@ -5,7 +5,7 @@ sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Desde", "Hasta", "Aging"],
+        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Saldo Enviado", "Venc. Saldo Enviado", "Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
@@ -87,6 +87,10 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
+            structure.push('<td>' + item["Siniestro"].SaldoPendiente + '</td>');
+            structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
+            structure.push('<td>' + item["Siniestro"].ImporteACancelar + '</td>');
+            structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
