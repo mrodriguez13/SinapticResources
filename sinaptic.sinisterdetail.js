@@ -49,7 +49,7 @@
          d.push("<strong>Vencimiento Saldo Enviado: </strong>"), d.push(n(s.VencimientoDeuda)),
          d.push("<strong>Saldo Acreditado: </strong>"), d.push(o(s.ImporteACancelar)),
          d.push("<strong>Vencimiento Saldo Acreditado: </strong>"), d.push(n(s["FechaDeCancelaci\u00f3n"])),
-         d.push("<div>"),
+         d.push("</div>"),
          d.push("</div>")
 
 
