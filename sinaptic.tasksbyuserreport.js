@@ -87,9 +87,9 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
-            structure.push('<td>' + (item["Siniestro"].SaldoPendiente || "0.00") + '</td>');
+            structure.push('<td>$' + (item["Siniestro"].SaldoPendiente.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') || "0.00") + '</td>');
             structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
-            structure.push('<td>' + (item["Siniestro"].ImporteACancelar || "0.00") + '</td>');
+            structure.push('<td>$' + (item["Siniestro"].ImporteACancelar.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') || "0.00") + '</td>');
             structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
