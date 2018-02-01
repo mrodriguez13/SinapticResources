@@ -91,16 +91,16 @@ sinaptic.tasksByUserReport = function () {
             var vencimientoCancelacion = "";
             var fechaDesde = "";
             var fechaHasta = "";
-            if (item["Siniestro"].VencimientoDeuda){
-                var date = moment(item["Siniestro"].VencimientoDeuda);
-                date.add(date.utcOffset() * -1, 'm');
-                vencimientoDeuda = FormatDate(date._d);
-            }
-            if (item["Siniestro"]["FechaDeCancelaci\u00f3n"]) {
-                var date = moment(item["Siniestro"]["FechaDeCancelaci\u00f3n"]);
-                date.add(date.utcOffset() * -1, 'm');
-                vencimientoCancelacion = FormatDate(date._d);
-            }
+            //if (item["Siniestro"].VencimientoDeuda){
+            //    var date = moment(item["Siniestro"].VencimientoDeuda);
+            //    date.add(date.utcOffset() * -1, 'm');
+            //    vencimientoDeuda = FormatDate(date._d);
+            //}
+            //if (item["Siniestro"]["FechaDeCancelaci\u00f3n"]) {
+            //    var date = moment(item["Siniestro"]["FechaDeCancelaci\u00f3n"]);
+            //    date.add(date.utcOffset() * -1, 'm');
+            //    vencimientoCancelacion = FormatDate(date._d);
+            //}
             //if (item.FechaDesde) {
             //    var date = moment(item.FechaDesde);
             //    date.add(date.utcOffset() * -1, 'm');
@@ -118,9 +118,9 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + vencimientoDeuda + '</td>');
+            structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + vencimientoCancelacion + '</td>');
+            structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
