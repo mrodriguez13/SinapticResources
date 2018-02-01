@@ -7,7 +7,7 @@
          var r = ""; if (null != e) {
              r = e.replace("/Date(", "");
              var s = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
-             r = (r = new Date(Number(r.replace(")/", "")))).getDate() + "-" + (parseInt(r.getMonth()) + 1) + "-" + r.getFullYear()
+             r = (r = new Date(Number(r.replace(")/", "")))).getDate() + "/" + (parseInt(r.getMonth()) + 1) + "/" + r.getFullYear()
          }
          else r = " - "; return r
      }, i = function (e) {
@@ -32,7 +32,7 @@
          d.push("<li><a href='#containerData-3'>Responsables</a></li>"),
          d.push("</ul>"),
 
-         d.push("<div id='containerData-1'><strong>Siniestro: </strong>"), d.push(o(s.Siniestro)),
+         d.push("<div id='containerData-1'><div style='width:49%;display:inline-block'><strong>Siniestro: </strong>"), d.push(o(s.Siniestro)),
          d.push("</br><strong>ID: </strong>"), d.push(o(e)),
          d.push("</br><strong>Grupo: </strong> "), d.push(o(s.Grupo)),
          d.push("</br><strong>Orden: </strong>"), d.push(o(s.Orden)),
@@ -43,8 +43,15 @@
          d.push("</br><strong>Tipo de Resolucion: </strong>"), d.push(o(s.TipoDeResulociónValue)),
          d.push("</br><strong>Tomador: </strong>"), d.push(o(s.Tomador)),
          d.push("</br><strong>Creacion del Siniestro: </strong>"), d.push(o(a)),
-         d.push("</br><strong>Días Transcurridos: </strong>"), d.push(o(l)),
+         d.push("</br><strong>Días Transcurridos: </strong></div>"), d.push(o(l)),
+         d.push("</div style='width:49%;display:inline-block'>"),
+         d.push("<strong>Saldo Enviado: </strong>"), d.push(o(s.SaldoPendiente)),
+         d.push("<strong>Vencimiento Saldo Enviado: </strong>"), d.push(n(s.VencimientoDeuda)),
+         d.push("<strong>Saldo Acreditado: </strong>"), d.push(o(s.ImporteACancelar)),
+         d.push("<strong>Vencimiento Saldo Acreditado: </strong>"), d.push(n(s["FechaDeCancelaci\u00f3n"])),
+         d.push("<div>"),
          d.push("</div>")
+
 
          d.push("<div id='containerData-2'><strong>Carrier: </strong>"), d.push(c),
          d.push("</br><strong>Mail Cliente: </strong>"), d.push(o(s.MailCliente)),
