@@ -5,7 +5,7 @@ sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Saldo Enviado", "Venc. Saldo Enviado", "Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging"],
+        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Importe Saldo Enviado", "Venc. Saldo Enviado", "Importe Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
