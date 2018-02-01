@@ -82,8 +82,8 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tr></tfoot>');
         structure.push('<tbody>');
         $(tasks).each(function (i, item) {
-            var saldo = (item["Siniestro"].SaldoPendiente || "0.00");
-            var impoCanc = (item["Siniestro"].ImporteACancelar || "0.00");
+            var saldo = parseFloat(item["Siniestro"].SaldoPendiente || "0.00");
+            var impoCanc = parseFloat(item["Siniestro"].ImporteACancelar || "0.00");
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
