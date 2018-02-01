@@ -1,4 +1,6 @@
-﻿var detailsSinister = function () {
+﻿$.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
+
+var detailsSinister = function () {
     var e = 0,
     r = ["Siniestro", "Grupo", "Orden", "Carrier", "Tomador", "DNI", "Fecha Siniestro", "Tipo de Siniestro", "Modelo Vehiculo", "Tipo Vehiculo", "Dominio", "Suma Asegurada"],
      s = function (e) { return e.toString() },
