@@ -82,14 +82,17 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tr></tfoot>');
         structure.push('<tbody>');
         $(tasks).each(function (i, item) {
+            var saldo = (item["Siniestro"].SaldoPendiente || "0.00");
+            var impoCanc = (item["Siniestro"].ImporteACancelar || "0.00");
+
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
-            structure.push('<td>$' + (item["Siniestro"].SaldoPendiente.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') || "0.00") + '</td>');
+            structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
             structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
-            structure.push('<td>$' + (item["Siniestro"].ImporteACancelar.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') || "0.00") + '</td>');
+            structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
             structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
             structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
