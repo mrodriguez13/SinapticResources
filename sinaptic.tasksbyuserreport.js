@@ -1,6 +1,8 @@
 ﻿"use strinct"
 var sinaptic = sinaptic || {};
 
+$.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
+
 sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
@@ -50,6 +52,7 @@ sinaptic.tasksByUserReport = function () {
 
     function getTasksByUser(userId) {
         var filterByUser = "";
+        $(settings.bodySelector).html('<div class="loader"></div>');
         if (userId !== 0){
             filterByUser = '(ModificadoPorId eq ' + userId + ') and ';
         } else {
@@ -84,6 +87,30 @@ sinaptic.tasksByUserReport = function () {
         $(tasks).each(function (i, item) {
             var saldo = parseFloat(item["Siniestro"].SaldoPendiente || "0.00");
             var impoCanc = parseFloat(item["Siniestro"].ImporteACancelar || "0.00");
+            var vencimientoDeuda = "";
+            var vencimientoCancelacion = "";
+            var fechaDesde = "";
+            var fechaHasta = "";
+            if (item["Siniestro"].VencimientoDeuda){
+                var date = moment(item["Siniestro"].VencimientoDeuda);
+                date.add(date.utcOffset() * -1, 'm');
+                vencimientoDeuda = FormatDate(date._d);
+            }
+            if (item["Siniestro"]["FechaDeCancelaci\u00f3n"]) {
+                var date = moment(item["Siniestro"]["FechaDeCancelaci\u00f3n"]);
+                date.add(date.utcOffset() * -1, 'm');
+                vencimientoCancelacion = FormatDate(date._d);
+            }
+            if (item.FechaDesde) {
+                var date = moment(item.FechaDesde);
+                date.add(date.utcOffset() * -1, 'm');
+                fechaDesde = FormatDate(date._d);
+            }
+            if (item.FechaHasta) {
+                var date = moment(item.FechaHasta);
+                date.add(date.utcOffset() * -1, 'm');
+                fechaHasta = FormatDate(date._d);
+            }
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
@@ -91,11 +118,11 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + FormatDate(item["Siniestro"].VencimientoDeuda) + '</td>');
+            structure.push('<td>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + FormatDate(item["Siniestro"]["FechaDeCancelaci\u00f3n"]) + '</td>');
-            structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
-            structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
+            structure.push('<td>' + vencimientoCancelacion + '</td>');
+            structure.push('<td>' + fechaDesde + '</td>');
+            structure.push('<td>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('</tr>');
         }
