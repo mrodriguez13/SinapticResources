@@ -36,19 +36,19 @@
          d.push("</br><strong>ID: </strong>"), d.push(o(e)),
          d.push("</br><strong>Grupo: </strong> "), d.push(o(s.Grupo)),
          d.push("</br><strong>Orden: </strong>"), d.push(o(s.Orden)),
-         d.push("</br><strong>Fecha de Siniestro: </strong>"), d.push(o(u)),
+         d.push("</br><strong>Fecha de Siniestro: </strong>"), d.push(adjustDate(u)),
          d.push("</br><strong>Tipo de Siniestro: </strong>"), d.push(o(s.TipoDeSiniestroValue)),
          d.push("</br><strong>Dominio: </strong>"), d.push(o(s.Dominio)),
          d.push("</br><strong>Suma Asegurada: </strong>"), d.push("$" + o(s.SumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Tipo de Resolucion: </strong>"), d.push(o(s.TipoDeResulociónValue)),
          d.push("</br><strong>Tomador: </strong>"), d.push(o(s.Tomador)),
-         d.push("</br><strong>Creacion del Siniestro: </strong>"), d.push(o(a)),
+         d.push("</br><strong>Creacion del Siniestro: </strong>"), d.push(adjustDate(a)),
          d.push("</br><strong>Días Transcurridos: </strong>"), d.push(o(l)),
          d.push("</div><div style='width:49%;display:inline-block'>"),
          d.push("<strong>Saldo Enviado: </strong>"), d.push("$" + o(s.SaldoPendiente.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
-         d.push("</br><strong>Vencimiento Saldo Enviado: </strong>"), d.push(n(s.VencimientoDeuda)),
+         d.push("</br><strong>Vencimiento Saldo Enviado: </strong>"), d.push(adjustDate(s.VencimientoDeuda)),
          d.push("</br><strong>Saldo Acreditado: </strong>"), d.push("$" + o(s.ImporteACancelar.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
-         d.push("</br><strong>Vencimiento Saldo Acreditado: </strong>"), d.push(n(s["FechaDeCancelaci\u00f3n"])),
+         d.push("</br><strong>Vencimiento Saldo Acreditado: </strong>"), d.push(adjustDate(s["FechaDeCancelaci\u00f3n"])),
          d.push("</div>"),
          d.push("</div>")
 
@@ -66,6 +66,17 @@
 
          d.push("</div>"), d = d.join(""), $("#PrincipalData").html(d)
      }, u = function (e) { $("#tabs").tabs(); };
+    function adjustDate(oridate) {
+        if (oridate) {
+            var date = moment(oridate);
+            date.add(date.utcOffset() * -1, 'm');
+            return dateToString(date._d);
+        }
+        return ""
+    }
+    function dateToString(date) {
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    };
     function getUserGruop(adminLink) {
         var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
         var usersUrl = host + "/_vti_bin/listdata.svc/Usuarios?$expand=Grupo&$filter=(UsuarioId eq " + _spPageContextInfo.userId + ")";
