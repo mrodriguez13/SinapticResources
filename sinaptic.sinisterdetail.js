@@ -46,9 +46,9 @@
          d.push("</br><strong>Días Transcurridos: </strong>"), d.push(o(l)),
          d.push("</div><div style='width:49%;display:inline-block'>"),
          d.push("<strong>Saldo Enviado: </strong>"), d.push(o(s.SaldoPendiente)),
-         d.push("<strong>Vencimiento Saldo Enviado: </strong>"), d.push(n(s.VencimientoDeuda)),
-         d.push("<strong>Saldo Acreditado: </strong>"), d.push(o(s.ImporteACancelar)),
-         d.push("<strong>Vencimiento Saldo Acreditado: </strong>"), d.push(n(s["FechaDeCancelaci\u00f3n"])),
+         d.push("</br><strong>Vencimiento Saldo Enviado: </strong>"), d.push(n(s.VencimientoDeuda)),
+         d.push("</br><strong>Saldo Acreditado: </strong>"), d.push(o(s.ImporteACancelar)),
+         d.push("</br><strong>Vencimiento Saldo Acreditado: </strong>"), d.push(n(s["FechaDeCancelaci\u00f3n"])),
          d.push("</div>"),
          d.push("</div>")
 
