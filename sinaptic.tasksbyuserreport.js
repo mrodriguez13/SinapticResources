@@ -101,16 +101,16 @@ sinaptic.tasksByUserReport = function () {
                 date.add(date.utcOffset() * -1, 'm');
                 vencimientoCancelacion = FormatDate(date._d);
             }
-            if (item.FechaDesde) {
-                var date = moment(item.FechaDesde);
-                date.add(date.utcOffset() * -1, 'm');
-                fechaDesde = FormatDate(date._d);
-            }
-            if (item.FechaHasta) {
-                var date = moment(item.FechaHasta);
-                date.add(date.utcOffset() * -1, 'm');
-                fechaHasta = FormatDate(date._d);
-            }
+            //if (item.FechaDesde) {
+            //    var date = moment(item.FechaDesde);
+            //    date.add(date.utcOffset() * -1, 'm');
+            //    fechaDesde = FormatDate(date._d);
+            //}
+            //if (item.FechaHasta) {
+            //    var date = moment(item.FechaHasta);
+            //    date.add(date.utcOffset() * -1, 'm');
+            //    fechaHasta = FormatDate(date._d);
+            //}
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
@@ -121,8 +121,8 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
             structure.push('<td>' + vencimientoCancelacion + '</td>');
-            structure.push('<td>' + fechaDesde + '</td>');
-            structure.push('<td>' + fechaHasta + '</td>');
+            structure.push('<td>' + FormatDate(item.FechaDesde) + '</td>');
+            structure.push('<td>' + FormatDate(item.FechaHasta) + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('</tr>');
         }
