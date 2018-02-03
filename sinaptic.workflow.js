@@ -979,7 +979,7 @@ sinaptic.wf = function () {
                 break;
 
             case 24:
-                var resolucion = $("#tipoResolucion option:selected").text();
+                var resolucion = $("#tipoResolucion option:selected").text().toUpperCase();
                 var reslvalue = $("#tipoResolucion option:selected").val();
                 if (reslvalue !== "1" && !hasAttachedFiles) {
                     alert("Debe adjuntar la documentación correspondiente");
@@ -989,7 +989,7 @@ sinaptic.wf = function () {
                 }
                 var payload = {
                     MotivoRechazo: "",
-                    TipoDeResuloci\u00f3nValue: resolucion,
+                    TipoDeResuloci\u00f3nValue: reslvalue,
                     EstadoId: reslvalue == "1" ? 25 : 33,
                     MotivoRechazo: ""
                 }

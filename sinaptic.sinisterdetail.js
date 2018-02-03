@@ -31,6 +31,7 @@ var detailsSinister = function () {
          var sumaAsegurada = s.SumaAsegurada || 0;
          var saldoPendiente = s.SaldoPendiente || 0;
          var importeACancelar = s.ImporteACancelar || 0;
+         var tipoSiniestro = s.TipoDeSiniestroValue == 1 ? "Robo total" : "Destrucción total";
 
          d.push("<div id='tabs'><ul><li><a href='#containerData-1'>Detalle</a></li>"),
          d.push("<li><a href='#containerData-2'>Contacto</a></li>"),
@@ -42,7 +43,7 @@ var detailsSinister = function () {
          d.push("</br><strong>Grupo: </strong> "), d.push(o(s.Grupo)),
          d.push("</br><strong>Orden: </strong>"), d.push(o(s.Orden)),
          d.push("</br><strong>Fecha de Siniestro: </strong>"), d.push(adjustDate(s.FechaSiniestro)),
-         d.push("</br><strong>Tipo de Siniestro: </strong>"), d.push(o(s.TipoDeSiniestroValue)),
+         d.push("</br><strong>Tipo de Siniestro: </strong>"), d.push(tipoSiniestro),
          d.push("</br><strong>Dominio: </strong>"), d.push(o(s.Dominio)),
          d.push("</br><strong>Suma Asegurada: </strong>"), d.push("$" + o(sumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Tipo de Resolucion: </strong>"), d.push(o(s.TipoDeResulociónValue)),
