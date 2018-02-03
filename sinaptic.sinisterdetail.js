@@ -28,6 +28,9 @@ var detailsSinister = function () {
 
          var a = n(s.Creado), u = n(s.FechaSiniestro), l = i(s.Creado), p = void 0 != s.TeamLeader && null != s.TeamLeader ? s.TeamLeader.Nombre : "",
          h = void 0 != s.Responsable && null != s.Responsable ? s.Responsable.Nombre : "", c = void 0 != s.Carrier && null != s.Carrier ? o(s.Carrier.Título) : "", d = [];
+         var sumaAsegurada = s.SumaAsegurada || 0;
+         var saldoPendiente = s.SaldoPendiente || 0;
+         var importeACancelar = s.ImporteACancelar || 0;
 
          d.push("<div id='tabs'><ul><li><a href='#containerData-1'>Detalle</a></li>"),
          d.push("<li><a href='#containerData-2'>Contacto</a></li>"),
@@ -41,15 +44,15 @@ var detailsSinister = function () {
          d.push("</br><strong>Fecha de Siniestro: </strong>"), d.push(adjustDate(s.FechaSiniestro)),
          d.push("</br><strong>Tipo de Siniestro: </strong>"), d.push(o(s.TipoDeSiniestroValue)),
          d.push("</br><strong>Dominio: </strong>"), d.push(o(s.Dominio)),
-         d.push("</br><strong>Suma Asegurada: </strong>"), d.push("$" + o(s.SumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
+         d.push("</br><strong>Suma Asegurada: </strong>"), d.push("$" + o(sumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Tipo de Resolucion: </strong>"), d.push(o(s.TipoDeResulociónValue)),
          d.push("</br><strong>Tomador: </strong>"), d.push(o(s.Tomador)),
          d.push("</br><strong>Creacion del Siniestro: </strong>"), d.push(adjustDate(s.Creado)),
          d.push("</br><strong>Días Transcurridos: </strong>"), d.push(o(l)),
          d.push("</div><div style='width:49%;display:inline-block'>"),
-         d.push("<strong>Saldo Enviado: </strong>"), d.push("$" + o(s.SaldoPendiente.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
+         d.push("<strong>Saldo Enviado: </strong>"), d.push("$" + o(saldoPendiente.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Vencimiento Saldo Enviado: </strong>"), d.push(adjustDate(s.VencimientoDeuda)),
-         d.push("</br><strong>Saldo Acreditado: </strong>"), d.push("$" + o(s.ImporteACancelar.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
+         d.push("</br><strong>Saldo Acreditado: </strong>"), d.push("$" + o(importeACancelar.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Vencimiento Saldo Acreditado: </strong>"), d.push(adjustDate(s["FechaDeCancelaci\u00f3n"])),
          d.push("</div>"),
          d.push("</div>")
