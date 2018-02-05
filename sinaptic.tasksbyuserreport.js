@@ -53,7 +53,7 @@ sinaptic.tasksByUserReport = function () {
     function getTasksByUser(userId) {
         var filterByUser = "";
         $(settings.bodySelector).html('<div class="loader"></div>');
-        if (userId !== 0){
+        if (userId != 0){
             filterByUser = '(ModificadoPorId eq ' + userId + ') and ';
         } else {
             filterByUser = '(ModificadoPorId ne null) and ';
@@ -85,6 +85,10 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tr></tfoot>');
         structure.push('<tbody>');
         $(tasks).each(function (i, item) {
+            if (item["Siniestro"] === null) {
+                return;
+            }
+
             var saldo = "0.00"
             if(item["Siniestro"].SaldoPendiente != null){
                 saldo = item["Siniestro"].SaldoPendiente ;
