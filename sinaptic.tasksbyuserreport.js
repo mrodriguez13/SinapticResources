@@ -85,8 +85,16 @@ sinaptic.tasksByUserReport = function () {
         structure.push('</tr></tfoot>');
         structure.push('<tbody>');
         $(tasks).each(function (i, item) {
-            var saldo = parseFloat(item["Siniestro"].SaldoPendiente || "0.00");
-            var impoCanc = parseFloat(item["Siniestro"].ImporteACancelar || "0.00");
+            var saldo = "0.00"
+            if(item["Siniestro"].SaldoPendiente != null){
+                saldo = item["Siniestro"].SaldoPendiente ;
+            }
+            saldo = parseFloat(saldo);
+            var impoCanc = "0.00"
+            if (item["Siniestro"].ImporteACancelar != null) {
+                impoCanc = item["Siniestro"].ImporteACancelar;
+            }
+            impoCanc = parseFloat(impoCanc);
             var vencimientoDeuda = "";
             var vencimientoCancelacion = "";
             var fechaDesde = "";
