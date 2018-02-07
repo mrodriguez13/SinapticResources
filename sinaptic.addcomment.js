@@ -47,6 +47,7 @@
                 $("#comentario").prop("disabled", false);
                 $("#saveComment").prop("disabled", false);
                 $("#newComment").css("display", "none");
+                getCommentsData();
             },
             error: errorHandler
         });
@@ -79,10 +80,10 @@
         });
 
         var mdlContent = [];
-        mdlContent.push('<div id="newComment" class="modal">');
+        mdlContent.push('<div id="modalWindow" class="modal">');
         mdlContent.push('<div class="modal-content">');
         mdlContent.push('<div class="modal-header">');
-        mdlContent.push('<span class="close">&times;</span>');
+        mdlContent.push('<span class="close" onclick="$(\'#modalWindow\').style.display=\'none\'">&times;</span>');
         mdlContent.push('<h2>Nuevo comentario</h2>');
         mdlContent.push('</div>');
         mdlContent.push('<div class="modal-body">');
@@ -103,6 +104,9 @@
         }
         $("#CommentsSection").html(structureLegacy);
 
+        $("#newComment").onclick = function () {
+            $("#modalWindow").style.display = "block";
+        };
 
 
     }
@@ -113,23 +117,4 @@
         setSinisterID: setSinisterID
     }
 })(jQuery);
-
-
-
-
-
-
-
-
-
-var btn = document.getElementById("newComment");
-btn.onclick = function () {
-    modal.style.display = "block";
-}
-function saveComment() {
-    var value = $("commentValue").val();
-    if (value !== null && value !== "") {
-        concole.log("Comentario: " + value);
-    }
-}
 
