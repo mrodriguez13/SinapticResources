@@ -1,4 +1,5 @@
 ﻿$.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
+var currentSinister = {};
 
 var detailsSinister = function () {
     var e = 0,
@@ -25,7 +26,7 @@ var detailsSinister = function () {
          //}
          $("#SinesterTitleID h1").css("display", "inline");
          $("#SinesterTitleID img").after("<h2 class='StatusTitle'>Estado: " + s.Estado["Descripción"] + "</h2>");
-
+         currentSinister = s;
          var a = n(s.Creado), u = n(s.FechaSiniestro), l = i(s.Creado), p = void 0 != s.TeamLeader && null != s.TeamLeader ? s.TeamLeader.Nombre : "",
          h = void 0 != s.Responsable && null != s.Responsable ? s.Responsable.Nombre : "", c = void 0 != s.Carrier && null != s.Carrier ? o(s.Carrier.Título) : "", d = [];
          var sumaAsegurada = s.SumaAsegurada || 0;
