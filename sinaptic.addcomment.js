@@ -32,9 +32,9 @@
             EstadoComentario: currentSinister.EstadoId,
             ComentaristaId: _spPageContextInfo.userId
         }
-
+        var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
         $.ajax({
-            url: settings.host + "/_vti_bin/listdata.svc/Comentarios",
+            url: host + "/_vti_bin/listdata.svc/Comentarios",
             type: "POST",
             processData: false,
             contentType: "application/json;odata=verbose",
@@ -55,6 +55,7 @@
     }
     var errorHandler = function (err) {
         console.log("Error: " + JSON.stringify(err));
+        $("#newComment").css("display", "none");
     };
     var successCall = function (data) {
         var resData = data.d.results;
