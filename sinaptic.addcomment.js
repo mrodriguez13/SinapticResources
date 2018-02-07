@@ -29,7 +29,7 @@
             T\u00edtulo: currentSinister.Siniestro,
             Comentario: comment,
             IDSiniestro: currentSinister.Identificador,
-            EstadoComentario: currentSinister.EstadoId,
+            EstadoComentario: currentSinister.Estado.Descripción,
             ComentaristaId: _spPageContextInfo.userId
         }
         var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
@@ -53,6 +53,19 @@
             error: errorHandler
         });
     }
+    function dateToString(date) {
+        var hour = ((date.getHours() < 10) ? "0" + date.getHours() : date.getHours());
+        var minutes = ((date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes());
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "  " + hour + ":" + minutes ;
+    };
+    var localDate = function(oridate) {
+        if (oridate) {
+            var date = moment(oridate);
+            date.add(date.utcOffset() * -1, 'm');
+            return dateToString(date._d);
+        }
+        return ""
+    }
     var errorHandler = function (err) {
         console.log("Error: " + JSON.stringify(err));
         $("#newComment").css("display", "none");
@@ -66,15 +79,17 @@
                 var initialDate = item.Creado.replace(")/", "");
                 initialDate = initialDate.replace("(", "");
                 initialDate = initialDate.replace("/Date", "");
-                var createdDate = new Date(parseInt(initialDate));
+                //var createdDate = new Date(parseInt(initialDate));
+                var createdDate = localDate(item.Creado);
 
-                var day = ((createdDate.getDate() < 10) ? "0" + createdDate.getDate() : createdDate.getDate());
+                /*var day = ((createdDate.getDate() < 10) ? "0" + createdDate.getDate() : createdDate.getDate());
                 var month = (((parseInt(createdDate.getMonth()) + 1) < 10) ? "0" + (parseInt(createdDate.getMonth()) + 1) : (parseInt(createdDate.getMonth()) + 1));
                 var hour = ((createdDate.getHours() < 10) ? "0" + createdDate.getHours() : createdDate.getHours());
                 var minutes = ((createdDate.getMinutes() < 10) ? "0" + createdDate.getMinutes() : createdDate.getMinutes());
 
-                createdDate = day + "/" + month + "/" + createdDate.getFullYear() + "  " + hour + ":" + minutes;
 
+                createdDate = day + "/" + month + "/" + createdDate.getFullYear() + "  " + hour + ":" + minutes;
+                                */
                 structureLegacy = structureLegacy + "<div class='legacyFile'><div class='titleComment'><h3>" + item.EstadoComentario + "</h3></div><div class='comment'><p>" + item.Comentario + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'>" + ((item.Comentarista != null) ? " - " + item.Comentarista.Nombre : '') + "</p></div></div>";
 
 
