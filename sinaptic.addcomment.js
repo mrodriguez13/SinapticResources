@@ -104,9 +104,9 @@
         }
         $("#CommentsSection").html(structureLegacy);
 
-        $("#newComment").click = function () {
+        $("#newComment").click(function () {
             $("#modalWindow").style.display = "block";
-        };
+        });
 
 
     }
