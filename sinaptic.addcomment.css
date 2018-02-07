@@ -53,16 +53,25 @@
     text-decoration: none;
     cursor: pointer;
 }
+.comentario{
 
+}
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #2072B8;
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {padding: 2px 16px;height: 100px;}
 
 .modal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #fff;
     color: white;
+}
+
+input#comentario {
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+}

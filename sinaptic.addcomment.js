@@ -21,6 +21,7 @@
     var saveComment = function () {
         var comment = $("#comentario").val();
         if (comment === "" || comment === undefined) {
+            alert("No se puede guardar un comentario vacío");
             return;
         }
         hasComment = true;
@@ -28,7 +29,7 @@
             T\u00edtulo: currentSinister.Siniestro,
             Comentario: comment,
             IDSiniestro: currentSinister.Identificador,
-            EstadoComentario: currentSinister.estado,
+            EstadoComentario: currentSinister.EstadoId,
             ComentaristaId: _spPageContextInfo.userId
         }
 
@@ -87,10 +88,10 @@
         mdlContent.push('<h2>Nuevo comentario</h2>');
         mdlContent.push('</div>');
         mdlContent.push('<div class="modal-body">');
-        mdlContent.push('<input type="text" id="comentario" ></input>');
+        mdlContent.push('<input type="text" placeholder="Ingrese comentario" id="comentario" ></input>');
         mdlContent.push('</div>');
         mdlContent.push('<div class="modal-footer">');
-        mdlContent.push('<button onclick="CommentsFromSinister.saveComment()">Agregar comentario</button>');
+        mdlContent.push('<button type="button" id="addButton" onclick="CommentsFromSinister.saveComment()">Agregar comentario</button>');
         mdlContent.push('</div>');
         mdlContent.push('</div>');
         mdlContent.push('</div>');
@@ -114,7 +115,8 @@
     }
     return {
         getCommentsData: getCommentsData,
-        setSinisterID: setSinisterID
+        setSinisterID: setSinisterID,
+        saveComment: saveComment
     }
 })(jQuery);
 
