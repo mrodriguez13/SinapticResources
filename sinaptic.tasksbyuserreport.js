@@ -2,12 +2,12 @@
 var sinaptic = sinaptic || {};
 
 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
-
+var carriers = [];
 sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Importe Saldo Enviado", "Venc. Saldo Enviado", "Importe Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging", "Usuario"],
+        listColumnsNames: ["Siniestro", "Fecha Siniestro", "Tipo de Siniestro", "Modelo Vehiculo", "Dominio", "Suma Asegurada", "Tomador", "Compañía Seguro", "Estado", "Grupo", "Orden", "Importe Saldo Enviado", "Venc. Saldo Enviado", "Importe Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging", "Usuario"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
@@ -47,7 +47,28 @@ sinaptic.tasksByUserReport = function () {
         $("#usersFilter").change(function () {
             getTasksByUser(this.value);
         });
-        getTasksByUser(0);
+        //getTasksByUser(0);
+        getCarriers();
+    }
+
+    function getCarriers() {
+        var url = settings.host + "/_vti_bin/listdata.svc/Carriers";
+        $.ajax({
+            url: reportUrl,
+            type: "GET",
+            async: true,
+            headers: { "accept": "application/json;odata=verbose" },
+            success: function (data) {
+                var carr = data.d.results;
+                $(carr).ech(function (i, item) {
+                    carriers[item.Identificador] = item.Nombre;
+                })
+                getTasksByUser(0);
+            },
+            error: function (data) {
+                alert("error:" + JSON.stringify(data));
+            }
+        });
     }
 
     function getTasksByUser(userId) {
@@ -99,10 +120,17 @@ sinaptic.tasksByUserReport = function () {
                 impoCanc = item["Siniestro"].ImporteACancelar;
             }
             impoCanc = parseFloat(impoCanc);
+            var sumaAsegurada = "0.00";
+            if (item["Siniestro"].SumaAsegurada != null) {
+                sumaAsegurada = item["Siniestro"].SumaAsegurada;
+            }
+            sumaAsegurada = parseFloat(sumaAsegurada);            
             var vencimientoDeuda = "";
             var vencimientoCancelacion = "";
             var fechaDesde = "";
             var fechaHasta = "";
+            var fechaSiniestro = "";
+            var tipoSiniestro = item["Siniestro"].TipoDeSiniestroValue == "1" ? "DESTRUCCIÓN TOTAL" : "ROBO TOTAL";
             if (item["Siniestro"].VencimientoDeuda){
                 var date = moment(item["Siniestro"].VencimientoDeuda);
                 date.add(date.utcOffset() * -1, 'm');
@@ -112,6 +140,11 @@ sinaptic.tasksByUserReport = function () {
                 var date = moment(item["Siniestro"]["FechaDeCancelaci\u00f3n"]);
                 date.add(date.utcOffset() * -1, 'm');
                 vencimientoCancelacion = dateToString(date._d);
+            }
+            if (item["Siniestro"]["FechaSiniestro"]) {
+                var date = moment(item["Siniestro"]["FechaSiniestro"]);
+                date.add(date.utcOffset() * -1, 'm');
+                fechaSiniestro = dateToString(date._d);
             }
             if (item.FechaDesde) {
                 var date = moment(item.FechaDesde);
@@ -123,9 +156,20 @@ sinaptic.tasksByUserReport = function () {
                 date.add(date.utcOffset() * -1, 'm');
                 fechaHasta = dateToString(date._d);
             }
+            var carrier = "";
+            if (item["Siniestro"].CarrierId !== null) {
+                carrier = carriers[item["Siniestro"].CarrierId];
+            }
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
+            structure.push('<td>' + fechaSiniestro + '</td>');
+            structure.push('<td>' + tipoSiniestro + '</td>');
+            structure.push('<td>' + (item["Siniestro"].ModeloVehiculo || "") + '</td>');
+            structure.push('<td>' + (item["Siniestro"].Dominio || "") + '</td>');
+            structure.push('<td>' + sumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
+            structure.push('<td>' + (item["Siniestro"].Tomador || "") + '</td>');
+            structure.push('<td>' + carrier + '</td>');
             structure.push('<td>' + item["Estado"].Descripción + '</td>');
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
