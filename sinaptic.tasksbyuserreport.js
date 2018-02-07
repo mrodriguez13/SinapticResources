@@ -7,7 +7,7 @@ sinaptic.tasksByUserReport = function () {
     var settings = {
         userId: _spPageContextInfo.userId,
         host: window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl,
-        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Importe Saldo Enviado", "Venc. Saldo Enviado", "Importe Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging"],
+        listColumnsNames: ["Siniestro", "Estado", "Grupo", "Orden", "Importe Saldo Enviado", "Venc. Saldo Enviado", "Importe Saldo Acreditado", "Venc. Saldo Acreditado", "Desde", "Hasta", "Aging", "Usuario"],
         headerSelector: "#header-container",
         bodySelector: "#body-container",
         footerSelector: "footer-container"
@@ -58,7 +58,7 @@ sinaptic.tasksByUserReport = function () {
         } else {
             filterByUser = '(ModificadoPorId ne null) and ';
         }
-        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null and Siniestro ne null&$expand=Siniestro,Estado";
+        var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null and Siniestro ne null&$expand=Siniestro,Estado,ModificadoPor";
         $.ajax({
             url: reportUrl,
             type: "GET",
@@ -136,6 +136,7 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + fechaDesde + '</td>');
             structure.push('<td>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
+            structure.push('<td>' + item.ModificadoPor.Nombre + '</td>');
             structure.push('</tr>');
         }
         )
