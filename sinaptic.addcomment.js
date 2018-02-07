@@ -80,10 +80,10 @@
         });
 
         var mdlContent = [];
-        mdlContent.push('<div id="modalWindow" class="modal">');
+        mdlContent.push('<div id="modalWindow" class="modal" style="display:none;">');
         mdlContent.push('<div class="modal-content">');
         mdlContent.push('<div class="modal-header">');
-        mdlContent.push('<span class="close" onclick="$(\'#modalWindow\').style.display=\'none\'">&times;</span>');
+        mdlContent.push('<span class="close" onclick="$(\'#modalWindow\').css(\'display\', \'none\')">&times;</span>');
         mdlContent.push('<h2>Nuevo comentario</h2>');
         mdlContent.push('</div>');
         mdlContent.push('<div class="modal-body">');
@@ -104,7 +104,7 @@
         }
         $("#CommentsSection").html(structureLegacy);
 
-        $("#newComment").onclick = function () {
+        $("#newComment").click = function () {
             $("#modalWindow").style.display = "block";
         };
 
