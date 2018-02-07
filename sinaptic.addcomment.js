@@ -61,7 +61,7 @@
     var localDate = function(oridate) {
         if (oridate) {
             var date = moment(oridate);
-            date.add(date.utcOffset() * -1, 'm');
+            date.add((date.utcOffset() * -1)*2, 'm');
             return dateToString(date._d);
         }
         return ""
