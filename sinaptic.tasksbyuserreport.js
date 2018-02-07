@@ -61,7 +61,7 @@ sinaptic.tasksByUserReport = function () {
             success: function (data) {
                 var carr = data.d.results;
                 $(carr).ech(function (i, item) {
-                    carriers[item.Identificador] = item.Nombre;
+                    carriers[item.Identificador] = item.Título;
                 })
                 getTasksByUser(0);
             },
