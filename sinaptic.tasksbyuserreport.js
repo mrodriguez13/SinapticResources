@@ -60,7 +60,7 @@ sinaptic.tasksByUserReport = function () {
             headers: { "accept": "application/json;odata=verbose" },
             success: function (data) {
                 var carr = data.d.results;
-                $(carr).ech(function (i, item) {
+                $(carr).each(function (i, item) {
                     carriers[item.Identificador] = item.Título;
                 })
                 getTasksByUser(0);
