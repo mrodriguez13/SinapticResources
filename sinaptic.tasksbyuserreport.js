@@ -54,7 +54,7 @@ sinaptic.tasksByUserReport = function () {
     function getCarriers() {
         var url = settings.host + "/_vti_bin/listdata.svc/Carriers";
         $.ajax({
-            url: reportUrl,
+            url: url,
             type: "GET",
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
