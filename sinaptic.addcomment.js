@@ -105,7 +105,7 @@
         $("#CommentsSection").html(structureLegacy);
 
         $("#newComment").click(function () {
-            $("#modalWindow").style.display = "block";
+            $("#modalWindow").css("display","block");
         });
 
 
