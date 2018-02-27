@@ -318,7 +318,7 @@ sinaptic.wf = function () {
                 siniesterInfo.push("<div class='col-md-4'>");
                 siniesterInfo.push("<label>Importe a cancelar</label>");
                 siniesterInfo.push("<div class='sinisterDataItem sinisterId' id='siniestroimporteacaancelar'>");
-                siniesterInfo.push(sinaptic.vm.currentSinister.saldopendiente);
+                siniesterInfo.push(sinaptic.vm.currentSinister.importeACancelar);
                 siniesterInfo.push("</div>");
                 siniesterInfo.push("</div>");
 

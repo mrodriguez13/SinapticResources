@@ -251,6 +251,7 @@ sinaptic.posa = function (options) {
                 dominio: sinister.Dominio,
                 responsableId: sinister.ResponsableId,
                 fechaSiniestro: sinister.FechaSiniestro,
+                importeACancelar: sinister.ImporteACancelar,
                 mailcliente: sinister.MailCliente,
                 mailcompania: sinister.MailCia,
                 modelovehiculo: sinister.ModeloVehiculo,
