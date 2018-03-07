@@ -130,7 +130,7 @@ sinaptic.tasksByUserReport = function () {
             var fechaDesde = "";
             var fechaHasta = "";
             var fechaSiniestro = "";
-            var tipoSiniestro = item["Siniestro"].TipoDeSiniestroValue == "1" ? "DESTRUCCIÓN TOTAL" : "ROBO TOTAL";
+            var tipoSiniestro = item["Siniestro"].TipoDeSiniestroValue == "1" ? "ROBO TOTAL" : "DESTRUCCIÓN TOTAL";
             if (item["Siniestro"].VencimientoDeuda){
                 var date = moment(item["Siniestro"].VencimientoDeuda);
                 date.add(date.utcOffset() * -1, 'm');
