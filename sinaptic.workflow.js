@@ -1242,6 +1242,12 @@ sinaptic.wf = function () {
                     closeTaskOk = false;
                     break;
                 }
+                if (!hasComment) {
+                    alert("Debe ingresar un comentario antes de completar la tarea");
+                    $('#comentariosContainer').toggle();
+                    closeTaskOk = false;
+                    break;
+                }
                 var payload = {
                     MotivoRechazo: "",
                     EstadoId: isAuthorized ? 34 : 24
