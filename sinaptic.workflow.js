@@ -1312,7 +1312,12 @@ sinaptic.wf = function () {
                 break;
 
             case 39:
-                verifPrenda
+                if (!hasComment) {
+                    alert("Debe ingresar un comentario antes de completar la tarea");
+                    $('#comentariosContainer').toggle();
+                    closeTaskOk = false;
+                    break;
+                }
                 var verifPrenda = false;
                 if ($("input#verifPrendaSi")[0].checked === true) {
                     verifPrenda = true;
