@@ -2,24 +2,27 @@
 var currentSinister = {};
 
 var detailsSinister = function () {
-    var e = 0,
-    r = ["Siniestro", "Grupo", "Orden", "Carrier", "Tomador", "DNI", "Fecha Siniestro", "Tipo de Siniestro", "Modelo Vehiculo", "Tipo Vehiculo", "Dominio", "Suma Asegurada"],
-     s = function (e) { return e.toString() },
-     t = function (e) { $("#PrincipalData").html("<h4>No hay detalles asociados a este Siniestro</h4>") },
-     o = function (e) { return void 0 == e || null == e || "" == e ? " - " : e }, n = function (e) {
+    var e = 0;
+    var fields = ["Siniestro", "Grupo", "Orden", "Carrier", "Tomador", "DNI", "Fecha Siniestro", "Tipo de Siniestro", "Modelo Vehiculo", "Tipo Vehiculo", "Dominio", "Suma Asegurada"]
+    var s = function (e) { return e.toString() }
+    var t = function (e) { $("#PrincipalData").html("<h4>No hay detalles asociados a este Siniestro</h4>") }
+    var o = function (e) { return void 0 == e || null == e || "" == e ? " - " : e }, n = function (e) {
          var r = ""; if (null != e) {
              r = e.replace("/Date(", "");
              var s = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dic"];
              r = (r = new Date(Number(r.replace(")/", "")))).getDate() + "/" + (parseInt(r.getMonth()) + 1) + "/" + r.getFullYear()
          }
          else r = " - "; return r
-     }, i = function (e) {
+    }
+    var i = function (e) {
          var r = new Date, s = e.replace("/Date(", "");
          return s = new Date(Number(s.replace(")/", ""))), Math.round(Math.abs((s.getTime() - r.getTime()) / 864e5))
      }
-     , a = function (r) {
-         var s = r.d.results[0]; $("#SinesterTitleID h1").html("Siniestro: " + s.Siniestro);
-         var t = window.location.protocol + "//access.willis.com/site/ExpertiseBrokersArgentina/Paginas/AdminTasks.aspx?"; t += "gp=" + s.Grupo + "&or=" + s.Orden + "&title=" + s.Estado["Descripción"];
+     var a = function (data) {
+         var s = data.d.results[0];
+         $("#SinesterTitleID h1").html("Siniestro: " + s.Siniestro);
+         var t = window.location.protocol + "//access.willis.com/site/ExpertiseBrokersArgentina/Paginas/AdminTasks.aspx?";
+         t += "gp=" + s.Grupo + "&or=" + s.Orden + "&title=" + s.Estado["Descripción"];
          getUserGruop('<a  href="' + t + '"><img src="' + window.location.protocol + '//access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/settings2.png" style="padding-top: 8px;" height="25" width="25"></a>');
          //if(true){
          //    $("#SinesterTitleID h1").after('<a  href="' + t + '"><img src="'+window.location.protocol+'://access.willis.com/site/ExpertiseBrokersArgentina/SiteAssets/img/settings2.png" style="padding-top: 8px;" height="25" width="25"></a>');
@@ -45,6 +48,7 @@ var detailsSinister = function () {
          d.push("</br><strong>Orden: </strong>"), d.push(o(s.Orden)),
          d.push("</br><strong>Fecha de Siniestro: </strong>"), d.push(adjustDate(s.FechaSiniestro)),
          d.push("</br><strong>Tipo de Siniestro: </strong>"), d.push(tipoSiniestro),
+         d.push("</br><strong>Modelo de vehículo: </strong>"), d.push(s.ModeloVehiculo),
          d.push("</br><strong>Dominio: </strong>"), d.push(o(s.Dominio)),
          d.push("</br><strong>Suma Asegurada: </strong>"), d.push("$" + o(sumaAsegurada.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))),
          d.push("</br><strong>Tipo de Resolucion: </strong>"), d.push(o(s.TipoDeResulociónValue)),
@@ -72,7 +76,10 @@ var detailsSinister = function () {
          d.push("</div>"),
 
          d.push("</div>"), d = d.join(""), $("#PrincipalData").html(d)
-     }, u = function (e) { $("#tabs").tabs(); };
+     }
+
+    var u = function (e) { $("#tabs").tabs(); };
+
     function adjustDate(oridate) {
         if (oridate) {
             var date = moment(oridate);
@@ -106,10 +113,11 @@ var detailsSinister = function () {
     }
     return {
         getPrincipalData: function () {
-            var o = s(r), n = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
+            var listFields = fields.toString();
+            var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
 
             $.ajax({
-                url: n + "/_vti_bin/listdata.svc/Siniestros?select=" + o + ",Identificador&$expand=Carrier,Estado,TeamLeader,Responsable&$filter=(Identificador eq " + e + ")",
+                url: host + "/_vti_bin/listdata.svc/Siniestros?select=" + listFields + ",Identificador&$expand=Carrier,Estado,TeamLeader,Responsable&$filter=(Identificador eq " + e + ")",
                 type: "GET",
                 async: !0,
                 headers: { accept: "application/json;odata=verbose" },
@@ -131,8 +139,6 @@ $(window).load(function () {
     while ($('#statusContainer').find('h4').length > 1) {
         $('#statusContainer').find('h4')[0].remove()
     }
-
-
     if ($('#statusContainer').find('canvas').width() < 500)
         $('#statusContainer').find('h4')[0].remove()
 });
