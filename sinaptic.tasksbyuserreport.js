@@ -163,7 +163,7 @@ sinaptic.tasksByUserReport = function () {
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
-            structure.push('<td>' + fechaSiniestro + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaSiniestro) + '</span>' + fechaSiniestro + '</td>');
             structure.push('<td>' + tipoSiniestro + '</td>');
             structure.push('<td>' + (item["Siniestro"].ModeloVehiculo || "") + '</td>');
             structure.push('<td>' + (item["Siniestro"].Dominio || "") + '</td>');
@@ -174,11 +174,11 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + vencimientoDeuda + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoDeuda) + '</span>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td>' + vencimientoCancelacion + '</td>');
-            structure.push('<td>' + fechaDesde + '</td>');
-            structure.push('<td>' + fechaHasta + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoCancelacion) + '</span>' + vencimientoCancelacion + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaDesde) + '</span>' + fechaDesde + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaHasta) + '</span>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('<td>' + item.ModificadoPor.Nombre + '</td>');
             structure.push('</tr>');
@@ -190,6 +190,10 @@ sinaptic.tasksByUserReport = function () {
         $(settings.bodySelector).html(structure.join(""));
 
         loadFooterSearchInputs();
+    }
+
+    function dateToSortableString(date){
+        return date.getFullYear() + (date.getMonth() + 1) + date.getDate() ;
     }
 
     function dateToString(date) {
