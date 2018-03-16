@@ -130,30 +130,40 @@ sinaptic.tasksByUserReport = function () {
             var fechaDesde = "";
             var fechaHasta = "";
             var fechaSiniestro = "";
+            var vencimientoDeuda_d = new Date(0);
+            var vencimientoCancelacion_d = new Date(0);
+            var fechaDesde_d = new Date(0);
+            var fechaHasta_d = new Date(0);
+            var fechaSiniestro_d = new Date(0);
             var tipoSiniestro = item["Siniestro"].TipoDeSiniestroValue == "1" ? "ROBO TOTAL" : "DESTRUCCIÓN TOTAL";
             if (item["Siniestro"].VencimientoDeuda){
                 var date = moment(item["Siniestro"].VencimientoDeuda);
                 date.add(date.utcOffset() * -1, 'm');
+                vencimientoDeuda_d = date._d;
                 vencimientoDeuda = dateToString(date._d);
             }
             if (item["Siniestro"]["FechaDeCancelaci\u00f3n"]) {
                 var date = moment(item["Siniestro"]["FechaDeCancelaci\u00f3n"]);
                 date.add(date.utcOffset() * -1, 'm');
+                vencimientoCancelacion_d = date._d;
                 vencimientoCancelacion = dateToString(date._d);
             }
             if (item["Siniestro"]["FechaSiniestro"]) {
                 var date = moment(item["Siniestro"]["FechaSiniestro"]);
                 date.add(date.utcOffset() * -1, 'm');
+                fechaSiniestro_d = date._d;
                 fechaSiniestro = dateToString(date._d);
             }
             if (item.FechaDesde) {
                 var date = moment(item.FechaDesde);
                 date.add(date.utcOffset() * -1, 'm');
+                fechaDesde_d = date._d;
                 fechaDesde = dateToString(date._d);
             }
             if (item.FechaHasta) {
                 var date = moment(item.FechaHasta);
                 date.add(date.utcOffset() * -1, 'm');
+                fechaHasta_d = date._d;
                 fechaHasta = dateToString(date._d);
             }
             var carrier = "";
@@ -163,7 +173,7 @@ sinaptic.tasksByUserReport = function () {
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaSiniestro) + '</span>' + fechaSiniestro + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaSiniestro_d) + '</span>' + fechaSiniestro + '</td>');
             structure.push('<td>' + tipoSiniestro + '</td>');
             structure.push('<td>' + (item["Siniestro"].ModeloVehiculo || "") + '</td>');
             structure.push('<td>' + (item["Siniestro"].Dominio || "") + '</td>');
@@ -174,11 +184,11 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoDeuda) + '</span>' + vencimientoDeuda + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoDeuda_d) + '</span>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoCancelacion) + '</span>' + vencimientoCancelacion + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaDesde) + '</span>' + fechaDesde + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaHasta) + '</span>' + fechaHasta + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoCancelacion_d) + '</span>' + vencimientoCancelacion + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaDesde_d) + '</span>' + fechaDesde + '</td>');
+            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaHasta_d) + '</span>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('<td>' + item.ModificadoPor.Nombre + '</td>');
             structure.push('</tr>');
