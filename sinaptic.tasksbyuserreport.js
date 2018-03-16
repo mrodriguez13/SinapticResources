@@ -173,7 +173,7 @@ sinaptic.tasksByUserReport = function () {
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaSiniestro_d) + '</span>' + fechaSiniestro + '</td>');
+            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaSiniestro_d) + '</span>' + fechaSiniestro + '</td>');
             structure.push('<td>' + tipoSiniestro + '</td>');
             structure.push('<td>' + (item["Siniestro"].ModeloVehiculo || "") + '</td>');
             structure.push('<td>' + (item["Siniestro"].Dominio || "") + '</td>');
@@ -184,11 +184,11 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoDeuda_d) + '</span>' + vencimientoDeuda + '</td>');
+            structure.push('<td><span style="display: none;">' + dateToSortableString(vencimientoDeuda_d) + '</span>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(vencimientoCancelacion_d) + '</span>' + vencimientoCancelacion + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaDesde_d) + '</span>' + fechaDesde + '</td>');
-            structure.push('<td><span style="visibility: hidden;">' + dateToSortableString(fechaHasta_d) + '</span>' + fechaHasta + '</td>');
+            structure.push('<td><span style="display: none;">' + dateToSortableString(vencimientoCancelacion_d) + '</span>' + vencimientoCancelacion + '</td>');
+            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaDesde_d) + '</span>' + fechaDesde + '</td>');
+            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaHasta_d) + '</span>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('<td>' + item.ModificadoPor.Nombre + '</td>');
             structure.push('</tr>');
