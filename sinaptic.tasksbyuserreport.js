@@ -203,7 +203,7 @@ sinaptic.tasksByUserReport = function () {
     }
 
     function dateToSortableString(date){
-        return date.getFullYear() + (date.getMonth() + 1) + date.getDate() ;
+        return "" + date.getFullYear() + (date.getMonth() + 1) + date.getDate() ;
     }
 
     function dateToString(date) {
