@@ -74,7 +74,7 @@ sinaptic.tasksByUserReport = function () {
     function getTasksByUser(userId) {
         var filterByUser = "";
         $(settings.bodySelector).html('<div class="loader"></div>');
-        if (userId != 0){
+        if (userId != 0) {
             filterByUser = '(ModificadoPorId eq ' + userId + ') and ';
         } else {
             filterByUser = '(ModificadoPorId ne null) and ';
@@ -111,8 +111,8 @@ sinaptic.tasksByUserReport = function () {
             }
 
             var saldo = "0.00"
-            if(item["Siniestro"].SaldoPendiente != null){
-                saldo = item["Siniestro"].SaldoPendiente ;
+            if (item["Siniestro"].SaldoPendiente != null) {
+                saldo = item["Siniestro"].SaldoPendiente;
             }
             saldo = parseFloat(saldo);
             var impoCanc = "0.00"
@@ -124,7 +124,7 @@ sinaptic.tasksByUserReport = function () {
             if (item["Siniestro"].SumaAsegurada != null) {
                 sumaAsegurada = item["Siniestro"].SumaAsegurada;
             }
-            sumaAsegurada = parseFloat(sumaAsegurada);            
+            sumaAsegurada = parseFloat(sumaAsegurada);
             var vencimientoDeuda = "";
             var vencimientoCancelacion = "";
             var fechaDesde = "";
@@ -136,7 +136,7 @@ sinaptic.tasksByUserReport = function () {
             var fechaHasta_d = new Date(0);
             var fechaSiniestro_d = new Date(0);
             var tipoSiniestro = item["Siniestro"].TipoDeSiniestroValue == "1" ? "ROBO TOTAL" : "DESTRUCCIÓN TOTAL";
-            if (item["Siniestro"].VencimientoDeuda){
+            if (item["Siniestro"].VencimientoDeuda) {
                 var date = moment(item["Siniestro"].VencimientoDeuda);
                 date.add(date.utcOffset() * -1, 'm');
                 vencimientoDeuda_d = date._d;
@@ -202,8 +202,8 @@ sinaptic.tasksByUserReport = function () {
         loadFooterSearchInputs();
     }
 
-    function dateToSortableString(date){
-        return "" + pad(date.getFullYear(), 4) + pad((date.getMonth() + 1),2) + pad(date.getDate(),2) ;
+    function dateToSortableString(date) {
+        return "" + pad(date.getFullYear(), 4) + pad((date.getMonth() + 1), 2) + pad(date.getDate(), 2);
     }
 
     function pad(n, width, z) {
@@ -217,7 +217,7 @@ sinaptic.tasksByUserReport = function () {
     };
 
     function FormatDate(date) {
-        if(date !== null){
+        if (date !== null) {
             var auxDate = date.replace("/Date(", "");
             auxDate = new Date(Number(auxDate.replace(")/", "")));
             auxDate = dateToString(auxDate);
@@ -266,7 +266,49 @@ sinaptic.tasksByUserReport = function () {
             "dom": "Bfrtip",
             "targets": [6], "searchable": false, "orderable": false, "visible": true,
             "buttons": [
-                "copy", "csv", "excel", "pdf", "print"
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copiar',
+                    titleAttr: 'Copiar en portapapeles',
+                    title: 'Tareas por Usuario',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'CSV',
+                    title: 'Tareas por Usuario',
+                    exportOptions: {
+                        columns: ':visible',
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Exportar a Excel',
+                    title: 'Tareas por Usuario',
+                    exportOptions: {
+                        columns: ':visible',
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'PDF',
+                    title: 'Tareas por Usuario',
+                    exportOptions: {
+                        columns: ':visible',
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }
             ]
         });;
 
@@ -290,6 +332,6 @@ sinaptic.tasksByUserReport = function () {
 
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     sinaptic.tasksByUserReport();
 })
