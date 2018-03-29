@@ -2,6 +2,7 @@
 var sinaptic = sinaptic || {};
 
 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
+$.getScript("http://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js");
 var carriers = [];
 sinaptic.tasksByUserReport = function () {
     var settings = {
@@ -173,7 +174,7 @@ sinaptic.tasksByUserReport = function () {
 
             structure.push('<tr onClick="openUrl(\'' + settings.host + '/Paginas/DetallesSiniestro.aspx?#ID=' + item["Identificador"] + '\')">');
             structure.push('<td>' + item["Siniestro"].Siniestro + '</td>');
-            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaSiniestro_d) + '</span>' + fechaSiniestro + '</td>');
+            structure.push('<td>' + fechaSiniestro + '</td>');
             structure.push('<td>' + tipoSiniestro + '</td>');
             structure.push('<td>' + (item["Siniestro"].ModeloVehiculo || "") + '</td>');
             structure.push('<td>' + (item["Siniestro"].Dominio || "") + '</td>');
@@ -184,11 +185,11 @@ sinaptic.tasksByUserReport = function () {
             structure.push('<td>' + item["Siniestro"].Grupo + '</td>');
             structure.push('<td>' + item["Siniestro"].Orden + '</td>');
             structure.push('<td>$' + saldo.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="display: none;">' + dateToSortableString(vencimientoDeuda_d) + '</span>' + vencimientoDeuda + '</td>');
+            structure.push('<td>' + vencimientoDeuda + '</td>');
             structure.push('<td>$' + impoCanc.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + '</td>');
-            structure.push('<td><span style="display: none;">' + dateToSortableString(vencimientoCancelacion_d) + '</span>' + vencimientoCancelacion + '</td>');
-            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaDesde_d) + '</span>' + fechaDesde + '</td>');
-            structure.push('<td><span style="display: none;">' + dateToSortableString(fechaHasta_d) + '</span>' + fechaHasta + '</td>');
+            structure.push('<td>' + vencimientoCancelacion + '</td>');
+            structure.push('<td>' + fechaDesde + '</td>');
+            structure.push('<td>' + fechaHasta + '</td>');
             structure.push('<td>' + Math.round(item.Aging) + '</td>');
             structure.push('<td>' + item.ModificadoPor.Nombre + '</td>');
             structure.push('</tr>');
@@ -236,6 +237,7 @@ sinaptic.tasksByUserReport = function () {
             var title = $(this).text();
             $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
         });
+        $.fn.dataTable.moment('DD/MM/YYYY');
 
         // DataTable
         var table = $('.table').DataTable({
