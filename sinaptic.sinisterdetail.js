@@ -1,5 +1,4 @@
-﻿$.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
-var currentSinister = {};
+﻿var currentSinister = {};
 
 var detailsSinister = function () {
     var e = 0;
@@ -112,13 +111,19 @@ var detailsSinister = function () {
         $("#SinesterTitleID h1").after(adminLink);
     }
     return {
-        getPrincipalData: function () {
+        getPrincipalData: $.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js",function () {
             var listFields = fields.toString();
             var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
             var navParams = window.location.href.split("ID=");
             var sinisterId = 0;
-            if (navParams.length > 0){
-                sinisterId = navParams[1];
+            if (navParams.length > 0) {
+                var andIndex = navParams[1].indexOf("&");
+                if (andIndex > 0){
+                    sinisterId = navParams[1].substr(0, andIndex);
+                }
+                else {
+                    sinisterId = navParams[1];
+                }
             }
 
             $.ajax({
@@ -134,7 +139,7 @@ var detailsSinister = function () {
 
 
 
-        },
+        }),
         setSinisterID: function () {
             var r = window.location.href.split("ID=");
             e = r[1];
