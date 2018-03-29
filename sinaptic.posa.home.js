@@ -1,4 +1,6 @@
 "use strict";
+$.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
+$.getScript("https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js");
 
 var sinaptic = sinaptic || {};
 
@@ -74,7 +76,7 @@ sinaptic.posa = function (options) {
     function getTasksByStatus(data) {
         var status = data.d.results;
         var filter = getStatusFilter(status);
-        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$expand=Estado,Carrier&$filter=( " + filter + ") and EstadoId ne 32";
+        var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$expand=Estado,Carrier&$filter=" + filter + " EstadoId ne 32";
         $.ajax({
             url: url,
             type: "GET",
@@ -86,11 +88,14 @@ sinaptic.posa = function (options) {
     }
 
     function getStatusFilter(data) {
-        var ret = "EstadoId eq ";
-        $(data).each(function (i, state) {
-            ret += state.Identificador + " or EstadoId eq ";
-        });
-        ret = ret.substring(0, ret.length - 16);
+        var ret = "";
+        if(data.length > 0){
+            ret = " (EstadoId eq ";
+            $(data).each(function (i, state) {
+                ret += state.Identificador + " or EstadoId eq ";
+            });
+            ret = ret.substring(0, ret.length - 16) + ") and";
+        }
         return ret;
     }
 
@@ -220,13 +225,9 @@ sinaptic.posa = function (options) {
             var fechaCancelacion = "";
             var dueDate = new Date();
             if (sinister.VencimientoDeuda != undefined && sinister.VencimientoDeuda != null) {
-                //vencimientoDeuda = sinister.VencimientoDeuda.replace("/Date(", "");
-                //vencimientoDeuda = new Date(Number(vencimientoDeuda.replace(")/", "")));
-                //vencimientoDeuda = dateToString(vencimientoDeuda);
                 var date = moment(sinister.VencimientoDeuda);
                 date.add(date.utcOffset() * -1, 'm');
                 vencimientoDeuda = dateToString(date._d);
-
             }
             if (sinister.VencimientoEstado != undefined && sinister.VencimientoEstado != null) {
                 var date = moment(sinister.VencimientoEstado);
@@ -249,6 +250,7 @@ sinaptic.posa = function (options) {
                 tomador: sinister.Tomador,
                 carrier: sinister.Carrier["T\u00edtulo"],
                 dominio: sinister.Dominio,
+                modelo: sinister.Modelo,
                 responsableId: sinister.ResponsableId,
                 fechaSiniestro: sinister.FechaSiniestro,
                 importeACancelar: sinister.ImporteACancelar,
@@ -294,6 +296,7 @@ sinaptic.posa = function (options) {
         var template = Handlebars.compile(source);
         var estructura = template(context);
         $("#userTasksContainer").html(estructura);
+        $.fn.dataTable.moment('DD/MM/YYYY');
         $("#userTasks").DataTable({
             "language": {
                 "sProcessing": "Procesando...",
@@ -532,8 +535,14 @@ sinaptic.posa = function (options) {
         });
     }
 
+    function pad(n, width, z) {
+        z = z || '0';
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+
     function dateToString(date) {
-        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        return pad(date.getDate(), 2) + "/" + pad((date.getMonth() + 1), 2) + "/" +  pad(date.getFullYear(), 4);
     };
 
     function refreshContents() {
