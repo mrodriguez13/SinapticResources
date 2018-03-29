@@ -75,6 +75,8 @@ var detailsSinister = function () {
          d.push("</div>"),
 
          d.push("</div>"), d = d.join(""), $("#PrincipalData").html(d)
+         $("#tabs").tabs();
+
      }
 
     var u = function (e) { $("#tabs").tabs(); };
