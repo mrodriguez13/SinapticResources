@@ -2,7 +2,7 @@
 var sinaptic = sinaptic || {};
 
 $.getScript("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js");
-$.getScript("http://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js");
+$.getScript("https://cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js");
 var carriers = [];
 sinaptic.tasksByUserReport = function () {
     var settings = {
