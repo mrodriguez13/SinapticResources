@@ -2384,20 +2384,29 @@ sinaptic.adminTasks = (function () {
     }
 
 
-
+    function CheckIfIsNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    };
 
 
     var updateCurrentSinister = function (sinisterId) {
 
         var currentPage = window.location.href;
+        var ClosedMeaning = "";
         currentPage = currentPage.substr(0, currentPage.indexOf('/Paginas'));
 
         var idNuevoEstado = $("." + sinisterId + ".status option:selected").val();
 
+        if (!CheckIfIsNumber(idNuevoEstado)) {
+            ClosedMeaning = idNuevoEstado;
+            idNuevoEstado = "";
+        }
+
         payload = {
             EstadoId: idNuevoEstado,
             Grupo: $("." + sinisterId +".groupInbox").val(),
-            Orden: $("." + sinisterId +".orderInbox").val()
+            Orden: $("." + sinisterId + ".orderInbox").val(),
+            MotivoCierre: ClosedMeaning
         };
 
         var postUrl = currentPage + "/_vti_bin/listdata.svc/Siniestros(" + sinisterId + ")";
@@ -2415,13 +2424,14 @@ sinaptic.adminTasks = (function () {
                 "If-Match": "*"
             },
             success: function (data) {
-
                 checkState(sinisterId, idNuevoEstado);
-
                 alert("Siniestro actualizado");
                 sinaptic.adminTasks.init();
             },
-            error: console.log("Error en la edición rapida")
+            error: function (data) {
+                alert("Falló la actualización del estado");
+                console.log("Error en la edición rapida: " + JSON.stringify(data));
+            }
         });
 
 
