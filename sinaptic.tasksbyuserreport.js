@@ -214,7 +214,7 @@ sinaptic.tasksByUserReport = function () {
     }
 
     function dateToString(date) {
-        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        return pad(date.getDate(), 2) + "/" + pad((date.getMonth() + 1), 2) + "/" +  pad(date.getFullYear(), 4);
     };
 
     function FormatDate(date) {
@@ -226,10 +226,6 @@ sinaptic.tasksByUserReport = function () {
         }
         return "";
     }
-
-    function dateToString(date) {
-        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-    };
 
     function loadFooterSearchInputs(elemnt) {
         // Setup - add a text input to each footer cell
