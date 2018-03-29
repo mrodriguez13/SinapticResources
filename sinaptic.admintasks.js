@@ -1965,19 +1965,10 @@ sinaptic.adminTasks = (function () {
                             console.log("done!!!");
                         });
                         promiseHistory.then(function (sArgs) {
-                            //var vencID = oListItem.get_id();
-                            //updateNewTaskCreated(vencID);
                             updateSinisterJSOM(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
                             console.log("task updated!!")
-                            //sArgs[0] == success callback sender
-                            //sArgs[1] == success callback args
                         }, function (fArgs) {
                             console.log("error");
-                            //fArgs[0] == fail callback sender
-                            //fArgs[1] == fail callback args.
-                            //in JSOM the callback args aren't used much - 
-                            //the only useful one is probably the get_message() 
-                            //on the fail callback
                             console.log(fArgs[1].get_message());
                         });
 
@@ -1992,19 +1983,10 @@ sinaptic.adminTasks = (function () {
                             console.log("done!!!");
                         });
                         promiseHistory.then(function (sArgs) {
-                            //var vencID = oListItem.get_id();
-                            //updateNewTaskCreated(vencID);
                             updateSinisterJSOM(sin, idSin, oldStatus, listTareasURL, newStatus, statusLetter, group, order, venc1, venc2);
                             console.log("task updated!!")
-                            //sArgs[0] == success callback sender
-                            //sArgs[1] == success callback args
                         }, function (fArgs) {
                             console.log("error");
-                            //fArgs[0] == fail callback sender
-                            //fArgs[1] == fail callback args.
-                            //in JSOM the callback args aren't used much - 
-                            //the only useful one is probably the get_message() 
-                            //on the fail callback
                             console.log(fArgs[1].get_message());
                         });
 
@@ -2014,38 +1996,24 @@ sinaptic.adminTasks = (function () {
 
         }
 
-
-
-
-
-
     };
     var completeOldTask = function (sin, id, oldStatus, task, newStatus) {
         var statusLetter = oldStatus.charAt(0);
         var statusList = "Tareas" + statusLetter;
         var IDTask = task.Identificador
         var etag = task.__metadata.etag;
-        //var modifiedItem = {};
-        //modifiedItem.EstadoValue = 2;
         task.Salto = 1;
         task.FechaDeInicio = getFormattedDate(task.FechaDeInicio);
         task.FechaDeVencimiento = getFormattedDate(task.FechaDeVencimiento);
         task.Creado = getFormattedDate(task.Creado);
         task.Modificado = getFormattedDate(task.Modificado);
         task.EstadoValue = "Completada";
-        //idVencRelated = task["IdVencimiento"];
-        //usrAssigned = task["AsignadoA"].Título;
-        //idVencRelated = curritem.get_item("IdVencimiento");
-        //usrAssigned = curritem.get_item("AsignadoA");
         closeTaskInHistory(task.Identificador, sin, newStatus);
 
         var jsonTask = JSON.stringify(task);
         var beforeSendFunction;
         var listTareasURL = host + "/_vti_bin/listdata.svc/" + statusList + "(" + IDTask + ")";
-        //beforeSendFunction = function (xhr) {
-        //    xhr.setRequestHeader("If-Match","*");
-        //    xhr.setRequestHeader("X-HTTP-Method", 'MERGE');
-        //}
+
         $.ajax({
             url: listTareasURL,
             type: "POST",
@@ -2062,29 +2030,10 @@ sinaptic.adminTasks = (function () {
                 console.log(xhr.status + ": " + xhr.statusText);
             }
         });
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: listTareasURL,
-        //    contentType: "application/json; charset=utf-8",
-        //    data: modifiedItem,
-        //    processData: false,
-        //    dataTipe:"json",
-        //    beforeSend: beforeSendFunction,
-        //    //headers: { "accept": "application/json;odata=verbose" },
-        //    error: function (xhr) {
-        //       console.log(xhr.status + ": " + xhr.statusText);
-        //    },
-        //    success: getTaskToUpdate,
-        //})
     };
-
-
 
     var getTaskToUpdate = function (data) {
         console.log("UPDATED!!!");
-
-
     }
     var createNewTask = function () {
 
@@ -2399,7 +2348,7 @@ sinaptic.adminTasks = (function () {
 
         if (!CheckIfIsNumber(idNuevoEstado)) {
             ClosedMeaning = idNuevoEstado;
-            idNuevoEstado = "";
+            idNuevoEstado = "32";
         }
 
         payload = {
