@@ -34,7 +34,7 @@ var detailsSinister = function () {
          var sumaAsegurada = s.SumaAsegurada || 0;
          var saldoPendiente = s.SaldoPendiente || 0;
          var importeACancelar = s.ImporteACancelar || 0;
-         var tipoSiniestro = s.TipoDeSiniestroValue == 1 ? "Robo total" : "Destrucción total";
+         var tipoSiniestro = s.TipoDeSiniestroValue == 1 || s.TipoDeSiniestroValue == "ROBO TOTAL"  ? "Robo total" : "Destrucción total";
 
          d.push("<div id='tabs'><ul><li><a href='#containerData-1'>Detalle</a></li>"),
          d.push("<li><a href='#containerData-2'>Contacto</a></li>"),
