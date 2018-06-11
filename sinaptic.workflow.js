@@ -1265,20 +1265,18 @@ sinaptic.wf = function () {
                 break;
 
             case 35:
-                // FALTA ADJUNTAR FACTURA
                 var payload = {
                     MotivoRechazo: "",
                     EstadoId: 36
                 }
-
                 if ($("#dropzone")[0].dropzone.files.length < 1) {
-                    alert("Debe adjuntar un documento");
+                    alert("Debe adjuntar la factura de Compra");
                     $("#dropzone").focus();
                     closeTaskOk = false;
                     break;
                 }
-
                 updateStatusChange(payload);
+                getFile("#dropzone");
                 break;
 
             case 36:
