@@ -2,10 +2,15 @@
     var sinesterID = 0;
     var principalDataField = "";
     var listSinester = "Comentarios";
-    var setSinisterID = function () {
-        var fullUrl = window.location.href;
-        var idArr = fullUrl.split("ID=");
-        sinesterID = idArr[1];
+    var setSinisterID = function (idParam) {
+        if (idParam != null) {
+            sinesterID = idParam;
+        }
+        else {
+            var fullUrl = window.location.href;
+            var idArr = fullUrl.split("ID=");
+            sinesterID = idArr[1];
+        }
     }
     var getCommentsData = function () {
         var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
