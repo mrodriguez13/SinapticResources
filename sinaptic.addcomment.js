@@ -3,7 +3,7 @@
     var principalDataField = "";
     var listSinester = "Comentarios";
     var setSinisterID = function (idParam) {
-        if (idParam != null) {
+        if (idParam != null && idParam != undefined) {
             sinesterID = idParam;
         }
         else {
