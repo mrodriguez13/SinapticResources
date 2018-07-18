@@ -45,14 +45,22 @@
         $("#CommentsSection").append(structure);
         $("#newCommentContainer").css("display", "none");
     }
-    var showNewCommentContainer = function () {
+    var showNewCommentContainer = function (edit) {
         $("#newCommentContainer").css("display", "inherit");
+        if (edit != null && edit === true) {
+            $("#addButton").html('<i class="fa fa - comments"></i> Guardar comentario');
+        }
+        else {
+            $("#addButton").html('<i class="fa fa - comments"></i> Agregar comentario');
+        }
+
     };
 
     var EditTmpComment = function (id) {
         var tmpCommment = sinaptic.vm.tempComments[id];
         $("#comentario").val(tmpCommment.Comentario);
-        showNewCommentContainer();
+        DeleteTmpComment(id);
+        showNewCommentContainer(true);
     }
 
     var DeleteTmpComment = function (id) {
