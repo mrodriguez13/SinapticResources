@@ -81,7 +81,7 @@ sinaptic.wf = function () {
     }
 
     function showError(data) {
-        alert( data.responseText);
+        alert(data.responseText);
     }
 
     function applyContentFormatters() {
@@ -110,16 +110,9 @@ sinaptic.wf = function () {
         $("#newSinister").modal();
     };
 
-    function loadComments(data) {
-
-    }
-
     var showTaskForm = function (siniestro, estadoId) {
         hasAttachedFiles = false;
         hasComment = false;
-        //CommentsFromSinister.setSinisterID(siniestro);
-        //CommentsFromSinister.getCommentsData(loadComments);
-
         sinaptic.context = {
             "siniestro": JSON.parse(siniestro),
             "estado": {
@@ -137,14 +130,14 @@ sinaptic.wf = function () {
         var buttons = [];
         var infoHeight = 0;
 
-        //buttons.push('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
+        buttons.push('<button style="float:left;" type="button" id="showComment" class="btn btn-warning"> Crear comentario </button>');
         buttons.push('<button style="float:left;" type="button" id="showAttach" class="btn btn-info"> Adjuntar doc </button>');
         if (estadoId === 25 || estadoId === 28 || estadoId === 29 || estadoId === 36) {
             buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Aceptar Tarea</button>');
             buttons.push('<button type="button" onclick="sinaptic.wf.showRejectTask(' + estadoId + ')" class="btn btn-danger">Rechazar Tarea</button>');
-            buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');           
+            buttons.push('<button style="margin-top: 12px;" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
         }
-        else{
+        else {
             buttons.push('<button type="button" onclick="sinaptic.wf.completeTask(' + estadoId + ')" class="btn btn-success">Completar Tarea</button>');
             buttons.push('<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>');
         }
@@ -482,16 +475,16 @@ sinaptic.wf = function () {
     function Upload(txtContent, destinationUrl) {
         var jsStream = arrayBufferToBase64(txtContent);
         var soapEnv = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-                      + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-                      + "<soap:Body>"
-                      + "<CopyIntoItems xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
-                      + "<SourceUrl>http://null</SourceUrl>"
-                      + "<DestinationUrls><string>" + destinationUrl + "</string></DestinationUrls>"
-                      + "<Fields><FieldInformation Type='File' /></Fields>"
-                      + "<Stream>" + jsStream + "</Stream>"
-                      + "</CopyIntoItems>"
-                      + "</soap:Body>"
-                      + "</soap:Envelope>";
+            + "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
+            + "<soap:Body>"
+            + "<CopyIntoItems xmlns=\"http://schemas.microsoft.com/sharepoint/soap/\">"
+            + "<SourceUrl>http://null</SourceUrl>"
+            + "<DestinationUrls><string>" + destinationUrl + "</string></DestinationUrls>"
+            + "<Fields><FieldInformation Type='File' /></Fields>"
+            + "<Stream>" + jsStream + "</Stream>"
+            + "</CopyIntoItems>"
+            + "</soap:Body>"
+            + "</soap:Envelope>";
         jQuery.ajax({
             url: settings.host + "/_vti_bin/copy.asmx",
             type: "POST",
@@ -594,7 +587,7 @@ sinaptic.wf = function () {
         if (!validateCreateSinister()) {
             return;
         }
-        var grupo =  $("#newSinister_grupo").val();
+        var grupo = $("#newSinister_grupo").val();
         var orden = $("#newSinister_orden").val();
 
         var url = settings.host + "/_vti_bin/listdata.svc/Siniestros?$filter=Grupo eq '" + grupo + "' and Orden eq '" + orden + "' and EstadoId ne 32";
@@ -660,7 +653,7 @@ sinaptic.wf = function () {
         });
 
 
- 
+
     };
 
     var addComment = function (estadoId) {
@@ -1149,7 +1142,7 @@ sinaptic.wf = function () {
                 }
 
                 hoy = yyyy + '' + mm + '' + dd;
-                if(navigator.userAgent.match(/trident/i) ){
+                if (navigator.userAgent.match(/trident/i)) {
                     if (Object.prototype.toString.call(inputDate) !== '[object Date]' || isNaN(inputDate.getTime())) {
                         alert("El formato de la fecha  de cancelación ingresada no es válido [dd/MM/aaaa]");
                         $("#cancelDate").focus();
