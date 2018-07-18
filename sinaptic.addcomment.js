@@ -29,17 +29,36 @@
             alert("No se puede guardar un comentario vacío");
             return;
         }
-        hasComment = true;
         var currStatus = sinaptic.vm.currentSinister.estado || "";
         var createdDate = localDate(new Date());
-        var structure = "<div class='legacyFile tempComment'><div class='titleComment'><h3>" + currStatus + "</h3></div><div class='comment'><p>" + comment + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'></p></div></div>";
-
+        sinaptic.vm.tempComments = sinaptic.vm.tempComments || [];
+        var index = sinaptic.vm.tempComments.lenght;
+        var structure = "<div class='legacyFile tempComment' id='tmpComment_" + index +"'><div class='titleComment'><h3>" + currStatus + "</h3> <div class='pull-right'><div><i class='fa fa-edit' onclick='CommentsFromSinister.EditTmpComment(" + index + ")' style='font-size: 20px;cursor:pointer;'></i></div><div><i class='fa fa-minus-square' onclick='CommentsFromSinister.DeleteTmpComment(" + index +")' style='font-size: 20px;cursor:pointer;'></i></div></div></div><div class='comment'><p>" + comment + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'></p></div></div>";
+        var tmpComment = {
+            T\u00edtulo: currentSinister.Siniestro,
+            Comentario: comment,
+            IDSiniestro: currentSinister.Identificador,
+            EstadoComentario: currentSinister.Estado.Descripción,
+            ComentaristaId: _spPageContextInfo.userId
+        }
+        sinaptic.vm.tempComments.push(tmpComment)
         $("#CommentsSection").append(structure);
         $("#newCommentContainer").css("display", "none");
     }
     var showNewCommentContainer = function () {
-        $("#newCommentContainer").css("display", "inline-block");
+        $("#newCommentContainer").css("display", "inherit");
     };
+
+    var EditTmpComment = function (id) {
+        var tmpCommment = sinaptic.vm.tempComments[id];
+        $("#comentario").val(tmpCommment.comment);
+        showNewCommentContainer();
+    }
+
+    var DeleteTmpComment = function (id) {
+        $("#tmpComment_" + id).remove();
+        sinaptic.vm.tempComments.splice(id, 1);
+    }
 
     var saveComment = function () {
         var comment = $("#comentario").val();
@@ -161,6 +180,8 @@
         setSinisterID: setSinisterID,
         addComment: addComment,
         showNewCommentContainer: showNewCommentContainer,
+        EditTmpComment: EditTmpComment,
+        DeleteTmpComment: DeleteTmpComment,
         saveComment: saveComment
     }
 })(jQuery);
