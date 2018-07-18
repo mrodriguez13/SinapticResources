@@ -12,14 +12,18 @@
             sinesterID = idArr[1];
         }
     }
-    var getCommentsData = function () {
+    var getCommentsData = function (callback) {
         var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
+        var successFunction = successCall;
+        if (callback != null && callack != undefined) {
+            successFunction = callback;
+        } 
         $.ajax({
             url: host + "/_vti_bin/listdata.svc/" + listSinester + "?$expand=Comentarista&$filter=IDSiniestro eq " + sinesterID + "&$orderby=Creado desc",//select=" + fieldsquery + ",Identificador&$expand=Carrier,Estado,&$filter=(Identificador eq " + sinesterID + ")",
             type: "GET",
             async: true,
             headers: { "accept": "application/json;odata=verbose" },
-            success: successCall,
+            success: successFunction,
             complete: completeCall
         });
     };
