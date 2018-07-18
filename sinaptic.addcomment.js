@@ -32,7 +32,7 @@
         hasComment = true;
         var currStatus = sinaptic.vm.currentSinister.estado || "";
         var createdDate = localDate(new Date());
-        var structure + "<div class='legacyFile tempComment'><div class='titleComment'><h3>" + currStatus + "</h3></div><div class='comment'><p>" + comment + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'></p></div></div>";
+        var structure = "<div class='legacyFile tempComment'><div class='titleComment'><h3>" + currStatus + "</h3></div><div class='comment'><p>" + comment + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'></p></div></div>";
 
         $("#CommentsSection").append(structure);
         $("#newCommentContainer").css("display", "none");
