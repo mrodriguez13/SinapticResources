@@ -51,7 +51,7 @@
 
     var EditTmpComment = function (id) {
         var tmpCommment = sinaptic.vm.tempComments[id];
-        $("#comentario").val(tmpCommment.comment);
+        $("#comentario").val(tmpCommment.Comentario);
         showNewCommentContainer();
     }
 
