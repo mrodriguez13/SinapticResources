@@ -117,8 +117,8 @@ sinaptic.wf = function () {
     var showTaskForm = function (siniestro, estadoId) {
         hasAttachedFiles = false;
         hasComment = false;
-        CommentsFromSinister.setSinisterID(siniestro);
-        CommentsFromSinister.getCommentsData(loadComments);
+        //CommentsFromSinister.setSinisterID(siniestro);
+        //CommentsFromSinister.getCommentsData(loadComments);
 
         sinaptic.context = {
             "siniestro": JSON.parse(siniestro),
