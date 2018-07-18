@@ -23,6 +23,24 @@
             complete: completeCall
         });
     };
+    var addComment = function () {
+        var comment = $("#comentario").val();
+        if (comment === "" || comment === undefined) {
+            alert("No se puede guardar un comentario vacío");
+            return;
+        }
+        hasComment = true;
+        var currStatus = sinaptic.vm.currentSinister.estado || "";
+        var createdDate = localDate(new Date());
+        var structure + "<div class='legacyFile tempComment'><div class='titleComment'><h3>" + currStatus + "</h3></div><div class='comment'><p>" + comment + "</p></div><div class='commentAuthor'>" + createdDate + "<p id='comentarista' style='font-size:11px;display:inline;'></p></div></div>";
+
+        $("#CommentsSection").append(structure);
+        $("#newCommentContainer").css("display", "none");
+    }
+    var showNewCommentContainer = function () {
+        $("#newCommentContainer").css("display", "inline-block");
+    };
+
     var saveComment = function () {
         var comment = $("#comentario").val();
         if (comment === "" || comment === undefined) {
@@ -37,6 +55,9 @@
             EstadoComentario: currentSinister.Estado.Descripción,
             ComentaristaId: _spPageContextInfo.userId
         }
+        sendComment(properties);
+    }
+    function sendComment(properties) {
         var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
         $.ajax({
             url: host + "/_vti_bin/listdata.svc/Comentarios",
@@ -58,6 +79,7 @@
             error: errorHandler
         });
     }
+
     function dateToString(date) {
         var hour = ((date.getHours() < 10) ? "0" + date.getHours() : date.getHours());
         var minutes = ((date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes());
@@ -137,6 +159,8 @@
     return {
         getCommentsData: getCommentsData,
         setSinisterID: setSinisterID,
+        addComment: addComment,
+        showNewCommentContainer: showNewCommentContainer,
         saveComment: saveComment
     }
 })(jQuery);
