@@ -49,10 +49,10 @@
     var showNewCommentContainer = function (edit) {
         $("#newCommentContainer").css("display", "inherit");
         if (edit != null && edit === true) {
-            $("#addButton").html('<i class="fa fa - comments"></i> Guardar comentario');
+            $("#addButton").html('<i class="fa fa-comments"></i> Guardar comentario');
         }
         else {
-            $("#addButton").html('<i class="fa fa - comments"></i> Agregar comentario');
+            $("#addButton").html('<i class="fa fa-comments"></i> Agregar comentario');
         }
 
     };
