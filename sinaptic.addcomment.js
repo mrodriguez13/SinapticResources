@@ -44,6 +44,7 @@
         sinaptic.vm.tempComments.push(tmpComment)
         $("#CommentsSection").append(structure);
         $("#newCommentContainer").css("display", "none");
+        $("#comentario").val("");
     }
     var showNewCommentContainer = function (edit) {
         $("#newCommentContainer").css("display", "inherit");
