@@ -31,7 +31,8 @@ sinaptic.adminTasks = (function () {
     { statusId: 39, status: "T - Verificar Nueva Prenda", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 40, status: "U - Enviar Prenda Rechazada a Compañia", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
     { statusId: 41, status: "V - Remitir Prenda Corregida a Plan Ovalo", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: 'RU' },
-    { statusId: 42, tatus: "E - Solicitar Documentacion al Cliente", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' }];
+    { statusId: 42, tatus: "E - Solicitar Documentacion al Cliente", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' },
+	{ statusId: 44, tatus: "Pendiente de Siniesto Total", venc1: "", venc2: "", gen: false, group: '', days1: '', days2: '', tipoResolucion: '' }];
     var allClosedCategories = ["Cerrado - No Configura Destrucción Total", "Cerrado - Plan de Ahorro Cancelado", "Cerrado - Prescripto", "Cerrado - Rechazado", "Cerrado - Titular Fallecido", "Cerrado - Vehículo Aparecido"];
     var listSiniestrosURL = host + "/_vti_bin/listdata.svc/" + listSiniestros + "?$expand=CreadoPor,Carrier,AsignadoA,Estado&$filter=(Estado/T%C3%ADtulo ne 'M - Siniestro Cerrado')";// and (SiniestroCancelado ne true)"//$select='" + listFields + "'";
     var Task = "";
