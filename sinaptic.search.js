@@ -85,7 +85,7 @@ var loadData = function (data, settings) {
     var results = data.d.results;
     var host = window.location.protocol + "//" + window.location.host + _spPageContextInfo.siteServerRelativeUrl;
     $(results).each(function (i, item) {
-        structure += '<tr onClick="openUrl(\'' + host + '/Paginas/DetallesSiniestro_desa.aspx?#ID=' + item["Identificador"] + '\')">';
+        structure += '<tr onClick="openUrl(\'' + host + '/Paginas/DetalleSiniestro_desa.aspx?#ID=' + item["Identificador"] + '\')">';
         var isClosed = item["SiniestroCancelado"];
         $.each(settings.listColumns, function (key, value) {
             var cellValue = " - ";
