@@ -14,7 +14,6 @@ $(document).ready(function() {
        $.each(r, function (index, value) { 
             if(window.location.href == value.Url) {
 		$("#titulo").append(value.LinkTitle);
-		$("#descripcion").append(value.%255Fx0066%255Fhb3);
 	    }		          
        });      
        		
