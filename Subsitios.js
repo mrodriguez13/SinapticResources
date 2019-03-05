@@ -13,8 +13,8 @@ $(document).ready(function() {
     $pnp.sp.web.lists.getByTitle("MenuPrincipal").items.get().then(r => {
        $.each(r, function (index, value) { 
             if(window.location.href == value.Url) {
-		$("#titulo").append(value.Title);
-		$("#descripcion").append(value.Descripcion);
+		$("#titulo").append(value.LinkTitle);
+		$("#descripcion").append(value.%255Fx0066%255Fhb3);
 	    }		          
        });      
        		
