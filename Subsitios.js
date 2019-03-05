@@ -13,8 +13,8 @@ $(document).ready(function() {
        $.each(r, function (index, value) { 
             
 			if(window.location.href == value.Url) {
-				$(".text-title").innerHTML = value.Title;
-				$(".text-descripcion").innerHTML = value.Descripcion;
+				document.getElementsByClassName("text-title").innerHTML = value.titulo;
+				document.getElementsByClassName("text-description").innerHTML = value.Descripcion;
 			}
 				          
        });      
