@@ -12,9 +12,9 @@ $(document).ready(function() {
 
     $pnp.sp.web.lists.getByTitle("MenuPrincipal").items.get().then(r => {
        $.each(r, function (index, value) { 
-            
-	subsitios.push(value);
-				          
+            if(window.location.href == value.Url) {
+		document.getElementById("titulo").innerHTML = value.Titulo;
+	    }		          
        });      
        		
     });
