@@ -9,10 +9,10 @@ $(document).ready(function() {
         }
     });
 
-	$pnp.sp.web.lists.getByTitle("MenuPrincipal").items.orderBy("Orden").get().then(r => {
+    $pnp.sp.web.lists.getByTitle("MenuPrincipal").items.orderBy("Orden").get().then(r => {
        $.each(r, function (index, value) { 
             
-			if(window.location.href == "https://intranet.inta.gob.ar/testing/rrhh/Paginas/RRHH1.aspx") {
+			if(window.location.href == value.Url) {
 				$(".text-title").innerHTML = value.Title;
 				$(".text-descripcion").innerHTML = value.Descripcion;
 			}
