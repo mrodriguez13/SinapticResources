@@ -12,7 +12,7 @@ $(document).ready(function() {
     $pnp.sp.web.lists.getByTitle("MenuPrincipal").items.get().then(r => {
        $.each(r, function (index, value) { 
             
-	subsitios.push(value):
+	subsitios.push(value);
 				          
        });      
        		
