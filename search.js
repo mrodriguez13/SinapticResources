@@ -131,19 +131,18 @@ function autocomplete(inp, arr) {
   });
 }
 
-autocomplete(document.getElementById("myInput"), pClave);
+autocomplete(document.getElementById("myInput"), titulos);
 
 });
 
 
 $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         $.each(r, function (index, value) {
-            botones.push({titulo: value.Title, url: value.URL, palabras_clave: value.PalabrasClave});
+            botones.push({titulo: value.Title, url: value.URL});
             ///$(".fast-items").append(item);
         });
         
          titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
-         pClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabras_clave);
          complete();
     });
 
