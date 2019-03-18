@@ -132,8 +132,6 @@ function autocomplete(inp, arr) {
 
 autocomplete(document.getElementById("myInput"), titulos);
 
-});
-
 
 $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         $.each(r, function (index, value) {
@@ -148,3 +146,5 @@ $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
 function getUrl(_titulo) {
     return botones.find(b => b.titulo.includes(_titulo)).url;
 }
+	
+})})
