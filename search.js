@@ -56,7 +56,7 @@ function autocomplete(inp, arr) {
        
 
 	  if (arr[i].toLowerCase().includes(val.toLowerCase()) || accentFold(arr[i].toLowerCase()).includes(val.toLowerCase()) 
-	     || getClave(arr[i]).includes(val.toLowerCase())) {
+	     || getClaves(arr[i].toLowerCase()).join("").includes(val.toLowerCase())) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
@@ -158,7 +158,7 @@ function getUrl(_titulo) {
     return botones.find(b => b.titulo.includes(_titulo)).url;
 }
 
-function getClave(_titulo) {
+function getClaves(_titulo) {
     return botones.filter(b => b.titulo.includes(_titulo)).map(b => b.palabras_clave.results.map(r => r.Label)).flat()
 }
 
