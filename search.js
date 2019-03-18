@@ -1,6 +1,5 @@
 var botones = [];
 var titulos;
-var pClave;
 
 $(document).ready(function() {
 	
