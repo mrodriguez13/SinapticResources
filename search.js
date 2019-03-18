@@ -131,7 +131,22 @@ function autocomplete(inp, arr) {
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
-}})
+
+}
+
+autocomplete(document.getElementById("myInput"), titulos);
+
+$pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
+    $.each(r, function (index, value) {
+        botones.push({titulo: value.Title, url: value.URL});
+        ///$(".fast-items").append(item);
+    });
+        
+    titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
+    complete();
+});
+
+})
 
 autocomplete(document.getElementById("myInput"), titulos);
 
