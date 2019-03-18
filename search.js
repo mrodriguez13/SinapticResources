@@ -12,8 +12,25 @@ $(document).ready(function() {
         }
     });
 
-	renderSearchBox(listName, function(){
+renderSearchBox(listName, function(){
 
+function accentFold(inStr) {
+  return inStr.replace(
+    /([àáâãäå])|([ç])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g, 
+    function (str, a, c, e, i, n, o, s, u, y, ae) {
+      if (a) return 'a';
+      if (c) return 'c';
+      if (e) return 'e';
+      if (i) return 'i';
+      if (n) return 'n';
+      if (o) return 'o';
+      if (s) return 's';
+      if (u) return 'u';
+      if (y) return 'y';
+      if (ae) return 'ae';
+    }
+  );
+}
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -116,15 +133,17 @@ function autocomplete(inp, arr) {
 
 autocomplete(document.getElementById("myInput"), pClave);
 
+});
+
 
 $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         $.each(r, function (index, value) {
-            botones.push({titulo:value.Title, url: value.URL, palabras_clave: value.PalabrasClave});
+            botones.push({titulo:value.Title, url: value.URL});
             ///$(".fast-items").append(item);
         });
         
          titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
-         pClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabras_clave);
+         pClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabrasClave);
          complete();
     });
 
