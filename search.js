@@ -119,7 +119,7 @@ autocomplete(document.getElementById("myInput"), pClave);
 
 $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         $.each(r, function (index, value) {
-            botones.push({titulo:value.Title, url: value.URL, palabras_clave: value.palabrasClave});
+            botones.push({titulo:value.Title, url: value.URL, palabras_clave: value.PalabrasClave});
             ///$(".fast-items").append(item);
         });
         
