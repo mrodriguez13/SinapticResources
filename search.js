@@ -1,5 +1,6 @@
 var botones = [];
 var titulos;
+var palabrasClave;
 
 $(document).ready(function() {
 	
@@ -140,19 +141,15 @@ function autocomplete(inp, arr) {
 function renderSearchBox(listName,complete) {
     $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         $.each(r, function (index, value) {
-            botones.push({titulo: value.Title, url: value.URL});
+            botones.push({titulo: value.Title, url: value.URL, palabras_clave: value.PalabrasClave});
             ///$(".fast-items").append(item);
         });
         
         titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
+	palabrasClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabras_clave);
         complete();
     });
 }
-
-
-
-
-
 
 function getUrl(_titulo) {
     return botones.find(b => b.titulo.includes(_titulo)).url;
