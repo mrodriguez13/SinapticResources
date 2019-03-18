@@ -15,7 +15,7 @@ renderSearchBox(listName, function(){
 
 function accentFold(inStr) {
   return inStr.replace(
-    /([Ã Ã¡Ã¢Ã£Ã¤Ã¥])|([Ã§])|([Ã¨Ã©ÃªÃ«])|([Ã¬Ã­Ã®Ã¯])|([Ã±])|([Ã²Ã³Ã´ÃµÃ¶Ã¸])|([ÃŸ])|([Ã¹ÃºÃ»Ã¼])|([Ã¿])|([Ã¦])/g, 
+    /([àáâãäå])|([ç])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g, 
     function (str, a, c, e, i, n, o, s, u, y, ae) {
       if (a) return 'a';
       if (c) return 'c';
