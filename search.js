@@ -159,7 +159,7 @@ function getUrl(_titulo) {
 }
 
 function getClave(_titulo) {
-    return botones.filter(b => b.titulo.includes("a")).map(b => b.palabras_clave.results.map(r => r.Label)).flat()
+    return botones.filter(b => b.titulo.includes(_titulo)).map(b => b.palabras_clave.results.map(r => r.Label)).flat()
 }
 
 
