@@ -11,8 +11,6 @@ $(document).ready(function() {
         }
     });
 
-renderSearchBox(listName, function(){
-
 function accentFold(inStr) {
   return inStr.replace(
     /([àáâãäå])|([ç])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g, 
@@ -163,5 +161,3 @@ $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
 function getUrl(_titulo) {
     return botones.find(b => b.titulo.includes(_titulo)).url;
 }
-
-})
