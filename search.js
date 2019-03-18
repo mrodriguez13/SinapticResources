@@ -143,7 +143,7 @@ $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
         });
         
          titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
-         pClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabrasClave);
+         pClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.PalabrasClave);
          complete();
     });
 
