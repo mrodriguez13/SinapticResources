@@ -50,9 +50,7 @@ function autocomplete(inp, arr) {
       this.parentNode.appendChild(a);
       /*for each item in the array...*/
       for (i = 0; i < arr.length; i++) {
-        /*check if the item starts with the same letters as the text field value:*/
-       
-
+        /*check if the item starts with the same letters as the text field value:*/      
 		 if (arr[i].toLowerCase().includes(val.toLowerCase())) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
@@ -73,6 +71,7 @@ function autocomplete(inp, arr) {
         }
       }
   });
+
   /*execute a function presses a key on the keyboard:*/
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
@@ -98,6 +97,7 @@ function autocomplete(inp, arr) {
         }
       }
   });
+
   function addActive(x) {
     /*a function to classify an item as "active":*/
     if (!x) return false;
@@ -108,12 +108,14 @@ function autocomplete(inp, arr) {
     /*add class "autocomplete-active":*/
     x[currentFocus].classList.add("autocomplete-active");
   }
+
   function removeActive(x) {
     /*a function to remove the "active" class from all autocomplete items:*/
     for (var i = 0; i < x.length; i++) {
       x[i].classList.remove("autocomplete-active");
     }
   }
+
   function closeAllLists(elmnt) {
     /*close all autocomplete lists in the document,
     except the one passed as an argument:*/
@@ -124,27 +126,27 @@ function autocomplete(inp, arr) {
       }
     }
   }
+
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
-}
+}})
 
 autocomplete(document.getElementById("myInput"), titulos);
 
-
 $pnp.sp.web.lists.getByTitle(listName).items.orderBy("Orden").get().then(r => {
-        $.each(r, function (index, value) {
-            botones.push({titulo: value.Title, url: value.URL});
-            ///$(".fast-items").append(item);
-        });
-        
-         titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
-         complete();
+    $.each(r, function (index, value) {
+        botones.push({titulo: value.Title, url: value.URL});
+        ///$(".fast-items").append(item);
     });
+        
+    titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
+    complete();
+});
 
 function getUrl(_titulo) {
     return botones.find(b => b.titulo.includes(_titulo)).url;
 }
-	
-})})
+
+})
