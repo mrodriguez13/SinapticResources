@@ -1,6 +1,7 @@
 var botones = [];
 var titulos;
 var palabrasClave;
+var _palabrasClave;
 
 $(document).ready(function() {
 	
@@ -131,7 +132,7 @@ function autocomplete(inp, arr) {
   });
 }
 
-    autocomplete(document.getElementById("myInput"), titulos);
+    autocomplete(document.getElementById("myInput"), _palabrasClave);
 
 });
 
@@ -147,6 +148,7 @@ function renderSearchBox(listName,complete) {
         
         titulos = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.titulo);
 	palabrasClave = botones.filter(b => b.url != "https://" && b.url != null).map(b => b.palabras_clave);
+	_palabrasClave = palabrasClave.map(p => p.results.map(r => r.Label)).flat();
         complete();
     });
 }
