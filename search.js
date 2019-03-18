@@ -132,7 +132,7 @@ function autocomplete(inp, arr) {
   });
 }
 
-    autocomplete(document.getElementById("myInput"), _palabrasClave);
+  autocomplete(document.getElementById("myInput"), titulos);
 
 });
 
