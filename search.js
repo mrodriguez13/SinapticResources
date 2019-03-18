@@ -55,8 +55,8 @@ function autocomplete(inp, arr) {
         /*check if the item starts with the same letters as the text field value:*/
        
 
-	  if ((((arr[i].toLowerCase().includes(val.toLowerCase()) || accentFold(arr[i].toLowerCase()).includes(val.toLowerCase()))
-	     || (getClave(arr[i].toLowerCase()).flat()).includes(val.toLowerCase())) || (getClave(accentFold(arr[i].toLowerCase())).flat()).includes(val.toLowerCase()))) {
+	  if (arr[i].toLowerCase().includes(val.toLowerCase()) || accentFold(arr[i].toLowerCase()).includes(val.toLowerCase()) 
+	     || getClave(arr[i]).includes(val.toLowerCase())) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
