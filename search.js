@@ -158,7 +158,7 @@ function getUrl(_titulo) {
 }
 
 function getClave(_titulo) {
-    return botones.find(b => b.titulo.includes(_titulo)).palabras_clave;
+    return botones.find(b => b.titulo.includes(_titulo)).palabras_clave.results.map(r => r.Label);
 }
 
 
