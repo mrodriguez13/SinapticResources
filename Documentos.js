@@ -15,7 +15,7 @@ $(document).ready(function() {
 
        $.each(r, function (index, value) {
        
-            var documento = '<div class="col-md-4 app-access"><img src="' + value.Icono.Url + '"; width=35px;/><span class="visible-xs-inline">' + value.Title + '</span></a></div>';
+            var documento = '<div class="col-md-4 app-access"><img src="' + value.Icono.Url + '"; width=35px;/><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
             $("#documentos").append(documento);   
                 
         });
