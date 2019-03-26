@@ -8,11 +8,11 @@ function agregarDocumento(documento) {
         documentos++;
     }
     else {
+	filas++;
         var fila = '<div id="fila' + filas + '" class="row"></div>';
         $("#documentos").append(fila);
         $("#fila"+filas).append(documento);
 	documentos++;
-        filas++;
     }
 }
 
