@@ -16,22 +16,22 @@ $(document).ready(function() {
             documentos++;
 
             if (value.Subsitio == window.location.href) {
-                var documento = '<div id="documento' + documentos + '" app-access"><img src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
+                var documento = '<div id="documento" app-access"><img src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
                 $("#documentos").append(documento);
             }
 
             switch (documentos) {
                 case 1:
-                    $('#documento'+documentos).addClass('col-md-12');
+                    $('#documento').addClass('col-md-12');
                     break;
                 case 2:
-                    $('#documento'+documentos).addClass('col-md-6');
+                    $('#documento').addClass('col-md-6');
                     break;
                 case 3:
-                    $('#documento'+documentos).addClass('col-md-4');
+                    $('#documento').addClass('col-md-4');
                     break;
                 case 4:
-                    $('#documento'+documentos).addClass('col-md-3');
+                    $('#documento').addClass('col-md-3');
                     break;
             }
 
