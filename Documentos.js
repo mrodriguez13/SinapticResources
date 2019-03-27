@@ -19,8 +19,9 @@ $(document).ready(function() {
                 var documento = '<div class="documento" app-access"><img src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
                 $("#documentos").append(documento);
             }
-
-            switch (documentos) {
+        }); 
+	    
+	switch (documentos) {
                 case 1:
                     $('.documento').addClass('col-md-12');
                     break;
@@ -33,9 +34,7 @@ $(document).ready(function() {
                 case 4:
                     $('.documento').addClass('col-md-3');
                     break;
-            }
-
-        }); 
+         }
          	       
     });
 })
