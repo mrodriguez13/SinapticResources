@@ -22,16 +22,16 @@ $(document).ready(function() {
 
             switch (documentos) {
                 case 1:
-                    $('#documento'+documentos).css("class", "col-md-12");
+                    $('#documento'+documentos).addClass('col-md-12');
                     break;
                 case 2:
-                    $('#documento'+documentos).css("class", "col-md-6");
+                    $('#documento'+documentos).addClass('col-md-6');
                     break;
                 case 3:
-                    $('#documento'+documentos).css("class", "col-md-4");
+                    $('#documento'+documentos).addClass('col-md-4');
                     break;
                 case 4:
-                    $('#documento'+documentos).css("class", "col-md-3");
+                    $('#documento'+documentos).addClass('col-md-3');
                     break;
             }
 
