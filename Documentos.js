@@ -25,7 +25,7 @@ $(document).ready(function() {
                     $('#documento').css('class','col-md-12');
                     break;
                 case 2:
-                    $('#documento').class('class','col-md-6');
+                    $('#documento').css('class','col-md-6');
                     break;
                 case 3:
                     $('#documento').css('class','col-md-4');
