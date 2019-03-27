@@ -32,8 +32,8 @@ $(document).ready(function() {
 		            case 4: 
 			            grid = "col-md-3";
                         break;
-			*/
                 }
+		*/
             }
             
             var documento = '<div class="col-md-4" app-access"><img src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
