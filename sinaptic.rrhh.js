@@ -7,7 +7,7 @@ $(document).ready(function() {
             }
         }
     });
-        
-    $(".mosaico").append('<div class="panel boton"></div>');
-    
-});
+
+    $("#titulo-sitio").append("Presentismo");
+})
+
