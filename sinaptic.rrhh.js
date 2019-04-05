@@ -13,6 +13,7 @@ $(document).ready(function() {
             if(value.ParendID == 'Presentismo') {
                 var boton = '<button class="boton">' + value.Title + '</button>';
                 $(".botones").append(boton);
+            }
         });                                                               
     });
 
