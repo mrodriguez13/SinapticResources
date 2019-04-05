@@ -8,6 +8,6 @@ $(document).ready(function() {
         }
     });
         
-    $(".mosaico").append('<div class="panel__iner boton"></div>');
+    $(".mosaico").append('<div class="panel__inner boton"></div>');
     
 });
