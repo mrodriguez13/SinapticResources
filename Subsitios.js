@@ -1,6 +1,3 @@
-var subsitios = [];
-var numero = 4;
-
 $(document).ready(function() {	
 	$pnp.setup({
         sp: {
