@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $pnp.sp.site.rootWeb.lists.getByTitle("MenuPrincipal").items.get().then(r => {
        $.each(r, function (index, value) {	
-	       if(value.fo9i == window.location.href || window.location.href.includes('https://intranet.inta.gob.ar/testing/rrhh')) {
+	       if(value.fo9i == window.location.href) {
 		    var element = '<span><h2 class="text-title" style="color: white;text-align:left;margin:0px">' + value.Title + '</h2></span><span><p class="text-description" style="color: white;text-align:left;margin:0px">' + value.Descripcion + '<p></span><br>'; 
 	            $("#tituloYDescripcion").html(element);	 
 	       }
