@@ -10,7 +10,7 @@ $(document).ready(function() {
     
     $pnp.sp.web.lists.getByTitle("Tilesrrhh").items.get().then(r => {
         $.each(r, function(index, value) {
-            if(value.ParendID == 'Presentismo') {
+            if(value.ParentID == 'Presentismo') {
                 var boton = '<button class="boton">' + value.Title + '</button>';
                 $(".botones").append(boton);
             }
