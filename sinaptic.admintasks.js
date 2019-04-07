@@ -192,8 +192,8 @@ sinaptic.adminTasks = (function () {
             }
             var estado = item.Estado.Título;
             var siniestro = item.Siniestro ? item.Siniestro.toUpperCase() : "SIN ASIGNAR";
-            var grupo = item.Grupo ? item.Grupo : "SIN ASIGNAR";
-            var orden = item.Orden ? item.Orden : "SIN ASIGNAR";
+            var grupo = item.Grupo ? item.Grupo : 0;
+            var orden = item.Orden ? item.Orden : 0;
             var idSiniestro = item.Identificador;
             if (item["SiniestroCancelado"]) {
                 tasksStructure.push("<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'>");
