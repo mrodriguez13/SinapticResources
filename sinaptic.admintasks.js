@@ -191,13 +191,13 @@ sinaptic.adminTasks = (function () {
                 asignado = item.AsignadoA.Título;
             }
             var estado = item.Estado.Título;
-            var siniestro = item.Siniestro;
-            var grupo = item.Grupo;
-            var orden = item.Orden;
+            var siniestro = item.Siniestro ? item.Siniestro.toUpperCase() : "SIN ASIGNAR";
+            var grupo = item.Grupo ? item.Grupo : "SIN ASIGNAR";
+            var orden = item.Orden ? item.Orden : "SIN ASIGNAR";
             var idSiniestro = item.Identificador;
             if (item["SiniestroCancelado"]) {
                 tasksStructure.push("<div class='itemTask canceled' data-idHistory='" + item.IdHistorial + "'>");
-                tasksStructure.push("<div class='title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
+                tasksStructure.push("<div class='title' data-sinister='" + siniestro + "'>" + siniestro + "</div>");
                 tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
                 tasksStructure.push("<div class='status'>" + buildComboBox(estado) + "</div>");
                 tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
@@ -210,7 +210,7 @@ sinaptic.adminTasks = (function () {
 
             } else {
                 tasksStructure.push("<div class='itemTask' data-idHistory='" + item.IdHistorial + "'>");
-                tasksStructure.push("<div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro.toUpperCase() + "</div>");
+                tasksStructure.push("<div class='" + idSiniestro + " title' data-sinister='" + siniestro + "'>" + siniestro + "</div>");
                 tasksStructure.push("<div class='idSinister'>" + idSiniestro + "</div>");
                 tasksStructure.push("<div  class='" + idSiniestro + " status'>" + buildComboBox(estado) + "</div>");
                 tasksStructure.push("<div class='group' data-group='" + grupo + "'>");
