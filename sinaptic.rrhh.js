@@ -11,7 +11,11 @@ $(document).ready(function() {
     $pnp.sp.web.lists.getByTitle("Tilesrrhh").items.get().then(r => {
         $.each(r, function(index, value) {   
           if (value.ParentID != null) {
-            if(value.ParentID.get_lookupValue() == 'Presentismo') {
+              
+              SPLookupValue _value = value.FieldValues["ParentID"] as SP.FieldLookUpValue
+              var mylookupvalue = _value.LookupValue;
+              
+            if(mylookupvalue == 'Presentismo') {
                 var boton = '<button class="boton">' + value.Title + '</button>';
                 $(".botones").append(boton);
             }
