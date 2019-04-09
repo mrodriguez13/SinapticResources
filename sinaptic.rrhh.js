@@ -12,7 +12,7 @@ $(document).ready(function() {
         $.each(r, function(index, value) {   
               
             if (value.Parent == 'Presentismo') {
-                var boton = '<button class="boton">' + value.Title + '</button>';
+                var boton = '<button class="boton" onclick="' + value.Url + '">' + value.Title + '</button>';
                 $(".botones").append(boton);
             }
     
