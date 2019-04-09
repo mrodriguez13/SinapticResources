@@ -12,7 +12,7 @@ $(document).ready(function() {
         $.each(r, function(index, value) {   
               
             if (value.Parent == 'Presentismo') {
-                var boton = '<button class="boton" onclick="window.location.href = '' + value.Url + '';">' + value.Title + '</button>';
+                var boton = '<button class="boton" onclick="window.location.href = "' + value.Url + '">' + value.Title + '</button>';
                 $(".botones").append(boton);
             }
     
@@ -22,4 +22,6 @@ $(document).ready(function() {
     $("#titulo-sitio").append("Presentismo");
     
 })
+
+
 
