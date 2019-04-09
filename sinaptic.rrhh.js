@@ -12,7 +12,7 @@ $(document).ready(function() {
         $.each(r, function(index, value) {   
           if (value.ParentID != null) {
               
-              SPLookupValue _value = value.FieldValues["ParentID"] as SP.FieldLookUpValue
+              SPLookupValue _value = value.FieldValues["ParentID"] as SP.FieldLookUpValue;
               var mylookupvalue = _value.LookupValue;
               
             if(mylookupvalue == 'Presentismo') {
