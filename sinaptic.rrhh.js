@@ -9,10 +9,12 @@ $(document).ready(function() {
     });
     
     $pnp.sp.web.lists.getByTitle("Tilesrrhh").items.get().then(r => {
-        $.each(r, function(index, value) {   
-              
+        $.each(r, function(index, value) {          
+            
+            var boton = '<a href="' + value.URL + '"></a>'
+            
             if (value.Parent == 'Presentismo') {
-                $("#botones").append(boton);
+                $(".mosaico").append(boton);
             }
     
         });                                                              
