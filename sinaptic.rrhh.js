@@ -12,7 +12,7 @@ $(document).ready(function() {
         $.each(r, function(index, value) {   
               
             if (value.Parent == 'Presentismo') {
-                var boton = '<a href="' + value.URL + '" class="boton">' + value.Title + '</a>';
+                var boton = value.URL;
                 $("#botones").append(boton);
             }
     
