@@ -1,8 +1,19 @@
-#titulo-sitio {
-  padding-left: 170px;
-}
+ .titulo {
+      font-family: inherit;
+      padding-left: 170px;
+      font-size: 25px;
+   }
 
-#botones {
-  padding-left: 160px;
-}
+   .mosaico {
+      text-align: center;
+      justify-content: center;
+   }
+
+   .boton {
+      background-color: #3074A0;
+      width: 20%;
+      margin: 5px;
+      border-radius: 12px;
+   }
+
   
