@@ -18,7 +18,7 @@ $(document).ready(function() {
         });                                                              
     });
 
-    $("#titulo-sitio").append("Presentismo");
+    $("#titulo-sitio").html("Presentismo");
     
 })
 
