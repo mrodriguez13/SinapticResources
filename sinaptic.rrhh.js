@@ -12,7 +12,6 @@ $(document).ready(function() {
         $.each(r, function(index, value) {   
               
             if (value.Parent == 'Presentismo') {
-                var boton = value.URL;
                 $("#botones").append(boton);
             }
     
