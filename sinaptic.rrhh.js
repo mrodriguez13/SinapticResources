@@ -13,8 +13,10 @@ $(document).ready(function() {
     $pnp.sp.web.lists.getByTitle("Tilesrrhh").items.get().then(r => {
         $.each(r, function(index, value) {          
             
-            if (value.ID == id) 
+            if (value.ID == id) {
                 var parent = value.Title; 
+            }
+                
             
             var boton = '<div class="panel__inner boton" onclick="window.location = \'' + value.URL + '\'">' + value.Title + '</a>';
             
