@@ -7,20 +7,26 @@ $(document).ready(function() {
             }
         }
     });
-    
+
+    var id = getUrlParameter('ID');
+
     $pnp.sp.web.lists.getByTitle("Tilesrrhh").items.get().then(r => {
         $.each(r, function(index, value) {          
             
-            var boton = '<div class="panel__inner boton" onclick="window.location = \'' + value.URL + '\'">' + value.Title + '</a>'
+            if (value.ID == id) 
+                var parent = value.Title; 
             
-            if (value.Parent == 'Presentismo') {
+            var boton = '<div class="panel__inner boton" onclick="window.location = \'' + value.URL + '\'">' + value.Title + '</a>';
+            
+            if (value.Parent == parent) {
+                
                 $(".mosaico").append(boton);
             }
     
         });                                                              
     });
 
-    $("#titulo-sitio").html("Presentismo");  
+    $("#titulo-sitio").html(parent);  
     
       
 })
