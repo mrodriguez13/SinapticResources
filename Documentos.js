@@ -27,10 +27,10 @@ $(document).ready(function() {
                 break;
                 case 2:
                     $('.documento').addClass('col-md-6');
-		    $('#documento1').attr('padding-left','300px');
-		    $('#documento1').attr('padding-right','0px');
-	            $('#documento2').attr('padding-left','0px');
-		    $('#documento2').attr('padding-right','3000px');
+		    $('#documento1').css('padding-left','300px');
+		    $('#documento1').css('padding-right','0px');
+	            $('#documento2').css('padding-left','0px');
+		    $('#documento2').css('padding-right','3000px');
                 break;
                 case 3:
                     $('.documento').addClass('col-md-4');
