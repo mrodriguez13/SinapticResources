@@ -30,7 +30,7 @@ $(document).ready(function() {
 		    $('#documento1').css('padding-left','300px');
 		    $('#documento1').css('padding-right','0px');
 	            $('#documento2').css('padding-left','0px');
-		    $('#documento2').css('padding-right','3000px');
+		    $('#documento2').css('padding-right','300px');
                 break;
                 case 3:
                     $('.documento').addClass('col-md-4');
