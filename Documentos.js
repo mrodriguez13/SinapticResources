@@ -15,7 +15,7 @@ $(document).ready(function() {
         $.each(r, function (index, value) {           
 
             if (value.Subsitio == window.location.href) {
-                var documento = '<div class="documento" app-access"><img class="icono" src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px">' + value.Title + '</span></a></div>';
+                var documento = '<div class="documento" app-access"><img class="icono" src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px; font-family: 'Robotolight'">' + value.Title + '</span></a></div>';
                 $("#documentos").append(documento);
 		documentos++;
             }
