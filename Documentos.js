@@ -24,16 +24,20 @@ $(document).ready(function() {
 	switch (documentos) {
                 case 1:
                     $('.documento').addClass('col-md-12');
-                    break;
+                break;
                 case 2:
                     $('.documento').addClass('col-md-6');
-                    break;
+		    $('#documento1').attr('padding-left','300px');
+		    $('#documento1').attr('padding-right','0px');
+	            $('#documento2').attr('padding-left','0px');
+		    $('#documento2').attr('padding-right','3000px');
+                break;
                 case 3:
                     $('.documento').addClass('col-md-4');
-                    break;
+                break;
                 case 4:
                     $('.documento').addClass('col-md-3');
-                    break;
+                break;
          }
          	       
     });
