@@ -34,9 +34,12 @@ $(document).ready(function() {
                 break;
                 case 3:
                     $('.documento').addClass('col-md-4');
+		    $('#documento1').css('padding-right','75px');
+		    $('#documento3').css('padding-right','75px');
                 break;
                 case 4:
                     $('.documento').addClass('col-md-3');
+		    $('#documento4').css('padding-right','40px');
                 break;
          }
          	       
