@@ -38,9 +38,9 @@ sinaptic.tasksByUserReport = function () {
             users.push(item.Usuario)
         });
         if (users.length > 0) {
-            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><label>USUARIO</label><option selected value="0">TODOS</option>');
+            structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><label>USUARIO</label>');
             $(users).each(function (i, user) {
-                structure.push("<option value='" + user.Identificador + "'>" + user.Nombre + "</option>");
+                structure.push("<option " + (i==0 ? "selected", "" ) + " value='" + user.Identificador + "'>" + user.Nombre + "</option>");
             });
             structure.push("</select></div>");
         }
@@ -48,7 +48,6 @@ sinaptic.tasksByUserReport = function () {
         $("#usersFilter").change(function () {
             getTasksByUser(this.value);
         });
-        //getTasksByUser(0);
         getCarriers();
     }
 
@@ -64,7 +63,7 @@ sinaptic.tasksByUserReport = function () {
                 $(carr).each(function (i, item) {
                     carriers[item.Identificador] = item.Título;
                 })
-                getTasksByUser(0);
+                //getTasksByUser(0);
             },
             error: function (data) {
                 alert("error:" + JSON.stringify(data));
@@ -78,7 +77,9 @@ sinaptic.tasksByUserReport = function () {
         if (userId != 0) {
             filterByUser = '(ModificadoPorId eq ' + userId + ') and ';
         } else {
-            filterByUser = '(ModificadoPorId ne null) and ';
+            alert("Debe seleccionar un usuario para obtener los datos");
+            return;
+           // filterByUser = '(ModificadoPorId ne null) and ';
         }
         var reportUrl = settings.host + "/_vti_bin/listdata.svc/Historial?$filter=" + filterByUser + "FechaHasta ne null and Siniestro ne null&$expand=Siniestro,Estado,ModificadoPor";
         $.ajax({
@@ -214,7 +215,7 @@ sinaptic.tasksByUserReport = function () {
     }
 
     function dateToString(date) {
-        return pad(date.getDate(), 2) + "/" + pad((date.getMonth() + 1), 2) + "/" +  pad(date.getFullYear(), 4);
+        return pad(date.getDate(), 2) + "/" + pad((date.getMonth() + 1), 2) + "/" + pad(date.getFullYear(), 4);
     };
 
     function FormatDate(date) {
