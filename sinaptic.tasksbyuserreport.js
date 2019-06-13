@@ -40,7 +40,7 @@ sinaptic.tasksByUserReport = function () {
         if (users.length > 0) {
             structure.push('<div class="reportFilter"><select class="form-control" id="usersFilter"><label>USUARIO</label>');
             $(users).each(function (i, user) {
-                structure.push("<option " + (i==0 ? "selected", "" ) + " value='" + user.Identificador + "'>" + user.Nombre + "</option>");
+                structure.push("<option " + (i==0 ? "selected": "" ) + " value='" + user.Identificador + "'>" + user.Nombre + "</option>");
             });
             structure.push("</select></div>");
         }
