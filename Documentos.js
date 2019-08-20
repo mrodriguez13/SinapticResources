@@ -14,7 +14,7 @@ $(document).ready(function() {
 
         $.each(r, function (index, value) {           
 
-            if (value.Subsitio == window.location.href) {
+            if (value.Subsitio == window.location.href.split('#')[0]) {
 		documentos++;
                 var documento = '<div id="documento' + documentos + '" class="documento" app-access"><img class="icono" src="' + value.Icono.Url + '"; width=35px;/><a href="' + value.Documento + '"><span class="visible-xs-inline" style="margin-left: 12px; font-family: \'Robotolight\'; font-size: 15px;">' + value.Title + '</span></a></div>';
                 $("#documentos").append(documento);
